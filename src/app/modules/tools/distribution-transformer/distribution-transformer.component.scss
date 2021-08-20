@@ -14,7 +14,11 @@ td.mat-cell,
 td.mat-footer-cell {
     text-align: center;    
 }
-#table-calc {
-    tr:last-child { background:#dad6d6 !important; }
+
+
+.finaltable tr:last-child { 
+    background:rgb(185, 184, 184) !important;
+    
 }
+
 

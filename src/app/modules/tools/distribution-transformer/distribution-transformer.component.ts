@@ -93,9 +93,10 @@ export class DisTransformerComponent implements OnInit {
   constructor(private fb: FormBuilder, private toolService: ToolsService, public dialog: MatDialog, private _location: Location) { }
 
   backClicked() {
-   this.showForms=true;
+   /* this.showForms=true;
    this.inputValues=[];
-   this.inputTableDataSource= [];
+   this.inputTableDataSource= []; */
+   location.reload();
   } 
 
   ngOnInit(): void {
