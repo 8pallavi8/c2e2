@@ -12,5 +12,9 @@ td.mat-footer-cell {
 th.mat-header-cell,
 td.mat-cell,
 td.mat-footer-cell {
-    text-align: center;
+    text-align: center;    
 }
+#table-calc {
+    tr:last-child { background:#dad6d6 !important; }
+}
+

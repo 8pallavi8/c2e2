@@ -14,6 +14,12 @@ export interface DistTransformer {
 }
 
 
+  export interface DialogData {
+    highestVoltageValueslist?: string[];
+    dualVoltWindings?: String[];
+    requestCount?: number;
+  }
+
 export interface TotalFinalValues {
     totalefficacy?: number,
     totalll?: number,

@@ -4,6 +4,7 @@
 /* Importing Bootstrap SCSS file. */
 
 @import '~bootstrap/scss/bootstrap';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./theme.scss";
 html,
 body {
@@ -14,3 +15,18 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.button-dialog{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px !important;
+    }
+.mat-toolbar {
+        position: -webkit-sticky;
+        top: 0;
+        z-index: 1;
+        background: transparent;
+    }

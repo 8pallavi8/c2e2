@@ -1,202 +1,156 @@
-<div class="container" style="margin-top: 30px;" *ngIf="showForms">
+<div class="container-fluid" style="margin-top: 30px;" *ngIf="showForms">
     <mat-card style="width: 100%; padding-bottom: 80px;">
         <div *ngIf="errMessage" class="warning" role="warning">
             {{errMessage}}
         </div>
+
         <div class="d-flex flex-justify-between">
             <h4 class="signup-title mt-4 ml-2 col-md-8">Add Distributed Transformer Inputs</h4>
         </div>
 
 
         <form [formGroup]="DisTransformerInputs" novalidate (submit)="addNewTransformerVariant()">
+            
             <div class="row">
-
+            <div class="mt-4 col-md-6" style="display: flex; align-items: center; justify-content: space-between;">
                 <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                    <mat-label>Select your country</mat-label>
+                    <mat-label>Select country</mat-label>
                     <mat-select matNativeControl id="Country" formControlName="Country">
-                        <mat-option *ngFor="let con of countrylist" [value]="con">{{con}}</mat-option>
+                        <mat-option *ngFor="let con of countrylist" [value]="con">{{con}}</mat-option> 
                     </mat-select>
-                    <mat-error *ngIf="DisTransformerInputs.controls['Country'].hasError('required') && submitted">
+                    <mat-hint color="primary">Select country to add Transformer</mat-hint>  
+                    <mat-error *ngIf="DisTransformerInputs.controls['Country'].hasError('required')">
                         Country is required
                     </mat-error>
                 </mat-form-field>
 
                 <div class="mt-4 col-md-6">
-                    <button mat-raised-button color="accent" style="color: #fff;" class="mat-elevation-z6" type="button" (click)="addTransformerVariant()">
+                    <button mat-raised-button color="accent" style="color: #fff;" class="mat-elevation-z6" type="button" [disabled]="DisTransformerInputs.controls['Country'].hasError('required')" (click)="openDialog()">
                         Add Transformer</button>
-                </div>
-
-                <div formArrayName="forminputs" *ngFor="let variant of DisTransformerInputs.get('forminputs')['controls']; let i = index;">
-                    <div [formGroupName]="i" style="border: 1px solid #bbb; margin: 20px;">
-
-                        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                            <mat-label>Power</mat-label>
-                            <input type="number" class="pro-name" matInput placeholder="Enter Power" formControlName="Power" required>
-                            <mat-error *ngIf="DisTransformerInputs.get('forminputs').controls[i].controls['Power'].hasError('required') && submitted">
-                                Power is required
-                            </mat-error>
-                            <mat-error *ngIf="DisTransformerInputs.get('forminputs').controls[i].controls['Power'].hasError('pattern')">
-                                Enter numerical values
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                            <mat-label>Stock</mat-label>
-                            <input type="number" class="pro-name" matInput placeholder="Enter Stock" formControlName="Stock" required>
-                            <!-- <mat-hint color="primary">Provide Stock</mat-hint> -->
-                            <mat-error *ngIf="DisTransformerInputs.get('forminputs').controls[i].controls['Stock'].hasError('required') && submitted">
-                                Stock is required
-                            </mat-error>
-                            <mat-error *ngIf="DisTransformerInputs.get('forminputs').controls[i].controls['Stock'].hasError('pattern')">
-                                Enter numerical values
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                            <mat-label>PlateEfficiency</mat-label>
-                            <input type="number" class="pro-name" matInput placeholder="Enter PlateEfficiency" formControlName="PlateEfficiency" required>
-                            <!-- <mat-hint color="primary">Provide PlateEfficiency</mat-hint> -->
-                            <mat-error *ngIf="DisTransformerInputs.get('forminputs').controls[i].controls['PlateEfficiency'].hasError('required') && submitted">
-                                PlateEfficiency is required
-                            </mat-error>
-                            <mat-error *ngIf="DisTransformerInputs.get('forminputs').controls[i].controls['PlateEfficiency'].hasError('pattern')">
-                                Enter numerical values
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                            <mat-label>Energy</mat-label>
-                            <input type="number" class="pro-name" matInput placeholder="Enter Energy" formControlName="Energy" required>
-                            <!-- <mat-hint color="primary">Provide Energy</mat-hint> -->
-                            <mat-error *ngIf="DisTransformerInputs.get('forminputs').controls[i].controls['Energy'].hasError('required') && submitted">
-                                Energy is required
-                            </mat-error>
-                            <mat-error *ngIf="DisTransformerInputs.get('forminputs').controls[i].controls['Energy'].hasError('pattern')">
-                                Enter numerical values
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                            <mat-label>EnergyPrice</mat-label>
-                            <input type="number" class="pro-name" matInput placeholder="Enter EnergyPrice" formControlName="EnergyPrice" required>
-                            <!-- <mat-hint color="primary">Provide EnergyPrice</mat-hint> -->
-                            <mat-error *ngIf="DisTransformerInputs.get('forminputs').controls[i].controls['EnergyPrice'].hasError('required') && submitted">
-                                EnergyPrice is required
-                            </mat-error>
-                            <mat-error *ngIf="DisTransformerInputs.get('forminputs').controls[i].controls['EnergyPrice'].hasError('pattern')">
-                                Enter numerical values
-                            </mat-error>
-
-                        </mat-form-field>
-
-                        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                            <mat-label>PolicyLevel</mat-label>
-                            <mat-select matNativeControl id="PolicyLevel" formControlName="PolicyLevel">
-                                <mat-option *ngFor="let policy of policyLevels" [value]="policy">{{policy}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                            <mat-label>FireRegulation</mat-label>
-                            <mat-select matNativeControl id="FireRegulation" formControlName="FireRegulation">
-                                <mat-option *ngFor="let Regulation of FireRegulation" [value]="Regulation">{{Regulation}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                            <mat-label>HighestVoltageValues</mat-label>
-                            <mat-select matNativeControl id="HighestVoltageValues" formControlName="HighestVoltageValues">
-                                <mat-option *ngFor="let voltage of highestVoltageValueslist" [value]="voltage">{{voltage}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                            <mat-label>DualVoltWindings</mat-label>
-                            <mat-select matNativeControl id="DualVoltWindings" formControlName="DualVoltWindings">
-                                <mat-option *ngFor="let voltwindings of dualVoltWindings" [value]="voltwindings">{{voltwindings}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-
-                        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                            <mat-label>Capex</mat-label>
-                            <input type="number" class="pro-name" matInput placeholder="Enter Capex" formControlName="Capex" required>
-                            <!-- <mat-hint color="primary">Provide Capex</mat-hint> -->
-                            <mat-error *ngIf="DisTransformerInputs.get('forminputs').controls[i].controls['Capex'].hasError('required') && submitted">
-                                Capex is required
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <!-- <div class="col-md-10 mt-2">
-                    <button mat-raised-button color="accent" style="color: #fff;" class="mat-elevation-z6" type="button" (click)="addTransformerVariant()">Add
-                        another Transformer</button>
-                </div> -->
-                <div class="text-center mt-5 col-md-10">
-                    <button mat-raised-button type="submit" color="primary" style="height: 50px;" class="mat-elevation-z6">Submit
-                        Transformers</button>
+                     
                 </div>
             </div>
+                
+                <table *ngIf="inputTableDataSource" mat-table [dataSource]="inputTableDataSource" >
+               
+                    <ng-container matColumnDef="Power">
+                        <th mat-header-cell *matHeaderCellDef> Power </th>
+                        <td mat-cell *matCellDef="let tran"> {{tran.Power}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Stock">
+                        <th mat-header-cell *matHeaderCellDef> Stock </th>
+                        <td mat-cell *matCellDef="let tran"> {{tran.Stock}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="PlateEfficiency">
+                        <th mat-header-cell *matHeaderCellDef> PlateEfficiency </th>
+                        <td mat-cell *matCellDef="let tran"> {{tran.PlateEfficiency}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Energy">
+                        <th mat-header-cell *matHeaderCellDef> Energy </th>
+                        <td mat-cell *matCellDef="let tran"> {{tran.Energy}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="EnergyPrice">
+                        <th mat-header-cell *matHeaderCellDef> EnergyPrice </th>
+                        <td mat-cell *matCellDef="let tran"> {{tran.EnergyPrice}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="PolicyLevel">
+                        <th mat-header-cell *matHeaderCellDef> PolicyLevel </th>
+                        <td mat-cell *matCellDef="let tran"> {{tran.PolicyLevel}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="FireRegulation">
+                        <th mat-header-cell *matHeaderCellDef> FireRegulation </th>
+                        <td mat-cell *matCellDef="let tran"> {{tran.FireRegulation}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="HighestVoltageValues">
+                        <th mat-header-cell *matHeaderCellDef> HighestVoltageValues </th>
+                        <td mat-cell *matCellDef="let tran"> {{tran.HighestVoltageValues}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="DualVoltWindings">
+                        <th mat-header-cell *matHeaderCellDef> DualVoltWindings </th>
+                        <td mat-cell *matCellDef="let tran"> {{tran.DualVoltWindings}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Capex">
+                        <th mat-header-cell *matHeaderCellDef> Capex </th>
+                        <td mat-cell *matCellDef="let tran"> {{tran.Capex}} </td>
+                      </ng-container>
+
+
+
+                      <tr mat-header-row *matHeaderRowDef="inputDisplayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: inputDisplayedColumns;"></tr>
+                  </table>
+               
+
+                <div class="text-center mt-5 col-md-10">
+                    <button *ngIf="inputValues.length>0" mat-raised-button type="submit" color="primary" style="height: 50px;" class="mat-elevation-z6">Submit
+                        Transformers</button>
+                </div>
+            </div>  
         </form>
     </mat-card>
-    <!-- Copyright 2021 Google LLC. All Rights Reserved.
-          Use of this source code is governed by an MIT-style license that
-          can be found in the LICENSE file at http://angular.io/license -->
+  
 </div>
-<div class="container container-fluid pt-4 pb-4" *ngIf="!showForms">
+
+                
+
+
+<div class="container-fluid pt-4 pb-4" *ngIf="!showForms">
     <h2 class="page-title">Proposed changes and potential savings</h2>
     <div class="row container-fluid">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-            <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
+        <table id="table-calc" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-            <!-- Position Column -->
             <ng-container matColumnDef="efficacy">
-                <th mat-header-cell *matHeaderCellDef> Efficacy </th>
+                <th mat-header-cell *matHeaderCellDef> Efficacy(%) </th>
                 <td mat-cell *matCellDef="let element"> {{element.efficacy}} </td>
             </ng-container>
 
-            <!-- Name Column -->
             <ng-container matColumnDef="ll">
-                <th mat-header-cell *matHeaderCellDef> Ll </th>
+                <th mat-header-cell *matHeaderCellDef> Ll(W) </th>
                 <td mat-cell *matCellDef="let element"> {{element.ll}} </td>
             </ng-container>
 
-            <!-- Weight Column -->
             <ng-container matColumnDef="nl">
-                <th mat-header-cell *matHeaderCellDef> Nl </th>
+                <th mat-header-cell *matHeaderCellDef> Nl(W) </th>
                 <td mat-cell *matCellDef="let element"> {{element.nl}} </td>
             </ng-container>
 
-            <!-- Symbol Column -->
             <ng-container matColumnDef="energyeffyincrease">
-                <th mat-header-cell *matHeaderCellDef> Energy Efficiency Increase </th>
+                <th mat-header-cell *matHeaderCellDef> Energy Efficiency Increase(MWh/yr) </th>
                 <td mat-cell *matCellDef="let element"> {{element.energyeffyincrease}} </td>
             </ng-container>
 
             <ng-container matColumnDef="energy">
-                <th mat-header-cell *matHeaderCellDef> Energy </th>
+                <th mat-header-cell *matHeaderCellDef> Energy(%) </th>
                 <td mat-cell *matCellDef="let element"> {{element.energy}} </td>
             </ng-container>
 
             <ng-container matColumnDef="financial">
-                <th mat-header-cell *matHeaderCellDef> Financial </th>
+                <th mat-header-cell *matHeaderCellDef> Financial(USD/yr) </th>
                 <td mat-cell *matCellDef="let element"> {{element.financial}} </td>
             </ng-container>
 
             <ng-container matColumnDef="paybackperiod">
-                <th mat-header-cell *matHeaderCellDef> Payback period </th>
+                <th mat-header-cell *matHeaderCellDef> Payback period(Years) </th>
                 <td mat-cell *matCellDef="let element"> {{element.paybackperiod}} </td>
             </ng-container>
 
             <ng-container matColumnDef="co2baseline">
-                <th mat-header-cell *matHeaderCellDef> Co2 baseline </th>
+                <th mat-header-cell *matHeaderCellDef> Co2 baseline(ton CO2/yr) </th>
                 <td mat-cell *matCellDef="let element"> {{element.co2baseline}} </td>
             </ng-container>
 
             <ng-container matColumnDef="co2savingston">
-                <th mat-header-cell *matHeaderCellDef> Co2 Savings in ton </th>
+                <th mat-header-cell *matHeaderCellDef> Co2 Savings in ton CO2/yr </th>
                 <td mat-cell *matCellDef="let element"> {{element.co2savingston}} </td>
             </ng-container>
 
@@ -206,7 +160,7 @@
             </ng-container>
 
             <ng-container matColumnDef="finalco2emissions">
-                <th mat-header-cell *matHeaderCellDef> Final Co2 emissions </th>
+                <th mat-header-cell *matHeaderCellDef> Final Co2 emissions(ton CO2/yr) </th>
                 <td mat-cell *matCellDef="let element"> {{element.finalco2emissions}} </td>
             </ng-container>
 
@@ -227,5 +181,9 @@
               </canvas>
             </div>
         </div>
+    </div>
+    <div class="mt-4 col-md-6">
+        <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="submit"  (click)="backClicked()">
+        Go back </button>
     </div>
 </div>

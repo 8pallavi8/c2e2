@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    ChartsModule
+    ChartsModule,
+    MatDialogModule
   ],
   exports: [
     HeaderComponent,
@@ -34,7 +36,8 @@ import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
     NgbModule,
     ChartsModule,
     PieChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    MatDialogModule
   ],
 })
 export class SharedModule { }
