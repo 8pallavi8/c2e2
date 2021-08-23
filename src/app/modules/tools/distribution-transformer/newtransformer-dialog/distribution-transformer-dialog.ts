@@ -27,9 +27,14 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
       private fb: FormBuilder) {}
     
       ngOnInit(): void {
-        this.DialogTransformerInputs = this.createVariant();
+          if(this.data.action == 'Update'){
+            this.DialogTransformerInputs = this.updateVariant(this.data.selectedTransformer); 
+          }else {
+          this.DialogTransformerInputs = this.createVariant(); 
+        }
         
     }
+
     createVariant(): FormGroup {
         return this.fb.group({
           Power: ['', Validators.compose([Validators.required, Validators.max(3149)])],
@@ -44,16 +49,41 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
           Capex: ['', Validators.compose([Validators.required])],
         });
       }
+
+      updateVariant(selectedTransformer: DistTransformer): FormGroup {
+        return this.fb.group({
+          Power: [selectedTransformer.Power, Validators.compose([Validators.required, Validators.max(3149)])],
+          Stock: [selectedTransformer.Stock, Validators.compose([Validators.required])],
+          PlateEfficiency: [selectedTransformer.PlateEfficiency, Validators.compose([Validators.required, Validators.max(100), Validators.min(0)])],
+          Energy: [selectedTransformer.Energy, Validators.compose([Validators.required])],
+          EnergyPrice: [selectedTransformer.EnergyPrice, Validators.compose([Validators.required])],
+          PolicyLevel: [selectedTransformer.PolicyLevel, Validators.compose([Validators.required])],
+          FireRegulation: [selectedTransformer.FireRegulation, Validators.compose([Validators.required])],
+          HighestVoltageValues: [selectedTransformer.HighestVoltageValues, Validators.compose([Validators.required])],
+          DualVoltWindings: [selectedTransformer.DualVoltWindings, Validators.compose([Validators.required])],
+          Capex: [selectedTransformer.Capex, Validators.compose([Validators.required])],
+        });
+      }
   
     onNoClick(): void {
       this.dialogRef.close();
     }
-    addToTable() {
-     
-      if (this.DialogTransformerInputs.valid){
+
+
+    addToTable() { 
+      if (this.DialogTransformerInputs.valid)
+      {
+        var newrequestnumber;
+       if (this.data.action == 'Update'){
+          newrequestnumber=this.data.selectedTransformer.Requestnumber;
+        }
+        else
+        {
+          newrequestnumber= this.data.requestCount+1;
+        }
         console.log("submit");
         this.inputValue= {
-          Requestnumber :this.data.requestCount+1,
+          Requestnumber :newrequestnumber,
           Power: this.DialogTransformerInputs.controls.Power.value,
           Stock: this.DialogTransformerInputs.controls.Stock.value,
           PlateEfficiency: this.DialogTransformerInputs.controls.PlateEfficiency.value,

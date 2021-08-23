@@ -1,6 +1,6 @@
-    <mat-toolbar class="mat-toolbar">
+<mat-toolbar class="mat-toolbar">
         <mat-toolbar-row class="d-flex justify-content-between">
-            <h3 mat-dialog-title>Add Transformer</h3>
+            <h3 mat-dialog-title>Transformer Details</h3>
             <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onNoClick()">
           <mat-icon>close</mat-icon>
         </button>
@@ -108,7 +108,7 @@
    
 <div class="button-dialog"  mat-dialog-actions>
     <button mat-raised-button color="accent" style="color: #fff;" class="mat-elevation-z6" type="button" (click)="onNoClick()">Cancel</button>
-    <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="submit"  cdkFocusInitial>Add</button>
+    <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="submit"  cdkFocusInitial>{{data.action}}</button>
   </div>
 
 </form>

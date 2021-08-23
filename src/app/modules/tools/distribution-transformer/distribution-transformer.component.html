@@ -25,7 +25,7 @@
                 </mat-form-field>
 
                 <div class="mt-4 col-md-6">
-                    <button mat-raised-button color="accent" style="color: #fff;" class="mat-elevation-z6" type="button" [disabled]="DisTransformerInputs.controls['Country'].hasError('required')" (click)="openDialog()">
+                    <button mat-raised-button color="accent" style="color: #fff;" class="mat-elevation-z6" type="button" [disabled]="DisTransformerInputs.controls['Country'].hasError('required')" (click)="openDialog('Add',{})">
                         Add Transformer</button>
                      
                 </div>
@@ -83,6 +83,29 @@
                         <td mat-cell *matCellDef="let tran"> {{tran.Capex}} </td>
                       </ng-container>
 
+                      <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let tran" class="action-link"> 
+
+
+                            <div class="delete-button-row">
+                                <div class="delete-flex-container">
+                                  <div class="delete-button-container">
+                                    <div class="delete-button-container">
+                                        <button mat-fab color="secondary" aria-label="To edit the Transformer" type="button" (click)="openDialog('Update',tran)">
+                                            <mat-icon>edit</mat-icon>
+                                          </button>  
+                                      </div>
+                                    <button mat-fab color="secondary" aria-label="To delete the Transformer" type="button" (click)="deleteTransformer(tran)">
+                                        <mat-icon>delete</mat-icon>
+                                      </button> 
+                                  </div>
+                                 
+                                </div>
+                            </div>
+                           
+                    </td>
+                      </ng-container>
 
 
                       <tr mat-header-row *matHeaderRowDef="inputDisplayedColumns"></tr>

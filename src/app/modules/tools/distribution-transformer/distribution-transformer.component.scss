@@ -21,4 +21,32 @@ td.mat-footer-cell {
     
 }
 
+.delete-button-row {
+    display: flex;
+    width: 200px;
+  }
+  
+  .delete-button-row .mat-button-base {
+    margin: 2px 2px 2px 0;
+  }
+  
+  .delete-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .delete-button-container {
+    display: flex;
+    justify-content: center;
+
+    > button {
+        box-shadow: none;
+        width: 40px;
+        height: 40px;  
+    }
+  }
+  .mat-fab .mat-button-wrapper {
+    padding: 0px 0 i !important;
+  }
 

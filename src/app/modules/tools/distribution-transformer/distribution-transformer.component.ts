@@ -66,7 +66,7 @@ export class DisTransformerComponent implements OnInit {
     'FireRegulation',
     'HighestVoltageValues',
     'DualVoltWindings',
-    'Capex'
+    'Capex','action'
   ]
   displayedColumns: string[] = [
     'efficacy',
@@ -95,8 +95,10 @@ export class DisTransformerComponent implements OnInit {
   backClicked() {
    /* this.showForms=true;
    this.inputValues=[];
-   this.inputTableDataSource= []; */
-   location.reload();
+   this.inputTableDataSource= []; 
+   location.reload(); */
+   //this.ngOnInit();
+   location.replace(location.origin);
   } 
 
   ngOnInit(): void {
@@ -109,50 +111,41 @@ export class DisTransformerComponent implements OnInit {
     })
 
     this.DisTransformerInputs = this.fb.group({
-      Country: ['', Validators.compose([Validators.required])],
-      forminputs: this.fb.array([this.createVariant()])
+      Country: ['', Validators.compose([Validators.required])]
     });
   }
 
-  openDialog(): void {
+  openDialog(action,obj): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '80%',
       autoFocus: false,
       maxHeight: '90vh',
-      data: {highestVoltageValueslist: this.highestVoltageValueslist,
-         dualVoltWindings: this.dualVoltWindings ,
-         requestCount : this.inputValues.length}
+      data: {
+        highestVoltageValueslist: this.highestVoltageValueslist,
+        dualVoltWindings: this.dualVoltWindings ,
+        requestCount : this.inputValues.length,
+        action: action, 
+        selectedTransformer: obj
+      }
     });
+
+   
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if(result !== undefined){
+        this.inputValues= this.inputValues.filter(x => x.Requestnumber != result.Requestnumber)
         this.inputValues.push(result);
-        const clonedInputValues = [...this.inputValues];
-        this.inputTableDataSource = clonedInputValues;
+        this.inputValues= this.inputValues.sort((first, second) => 0 - (first.Requestnumber > second.Requestnumber ? -1 : 1));
+        this.inputTableDataSource = this.inputValues;
       }
     });
   }
 
-  createVariant(): FormGroup {
-    return this.fb.group({
-      Power: ['', Validators.compose([Validators.required])],
-      Stock: ['', Validators.compose([Validators.required])],
-      PlateEfficiency: ['', Validators.compose([Validators.required])],
-      Energy: ['', Validators.compose([Validators.required])],
-      EnergyPrice: ['', Validators.compose([Validators.required])],
-      PolicyLevel: ['', Validators.compose([Validators.required])],
-      FireRegulation: ['', Validators.compose([Validators.required])],
-      HighestVoltageValues: ['', Validators.compose([Validators.required])],
-      DualVoltWindings: ['', Validators.compose([Validators.required])],
-      Capex: ['', Validators.compose([Validators.required])],
-    });
-  }
-
-  removeVariant(index): void {
-    this.forminputs.removeAt(index);
-    console.log(this.forminputs);
-  }
+  deleteTransformer(obj) : void {
+    this.inputValues = this.inputValues.filter(i => i.Requestnumber !== obj.Requestnumber)
+    this.inputTableDataSource = this.inputValues;
+  } 
 
   addNewTransformerVariant() {
     var transReq = {

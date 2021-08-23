@@ -18,6 +18,9 @@ export interface DistTransformer {
     highestVoltageValueslist?: string[];
     dualVoltWindings?: String[];
     requestCount?: number;
+    action?: String;
+    selectedTransformer?: DistTransformer;
+
   }
 
 export interface TotalFinalValues {
