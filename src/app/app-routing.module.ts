@@ -3,10 +3,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { AppLayoutComponent } from './layout/app-layout/app-layout.component';
 
 const routes: Routes = [
   {
-    path: '', component: AppComponent,
+    path: '', component: AppLayoutComponent,
     children: [
       {
         path: 'tools',

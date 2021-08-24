@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import {MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogOverviewExampleDialog } from './distribution-transformer/newtransformer-dialog/distribution-transformer-dialog';
 
+
 const routes: Routes = [
   {
       path: '',
@@ -20,7 +21,7 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     MatDialogModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ]
 })
 export class ToolsModule { }

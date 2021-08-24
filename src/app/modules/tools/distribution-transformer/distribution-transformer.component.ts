@@ -1,13 +1,14 @@
-import { Component, OnInit , Inject} from '@angular/core';
+import { Component, OnInit , Inject, SystemJsNgModuleLoader} from '@angular/core';
 import { FormArray, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
-import { DialogData, DistTransformer } from 'src/app/shared/models/models';
+import { DialogData, DistTransformer} from 'src/app/shared/models/models';
 import { ToolsService } from 'src/app/shared/services/tools.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogOverviewExampleDialog } from './newtransformer-dialog/distribution-transformer-dialog';
 import {Location} from '@angular/common';
+import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 
 export interface FinalTable {
   efficacy?: number;
@@ -90,14 +91,15 @@ export class DisTransformerComponent implements OnInit {
   inputValues: DistTransformer[] = [];
   ctr = 0;
   
-  constructor(private fb: FormBuilder, private toolService: ToolsService, public dialog: MatDialog, private _location: Location) { }
+  constructor(private fb: FormBuilder,
+     private toolService: ToolsService,
+     public dialog: MatDialog,
+     private _location: Location,
+     private confirmationDialog: ConfirmationDialogService) { 
+
+     }
 
   backClicked() {
-   /* this.showForms=true;
-   this.inputValues=[];
-   this.inputTableDataSource= []; 
-   location.reload(); */
-   //this.ngOnInit();
    location.replace(location.origin);
   } 
 
@@ -142,9 +144,20 @@ export class DisTransformerComponent implements OnInit {
     });
   }
 
-  deleteTransformer(obj) : void {
-    this.inputValues = this.inputValues.filter(i => i.Requestnumber !== obj.Requestnumber)
-    this.inputTableDataSource = this.inputValues;
+
+  public openConfirmationDialog(obj) {
+    this.confirmationDialog.confirm('Delete Transformer','Do you really want to delete?')
+    .then((confirmed) => this.deleteTransformer(confirmed,obj))
+    .catch(() => console.log('User dismissed the dialog'));
+  }
+
+  deleteTransformer(confirm,obj) : void {
+    console.log(confirm);
+    if(confirm)
+    {
+      this.inputValues = this.inputValues.filter(i => i.Requestnumber !== obj.Requestnumber)
+      this.inputTableDataSource = this.inputValues;
+    }
   } 
 
   addNewTransformerVariant() {

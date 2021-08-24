@@ -6,6 +6,12 @@
 @import '~bootstrap/scss/bootstrap';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./theme.scss";
+
+//mat table responsive css
+@import './app/material/mat-table-responsive/mat-table-responsive.directive.scss';
+
+
+
 html,
 body {
     height: 100%;

@@ -31,7 +31,7 @@
                 </div>
             </div>
                 
-                <table *ngIf="inputTableDataSource" mat-table [dataSource]="inputTableDataSource" >
+                <table mat-table *ngIf="inputTableDataSource" matSort matTableResponsive [dataSource]="inputTableDataSource" >
                
                     <ng-container matColumnDef="Power">
                         <th mat-header-cell *matHeaderCellDef> Power </th>
@@ -83,28 +83,18 @@
                         <td mat-cell *matCellDef="let tran"> {{tran.Capex}} </td>
                       </ng-container>
 
+                     
+
                       <ng-container matColumnDef="action">
-                        <th mat-header-cell *matHeaderCellDef> </th>
-                        <td mat-cell *matCellDef="let tran" class="action-link"> 
-
-
-                            <div class="delete-button-row">
-                                <div class="delete-flex-container">
-                                  <div class="delete-button-container">
-                                    <div class="delete-button-container">
-                                        <button mat-fab color="secondary" aria-label="To edit the Transformer" type="button" (click)="openDialog('Update',tran)">
-                                            <mat-icon>edit</mat-icon>
-                                          </button>  
-                                      </div>
-                                    <button mat-fab color="secondary" aria-label="To delete the Transformer" type="button" (click)="deleteTransformer(tran)">
-                                        <mat-icon>delete</mat-icon>
-                                      </button> 
-                                  </div>
-                                 
-                                </div>
-                            </div>
-                           
-                    </td>
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let tran">
+                          <button mat-icon-button  type="button"   (click)="openDialog('Update',tran)">
+                            <mat-icon>edit</mat-icon>
+                          </button>
+                          <button mat-icon-button type="button"   (click)="openConfirmationDialog(tran)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
                       </ng-container>
 
 
@@ -123,14 +113,12 @@
   
 </div>
 
-                
-
 
 <div class="container-fluid pt-4 pb-4" *ngIf="!showForms">
     <h2 class="page-title">Proposed changes and potential savings</h2>
     <div class="row container-fluid">
 
-        <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8 finaltable" >
+        <table  mat-table matSort matTableResponsive  [dataSource]="dataSource" class="mat-elevation-z8 finaltable" >
 
             <ng-container matColumnDef="efficacy">
                 <th mat-header-cell *matHeaderCellDef> Efficacy(%) </th>

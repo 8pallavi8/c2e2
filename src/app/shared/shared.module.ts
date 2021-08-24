@@ -9,13 +9,16 @@ import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogService } from './services/confirmation-dialog.service';
+import { ConfirmationDialogComponent } from './deleteconfirmationdialog/deleteconfirmationdialog.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
     PieChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -24,8 +27,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReactiveFormsModule,
     NgbModule,
     ChartsModule,
-    MatDialogModule
-  ],
+    MatDialogModule,
+    ],
   exports: [
     HeaderComponent,
     FooterComponent,
@@ -37,7 +40,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     ChartsModule,
     PieChartComponent,
     BarChartComponent,
-    MatDialogModule
+    MatDialogModule,
+    ConfirmationDialogComponent
+
   ],
+  // If Service do not have Provider == root then add the below code to use the service by other components.
+  //providers: [ ConfirmationDialogService ],
+  //entryComponents: [ ConfirmationDialogComponent ],
 })
 export class SharedModule { }

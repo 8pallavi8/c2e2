@@ -1,52 +1,23 @@
 .mat-elevation-z8{
     width: 100%; margin: 0px !important;
 }
-
-th.mat-header-cell,
-td.mat-cell,
-td.mat-footer-cell {
-    padding-right: 34px;
-    padding-left: 20px;
-}
-
-th.mat-header-cell,
-td.mat-cell,
-td.mat-footer-cell {
-    text-align: center;    
-}
+table {
+    width: 100%;
+  }
+  
+  .mat-column-actions {
+    text-align: right;
+  }
+  
+  td.mat-cell{
+      min-width: 10%;
+  }
 
 
-.finaltable tr:last-child { 
+  th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+      padding: 6px;
+  }
+  .finaltable tr:last-child { 
     background:rgb(185, 184, 184) !important;
     
 }
-
-.delete-button-row {
-    display: flex;
-    width: 200px;
-  }
-  
-  .delete-button-row .mat-button-base {
-    margin: 2px 2px 2px 0;
-  }
-  
-  .delete-flex-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .delete-button-container {
-    display: flex;
-    justify-content: center;
-
-    > button {
-        box-shadow: none;
-        width: 40px;
-        height: 40px;  
-    }
-  }
-  .mat-fab .mat-button-wrapper {
-    padding: 0px 0 i !important;
-  }
-
