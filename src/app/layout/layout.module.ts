@@ -4,6 +4,7 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
+    MatDialogModule,
     AppRoutingModule,
     RouterModule.forChild(routes)
   ],

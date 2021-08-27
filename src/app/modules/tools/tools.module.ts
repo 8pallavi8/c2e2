@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import {MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogOverviewExampleDialog } from './distribution-transformer/newtransformer-dialog/distribution-transformer-dialog';
+import { FormHeaderComponent } from './distribution-transformer/form-header/form-header.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [DisTransformerComponent,DialogOverviewExampleDialog],
+  declarations: [DisTransformerComponent,DialogOverviewExampleDialog, FormHeaderComponent],
   imports: [
     CommonModule,
     SharedModule,

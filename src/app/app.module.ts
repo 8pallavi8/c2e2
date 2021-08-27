@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './layout/layout.module';
+import { ConfirmationDialogService } from './shared/services/confirmation-dialog.service';
+import { ConfirmationDialogComponent } from './shared/deleteconfirmationdialog/deleteconfirmationdialog.component';
+import { FormHeaderComponent } from './form-header/form-header.component';
 
 
 @NgModule({
@@ -24,8 +27,10 @@ import { LayoutModule } from './layout/layout.module';
   ],
   declarations: [
     AppComponent,
+    FormHeaderComponent,
   ],
-  providers: [],
+  providers: [ ConfirmationDialogService ],
+  entryComponents: [ ConfirmationDialogComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

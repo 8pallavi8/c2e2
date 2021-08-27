@@ -1,200 +1,203 @@
-<div class="container-fluid" style="margin-top: 30px;" *ngIf="showForms">
-    <mat-card style="width: 100%; padding-bottom: 80px;">
-        <div *ngIf="errMessage" class="warning" role="warning">
-            {{errMessage}}
-        </div>
+<div class="calculator-tools">
+    
+    <div class="container-fluid calculator-tools-main"  *ngIf="showForms">
 
-        <div class="d-flex flex-justify-between">
-            <h4 class="signup-title mt-4 ml-2 col-md-8">Add Distributed Transformer Inputs</h4>
-        </div>
-
-
-        <form [formGroup]="DisTransformerInputs" novalidate (submit)="addNewTransformerVariant()">
-            
-            <div class="row">
-            <div class="mt-4 col-md-6" style="display: flex; align-items: center; justify-content: space-between;">
-                <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                    <mat-label>Select country</mat-label>
-                    <mat-select matNativeControl id="Country" formControlName="Country">
-                        <mat-option *ngFor="let con of countrylist" [value]="con">{{con}}</mat-option> 
-                    </mat-select>
-                    <mat-hint color="primary">Select country to add Transformer</mat-hint>  
-                    <mat-error *ngIf="DisTransformerInputs.controls['Country'].hasError('required')">
-                        Country is required
-                    </mat-error>
-                </mat-form-field>
-
-                <div class="mt-4 col-md-6">
-                    <button mat-raised-button color="accent" style="color: #fff;" class="mat-elevation-z6" type="button" [disabled]="DisTransformerInputs.controls['Country'].hasError('required')" (click)="openDialog('Add',{})">
-                        Add Transformer</button>
-                     
-                </div>
+               <app-form-header> </app-form-header>
+            <div *ngIf="errMessage" class="warning" role="warning">
+                {{errMessage}}
             </div>
+
+            <div class="d-flex flex-justify-between">
+                <h4 class="signup-title mt-4 ml-2 col-md-8">Add Distributed Transformer Inputs</h4>
+            </div>
+
+
+            <form [formGroup]="DisTransformerInputs" novalidate (submit)="addNewTransformerVariant()">
                 
-                <table mat-table *ngIf="inputTableDataSource" matSort matTableResponsive [dataSource]="inputTableDataSource" >
-               
-                    <ng-container matColumnDef="Power">
-                        <th mat-header-cell *matHeaderCellDef> Power </th>
-                        <td mat-cell *matCellDef="let tran"> {{tran.Power}} </td>
-                      </ng-container>
+                <div class="row">
+                <div class="mt-4 col-md-6" >
+                    <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+                        <mat-label>Select country</mat-label>
+                        <mat-select matNativeControl id="Country" formControlName="Country">
+                            <mat-option *ngFor="let con of countrylist" [value]="con">{{con}}</mat-option> 
+                        </mat-select>
+                        <mat-hint color="primary">Select country to add Transformer</mat-hint>  
+                        <mat-error *ngIf="DisTransformerInputs.controls['Country'].hasError('required')">
+                            Country is required
+                        </mat-error>
+                    </mat-form-field>
 
-                      <ng-container matColumnDef="Stock">
-                        <th mat-header-cell *matHeaderCellDef> Stock </th>
-                        <td mat-cell *matCellDef="let tran"> {{tran.Stock}} </td>
-                      </ng-container>
-
-                      <ng-container matColumnDef="PlateEfficiency">
-                        <th mat-header-cell *matHeaderCellDef> PlateEfficiency </th>
-                        <td mat-cell *matCellDef="let tran"> {{tran.PlateEfficiency}} </td>
-                      </ng-container>
-
-                      <ng-container matColumnDef="Energy">
-                        <th mat-header-cell *matHeaderCellDef> Energy </th>
-                        <td mat-cell *matCellDef="let tran"> {{tran.Energy}} </td>
-                      </ng-container>
-
-                      <ng-container matColumnDef="EnergyPrice">
-                        <th mat-header-cell *matHeaderCellDef> EnergyPrice </th>
-                        <td mat-cell *matCellDef="let tran"> {{tran.EnergyPrice}} </td>
-                      </ng-container>
-
-                      <ng-container matColumnDef="PolicyLevel">
-                        <th mat-header-cell *matHeaderCellDef> PolicyLevel </th>
-                        <td mat-cell *matCellDef="let tran"> {{tran.PolicyLevel}} </td>
-                      </ng-container>
-
-                      <ng-container matColumnDef="FireRegulation">
-                        <th mat-header-cell *matHeaderCellDef> FireRegulation </th>
-                        <td mat-cell *matCellDef="let tran"> {{tran.FireRegulation}} </td>
-                      </ng-container>
-
-                      <ng-container matColumnDef="HighestVoltageValues">
-                        <th mat-header-cell *matHeaderCellDef> HighestVoltageValues </th>
-                        <td mat-cell *matCellDef="let tran"> {{tran.HighestVoltageValues}} </td>
-                      </ng-container>
-
-                      <ng-container matColumnDef="DualVoltWindings">
-                        <th mat-header-cell *matHeaderCellDef> DualVoltWindings </th>
-                        <td mat-cell *matCellDef="let tran"> {{tran.DualVoltWindings}} </td>
-                      </ng-container>
-
-                      <ng-container matColumnDef="Capex">
-                        <th mat-header-cell *matHeaderCellDef> Capex </th>
-                        <td mat-cell *matCellDef="let tran"> {{tran.Capex}} </td>
-                      </ng-container>
-
-                     
-
-                      <ng-container matColumnDef="action">
-                        <th mat-header-cell *matHeaderCellDef></th>
-                        <td mat-cell *matCellDef="let tran">
-                          <button mat-icon-button  type="button"   (click)="openDialog('Update',tran)">
-                            <mat-icon>edit</mat-icon>
-                          </button>
-                          <button mat-icon-button type="button"   (click)="openConfirmationDialog(tran)">
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                        </td>
-                      </ng-container>
-
-
-                      <tr mat-header-row *matHeaderRowDef="inputDisplayedColumns"></tr>
-                      <tr mat-row *matRowDef="let row; columns: inputDisplayedColumns;"></tr>
-                  </table>
-               
-
-                <div class="text-center mt-5 col-md-10">
-                    <button *ngIf="inputValues.length>0" mat-raised-button type="submit" color="primary" style="height: 50px;" class="mat-elevation-z6">Submit
-                        Transformers</button>
+                    <div class="mt-4 col-md-6">
+                        <button mat-raised-button color="accent" style="color: #fff;" class="mat-elevation-z6" type="button" [disabled]="DisTransformerInputs.controls['Country'].hasError('required')" (click)="openDialog('Add',{})">
+                            Add Transformer</button>
+                        
+                    </div>
                 </div>
-            </div>  
-        </form>
-    </mat-card>
-  
-</div>
+                    
+                    <table mat-table *ngIf="inputTableDataSource" matSort matTableResponsive [dataSource]="inputTableDataSource" >
+                
+                        <ng-container matColumnDef="Power">
+                            <th mat-header-cell *matHeaderCellDef> Power </th>
+                            <td mat-cell *matCellDef="let tran"> {{tran.Power}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Stock">
+                            <th mat-header-cell *matHeaderCellDef> Stock </th>
+                            <td mat-cell *matCellDef="let tran"> {{tran.Stock}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="PlateEfficiency">
+                            <th mat-header-cell *matHeaderCellDef> PlateEfficiency </th>
+                            <td mat-cell *matCellDef="let tran"> {{tran.PlateEfficiency}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Energy">
+                            <th mat-header-cell *matHeaderCellDef> Energy </th>
+                            <td mat-cell *matCellDef="let tran"> {{tran.Energy}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="EnergyPrice">
+                            <th mat-header-cell *matHeaderCellDef> EnergyPrice </th>
+                            <td mat-cell *matCellDef="let tran"> {{tran.EnergyPrice}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="PolicyLevel">
+                            <th mat-header-cell *matHeaderCellDef> PolicyLevel </th>
+                            <td mat-cell *matCellDef="let tran"> {{tran.PolicyLevel}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="FireRegulation">
+                            <th mat-header-cell *matHeaderCellDef> FireRegulation </th>
+                            <td mat-cell *matCellDef="let tran"> {{tran.FireRegulation}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="HighestVoltageValues">
+                            <th mat-header-cell *matHeaderCellDef> HighestVoltageValues </th>
+                            <td mat-cell *matCellDef="let tran"> {{tran.HighestVoltageValues}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="DualVoltWindings">
+                            <th mat-header-cell *matHeaderCellDef> DualVoltWindings </th>
+                            <td mat-cell *matCellDef="let tran"> {{tran.DualVoltWindings}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Capex">
+                            <th mat-header-cell *matHeaderCellDef> Capex </th>
+                            <td mat-cell *matCellDef="let tran"> {{tran.Capex}} </td>
+                        </ng-container>
+
+                        
+
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let tran">
+                            <button mat-icon-button  type="button"   (click)="openDialog('Update',tran)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button type="button"   (click)="openConfirmationDialog(tran)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            </td>
+                        </ng-container>
 
 
-<div class="container-fluid pt-4 pb-4" *ngIf="!showForms">
-    <h2 class="page-title">Proposed changes and potential savings</h2>
-    <div class="row container-fluid">
+                        <tr mat-header-row *matHeaderRowDef="inputDisplayedColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: inputDisplayedColumns;"></tr>
+                    </table>
+                
 
-        <table  mat-table matSort matTableResponsive  [dataSource]="dataSource" class="mat-elevation-z8 finaltable" >
-
-            <ng-container matColumnDef="efficacy">
-                <th mat-header-cell *matHeaderCellDef> Efficacy(%) </th>
-                <td mat-cell *matCellDef="let element"> {{element.efficacy}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="ll">
-                <th mat-header-cell *matHeaderCellDef> Ll(W) </th>
-                <td mat-cell *matCellDef="let element"> {{element.ll}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="nl">
-                <th mat-header-cell *matHeaderCellDef> Nl(W) </th>
-                <td mat-cell *matCellDef="let element"> {{element.nl}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="energyeffyincrease">
-                <th mat-header-cell *matHeaderCellDef> Energy Efficiency Increase(MWh/yr) </th>
-                <td mat-cell *matCellDef="let element"> {{element.energyeffyincrease}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="energy">
-                <th mat-header-cell *matHeaderCellDef> Energy(%) </th>
-                <td mat-cell *matCellDef="let element"> {{element.energy}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="financial">
-                <th mat-header-cell *matHeaderCellDef> Financial(USD/yr) </th>
-                <td mat-cell *matCellDef="let element"> {{element.financial}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="paybackperiod">
-                <th mat-header-cell *matHeaderCellDef> Payback period(Years) </th>
-                <td mat-cell *matCellDef="let element"> {{element.paybackperiod}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="co2baseline">
-                <th mat-header-cell *matHeaderCellDef> Co2 baseline(ton CO2/yr) </th>
-                <td mat-cell *matCellDef="let element"> {{element.co2baseline}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="co2savingston">
-                <th mat-header-cell *matHeaderCellDef> Co2 Savings in ton CO2/yr </th>
-                <td mat-cell *matCellDef="let element"> {{element.co2savingston}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="co2savingspercent">
-                <th mat-header-cell *matHeaderCellDef> Co2 Savings in % </th>
-                <td mat-cell *matCellDef="let element"> {{element.co2savingspercent}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="finalco2emissions">
-                <th mat-header-cell *matHeaderCellDef> Final Co2 emissions(ton CO2/yr) </th>
-                <td mat-cell *matCellDef="let element"> {{element.finalco2emissions}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-    </div>
-    <div class="row">
-        <div class="container-fluid mt-5 col-md-6">
-            <div class="chart-wrapper">
-                <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
-              </canvas>
+                    <div class="text-center mt-5 col-md-10">
+                        <button *ngIf="inputValues.length>0" mat-raised-button type="submit" color="primary" style="height: 50px;" class="mat-elevation-z6">Submit
+                            Transformers</button>
+                    </div>
+                </div>  
+            </form>
+        </div>
+        <div class="container-fluid pt-4 pb-4" *ngIf="!showForms">
+            <app-form-header> </app-form-header>
+            <h2 class="page-title">Proposed changes and potential savings</h2>
+            <div class="row container-fluid">
+        
+                <table  mat-table matSort matTableResponsive  [dataSource]="dataSource" class="mat-elevation-z8 finaltable" >
+        
+                    <ng-container matColumnDef="efficacy">
+                        <th mat-header-cell *matHeaderCellDef> Efficacy(%) </th>
+                        <td mat-cell *matCellDef="let element"> {{element.efficacy}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="ll">
+                        <th mat-header-cell *matHeaderCellDef> Ll(W) </th>
+                        <td mat-cell *matCellDef="let element"> {{element.ll}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="nl">
+                        <th mat-header-cell *matHeaderCellDef> Nl(W) </th>
+                        <td mat-cell *matCellDef="let element"> {{element.nl}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="energyeffyincrease">
+                        <th mat-header-cell *matHeaderCellDef> Energy Efficiency Increase(MWh/yr) </th>
+                        <td mat-cell *matCellDef="let element"> {{element.energyeffyincrease}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="energy">
+                        <th mat-header-cell *matHeaderCellDef> Energy(%) </th>
+                        <td mat-cell *matCellDef="let element"> {{element.energy}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="financial">
+                        <th mat-header-cell *matHeaderCellDef> Financial(USD/yr) </th>
+                        <td mat-cell *matCellDef="let element"> {{element.financial}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="paybackperiod">
+                        <th mat-header-cell *matHeaderCellDef> Payback period(Years) </th>
+                        <td mat-cell *matCellDef="let element"> {{element.paybackperiod}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="co2baseline">
+                        <th mat-header-cell *matHeaderCellDef> Co2 baseline(ton CO2/yr) </th>
+                        <td mat-cell *matCellDef="let element"> {{element.co2baseline}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="co2savingston">
+                        <th mat-header-cell *matHeaderCellDef> Co2 Savings in ton CO2/yr </th>
+                        <td mat-cell *matCellDef="let element"> {{element.co2savingston}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="co2savingspercent">
+                        <th mat-header-cell *matHeaderCellDef> Co2 Savings in % </th>
+                        <td mat-cell *matCellDef="let element"> {{element.co2savingspercent}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="finalco2emissions">
+                        <th mat-header-cell *matHeaderCellDef> Final Co2 emissions(ton CO2/yr) </th>
+                        <td mat-cell *matCellDef="let element"> {{element.finalco2emissions}} </td>
+                    </ng-container>
+        
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+            <div class="row">
+                <div class="container-fluid mt-5 col-md-6">
+                    <div class="chart-wrapper">
+                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+                      </canvas>
+                    </div>
+                </div>
+                <div class="container-fluid mt-5 col-md-6">
+                    <div class="chart-wrapper">
+                        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+                      </canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 col-md-6">
+                <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="submit"  (click)="backClicked()">
+                Go back </button>
             </div>
         </div>
-        <div class="container-fluid mt-5 col-md-6">
-            <div class="chart-wrapper">
-                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
-              </canvas>
-            </div>
-        </div>
-    </div>
-    <div class="mt-4 col-md-6">
-        <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="submit"  (click)="backClicked()">
-        Go back </button>
-    </div>
+    
 </div>
+
