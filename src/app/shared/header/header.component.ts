@@ -9,6 +9,16 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
+
+  showToolbox: boolean = false;
+
+  toggleToolbox(){
+    console.log(this.showToolbox)
+    this.showToolbox= !this.showToolbox
+    console.log(this.showToolbox)
+
+  }
+
   ngOnInit(): void {
   }
 
