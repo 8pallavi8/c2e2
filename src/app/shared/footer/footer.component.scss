@@ -1,0 +1,361 @@
+.p-site-footer {
+    background-color: #01465f;
+    color: #ffffff;
+}
+
+.o-container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative;
+}
+
+@media (min-width: 992px){
+    .o-container {
+        padding: 0 1.5rem;
+    }
+}
+
+.p-site-footer__top {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.36);
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 2rem 0;
+}
+
+.p-site-footer__top {
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding: 4rem 0;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.p-site-footer__website-description {
+    font-size: 1.125rem;
+    line-height: 1.3333333333;
+    margin: 0 0 1.5rem;
+    width: 100%;
+}
+
+@media (min-width: 992px){
+    .p-site-footer__website-description {
+        width: 50%;
+    }
+}
+
+
+.p-site-footer__partners-list {
+    margin: 0;
+    padding: 0;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@media (min-width: 992px){
+    .p-site-footer__partners-list {
+        width: 37.5%;
+    }
+}
+
+.p-site-footer__partners-item {
+    list-style: none;
+    display: block;
+    width: 100%;
+    margin-right: 15%;
+    height: 100px;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+}
+
+.p-site-footer__partners-item--unep {
+    width: 58%;
+}
+
+.p-site-footer__partners-link {
+    display: inline-block;
+    text-indent: -9999px;
+}
+
+.p-site-footer__partners-item a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.p-site-footer__partners-item--unep a {
+    background: url(https://c2e2.unepdtu.org/wp-content/themes/unepdtu/assets/img/unep-logo_50_white.svg) center top/contain no-repeat;
+}
+
+.p-site-footer__partners-item {
+    list-style: none;
+    display: block;
+    width: 100%;
+    margin-right: 15%;
+    height: 100px;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+}
+
+.p-site-footer__partners-item--dtu {
+    width: 15%;
+}
+
+.p-site-footer__partners-item:last-child {
+    margin: 0;
+}
+
+.p-site-footer__partners-link {
+    display: inline-block;
+    text-indent: -9999px;
+}
+
+.p-site-footer__partners-item a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.p-site-footer__partners-item--dtu a {
+    background: url(https://c2e2.unepdtu.org/wp-content/themes/unepdtu/assets/img/dtu-logo.png) center top/contain no-repeat;
+}
+
+.p-site-footer__bottom {
+    padding: 2rem 0;
+}
+
+@media (min-width: 992px){
+    .p-site-footer__bottom {
+        padding: 4rem 0;
+    }
+}
+
+.o-grid {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    margin: 0 -1.5rem;
+    box-sizing: border-box;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+
+@media (min-width: 992px){
+    .o-grid__col-md-3 {
+        -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+        max-width: 25%;
+    }
+}
+
+@media (min-width: 1200px){
+    .o-grid__col {
+        width: 100%;
+        padding: 0 1.5rem;
+    }
+}
+
+.p-site-footer__headline {
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1;
+    margin: 1.375rem 0;
+}
+
+h2:first-child {
+    margin-top: 0;
+}
+
+.c-address {
+    margin-bottom: 2.5rem;
+}
+
+.c-address--footer {
+    color: #009be8;
+    font-weight: 400;
+}
+
+.c-address__address {
+    margin-bottom: 1.375rem;
+}
+
+.c-address__telephone {
+    margin-bottom: 1.375rem;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.c-address__direction {
+    color: #ffffff;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.c-address__direction:after {
+    content: " ❯";
+    margin-left: 0.5rem;
+}
+
+@media (min-width: 992px){
+    .o-grid__col-md-3 {
+        -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+        max-width: 25%;
+    }
+}
+
+@media (min-width: 1200px){
+    .o-grid__col {
+        width: 100%;
+        padding: 0 1.5rem;
+    }    
+}
+
+.p-site-footer__headline {
+    /* font-weight: 400; */
+    font-size: 1.5rem;
+    line-height: 1;
+    margin: 1.375rem 0;
+}
+
+h2:first-child {
+    margin-top: 0;
+}
+
+.c-footer-menu__list {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.375;
+    margin: 0 0 2.5rem;
+    font-weight: 400;
+    padding: 0;
+}
+
+.c-footer-menu__item {
+    margin-bottom: 1.375rem;
+    list-style: none;
+}
+
+.c-footer-menu__item a {
+    text-decoration: none;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.c-footer-menu__item a:after {
+    content: " ❯";
+    margin-left: 0.5rem;
+}
+
+.c-footer-menu__item {
+    margin-bottom: 1.375rem;
+    list-style: none;
+}
+
+.c-footer-menu__item a {
+    text-decoration: none;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.c-footer-menu__item a:after {
+    content: " ❯";
+    margin-left: 0.5rem;
+}
+
+@media (min-width: 992px){
+    .o-grid__col-md-3 {
+        -ms-flex-preferred-size: 25%;
+        flex-basis: 25%;
+        max-width: 25%;
+    }
+}
+
+
+@media (min-width: 1200px){
+    .o-grid__col {
+        width: 100%;
+        padding: 0 1.5rem;
+    }
+}
+
+.p-site-footer__headline {
+    /* font-weight: 400; */
+    font-size: 1.5rem;
+    line-height: 1;
+    margin: 1.375rem 0;
+}
+
+h2:first-child {
+    margin-top: 0;
+}
+
+.c-social-links {
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0;
+}
+.c-social-links__item {
+    list-style: none;
+    margin-right: 1.25rem;
+}
+
+.c-social-links__link {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1.25rem;
+    display: inline-block;
+    text-indent: -9999px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: opacity 220ms ease-in-out;
+}
+
+.c-social-links__link--linkedin {
+    background-image: url(https://c2e2.unepdtu.org/wp-content/themes/unepdtu/assets/img/icon-linkedin-white.svg);
+}
+
+.c-social-links__item {
+    list-style: none;
+    margin-right: 1.25rem;
+}
+
+.c-social-links__link {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1.25rem;
+    display: inline-block;
+    text-indent: -9999px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: opacity 220ms ease-in-out;
+}
+
+.c-social-links__link--youtube {
+    background-image: url(https://c2e2.unepdtu.org/wp-content/themes/unepdtu/assets/img/icon-youtube-white.svg);
+}
+.p-site-footer__legal {
+    font-size: 12px;
+    font-size: 0.75rem;
+    margin: 0 0 2rem;
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.5);
+}
