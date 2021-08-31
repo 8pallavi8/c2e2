@@ -42,9 +42,8 @@ import { ConfirmationDialogComponent } from './deleteconfirmationdialog/deleteco
     BarChartComponent,
     MatDialogModule,
     ConfirmationDialogComponent
-
   ],
-
+  
   // If Service do not have Provider == root then add the below code to use the service by other components.
   providers: [ ConfirmationDialogService ],
   entryComponents: [ ConfirmationDialogComponent ],

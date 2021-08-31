@@ -11,6 +11,7 @@ import { LayoutModule } from './layout/layout.module';
 import { ConfirmationDialogService } from './shared/services/confirmation-dialog.service';
 import { ConfirmationDialogComponent } from './shared/deleteconfirmationdialog/deleteconfirmationdialog.component';
 import { FormHeaderComponent } from './form-header/form-header.component';
+import { AutoFocusDirective } from './auto-focus.directive';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { FormHeaderComponent } from './form-header/form-header.component';
   declarations: [
     AppComponent,
     FormHeaderComponent,
+    AutoFocusDirective
   ],
   providers: [ ConfirmationDialogService ],
   entryComponents: [ ConfirmationDialogComponent ],
