@@ -5,17 +5,17 @@ import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-
 
 @Component({
   selector: 'app-layout',
-  templateUrl:'./app-layout.component.html',
+  templateUrl: './app-layout.component.html',
   styleUrls: ['./app-layout.component.scss']
 })
 export class AppLayoutComponent implements OnInit {
 
- 
+
   constructor(private activatedRoute: ActivatedRoute, private confirmationDialog: ConfirmationDialogService,
     private router: Router) { }
 
   ngOnInit(): void {
-    
+
   }
 
 }

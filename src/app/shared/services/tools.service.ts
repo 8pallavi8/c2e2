@@ -1,15 +1,18 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { BEETSummary } from "../models/models";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ToolsService {
 
-    constructor(private http: HttpClient) {
 
+    constructor(private fb: FormBuilder,private http: HttpClient) {
+   
     }
     sendDisTransformerDetails(transReq): Observable<any> {
         console.log(environment.baseUrl)

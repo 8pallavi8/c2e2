@@ -4,7 +4,7 @@ import { Directive, ElementRef } from "@angular/core";
   selector: "[autofocussearch]"
 })
 export class AutoFocusDirective {
-  constructor(public elementRef: ElementRef) {}
+  constructor(public elementRef: ElementRef) { }
 
   ngOnInit() {
     setTimeout(() => {

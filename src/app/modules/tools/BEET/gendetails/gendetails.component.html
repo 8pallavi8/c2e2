@@ -1,0 +1,113 @@
+<mat-toolbar class="mat-toolbar">
+    <mat-toolbar-row class="d-flex justify-content-between">
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="container-fluid">
+
+    <form [formGroup]="formGroup" class="form">
+        <h2>Location Details</h2>
+        <div class="container">
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>User Name</mat-label>
+                <input matInput formControlName="UserName" required>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>Project name</mat-label>
+                <input matInput formControlName="ProjectName" required>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>country</mat-label>
+                <input matInput formControlName="Country" required>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>Province</mat-label>
+                <input matInput formControlName="Province" required>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>Location</mat-label>
+                <input matInput formControlName="Location" required>
+            </mat-form-field>
+        </div>
+
+        <h2>Type of building</h2>
+
+        <div class="container">
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>Building Type</mat-label>
+                <input matInput required>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>Categories/Spaces</mat-label>
+                <input matInput required>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>Building Categories/Spaces</mat-label>
+                <input matInput required>
+            </mat-form-field>
+
+        </div>
+
+        <h2>Building age, area, no. of floors, occupancy hours</h2>
+
+
+        <div class="container">
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>Year of construction</mat-label>
+                <input matInput required>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>Buiding gross area</mat-label>
+                <input matInput required>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>Net occupied floor area</mat-label>
+                <input matInput required>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>No. of floors</mat-label>
+                <input matInput required>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>Occupancy hours per week</mat-label>
+                <input matInput required>
+            </mat-form-field>
+
+        </div>
+
+        <h2>Occupancy - People </h2>
+        <div class="container">
+            <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1">I only know the number of people occupying the building during normal working hours</mat-radio-button><br>
+                <mat-radio-button>I know the occupant density of the building (m2/person or ft2/person)</mat-radio-button><br>
+                <mat-radio-button>I do not know the value</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <h2>Energy and Fuel cost</h2>
+        <div class="container">
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>Electricity cost</mat-label>
+                <input matInput required>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                <mat-label>Fuel cost</mat-label>
+                <input matInput required>
+            </mat-form-field>
+
+        </div>
+    </form>
+</div>

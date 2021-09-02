@@ -12,10 +12,12 @@ import { ConfirmationDialogService } from './shared/services/confirmation-dialog
 import { ConfirmationDialogComponent } from './shared/deleteconfirmationdialog/deleteconfirmationdialog.component';
 import { FormHeaderComponent } from './form-header/form-header.component';
 import { AutoFocusDirective } from './auto-focus.directive';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 @NgModule({
-  
+
   imports: [
     BrowserModule,
     CommonModule,
@@ -31,8 +33,8 @@ import { AutoFocusDirective } from './auto-focus.directive';
     FormHeaderComponent,
     AutoFocusDirective
   ],
-  providers: [ ConfirmationDialogService ],
-  entryComponents: [ ConfirmationDialogComponent ],
+  providers: [ConfirmationDialogService],
+  entryComponents: [ConfirmationDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

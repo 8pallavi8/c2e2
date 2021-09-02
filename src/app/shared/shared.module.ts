@@ -11,6 +11,7 @@ import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogService } from './services/confirmation-dialog.service';
 import { ConfirmationDialogComponent } from './deleteconfirmationdialog/deleteconfirmationdialog.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [

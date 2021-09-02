@@ -1,0 +1,63 @@
+  <h1 style="text-align: center;">Self Assessment Building Energy Efficiency Tool (BEET)</h1>
+  
+  <mat-horizontal-stepper labelPosition="bottom" #stepper>
+   
+      <mat-step [stepControl]="firstFormGroup">
+          <ng-template matStepLabel>General Details</ng-template>
+          <app-gendetails></app-gendetails>
+          <div>
+            <button  mat-button matStepperNext>Next</button>
+          </div>
+      </mat-step>
+
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Building Envelope Details</ng-template>
+          <mat-form-field appearance="fill">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                   required>
+
+                   <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                   required>
+          </mat-form-field>
+          <div>
+
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+ 
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Lighting</ng-template>
+          <app-gendetails></app-gendetails>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="fourthFormGroup">
+        <form [formGroup]="fourthFormGroup">
+          <ng-template matStepLabel>HVAC</ng-template>
+          <app-gendetails></app-gendetails>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+
+      <mat-step>
+        <ng-template matStepLabel>Plug Loads</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="showSummary()">ShowSummary</button> 
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>

@@ -1,3 +1,6 @@
+import { Input } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+
 export interface DistTransformer {
     Requestnumber?: number;
     Country?: string;
@@ -49,5 +52,10 @@ export interface FinalValues {
     co2savingston?: number;
     co2savingspercent?: number;
     finalco2emissions?: number;
+}
+
+
+export interface BEETSummary {
+  general: FormGroup;
 }
 
