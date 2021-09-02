@@ -17,7 +17,7 @@ export class GendetailsComponent implements OnInit {
     'select'
   ]
 
-  constructor(private fb: FormBuilder, private toolService: ToolsService) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.formGroup = this.createForm();
@@ -25,11 +25,11 @@ export class GendetailsComponent implements OnInit {
 
   createForm(): FormGroup {
     return this.fb.group({
-      UserName: ['kkk', Validators.compose([Validators.required])],
-      ProjectName: ['lll', Validators.compose([Validators.required])],
-      Country: ['Argentina', Validators.compose([Validators.required])],
-      Province: ['wer', Validators.compose([Validators.required])],
-      Location: ['werty', Validators.compose([Validators.required])],
+      UserName: ['', Validators.compose([Validators.required])],
+      ProjectName: ['', Validators.compose([Validators.required])],
+      Country: ['', Validators.compose([Validators.required])],
+      Province: ['', Validators.compose([Validators.required])],
+      Location: ['', Validators.compose([Validators.required])],
     });
   }
 
