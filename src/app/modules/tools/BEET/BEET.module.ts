@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
+import { BuildingenvelopedetailsComponent } from './buildingenvelopedetails/buildingenvelopedetails.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [GendetailsComponent,BEETComponent],
+  declarations: [GendetailsComponent,BEETComponent,BuildingenvelopedetailsComponent],
   imports: [
     CommonModule,
     SharedModule,
