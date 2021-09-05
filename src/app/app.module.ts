@@ -14,8 +14,7 @@ import { FormHeaderComponent } from './form-header/form-header.component';
 import { AutoFocusDirective } from './auto-focus.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
-import { BuildingenvelopedetailsComponent } from './modules/tools/BEET/buildingenvelopedetails/buildingenvelopedetails.component';
-
+import { LightingComponent } from './modules/tools/BEET/lighting/lighting.component';
 
 @NgModule({
 
@@ -32,8 +31,7 @@ import { BuildingenvelopedetailsComponent } from './modules/tools/BEET/buildinge
   declarations: [
     AppComponent,
     FormHeaderComponent,
-    AutoFocusDirective,
-    BuildingenvelopedetailsComponent
+    AutoFocusDirective
   ],
   providers: [ConfirmationDialogService],
   entryComponents: [ConfirmationDialogComponent],

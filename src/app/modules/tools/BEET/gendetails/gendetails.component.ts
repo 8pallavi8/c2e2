@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ToolsService } from 'src/app/shared/services/tools.service';
 
@@ -30,6 +30,16 @@ export class GendetailsComponent implements OnInit {
       Country: ['', Validators.compose([Validators.required])],
       Province: ['', Validators.compose([Validators.required])],
       Location: ['', Validators.compose([Validators.required])],
+      Buildingtype: ['', Validators.compose([Validators.required])],
+      Categories: ['', Validators.compose([Validators.required])],
+      Yearofconstruction:['', Validators.compose([Validators.required])],
+      Buildinggrossarea:['', Validators.compose([Validators.required])],
+      Netoccupiedfloorarea: ['', Validators.compose([Validators.required])],
+      Nooffloors:['', Validators.compose([Validators.required])],
+      Occupanyhoursperweek:['', Validators.compose([Validators.required])],
+      Occupancypeople: new FormControl('',Validators.required),
+      Electricitycost:['', Validators.compose([Validators.required])],
+      Fuelcost:['', Validators.compose([Validators.required])]
     });
   }
 

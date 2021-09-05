@@ -1,72 +1,65 @@
-<div class="calculator-tool5"> 
-  
-  <h1 style="text-align: center; color: blue; font-style: oblique;">Self Assessment Building Energy Efficiency Tool (BEET)</h1>
-  
+<div class="calculator-tool5">
+
+  <h1 style="text-align: center; color: blue; font-style: oblique;">Self Assessment Building Energy Efficiency Tool
+    (BEET)</h1>
+
   <mat-horizontal-stepper labelPosition="bottom" #stepper>
-   
-      <mat-step [stepControl]="firstFormGroup">
-          <ng-template matStepLabel>General Details</ng-template>
-          <app-gendetails></app-gendetails>
-          <div class="step-button">
-            <button  mat-raised-button color="primary" matStepperNext>Next</button>
-          </div>
-      </mat-step>
 
-      <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup">
-          <ng-template matStepLabel>Building Envelope Details</ng-template>
-          <mat-form-field appearance="fill">
-            <mat-label>Address</mat-label>
-            <input matInput formControlName="secondCtrl">
-                   <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                   required>
-          </mat-form-field>
-          <div class="step-button">
-            <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
-            <button mat-raised-button color="primary" matStepperNext>Next</button>
- 
-          </div>
-        </form>
-      </mat-step>
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>General Details</ng-template>
+      <app-gendetails></app-gendetails>
+      <div class="step-button">
+        <button mat-raised-button color="primary" matStepperNext>Next</button>
+      </div>
+    </mat-step>
 
-      <mat-step [stepControl]="thirdFormGroup">
-        <form [formGroup]="thirdFormGroup">
-          <ng-template matStepLabel>Lighting</ng-template>
-          <div class="step-button"    >
-            <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
-            <button mat-raised-button color="primary" matStepperNext>Next</button>
-          </div>
-        </form>
-      </mat-step>
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>Building Envelope Details</ng-template>
+      <app-buildingenvelopedetails></app-buildingenvelopedetails> 
+      <div class="step-button">
+        <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
+        <button mat-raised-button color="primary" matStepperNext>Next</button>
+      </div>
+    </mat-step>
 
-      <mat-step [stepControl]="fourthFormGroup">
-        <form [formGroup]="fourthFormGroup">
-          <ng-template matStepLabel>HVAC</ng-template>
-          <div class="step-button">
-            <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
-            <button mat-raised-button color="primary" matStepperNext>Next</button>
-          </div>
-        </form>
-      </mat-step>
-
-      <mat-step [stepControl]="fourthFormGroup">
-        <form [formGroup]="fourthFormGroup">
-          <ng-template matStepLabel>Plug Loads</ng-template>
-          <div class="step-button">
-            <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
-            <button mat-raised-button color="primary" matStepperNext>Next</button>
-          </div>
-        </form>
-      </mat-step>
-
-      <mat-step>
-        <ng-template matStepLabel>Summary</ng-template>
+    <mat-step [stepControl]="thirdFormGroup">
+        <ng-template matStepLabel>Lighting</ng-template>
+         <app-lighting></app-lighting>
         <div class="step-button">
           <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
-          <button mat-raised-button color="primary" (click)="showSummary()" style="margin-right: inherit;">ShowSummary</button> 
-          <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
         </div>
-      </mat-step>
-    </mat-horizontal-stepper>
+    </mat-step>
 
-</div> 
+    <mat-step [stepControl]="fourthFormGroup">
+      <form [formGroup]="fourthFormGroup">
+        <ng-template matStepLabel>HVAC</ng-template>
+        <div class="step-button">
+          <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="fourthFormGroup">
+      <form [formGroup]="fourthFormGroup">
+        <ng-template matStepLabel>Plug Loads</ng-template>
+        <div class="step-button">
+          <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>User Input Data Summary</ng-template>
+      <div class="step-button">
+        <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
+        <button mat-raised-button color="primary" (click)="showSummary()"
+          style="margin-right: inherit;">ShowSummary</button>
+        <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+</div>

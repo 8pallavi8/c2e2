@@ -7,6 +7,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { BuildingenvelopedetailsComponent } from './buildingenvelopedetails/buildingenvelopedetails.component';
+import { LightingComponent } from './lighting/lighting.component';
+import { MatInputModule } from '@angular/material/input';
 
 
 const routes: Routes = [
@@ -18,11 +20,12 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [GendetailsComponent,BEETComponent,BuildingenvelopedetailsComponent],
+  declarations: [GendetailsComponent,BEETComponent,BuildingenvelopedetailsComponent,LightingComponent],
   imports: [
     CommonModule,
     SharedModule,
     MatStepperModule,
+    MatInputModule,
     RouterModule.forChild(routes),
   ]
 })
