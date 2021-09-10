@@ -9,6 +9,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { BuildingenvelopedetailsComponent } from './buildingenvelopedetails/buildingenvelopedetails.component';
 import { LightingComponent } from './lighting/lighting.component';
 import { MatInputModule } from '@angular/material/input';
+import { HvacComponent } from './hvac/hvac.component';
+import { PlugloadsComponent } from './plugloads/plugloads.component';
 
 
 const routes: Routes = [
@@ -20,7 +22,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [GendetailsComponent,BEETComponent,BuildingenvelopedetailsComponent,LightingComponent],
+  declarations: [GendetailsComponent,BEETComponent,BuildingenvelopedetailsComponent,LightingComponent,HvacComponent,PlugloadsComponent],
   imports: [
     CommonModule,
     SharedModule,

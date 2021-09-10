@@ -7,21 +7,17 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./buildingenvelopedetails.component.scss']
 })
 export class BuildingenvelopedetailsComponent implements OnInit {
-
-  formgroup1: FormGroup;
-
-
+  formgroup: FormGroup;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.formgroup1 = new FormGroup({
-      outerwallr: new FormControl('',Validators.required),
-      roofr: new FormControl('',Validators.required),
-      windowr: new FormControl('',Validators.required),
-      shgcwindow: new FormControl('',Validators.required),
-      wwr: new FormControl('',Validators.required)
+    this.formgroup = this.fb.group({
+      outerwallr: ['', Validators.compose([Validators.required])],
+      roofr: ['', Validators.compose([Validators.required])],
+      windowr: ['', Validators.compose([Validators.required])],
+      shgcwindow: ['', Validators.compose([Validators.required])],
+      wwr: ['', Validators.compose([Validators.required])]
 })
-
   }
 
 }

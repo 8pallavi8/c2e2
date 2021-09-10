@@ -1,0 +1,163 @@
+<mat-toolbar class="mat-toolbar">
+    <mat-toolbar-row class="d-flex justify-content-between">
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container-fluid beet-container">
+    <form [formGroup]="formgroup" class="form">
+        <mat-accordion [togglePosition]="'before'">
+            <mat-expansion-panel expanded='true'>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h2>Heating efficiency</h2>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="container">
+
+                    <div class="fields-note">
+                        <p><span class="notes-style"> Note:</span>  You may select any of the options.
+                            You may find these values on the equipment name plate or design document or from supplier
+                        </p>
+                    </div>
+                    <mat-radio-group aria-label="Select an option" formControlName="heatefficiency">
+                        <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                        <mat-radio-button value="2">No, I don't know</mat-radio-button><br>
+                        <mat-radio-button value="3">The building does not use any heating equipment</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion [togglePosition]="'before'">
+            <mat-expansion-panel>
+
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h2>Air-Conditioning (Cooling)</h2>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="container">
+
+                    <div class="fields-note">
+                        <p><span class="notes-style"> Note:</span>  You may select any of the options.
+                            You may find these values on the equipment name plate or design document or from supplier.
+                        </p>
+                    </div>
+                    <mat-radio-group aria-label="Select an option" formControlName="airconditioning">
+                        <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                        <mat-radio-button value="2">No, I don't know</mat-radio-button><br>
+                        <mat-radio-button value="3">The building does not use any cooling equipment</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion [togglePosition]="'before'">
+            <mat-expansion-panel>
+
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h2>Ventilation</h2>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="container">
+
+                    <div class="fields-note">
+                        <p><span class="notes-style"> Note:</span>  You may select any of the options to provide details on Ventilation rates of the building.
+                            Default standard ventilation rates will be considered in case of option B</p>
+                    </div>
+                    <mat-radio-group aria-label="Select an option" formControlName="ventilation">
+                        <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                        <mat-radio-button value="2">No, I don't know</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion [togglePosition]="'before'">
+            <mat-expansion-panel>
+
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h2>Infiltration rate </h2>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="container">
+
+                    <div class="fields-note">
+                        <p><span class="notes-style"> Note:</span>  You may select any of the options to provide details on R value of the wall.</p>
+                    </div>
+                    <mat-radio-group aria-label="Select an option" formControlName="infiltration">
+                        <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                        <mat-radio-button value="2">No, I don't know</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion [togglePosition]="'before'">
+            <mat-expansion-panel>
+
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h2>Economizer/free cooling</h2>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="container">
+
+                    <div class="fields-note">
+                        <p><span class="notes-style"> Note:</span> Economizer is a part of the outdoor system of an HVAC system. It can be used to avail optimal
+                            free cooling using outside air if the outside ambient conditions are favourable with respect
+                            to the temperatures and humidity levels.
+                            N/A: Not applicable
+                        </p>
+                    </div>
+                    <div>
+                        <span>
+                      <p>Do you have and actively manage the economizer / free cooling to cater to your cooling needs?</p>
+                    </span>
+                    <span>
+                      <mat-form-field>
+                        <mat-select placeholder="select" >
+                          <mat-option *ngFor="let client of clients" [value]="client.value">
+                            {{client.value}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </span>
+                    </div>
+                   
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion [togglePosition]="'before'">
+            <mat-expansion-panel>
+
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h2> Other miscellaneous data
+                        </h2>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="container">
+
+                    <div class="fields-note">
+                        <p><span class="notes-style"> Note:</span> Average indoor air temperature being maintained throughout the year inside the building. It
+                            can also be the temperature set points at the user side (occupant areas).
+                            Enter the value in either units i.e. degree Centigrade (0C) or degree Fahrenheit (0F)
+                            N/A: Not applicable
+                        </p>
+                    </div>
+                    <mat-radio-group aria-label="Select an option" formControlName="miscellaneousdata">
+                        <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                        <mat-radio-button value="2"> No, I don't know.</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </form>
+
+</div>

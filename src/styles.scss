@@ -62,3 +62,18 @@ html, body { height: 100%; }
 .calculator-tool5{
         background-color: lightgoldenrodyellow;
     }
+
+
+
+.time-picker-component .mat-form-field-infix {
+        display: inherit;
+      }
+
+.fields-note{
+        font-style: italic;
+    }
+
+.notes-style{
+    font-weight: bold;
+    color: indianred;
+}

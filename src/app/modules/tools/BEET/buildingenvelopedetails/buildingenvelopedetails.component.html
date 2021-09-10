@@ -4,7 +4,7 @@
 </mat-toolbar>
 
 <div class="container-fluid beet-container">
-    <form [formGroup]="formgroup1" class="form">
+    <form [formGroup]="formgroup" class="form">
         <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel expanded='true'>
                 <mat-expansion-panel-header>
@@ -15,7 +15,7 @@
                 <div class="container">
 
                     <div class="fields-note">
-                        <p> You may select any of the options to provide details on R value of the wall.</p>
+                        <p><span class="notes-style"> Note:</span>  You may select any of the options to provide details on R value of the wall.</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="outerwallr">
                         <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
@@ -24,7 +24,7 @@
                         <mat-radio-button value="3"> Calculate the R value by adding custom layers from prelisted
                             materials(Advanced level)</mat-radio-button>
                     </mat-radio-group>
-     
+
                     <mat-label>Dynamic Update Based Dialog Selection</mat-label>
 
                 </div>
@@ -42,7 +42,7 @@
                 <div class="container">
 
                     <div class="fields-note">
-                        <p> You may select any of the options to provide details on R value of the wall.</p>
+                        <p><span class="notes-style"> Note:</span>  You may select any of the options to provide details on R value of the wall.</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="roofr">
                         <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
@@ -70,7 +70,7 @@
                 <div class="container">
 
                     <div class="fields-note">
-                        <p> You may select any of the options to provide details on R value of the wall.</p>
+                        <p><span class="notes-style"> Note:</span>  You may select any of the options to provide details on R value of the wall.</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="windowr">
                         <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
@@ -94,7 +94,7 @@
                 <div class="container">
 
                     <div class="fields-note">
-                        <p>You may select any of the options to provide details on SHGC value of the window</p>
+                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on SHGC value of the window</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="shgcwindow">
                         <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
@@ -115,7 +115,7 @@
                 <div class="container">
 
                     <div class="fields-note">
-                        <p> You may select any of the options to provide details on WWR value of the window</p>
+                        <p> <span class="notes-style"> Note:</span> You may select any of the options to provide details on WWR value of the window</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="wwr">
                         <mat-radio-button value="1">Yes, I know</mat-radio-button><br>

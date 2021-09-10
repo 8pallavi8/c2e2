@@ -2,8 +2,8 @@
     <mat-toolbar-row class="d-flex justify-content-between">
     </mat-toolbar-row>
 </mat-toolbar>
-<div class="container-fluid beet-container">
 
+<div class="container-fluid beet-container">
     <form [formGroup]="formGroup" class="form">
 
         <mat-accordion [togglePosition]="'before'">
@@ -18,7 +18,7 @@
 
                     <div class="fields-note">
 
-                        <p> It is important to select Provice first and then Location before clicking and loading the
+                        <p><span class="notes-style"> Note:</span> It is important to select Provice first and then Location before clicking and loading the
                             climate data.
                             If exact location is not available, please select the nearest / most suitable location (or)
                             reach out to us.
@@ -26,27 +26,27 @@
                     </div>
 
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="fill">
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>User Name</mat-label>
                         <input matInput formControlName="UserName" required>
                     </mat-form-field>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="fill">
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Project name</mat-label>
                         <input matInput formControlName="ProjectName" required>
                     </mat-form-field>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="fill">
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>country</mat-label>
                         <input matInput formControlName="Country" required>
                     </mat-form-field>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="fill">
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Province</mat-label>
                         <input matInput formControlName="Province" required>
                     </mat-form-field>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="fill">
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Location</mat-label>
                         <input matInput formControlName="Location" required>
                     </mat-form-field>
@@ -65,29 +65,27 @@
                 <div class="container">
 
                     <div class="fields-note">
-
-                        <p>Please first select the building type from drop down list and then click the button to select
+                        <p><span class="notes-style"> Note:</span> Please first select the building type from drop down list and then click the button to select
                             building spaces.
                             If your building type is not available in the list, please select the most representative
                             building type.
                         </p>
                     </div>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="fill">
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Building Type</mat-label>
                         <input matInput required>
                     </mat-form-field>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="fill">
-                        <mat-label>Categories/Spaces</mat-label>
-                        <input matInput required>
-                    </mat-form-field>
+                    <button mat-raised-button (click)="opendialog()">Click here to select building spaces</button>
 
-                    <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
-                        <mat-label>Building Categories/Spaces</mat-label>
-                        <input matInput required>
-                    </mat-form-field>
+                    <div>
+                        <mat-label>Building Categories/Spaces : </mat-label>
 
+                        <li *ngFor="let item of selecteditems">
+                            {{item}}
+                        </li>
+                    </div>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
@@ -104,32 +102,40 @@
 
                     <div class="fields-note">
 
-                        <p>You may select the units in which you may want to enter the building area value using drop
+                        <p><span class="notes-style"> Note:</span> You may select the units in which you may want to enter the building area value using drop
                             down button.
                         </p>
                     </div>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="fill">
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Year of construction</mat-label>
                         <input matInput required>
                     </mat-form-field>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="fill">
-                        <mat-label>Buiding gross area</mat-label>
-                        <input matInput required>
-                    </mat-form-field>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="fill">
+                    <div class="time-picker-component">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Building gross area</mat-label>
+                            <input matInput  id="end_time_hour">
+                         <mat-select name="ampm">
+                              <mat-option value="AM">square feet</mat-option>
+                              <mat-option value="PM">square meter</mat-option>
+                         </mat-select>
+                       </mat-form-field>
+                    </div>
+
+
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Net occupied floor area</mat-label>
                         <input matInput required>
                     </mat-form-field>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="fill">
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>No. of floors</mat-label>
                         <input matInput required>
                     </mat-form-field>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="fill">
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Occupancy hours per week</mat-label>
                         <input matInput required>
                     </mat-form-field>
@@ -149,7 +155,7 @@
                 <div class="container">
 
                     <div class="fields-note">
-                        <p>Select from following options. For option C, standard values will be considered based on the
+                        <p><span class="notes-style"> Note:</span> Select from following options. For option C, standard values will be considered based on the
                             building categories and spaces selected. More details on this is given in the Assumptions
                             section.
                         </p>
@@ -177,18 +183,18 @@
 
                 <div class="container">
                     <div class="fields-note">
-                        <p>Fuel considered as Natural Gas. If any other forms of fuel is being used, please reach out to
+                        <p><span class="notes-style"> Note:</span> Fuel considered as Natural Gas. If any other forms of fuel is being used, please reach out to
                             us.
 
                         </p>
                     </div>
 
-                    <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                    <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
                         <mat-label>Electricity cost</mat-label>
                         <input matInput required>
                     </mat-form-field>
 
-                    <mat-form-field class="w-100 mt-4 col-md-6" appearance="fill">
+                    <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
                         <mat-label>Fuel cost</mat-label>
                         <input matInput required>
                     </mat-form-field>

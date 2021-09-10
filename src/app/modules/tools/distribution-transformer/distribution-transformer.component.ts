@@ -6,7 +6,7 @@ import { Label, SingleDataSet } from 'ng2-charts';
 import { DialogData, DistTransformer } from 'src/app/shared/models/models';
 import { ToolsService } from 'src/app/shared/services/tools.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogOverviewExampleDialog } from './newtransformer-dialog/distribution-transformer-dialog';
+import { DialogOverviewExampleDialog} from './newtransformer-dialog/distribution-transformer-dialog';
 import { Location } from '@angular/common';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 
@@ -130,9 +130,6 @@ export class DisTransformerComponent implements OnInit {
         selectedTransformer: obj
       }
     });
-
-
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if (result !== undefined) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-lighting',
@@ -12,6 +12,8 @@ export class LightingComponent implements OnInit {
   constructor(private fb:FormBuilder) { }
 
   ngOnInit(): void {
-  }
-
+    this.formgroup = new FormGroup({
+      lightdetails: new FormControl('',Validators.required),
+  })
+}
 }

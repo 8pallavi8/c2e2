@@ -15,6 +15,7 @@ import { AutoFocusDirective } from './auto-focus.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { LightingComponent } from './modules/tools/BEET/lighting/lighting.component';
+import { DialogComponent } from './shared/dialog/dialog.component';
 
 @NgModule({
 
