@@ -1,0 +1,95 @@
+<mat-toolbar class="mat-toolbar">
+    <mat-toolbar-row class="d-flex justify-content-between">
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container-fluid beet-container">
+    <form [formGroup]="formgroup" class="form">
+
+        <mat-accordion [togglePosition]="'before'">
+            <mat-expansion-panel expanded='true'>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h2>Power generation CO2 emissions</h2>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="container">
+                    <p>Do you know the local grid emission factor ?</p>
+                    <div class="fields-note">
+
+                        <p><span class="notes-style"> Note:</span> Applicable for electricity import from the grid
+                        </p>
+                    </div>
+
+                    <div>
+                        <mat-radio-group aria-label="Select an option" formControlName="powergenerationco2emmisions">
+                            <mat-radio-button (click)="showpowergenerationCO2emission(true)" value="1">Yes, I know
+                            </mat-radio-button><br>
+                            <mat-radio-button (click)="showpowergenerationCO2emission(false)" value="2">No, I don't
+                                know.</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <span *ngIf="haspowergenerationCO2emission">
+                        <p style="margin-top: 1em;">I know the grid emission factor.</p>
+
+
+                        <p>Please enter grid emission factor[kg CO2/kWh] : </p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Enter value here</mat-label>
+                            <input matInput placeholder="Enter value" required>
+                        </mat-form-field>
+
+                    </span>
+
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion [togglePosition]="'before'">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h2>On site CO2 emissions</h2>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="container">
+                    <p>Do you know the fuel CO2 emission factor?</p>
+                    <div class="fields-note">
+                        <p><span class="notes-style"> Note:</span>You may select any of the options to provide details
+                            of On-site CO2 emissions (especially if you are using fuel based heating equipment or- power
+                            generators, etc. )
+                            Natural Gas equivalent CO2 emissions values will be used for the assessment
+                        </p>
+                    </div>
+                    <div>
+                        <mat-radio-group aria-label="Select an option" formControlName="onsiteco2emmisions">
+                            <mat-radio-button (click)="showonsiteCO2emission(true)" value="1">Yes, I know
+                            </mat-radio-button><br>
+                            <mat-radio-button (click)="showonsiteCO2emission(false)" value="2">No, I don't know.
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <span *ngIf="hasonsiteCO2Emission">
+                        <p style="margin-top: 1em;"></p>
+                        <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
+                            <mat-label>Select CO2 emissions units</mat-label>
+                            <mat-select formControlName="units">
+                                <mat-option *ngFor="let unit of unitslist" [value]="unit">{{unit}}</mat-option>
+                            </mat-select>
+                            <mat-hint color="primary">Please Select</mat-hint>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
+                            <mat-label>Enter value here</mat-label>
+                            <input matInput placeholder="Enter value" required>
+                        </mat-form-field>
+                    </span>
+
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+    </form>
+</div>
