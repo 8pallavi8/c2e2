@@ -40,9 +40,18 @@
       </div>
     </mat-step>
 
-    <mat-step [stepControl]="fourthFormGroup">
+    <mat-step [stepControl]="fifthFormGroup">
       <ng-template matStepLabel>Plug Loads</ng-template>
       <app-plugloads></app-plugloads>
+      <div class="step-button">
+        <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
+        <button mat-raised-button color="primary" matStepperNext>Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="sixthFormGroup">
+      <ng-template matStepLabel>CO2 Emissions</ng-template>
+      <app-co2-emissions></app-co2-emissions>
       <div class="step-button">
         <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
         <button mat-raised-button color="primary" matStepperNext>Next</button>

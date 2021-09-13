@@ -15,6 +15,8 @@ export class BEETComponent implements OnInit, AfterViewInit {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
+  fifthFormGroup: FormGroup;
+  sixthFormGroup: FormGroup;
   @ViewChild(GendetailsComponent) primarySampleComponent: GendetailsComponent;
 
   constructor(private _formBuilder: FormBuilder, private toolService: ToolsService) { }
@@ -36,6 +38,12 @@ export class BEETComponent implements OnInit, AfterViewInit {
       secondCtrl: ['', Validators.required]
     });
     this.fourthFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+    this.fifthFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+    this.sixthFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
 

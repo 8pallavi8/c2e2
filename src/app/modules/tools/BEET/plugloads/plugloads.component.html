@@ -10,13 +10,11 @@
             <mat-expansion-panel expanded='true'>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        <h2>Plug loads (equipment/appliances inside occupied conditioned area)
-                        </h2>
+                        <h2>Plug loads (equipment/appliances inside occupied conditioned area)</h2>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
 
                 <div class="container">
-
                     <p>Do you know the plug load density for your building ?</p>
                     <div class="fields-note">
                         <p><span class="notes-style"> Note:</span>You may select any of the options. Option C available
@@ -53,16 +51,6 @@
                                 <mat-cell *matCellDef="let option"> {{option.operations}} </mat-cell>
                             </ng-container>
 
-
-                            <ng-container matColumnDef="quantity">
-                                <mat-header-cell *matHeaderCellDef>Quantity</mat-header-cell>
-                                <mat-cell *matCellDef="let quantity">
-                                    <mat-form-field floatLabel="never">
-                                        <input matInput placeholder="Quantity">
-                                    </mat-form-field>
-                                </mat-cell>
-                            </ng-container>
-
                             <!-- options Column -->
                             <ng-container matColumnDef="options">
                                 <mat-header-cell *matHeaderCellDef> Yes/No/NA </mat-header-cell>
@@ -77,63 +65,20 @@
                                 </mat-cell>
                             </ng-container>
 
+                            <ng-container matColumnDef="quantity">
+                                <mat-header-cell *matHeaderCellDef>Quantity</mat-header-cell>
+                                <mat-cell *matCellDef="let quantity">
+                                    <mat-form-field floatLabel="never">
+                                        <input matInput placeholder="Quantity">
+                                    </mat-form-field>
+                                </mat-cell>
+                            </ng-container>
+
                             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                         </mat-table>
                     </div>
 
-                </div>
-            </mat-expansion-panel>
-        </mat-accordion>
-
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <h2>Power generation CO2 emissions
-                        </h2>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <div class="container">
-                    <p>Do you know the local grid emission factor ?</p>
-                    <div class="fields-note">
-
-                        <p><span class="notes-style"> Note:</span> Applicable for electricity import from the grid
-                        </p>
-                    </div>
-
-                    <mat-radio-group aria-label="Select an option" formControlName="powergeneration">
-                        <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button value="2">No, I don't know.
-                        </mat-radio-button>
-                    </mat-radio-group>
-
-                </div>
-            </mat-expansion-panel>
-        </mat-accordion>
-
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <h2>On site CO2 emissions</h2>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <div class="container">
-                    <p>Do you know the fuel CO2 emission factor?</p>
-                    <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span>You may select any of the options to provide details
-                            of On-site CO2 emissions (especially if you are using fuel based heating equipment or- power
-                            generators, etc. )
-                            Natural Gas equivalent CO2 emissions values will be used for the assessment
-                        </p>
-                    </div>
-                    <mat-radio-group aria-label="Select an option" formControlName="onsiteco2emmisions">
-                        <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button value="2">No, I don't know.</mat-radio-button>
-                    </mat-radio-group>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

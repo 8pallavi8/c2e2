@@ -1,0 +1,65 @@
+<mat-toolbar class="mat-toolbar">
+    <mat-toolbar-row class="d-flex justify-content-between">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onNoClick()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div mat-dialog-content>
+
+    <!-- <div class="example-container mat-elevation-z8">
+    <p>Choose ANY ONE from the available units</p>
+    <mat-table>
+        <ng-container matColumnDef="unitsoptions">
+            <mat-header-cell *matHeaderCellDef>Select CO2 emissions units</mat-header-cell>
+            <mat-cell *matCellDef="let units">
+                <mat-form-field>
+                    <mat-select [(value)]="units.options" placeholder="select">
+                        <mat-option value="kgCO2/mmbtu">kgCO2/mmbtu</mat-option>
+                        <mat-option value="lbsCO2/mmbtu">lbsCO2/mmbtu</mat-option>
+                        <mat-option value="kgCO2/therm">kgCO2/therm</mat-option>
+                        <mat-option value="lbsCO2/therm">lbsCO2/therm</mat-option>
+                        <mat-option value="kgCO2/kcal">kgCO2/kcal</mat-option>
+                        <mat-option value="lbsCO2/kcal">lbsCO2/kcal</mat-option>
+                        <mat-option value="kgCO2/m3">kgCO2/m3</mat-option>
+                        <mat-option value="lbsCO2/ft3">lbsCO2/ft3</mat-option>
+                        <mat-option value="metrictonsCO2/Mcf">metrictonsCO2/Mcf</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="onsiteco2value">
+            <mat-header-cell *matHeaderCellDef>Enter value here</mat-header-cell>
+            <mat-cell *matCellDef="let quantity">
+                <mat-form-field >
+                    <input matInput placeholder="Enter value here">
+                </mat-form-field>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>
+</div> -->
+
+    <div class="row">
+        <div class="mt-4 col-md-6">
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+                <mat-label>Select CO2 emissions units</mat-label>
+                <mat-select formControlName="units">
+                    <mat-option *ngFor="let unit of unitslist" [value]="unit">{{unit}}</mat-option>
+                </mat-select>
+                <mat-hint color="primary">Please Select</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="mt-4 col-md-6">
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+                <mat-label>Enter value here</mat-label>
+                <input matInput placeholder="Enter value" required>
+            </mat-form-field>
+        </div>
+    </div>

@@ -25,7 +25,7 @@ export class DialogOverviewExampleDialog implements OnInit {
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private fb: FormBuilder) { 
-      
+
     }
 
   ngOnInit(): void {
@@ -34,7 +34,6 @@ export class DialogOverviewExampleDialog implements OnInit {
     } else {
       this.DialogTransformerInputs = this.createVariant();
     }
-
   }
 
   createVariant(): FormGroup {

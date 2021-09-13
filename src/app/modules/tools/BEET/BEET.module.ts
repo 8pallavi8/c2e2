@@ -11,6 +11,7 @@ import { LightingComponent } from './lighting/lighting.component';
 import { MatInputModule } from '@angular/material/input';
 import { HvacComponent } from './hvac/hvac.component';
 import { PlugloadsComponent } from './plugloads/plugloads.component';
+import { CO2EmissionsComponent } from './co2-emissions/co2-emissions.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [GendetailsComponent,BEETComponent,BuildingenvelopedetailsComponent,LightingComponent,HvacComponent,PlugloadsComponent],
+  declarations: [GendetailsComponent,BEETComponent,BuildingenvelopedetailsComponent,LightingComponent,HvacComponent,PlugloadsComponent,CO2EmissionsComponent],
   imports: [
     CommonModule,
     SharedModule,

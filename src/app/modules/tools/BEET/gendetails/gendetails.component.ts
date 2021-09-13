@@ -18,10 +18,7 @@ export class GendetailsComponent implements OnInit {
 
   formGroup: FormGroup;
   inputTableDataSource: any;
-  inputDisplayedColumns: string[] = [
-    'option',
-    'select'
-  ]
+  inputDisplayedColumns: string[] = ['option','select']
   dialogref: any;
   textBoxData: string[] = ["bowling Aalley", "game arcades", "health club",
     "swimming", "disco", "gym", "gambling"];

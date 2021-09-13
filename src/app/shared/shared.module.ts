@@ -13,6 +13,7 @@ import { ConfirmationDialogService } from './services/confirmation-dialog.servic
 import { ConfirmationDialogComponent } from './deleteconfirmationdialog/deleteconfirmationdialog.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { DialogComponent } from './dialog/dialog.component';
+import { TextfieldDialogComponent } from './textfield-dialog/textfield-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DialogComponent } from './dialog/dialog.component';
     PieChartComponent,
     BarChartComponent,
     DialogComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    TextfieldDialogComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { DialogComponent } from './dialog/dialog.component';
     BarChartComponent,
     MatDialogModule,
     ConfirmationDialogComponent,
-    DialogComponent
+    DialogComponent,
+    TextfieldDialogComponent
   ],
   
   // If Service do not have Provider == root then add the below code to use the service by other components.
