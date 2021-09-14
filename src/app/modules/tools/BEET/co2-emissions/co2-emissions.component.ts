@@ -10,6 +10,7 @@ export class CO2EmissionsComponent implements OnInit {
   formgroup: FormGroup;
   hasonsiteCO2Emission:boolean=false;
   haspowergenerationCO2emission:boolean=false;
+  unitslist = ["kgCO2/mmbtu","lbsCO2/mmbtu","kgCO2/therm","lbsCO2/therm","kgCO2/kcal","lbsCO2/kcal","kgCO2/m3","lbsCO2/ft3","metrictonsCO2/Mcf"];
 
   constructor(private fb: FormBuilder) { }
 

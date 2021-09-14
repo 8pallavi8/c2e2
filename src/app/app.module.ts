@@ -18,6 +18,8 @@ import { LightingComponent } from './modules/tools/BEET/lighting/lighting.compon
 import { DialogComponent } from './shared/dialog/dialog.component';
 import { TextfieldDialogComponent } from './shared/textfield-dialog/textfield-dialog.component';
 import { CO2EmissionsComponent } from './modules/tools/BEET/co2-emissions/co2-emissions.component';
+import { PlugloadinputdialogComponent } from './shared/plugloadinputdialog/plugloadinputdialog.component';
+import { PlugloadavailablevaldialogComponent } from './shared/plugloadavailablevaldialog/plugloadavailablevaldialog.component';
 
 @NgModule({
 

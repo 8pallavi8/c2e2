@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { PlugloadavailablevaldialogComponent } from 'src/app/shared/plugloadavailablevaldialog/plugloadavailablevaldialog.component';
+import {PlugloadinputdialogComponent} from 'src/app/shared/plugloadinputdialog/plugloadinputdialog.component';
 
 export interface OPTIONS {
   operations: string;
@@ -19,9 +21,8 @@ export class PlugloadsComponent implements OnInit {
   formgroup: FormGroup;
   displayedColumns = ['operations', 'options', 'quantity'];
   selectionOptions = ['Yes', 'No', 'NA'];
-  unitslist=["kgCO2/mmbtu","lbsCO2/mmbtu","kgCO2/therm","lbsCO2/therm","kgCO2/kcal","lbsCO2/kcal","kgCO2/m3","lbsCO2/ft3","metrictonsCO2/Mcf"]
+  plugloadvalue:number;
   
-
   OPTIONS_DATA: OPTIONS[] = [
     { operations: 'Do you remove underused refrigerators ?', options: '', quantity: 0 },
     { operations: 'Do you replace inefficient refrigerators with most efficient one regularly ?', options: '', quantity: 0 },
@@ -48,14 +49,37 @@ export class PlugloadsComponent implements OnInit {
   dialogref: any;
   selecteditems: string[];
 
-  constructor(private fb: FormBuilder) { }
-
+  constructor(private fb: FormBuilder, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.formgroup = this.fb.group({
       plugloads: ['', Validators.compose([Validators.required])]
     }
     )
+  }
+
+  openDialog(){
+    const dialogref = this.dialog.open(PlugloadinputdialogComponent,{
+      width: '60%',
+      autoFocus: false,
+      maxHeight: '90vh',
+    });
+    dialogref.afterClosed().subscribe(result => {
+      this.plugloadvalue= result;
+      console.log(result);
+    });
+  }
+
+  openAvailableValDialog(){
+    const dialogref = this.dialog.open(PlugloadavailablevaldialogComponent,{
+      width: '60%',
+      autoFocus: false,
+      maxHeight: '90vh',
+    });
+    dialogref.afterClosed().subscribe(result => {
+      this.plugloadvalue= result;
+      console.log(result);
+    });
   }
 
 }

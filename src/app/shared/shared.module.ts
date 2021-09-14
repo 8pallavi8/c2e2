@@ -14,6 +14,8 @@ import { ConfirmationDialogComponent } from './deleteconfirmationdialog/deleteco
 import { MatStepperModule } from '@angular/material/stepper';
 import { DialogComponent } from './dialog/dialog.component';
 import { TextfieldDialogComponent } from './textfield-dialog/textfield-dialog.component';
+import { PlugloadinputdialogComponent } from './plugloadinputdialog/plugloadinputdialog.component';
+import { PlugloadavailablevaldialogComponent } from './plugloadavailablevaldialog/plugloadavailablevaldialog.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { TextfieldDialogComponent } from './textfield-dialog/textfield-dialog.co
     BarChartComponent,
     DialogComponent,
     ConfirmationDialogComponent,
-    TextfieldDialogComponent
+    TextfieldDialogComponent,
+    PlugloadinputdialogComponent,
+    PlugloadavailablevaldialogComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +52,9 @@ import { TextfieldDialogComponent } from './textfield-dialog/textfield-dialog.co
     MatDialogModule,
     ConfirmationDialogComponent,
     DialogComponent,
-    TextfieldDialogComponent
+    TextfieldDialogComponent,
+    PlugloadinputdialogComponent,
+    PlugloadavailablevaldialogComponent
   ],
   
   // If Service do not have Provider == root then add the below code to use the service by other components.
