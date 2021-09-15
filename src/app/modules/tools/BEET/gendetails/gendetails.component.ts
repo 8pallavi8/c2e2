@@ -15,11 +15,11 @@ import { ToolsService } from 'src/app/shared/services/tools.service';
   styleUrls: ['./gendetails.component.scss']
 })
 export class GendetailsComponent implements OnInit {
-
   formGroup: FormGroup;
   inputTableDataSource: any;
   inputDisplayedColumns: string[] = ['option','select']
   dialogref: any;
+  units:string = "squarefeet";
   textBoxData: string[] = ["bowling Aalley", "game arcades", "health club",
     "swimming", "disco", "gym", "gambling"];
   selecteditems: string[];
@@ -53,6 +53,7 @@ export class GendetailsComponent implements OnInit {
     });
   }
 
+  
   opendialog(): void {
     this.dialogref = this.dialog.open(DialogComponent, {
       width: '80%',

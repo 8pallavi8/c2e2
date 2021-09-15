@@ -18,7 +18,8 @@
 
                     <div class="fields-note">
 
-                        <p><span class="notes-style"> Note:</span> It is important to select Provice first and then Location before clicking and loading the
+                        <p><span class="notes-style"> Note:</span> It is important to select Provice first and then
+                            Location before clicking and loading the
                             climate data.
                             If exact location is not available, please select the nearest / most suitable location (or)
                             reach out to us.
@@ -51,7 +52,8 @@
                         <input matInput formControlName="Location" required>
                     </mat-form-field>
 
-                    <button class="w-100  mt-4 col-md-4" mat-raised-button (click)="opendialog()">Click here to load selected location climate data</button>
+                    <button class="w-100  mt-4 col-md-4" mat-raised-button (click)="opendialog()">Click here to load
+                        selected location climate data</button>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
@@ -67,7 +69,8 @@
                 <div class="container">
 
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> Please first select the building type from drop down list and then click the button to select
+                        <p><span class="notes-style"> Note:</span> Please first select the building type from drop down
+                            list and then click the button to select
                             building spaces.
                             If your building type is not available in the list, please select the most representative
                             building type.
@@ -104,7 +107,8 @@
 
                     <div class="fields-note">
 
-                        <p><span class="notes-style"> Note:</span> You may select the units in which you may want to enter the building area value using drop
+                        <p><span class="notes-style"> Note:</span> You may select the units in which you may want to
+                            enter the building area value using drop
                             down button.
                         </p>
                     </div>
@@ -114,15 +118,15 @@
                         <input matInput required>
                     </mat-form-field>
 
-                    <span class="time-picker-component">
+                    <span class="units-picker-component">
                         <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                             <mat-label>Building gross area</mat-label>
-                            <input matInput  id="end_time_hour">
-                         <mat-select name="ampm">
-                              <mat-option value="AM">square feet</mat-option>
-                              <mat-option value="PM">square meter</mat-option>
-                         </mat-select>
-                       </mat-form-field>
+                            <input matInput>
+                            <mat-select [(value)]="units">
+                                <mat-option value="squarefeet">sqft</mat-option>
+                                <mat-option value="squaremeter">sqmt</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </span>
 
 
@@ -156,7 +160,8 @@
                 <div class="container">
 
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> Select from following options. For option C, standard values will be considered based on the
+                        <p><span class="notes-style"> Note:</span> Select from following options. For option C, standard
+                            values will be considered based on the
                             building categories and spaces selected. More details on this is given in the Assumptions
                             section.
                         </p>
@@ -184,18 +189,19 @@
 
                 <div class="container">
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> Fuel considered as Natural Gas. If any other forms of fuel is being used, please reach out to
+                        <p><span class="notes-style"> Note:</span> Fuel considered as Natural Gas. If any other forms of
+                            fuel is being used, please reach out to
                             us.
 
                         </p>
                     </div>
 
-                    <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Electricity cost</mat-label>
                         <input matInput required>
                     </mat-form-field>
 
-                    <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Fuel cost</mat-label>
                         <input matInput required>
                     </mat-form-field>

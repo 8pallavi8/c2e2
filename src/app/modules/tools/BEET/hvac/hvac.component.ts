@@ -7,8 +7,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./hvac.component.scss']
 })
 export class HvacComponent implements OnInit {
-  selectedValue: string;
+selectedValue: string;
   formgroup: FormGroup;
+  units:string = "centigrade";
 
 
   constructor(private fb: FormBuilder) { }
@@ -28,4 +29,7 @@ export class HvacComponent implements OnInit {
     }
     )
   }
+
+ 
+  
 }
