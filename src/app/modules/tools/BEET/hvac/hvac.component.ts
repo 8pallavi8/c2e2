@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { debounceTime } from 'rxjs/operators';
+import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
+
 
 @Component({
   selector: 'app-hvac',
@@ -13,9 +16,11 @@ selectedValue: string;
   units:string = "centigrade";
   hasInfiltrationRateValue:boolean= false;
   infiltration:number;
+
+
  
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,public dialog: MatDialog,private confirmationDialog: ConfirmationDialogService) { }
 
   options = [{ value: 'Yes' }, { value: 'No' }, { value: 'N/A' }];
 
@@ -37,6 +42,17 @@ selectedValue: string;
     });
   }
 
+  public openConfirmationDialog() {
+    this.confirmationDialog.confirm('Confirm', 'You have selected No Heating Equipment In The Building','OK',null)
+      .catch(() => console.log('User dismissed the dialog'));
+  }
+
+
+  public openConfirmationDialogac() {
+    this.confirmationDialog.confirm('Confirm', 'You have selected No Cooling Equipment In The Building','OK',null)
+      .catch(() => console.log('User dismissed the dialog'));
+  }
+  
 
   showInfiltrationRateValue(state:boolean):void{
     if(state== true)

@@ -78,3 +78,17 @@ html, body { height: 100%; }
     font-weight: bold;
     color: indianred;
 }
+
+
+  .cdk-overlay-pane.my-dialog {
+    position: relative!important;
+  }
+  .close.mat-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    // line-height: 14px;
+    min-width: auto;
+  }
+

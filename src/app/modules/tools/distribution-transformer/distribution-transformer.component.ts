@@ -143,7 +143,7 @@ export class DisTransformerComponent implements OnInit {
 
 
   public openConfirmationDialog(obj) {
-    this.confirmationDialog.confirm('Delete Transformer', 'Do you really want to delete?')
+    this.confirmationDialog.confirm('Delete Transformer', 'Do you really want to delete?','OK','CANCEL')
       .then((confirmed) => this.deleteTransformer(confirmed, obj))
       .catch(() => console.log('User dismissed the dialog'));
   }

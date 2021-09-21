@@ -17,6 +17,7 @@ import { TextfieldDialogComponent } from './textfield-dialog/textfield-dialog.co
 import { PlugloadinputdialogComponent } from './plugloadinputdialog/plugloadinputdialog.component';
 import { PlugloadavailablevaldialogComponent } from './plugloadavailablevaldialog/plugloadavailablevaldialog.component';
 
+
 @NgModule({
   declarations: [
     HeaderComponent,

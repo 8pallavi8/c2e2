@@ -5,6 +5,8 @@
 
 <div class="container-fluid beet-container">
     <form [formGroup]="formgroup" class="form">
+
+        <!-- Heating efficiency  -->
         <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel expanded='true'>
                 <mat-expansion-panel-header>
@@ -13,7 +15,7 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="container">
-
+                    <p>Do you know the heating equipment efficiency of your building?</p>
                     <div class="fields-note">
                         <p><span class="notes-style"> Note:</span> You may select any of the options.
                             You may find these values on the equipment name plate or design document or from supplier
@@ -22,12 +24,13 @@
                     <mat-radio-group aria-label="Select an option" formControlName="heatefficiency">
                         <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                         <mat-radio-button value="2">No, I don't know</mat-radio-button><br>
-                        <mat-radio-button value="3">The building does not use any heating equipment</mat-radio-button>
+                        <mat-radio-button (click)="openConfirmationDialog()" value="3">The building does not use any
+                            heating equipment</mat-radio-button>
                     </mat-radio-group>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
-
+        <!-- Air-Conditioning (Cooling) -->
         <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel>
 
@@ -37,7 +40,7 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="container">
-
+<p>Do you know the cooling equipment performance parameters of your building? </p>
                     <div class="fields-note">
                         <p><span class="notes-style"> Note:</span> You may select any of the options.
                             You may find these values on the equipment name plate or design document or from supplier.
@@ -46,12 +49,13 @@
                     <mat-radio-group aria-label="Select an option" formControlName="airconditioning">
                         <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                         <mat-radio-button value="2">No, I don't know</mat-radio-button><br>
-                        <mat-radio-button value="3">The building does not use any cooling equipment</mat-radio-button>
+                        <mat-radio-button (click)="openConfirmationDialogac()" value="3">The building does not use any
+                            cooling equipment</mat-radio-button>
                     </mat-radio-group>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
-
+        <!-- ventilation -->
         <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel>
 
@@ -76,7 +80,7 @@
 
             </mat-expansion-panel>
         </mat-accordion>
-
+        <!-- Infiltration rate  -->
         <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel>
 
@@ -93,7 +97,7 @@
                     </div>
 
                     <div>
-                        <mat-radio-group aria-label="Select an option" >
+                        <mat-radio-group aria-label="Select an option">
                             <mat-radio-button (click)="showInfiltrationRateValue(true)" value="1">Yes, I know
                             </mat-radio-button><br>
                             <mat-radio-button (click)="showInfiltrationRateValue(false)" value="2">No, I don't know.
@@ -104,16 +108,16 @@
                         <p style="margin-top: 1em;">Please enter the Infiltration Rate value in Air Changes per
                             Hour(ACH)</p>
 
-                        <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline" >
+                        <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
                             <mat-label>Enter value here</mat-label>
-                            <input matInput placeholder="Enter value" required formControlName= "infiltration"> 
+                            <input matInput placeholder="Enter value" required formControlName="infiltration">
                         </mat-form-field>
                     </span>
                     <b>Plug load density in [watts per square meter]:{{infiltration}}</b>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
-
+        <!-- Economizer / free cooling  -->
         <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel>
 
@@ -151,7 +155,7 @@
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
-
+        <!-- Other miscellaneous data -->
         <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel>
 

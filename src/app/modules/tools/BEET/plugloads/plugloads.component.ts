@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { PlugloadavailablevaldialogComponent } from 'src/app/shared/plugloadavailablevaldialog/plugloadavailablevaldialog.component';
 import {PlugloadinputdialogComponent} from 'src/app/shared/plugloadinputdialog/plugloadinputdialog.component';
+import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 
 export interface OPTIONS {
   operations: string;
