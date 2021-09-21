@@ -25,5 +25,4 @@ export class ConfirmationDialogService {
 
     return modalRef.result;
   }
-
 }
