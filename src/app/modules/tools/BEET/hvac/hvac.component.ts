@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime } from 'rxjs/operators';
+import { HvacventilationdialogComponent } from 'src/app/shared/hvacventilationdialog/hvacventilationdialog.component';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 
 
@@ -51,6 +52,18 @@ selectedValue: string;
   public openConfirmationDialogac() {
     this.confirmationDialog.confirm('Confirm', 'You have selected No Cooling Equipment In The Building','OK',null)
       .catch(() => console.log('User dismissed the dialog'));
+  }
+
+  openDialogventilation(){
+    const dialogref = this.dialog.open(HvacventilationdialogComponent,{
+      width: '60%',
+      autoFocus: false,
+      maxHeight: '90vh',
+    });
+    dialogref.afterClosed().subscribe(result => {
+      /* this.plugloadvalue= result;
+      console.log(result); */
+    });
   }
   
 

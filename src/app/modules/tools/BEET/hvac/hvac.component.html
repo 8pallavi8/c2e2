@@ -73,7 +73,7 @@
                             Default standard ventilation rates will be considered in case of option B</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="ventilation">
-                        <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                        <mat-radio-button value="1" (click)="openDialogventilation()">Yes, I know</mat-radio-button><br>
                         <mat-radio-button value="2">No, I don't know</mat-radio-button>
                     </mat-radio-group>
                 </div>
@@ -107,13 +107,14 @@
                     <span *ngIf="hasInfiltrationRateValue">
                         <p style="margin-top: 1em;">Please enter the Infiltration Rate value in Air Changes per
                             Hour(ACH)</p>
-
                         <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
                             <mat-label>Enter value here</mat-label>
                             <input matInput placeholder="Enter value" required formControlName="infiltration">
                         </mat-form-field>
                     </span>
-                    <b>Plug load density in [watts per square meter]:{{infiltration}}</b>
+<div>
+                    <b>Infiltration Rate(Air changes per Hour):{{infiltration}}</b>
+</div>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

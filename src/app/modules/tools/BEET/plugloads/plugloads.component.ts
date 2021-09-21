@@ -59,7 +59,7 @@ export class PlugloadsComponent implements OnInit {
     )
   }
 
-  openDialog(){
+  openDialogplugload(){
     const dialogref = this.dialog.open(PlugloadinputdialogComponent,{
       width: '60%',
       autoFocus: false,
