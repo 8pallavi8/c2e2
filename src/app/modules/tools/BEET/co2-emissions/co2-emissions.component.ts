@@ -29,12 +29,11 @@ export class CO2EmissionsComponent implements OnInit {
     this.hasonsiteCO2Emission = false;
   }
 
+
   showpowergenerationCO2emission(state:boolean):void{
     if (state == true) 
     this.haspowergenerationCO2emission = true;
     else
     this.haspowergenerationCO2emission = false;
   }
-
-
 }

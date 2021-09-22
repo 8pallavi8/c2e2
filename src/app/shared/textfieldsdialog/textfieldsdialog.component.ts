@@ -17,8 +17,8 @@ export class textfieldsdialogComponent implements OnInit {
   @Input() btnCancelText: string;
   @Input() inputfield1text:string;
   @Input() inputfield2text:string;
-  ventilationcubicmt:number;
-  ventilationcubicft:number;
+  enteredValue1:number;
+  enteredValue2:number;
 
   constructor(private activeModal: NgbActiveModal) { }
 
@@ -30,15 +30,13 @@ export class textfieldsdialogComponent implements OnInit {
   }
 
   public accept() {
-    this.activeModal.close(this.ventilationcubicmt ? this.ventilationcubicmt  : this.ventilationcubicft);
+    this.activeModal.close(this.enteredValue1 ? this.enteredValue1  : this.enteredValue2);
   }
 
   public dismiss() {
     this.activeModal.dismiss();
   }
-  /* onNoClick(): void {
-    this.dialogRef.close();
-  }
+  /* 
   enteredPlugLoad() {
     this.dialogRef.close(this.ventilationcubicmt ? this.ventilationcubicmt  : this.ventilationcubicft);
   } */
