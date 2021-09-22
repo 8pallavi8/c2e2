@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-toolbar">
+<!-- <mat-toolbar class="mat-toolbar">
     <mat-toolbar-row class="d-flex justify-content-between">
         <h3>I know the ventilation rate value for my building</h3>
         <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onNoClick()">
@@ -29,4 +29,36 @@
 <div class="button-dialog" mat-dialog-actions>
     <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="submit" (click)="enteredPlugLoad()"
         cdkFocusInitial>Click to Return</button>
+</div>
+ -->
+
+<div class="modal-header generic-header">
+    <h3 class="modal-title">{{ title }}</h3>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div>{{ text }}</div>
+    <div>{{notes}}</div>
+    <div class="d-flex flex-justify-between mt-4">
+        <p class="mt-4 col-md-6">{{ inputfield1text }}</p>
+        <mat-form-field class="mt-2 col-md-6" appearance="outline">
+            <input matInput placeholder="Enter value" [(ngModel)]="ventilationcubicmt">
+        </mat-form-field>
+    </div>
+
+    <p style="text-align:center;">OR</p>
+
+    <div class="d-flex flex-justify-between mt-4">
+        <p class="mt-4 col-md-6">{{ inputfield2text }}</p>
+        <mat-form-field class="mt-2 col-md-6" appearance="outline">
+            <input matInput placeholder="Enter value" [(ngModel)]="ventilationcubicft">
+        </mat-form-field>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="decline()">{{ btnCancelText }}</button>
+    <button type="button" class="btn btn-primary" (click)="accept()">{{ btnOkText }}</button>
 </div>

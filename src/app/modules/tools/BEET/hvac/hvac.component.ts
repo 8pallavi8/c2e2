@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime } from 'rxjs/operators';
-import { HvacventilationdialogComponent } from 'src/app/shared/hvacventilationdialog/hvacventilationdialog.component';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
+import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
+
 
 
 @Component({
@@ -17,11 +18,11 @@ selectedValue: string;
   units:string = "centigrade";
   hasInfiltrationRateValue:boolean= false;
   infiltration:number;
+  ventilationvalue:number;
 
-
- 
-
-  constructor(private fb: FormBuilder,public dialog: MatDialog,private confirmationDialog: ConfirmationDialogService) { }
+  constructor(private fb: FormBuilder,public dialog: MatDialog,
+    private confirmationDialog: ConfirmationDialogService,
+    private inputDialog: InputdialogService) { }
 
   options = [{ value: 'Yes' }, { value: 'No' }, { value: 'N/A' }];
 
@@ -43,6 +44,20 @@ selectedValue: string;
     });
   }
 
+
+  public openInputVentilationDialog(){
+    this.inputDialog.entervalue('HVAC Ventilation',
+     'I know the ventilation rate value for my building.',
+     'You may choose to enter the values for any of the units mentioned below, Necessary units conversions will be made by the tool for respective calculations.',
+     'OK',
+     'cancel',
+     'Ventilation rate in [cubic meter per minute per person]:',
+     'Ventilation rate in  [cubic feet per minute per person]:')
+     .then((confirmed) => {this.ventilationvalue=confirmed })
+      .catch(() => console.log('User dismissed the dialog'));
+  }
+
+
   public openConfirmationDialog() {
     this.confirmationDialog.confirm('Confirm', 'You have selected No Heating Equipment In The Building','OK',null)
       .catch(() => console.log('User dismissed the dialog'));
@@ -54,31 +69,28 @@ selectedValue: string;
       .catch(() => console.log('User dismissed the dialog'));
   }
 
-  openDialogventilation(){
+  /* openDialogventilation(){
     const dialogref = this.dialog.open(HvacventilationdialogComponent,{
       width: '60%',
       autoFocus: false,
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      /* this.plugloadvalue= result;
-      console.log(result); */
+      // this.plugloadvalue= result;
+      console.log(result); 
     });
-  }
-  
+  } */
 
   showInfiltrationRateValue(state:boolean):void{
     if(state== true)
     { this.hasInfiltrationRateValue = true;
       this.infiltration =0;
     }
-   
     else
   {
     this.hasInfiltrationRateValue = false;
      this.infiltration =2;
-  }
-    
+  } 
   }  
 
   

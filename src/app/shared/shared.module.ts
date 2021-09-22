@@ -15,7 +15,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { DialogComponent } from './dialog/dialog.component';
 import { PlugloadinputdialogComponent } from './plugloadinputdialog/plugloadinputdialog.component';
 import { PlugloadavailablevaldialogComponent } from './plugloadavailablevaldialog/plugloadavailablevaldialog.component';
-import { HvacventilationdialogComponent } from './hvacventilationdialog/hvacventilationdialog.component';
+import {textfieldsdialogComponent } from './textfieldsdialog/textfieldsdialog.component';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import { HvacventilationdialogComponent } from './hvacventilationdialog/hvacvent
     ConfirmationDialogComponent,
     PlugloadinputdialogComponent,
     PlugloadavailablevaldialogComponent,
-    HvacventilationdialogComponent
+    textfieldsdialogComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +55,7 @@ import { HvacventilationdialogComponent } from './hvacventilationdialog/hvacvent
     DialogComponent,
     PlugloadinputdialogComponent,
     PlugloadavailablevaldialogComponent,
-    HvacventilationdialogComponent
+    textfieldsdialogComponent
   ],
   
   // If Service do not have Provider == root then add the below code to use the service by other components.

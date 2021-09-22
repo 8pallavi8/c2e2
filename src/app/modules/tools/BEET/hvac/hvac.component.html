@@ -73,10 +73,14 @@
                             Default standard ventilation rates will be considered in case of option B</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="ventilation">
-                        <mat-radio-button value="1" (click)="openDialogventilation()">Yes, I know</mat-radio-button><br>
+                        <mat-radio-button (click)="openInputVentilationDialog()" value="1">Yes, I know</mat-radio-button><br>
                         <mat-radio-button value="2">No, I don't know</mat-radio-button>
                     </mat-radio-group>
                 </div>
+
+                <div>
+                    <b>Ventilation rate(cubic meter  per minute per person):{{ventilationvalue}}</b>
+</div>
 
             </mat-expansion-panel>
         </mat-accordion>
@@ -178,9 +182,9 @@
                     </div>
                     <span class="units-picker-component">
                         <p class="fieldname-align">Average indoor air temperature (set-point):</p>
-                        <mat-form-field appearance="outline" formControlName="avgIndoorAirTemp">
+                        <mat-form-field appearance="outline" >
                             <mat-label>Enter value</mat-label>
-                            <input matInput>
+                            <input matInput formControlName="avgIndoorAirTemp">
                             <mat-select [(value)]="units">
                                 <mat-option value="centigrade">ºC</mat-option>
                                 <mat-option value="farenheit">ºF</mat-option>
