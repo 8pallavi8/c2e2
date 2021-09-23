@@ -54,6 +54,8 @@ export class GendetailsComponent implements OnInit {
   }
 
   
+
+  
   opendialog(): void {
     this.dialogref = this.dialog.open(DialogComponent, {
       width: '80%',

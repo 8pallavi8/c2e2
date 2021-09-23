@@ -10,13 +10,17 @@ const routes: Routes = [
     path: '', component: AppLayoutComponent,
     children: [
       {
-        path: '',
-        loadChildren: () => import('./modules/tools/tools.module').then(m => m.ToolsModule)
+        path: 'tools',
+        loadChildren: () => import('./modules/tools/distribution-transformer/distribution-transformer.module').then(m => m.DistributionTransformerModule)
       },
+      {
+        path: 'tool5',
+        loadChildren: () => import('./modules/tools/BEET/BEET.module').then(m => m.BEETModule)
+      }/* ,
       {
         path: '**',
         redirectTo: 'tools',
-      }
+      } */
     ]
   }
 ];

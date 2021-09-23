@@ -5,9 +5,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PlugloadavailablevaldialogComponent } from 'src/app/shared/plugloadavailablevaldialog/plugloadavailablevaldialog.component';
 import {PlugloadinputdialogComponent} from 'src/app/shared/plugloadinputdialog/plugloadinputdialog.component';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
+import { isObjectLiteralElement } from 'typescript';
 
 export interface OPTIONS {
-  operations: string;
+  operations : string;
   options: string;
   quantity: number;
 }
