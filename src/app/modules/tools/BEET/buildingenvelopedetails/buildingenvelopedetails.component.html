@@ -23,7 +23,7 @@
                         <mat-radio-button (click)="openOuterWallR()" value="1">Yes, I know</mat-radio-button><br>
                         <mat-radio-button value="2"> I want to select from predefined types (pictures available for
                             reference)</mat-radio-button><br>
-                        <mat-radio-button value="3"> Calculate the R value by adding custom layers from prelisted
+                        <mat-radio-button (click)="openOuterWallAdvancedR()" value="3"> Calculate the R value by adding custom layers from prelisted
                             materials(Advanced level)</mat-radio-button>
                     </mat-radio-group>
 
@@ -78,7 +78,7 @@
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="windowr">
                         <mat-radio-button (click)="openWindowR()" value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button value="2"> I want to select from predefined types (list available)
+                        <mat-radio-button (click)="openWindowPredefinedR()" value="2"> I want to select from predefined types (list available)
                         </mat-radio-button>
                     </mat-radio-group>
 

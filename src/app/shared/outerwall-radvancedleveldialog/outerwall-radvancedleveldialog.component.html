@@ -1,0 +1,65 @@
+<mat-toolbar class="mat-toolbar">
+    <mat-toolbar-row class="d-flex justify-content-between">
+        <h3>Calculate R value for outer wall by adding custom layers</h3>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onNoClick()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<h3> See below example table fro reference. Details to be filled in Table 1</h3>
+<p>Step1: Select the layer number from the dropdown list.</p>
+<p>Step2: Select material from dropdown list.</p>
+<p>Step3: Click load button and proceed with the tool. </p>
+<p>Step4: Click return to insert the customR value.<p>
+
+
+    <b>Example Table:</b>
+
+    <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="Layer">
+            <th mat-header-cell *matHeaderCellDef> Layer</th>
+            <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Capadelelementoconstructivo">
+            <th mat-header-cell *matHeaderCellDef> Capa del elemento constructivo </th>
+            <td mat-cell *matCellDef="let example"> {{example.Capadelelementoconstructivo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Espesordecadacapa">
+            <th mat-header-cell *matHeaderCellDef> Espesor de cada capa(e) in m </th>
+            <td mat-cell *matCellDef="let example"> {{example.Espesordecadacapa}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Resistenciatermica">
+            <th mat-header-cell *matHeaderCellDef> Resistencia termica (R) in sqm.K/W </th>
+            <td mat-cell *matCellDef="let example"> {{example.Resistenciatermica}} </td>
+        </ng-container>
+
+     
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+<br>
+<div >
+    <b>Table 1</b>
+<span class="d-flex justify-content-between">
+    <p style="margin-top: 20px;" >Layer Number :</p>
+    <mat-form-field  appearance="outline">
+        <mat-label>Select layer</mat-label>
+        <mat-select formControlName="layers">
+            <mat-option *ngFor="let layer of layersList" [value]="layer">{{layer}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <p style="margin-top: 20px;">Capa del elemento constructivo</p>
+    <mat-form-field   appearance="outline">
+        <mat-label>Capa del elemento constructivo :</mat-label>
+        <mat-select formControlName="elements">
+            <mat-option *ngFor="let element of elementsList" [value]="element">{{element}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</span>
+</div>

@@ -16,6 +16,8 @@ import { DialogComponent } from './dialog/dialog.component';
 import { PlugloadinputdialogComponent } from './plugloadinputdialog/plugloadinputdialog.component';
 import { PlugloadavailablevaldialogComponent } from './plugloadavailablevaldialog/plugloadavailablevaldialog.component';
 import {textfieldsdialogComponent } from './textfieldsdialog/textfieldsdialog.component';
+import { WindowRdialogComponent } from './window-rdialog/window-rdialog.component';
+import { OuterwallRadvancedleveldialogComponent } from './outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import {textfieldsdialogComponent } from './textfieldsdialog/textfieldsdialog.co
     ConfirmationDialogComponent,
     PlugloadinputdialogComponent,
     PlugloadavailablevaldialogComponent,
-    textfieldsdialogComponent
+    textfieldsdialogComponent,
+    WindowRdialogComponent,
+    OuterwallRadvancedleveldialogComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +59,9 @@ import {textfieldsdialogComponent } from './textfieldsdialog/textfieldsdialog.co
     DialogComponent,
     PlugloadinputdialogComponent,
     PlugloadavailablevaldialogComponent,
-    textfieldsdialogComponent
+    textfieldsdialogComponent,
+    WindowRdialogComponent,
+    OuterwallRadvancedleveldialogComponent
   ],
   
   // If Service do not have Provider == root then add the below code to use the service by other components.
