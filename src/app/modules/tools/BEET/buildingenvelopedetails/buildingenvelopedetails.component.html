@@ -6,36 +6,37 @@
 <div class="container-fluid beet-container">
     <form [formGroup]="formgroup" class="form">
         <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel expanded='true'>
+            <mat-expansion-panel expanded='true' style="padding-top: 20px;">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <h2>R Value (Thermal resistance) - Outer Wall </h2>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="container">
-
                     <p>Do you know the R value?</p>
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
-                            on R value of the wall.</p>
+                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="outerwallr">
                         <mat-radio-button (click)="openOuterWallR()" value="1">Yes, I know</mat-radio-button><br>
+<<<<<<< HEAD
+                        <mat-radio-button value="2"> I want to select from predefined types (pictures available for reference)
+                        </mat-radio-button><br>
+                        <mat-radio-button value="3"> Calculate the R value by adding custom layers from prelisted materials(Advanced level)</mat-radio-button>
+=======
                         <mat-radio-button value="2"> I want to select from predefined types (pictures available for
                             reference)</mat-radio-button><br>
                         <mat-radio-button (click)="openOuterWallAdvancedR()" value="3"> Calculate the R value by adding custom layers from prelisted
                             materials(Advanced level)</mat-radio-button>
+>>>>>>> c7f9bc4862973e51c4d10e9d9e668100c14fe7f8
                     </mat-radio-group>
-
                     <mat-label>Dynamic Update Based Dialog Selection</mat-label>
-
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
 
         <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel>
-
+            <mat-expansion-panel style="padding-top: 20px;">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <h2>R Value (Thermal resistance) - Roof </h2>
@@ -44,17 +45,13 @@
                 <div class="container">
                     <p>Do you know the R value?</p>
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
-                            on R value of the wall.</p>
+                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="roofr">
                         <mat-radio-button (click)="openRoofR()" value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button value="2"> I want to select from predefined types (pictures available for
-                            reference)
+                        <mat-radio-button value="2"> I want to select from predefined types (pictures available for reference)
                         </mat-radio-button><br>
-                        <mat-radio-button value="3">Calculate the R value by adding custom layers from prelisted
-                            materials
-                            (Advanced level)</mat-radio-button>
+                        <mat-radio-button value="3">Calculate the R value by adding custom layers from prelisted materials (Advanced level)</mat-radio-button>
                     </mat-radio-group>
 
                 </div>
@@ -73,8 +70,7 @@
                 <div class="container">
                     <p>Do you know the R value?</p>
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
-                            on R value of the wall.</p>
+                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="windowr">
                         <mat-radio-button (click)="openWindowR()" value="1">Yes, I know</mat-radio-button><br>
@@ -97,8 +93,7 @@
                 <div class="container">
                     <p>Do you know the SHGC value?</p>
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
-                            on SHGC value of the window</p>
+                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on SHGC value of the window</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="shgcwindow">
                         <mat-radio-button (click)="showSHGC(true)" value="1">Yes, I know</mat-radio-button><br>
@@ -113,13 +108,11 @@
                         </mat-form-field>
                     </span>
                 </div>
-                
             </mat-expansion-panel>
         </mat-accordion>
 
         <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel>
-
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <h2>Window to Wall Ratio (WWR)</h2>
@@ -128,8 +121,7 @@
                 <div class="container">
                     <p>Do you know the Window to Wall Ratio</p>
                     <div class="fields-note">
-                        <p> <span class="notes-style"> Note:</span> You may select any of the options to provide details
-                            on WWR value of the window</p>
+                        <p> <span class="notes-style"> Note:</span> You may select any of the options to provide details on WWR value of the window</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="wwr">
                         <mat-radio-button (click)="showWWR(true)" value="1">Yes, I know</mat-radio-button><br>
@@ -144,11 +136,7 @@
                         </mat-form-field>
                     </span>
                 </div>
-                
-                
-                
             </mat-expansion-panel>
         </mat-accordion>
     </form>
-
 </div>
