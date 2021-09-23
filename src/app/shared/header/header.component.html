@@ -2,52 +2,54 @@
 
     <!-- UNEP DTU branding -->
     <div class="p-site-header__branding">
-              <p class="p-site-header__logo">
-          <a href="https://c2e2.unepdtu.org" rel="home" class="p-site-header__logo-link" title="Copenhagen Centre on Energy Efficiency"><img src= "./assets/images/c2e2-logo-seforall.png" alt="Copenhagen Centre on Energy Efficiency"></a>
+        <p class="p-site-header__logo">
+            <a href="https://c2e2.unepdtu.org" rel="home" class="p-site-header__logo-link" title="Copenhagen Centre on Energy Efficiency"><img src="./assets/images/c2e2-logo-seforall.png" alt="Copenhagen Centre on Energy Efficiency"></a>
         </p>
-          </div>
+    </div>
 
     <div class="p-site-header__navigation-and-search">
 
-      <!-- Primary menu -->
-      <button class="c-primary-menu__toggle js-menu-toggle">
+        <!-- Primary menu -->
+        <button class="c-primary-menu__toggle js-menu-toggle">
         <span class="c-primary-menu__toggle-lines"></span>
         <span class="c-primary-menu__toggle-text">Menu</span>
       </button>
-      <nav class="c-primary-menu">
-        <ul class="c-primary-menu__list " role="menu">
-          <li class="c-primary-menu__item  c-primary-menu__item--32244"><a href="https://c2e2.unepdtu.org/who-we-are/">Who We Are</a></li>
-          <li class="c-primary-menu__item  c-primary-menu__item--36874"><a href="https://c2e2.unepdtu.org/collection/c2e2-publications/">C2E2 Publications</a></li>
-         <li class="c-primary-menu__item  c-primary-menu__item--32236"><a href="https://c2e2.unepdtu.org/kms/">Knowledge Management System</a></li>
-         <li class="c-primary-menu__item  c-primary-menu__item--32291"><a href="https://c2e2.unepdtu.org/news/">News</a></li>
-         <li class="c-primary-menu__item c-primary-menu__item--parent  c-primary-menu__item--38501 " [ngClass]="{'c-primary-menu__item--show-children' : showToolbox}">
-          <a  (click)= "toggleToolbox()" >Toolbox</a>
-	       <ul class="c-primary-menu__sub-menu c-primary-menu__sub-menu--1">
-         <li class="c-primary-menu__sub-menu-item c-primary-menu__sub-menu--1__item  c-primary-menu__item--38785">
-           <a href="https://c2e2.unepdtu.org/kms_object/street-lighting-financing-tool-slft/">Street Lighting Financing Tool (SLFT)</a></li>
-         </ul>
-        </li>
-        </ul>      
-      </nav>
+        <nav class="c-primary-menu">
+            <ul class="c-primary-menu__list " role="menu">
+                <li class="c-primary-menu__item"><a href="https://c2e2.unepdtu.org/who-we-are/">Who We Are</a></li>
+                <li class="c-primary-menu__item"><a href="https://c2e2.unepdtu.org/collection/c2e2-publications/">C2E2 Publications</a></li>
+                <li class="c-primary-menu__item"><a href="https://c2e2.unepdtu.org/kms/">Knowledge Management System</a></li>
+                <li class="c-primary-menu__item"><a href="https://c2e2.unepdtu.org/news/">News</a></li>
+                <li class="c-primary-menu__item c-primary-menu__item--parent" [ngClass]="{'c-primary-menu__item--show-children' : showToolbox}">
+                    <a (click)="toggleToolbox()">Toolbox</a>
+                    <ul class="c-primary-menu__sub-menu">
+                        <li class="c-primary-menu__sub-menu-item">
+                            <a [routerLink]="['/tools']">Energy Efficient Distribution Transformers (EEDT)</a></li>
+                        <li class="c-primary-menu__sub-menu-item" style="margin-bottom: 10px;">
+                            <a [routerLink]="['/tool5']">Building Energy Efficiency Tool (BEET)</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
 
-      <!-- Global search functionality -->
-      <a class="c-global-search__toggle" [ngClass]="{'active' : showsearch}" (click)= "showToggleSearch()">
-        <span class="c-global-search__toggle-text">Search</span>
-      </a>
-      <div class="c-global-search" id="global-search" [ngClass]="{'active' : showsearch}" >
-        <div class="c-global-search__inner">
-          <form class="c-global-search__form" action="/">
-            <div class="c-global-search__form-group" >
-              <label class="c-global-search__label" for="s">Search a keyword, location etc.</label>
-              <input #msgFocus class="c-global-search__input" type="text" name="s" placeholder="Search a keyword, location etc.">
-              <button class="c-global-search__button">Search</button>
+        <!-- Global search functionality -->
+        <!-- <a class="c-global-search__toggle" [ngClass]="{'active' : showsearch}" (click)="showToggleSearch()">
+            <span class="c-global-search__toggle-text">Search</span>
+        </a> -->
+        <!-- <div class="c-global-search" id="global-search" [ngClass]="{'active' : showsearch}">
+            <div class="c-global-search__inner">
+                <form class="c-global-search__form" action="/">
+                    <div class="c-global-search__form-group">
+                        <label class="c-global-search__label" for="s">Search a keyword, location etc.</label>
+                        <input #msgFocus class="c-global-search__input" type="text" name="s" placeholder="Search a keyword, location etc.">
+                        <button class="c-global-search__button">Search</button>
+                    </div>
+                </form>
             </div>
-          </form>
-        </div>
-      </div>
+        </div> -->
     </div>
-  </header>
+</header>
 
-  <div class="c-primary-menu__sub-menu-container" [ngClass]="{'showToolbox' : showToolbox}">
+<div class="c-primary-menu__sub-menu-container" [ngClass]="{'showToolbox' : showToolbox}">
 
-  </div>
+</div>

@@ -16,11 +16,11 @@ const routes: Routes = [
       {
         path: 'tool5',
         loadChildren: () => import('./modules/tools/BEET/BEET.module').then(m => m.BEETModule)
-      }/* ,
+      },
       {
         path: '**',
         redirectTo: 'tools',
-      } */
+      }
     ]
   }
 ];
