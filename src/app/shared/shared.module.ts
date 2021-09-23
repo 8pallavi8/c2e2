@@ -18,6 +18,7 @@ import { PlugloadavailablevaldialogComponent } from './plugloadavailablevaldialo
 import {textfieldsdialogComponent } from './textfieldsdialog/textfieldsdialog.component';
 import { WindowRdialogComponent } from './window-rdialog/window-rdialog.component';
 import { OuterwallRadvancedleveldialogComponent } from './outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { OuterwallRadvancedleveldialogComponent } from './outerwall-radvancedlev
     NgbModule,
     ChartsModule,
     MatDialogModule,
+    RouterModule
     ],
   exports: [
     HeaderComponent,
