@@ -9,10 +9,11 @@
 
 <div mat-dialog-content>
     <mat-list-item>
-     <section class="example-section" *ngFor="let item of textboxitems">
-        <mat-checkbox class="checkbox" [checked]="item.selected" (change)="onChange($event,item)" [value]="item">{{item}}</mat-checkbox>
-    </section> 
-</mat-list-item>
+        <section class="example-section" *ngFor="let item of textboxitems">
+            <mat-checkbox class="checkbox" [checked]="item.selected" (change)="onChange($event,item)" [value]="item">
+                {{item}}</mat-checkbox>
+        </section>
+    </mat-list-item>
 
     <div class="button-dialog" mat-dialog-actions>
         <button mat-raised-button color="primary" style="color: #fff;" type="button" [mat-dialog-close]="textboxitems"
@@ -20,5 +21,3 @@
     </div>
 
 </div>
-
-

@@ -7,7 +7,7 @@
     <form [formGroup]="formGroup" class="form">
 
         <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel expanded='true' style="padding-top: 20px;">
+            <mat-expansion-panel expanded='true'>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <h2>Location Details</h2>
@@ -19,7 +19,9 @@
                     </p>
 
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> It is important to select Provice first and then Location before clicking and loading the climate data. If exact location is not available, please select the nearest / most suitable location
+                        <p><span class="notes-style"> Note:</span> It is important to select Provice first and then
+                            Location before clicking and loading the climate data. If exact location is not available,
+                            please select the nearest / most suitable location
                             (or) reach out to us.
                         </p>
                     </div>
@@ -67,15 +69,14 @@
                     <p>Please select the main building type.
                     </p>
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> Please first select the building type from drop down list and then click the button to select building spaces. If your building type is not available in the list, please select the most representative
+                        <p><span class="notes-style"> Note:</span> Please first select the building type from drop down
+                            list and then click the button to select building spaces. If your building type is not
+                            available in the list, please select the most representative
                             building type.
                         </p>
                     </div>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                        <mat-label>Building Type</mat-label>
-                        <input matInput required>
-                    </mat-form-field>
+                   
 
                     <button mat-raised-button (click)="opendialog()">Click here to select building spaces</button>
 
@@ -102,7 +103,8 @@
 
 
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select the units in which you may want to enter the building area value using drop down button.
+                        <p><span class="notes-style"> Note:</span> You may select the units in which you may want to
+                            enter the building area value using drop down button.
                         </p>
                     </div>
 
@@ -155,15 +157,35 @@
                     </p>
 
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> Select from following options. For option C, standard values will be considered based on the building categories and spaces selected. More details on this is given in the Assumptions section.
+                        <p><span class="notes-style"> Note:</span> Select from following options. For option C, standard
+                            values will be considered based on the building categories and spaces selected. More details
+                            on this is given in the Assumptions section.
                         </p>
                     </div>
-                    <mat-radio-group aria-label="Select an option" formControlName="Occupancypeople">
-                        <mat-radio-button value="1">I only know the number of people occupying the building during normal working hours</mat-radio-button><br>
-                        <mat-radio-button value="2"> I know the occupant density of the building (m2/person or ft2/person)
-                        </mat-radio-button><br>
-                        <mat-radio-button value="3">I do not know the value</mat-radio-button>
-                    </mat-radio-group>
+                    <div>
+                        <mat-radio-group aria-label="Select an option" formControlName="occupancy">
+                            <mat-radio-button (click)=showOccupancy(true) value="1">I only know the number of people
+                                occupying the building during normal working hours</mat-radio-button><br>
+                            <mat-radio-button (click)=showOccupantDensity(true) value="2"> I know the occupant density
+                                of the building (m2/person or ft2/person)
+                            </mat-radio-button><br>
+                            <mat-radio-button (click)=showOccupancy(false) value="3">I do not know the value</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <span *ngIf="hasOccupancy">
+                        <p style="margin-top: 1em;">I know the number of people occupying the buidling during normal working hours.</p>
+                        <p>Number of people occupying the building </p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Enter value here</mat-label>
+                            <input matInput placeholder="Enter value"  formControlName="occupancyValueKnown">
+                        </mat-form-field>
+                    </span>
+
+                    <div>
+                        <b>Occupant density (square meter per person):{{occupancyValue}}</b>
+    </div>
+
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
@@ -180,7 +202,8 @@
                     <p>Please enter energy and fuel details associated with the building.
                     </p>
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> Fuel considered as Natural Gas. If any other forms of fuel is being used, please reach out to us.
+                        <p><span class="notes-style"> Note:</span> Fuel considered as Natural Gas. If any other forms of
+                            fuel is being used, please reach out to us.
                         </p>
                     </div>
 
