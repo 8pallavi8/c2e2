@@ -3,8 +3,10 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ARIA_LIVE_DELAY } from '@ng-bootstrap/ng-bootstrap/util/accessibility/live';
+import { debounceTime } from 'rxjs/operators';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
+import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
 import { ToolsService } from 'src/app/shared/services/tools.service';
 
 
@@ -17,20 +19,29 @@ import { ToolsService } from 'src/app/shared/services/tools.service';
 export class GendetailsComponent implements OnInit {
   formGroup: FormGroup;
   inputTableDataSource: any;
-  inputDisplayedColumns: string[] = ['option','select']
+  inputDisplayedColumns: string[] = ['option', 'select']
   dialogref: any;
-  units:string = "squarefeet";
+  units: string = "squarefeet";
   textBoxData: string[] = ["bowling Aalley", "game arcades", "health club",
     "swimming", "disco", "gym", "gambling"];
   selecteditems: string[];
+  hasOccupancy: boolean = false;
+  hasOccupancyDensity: boolean = false;
+  occupancyValue: number;
 
 
   constructor(private fb: FormBuilder,
     public dialog: MatDialog,
+    private inputDialog: InputdialogService,
     private DialogService: ConfirmationDialogService) { }
 
   ngOnInit(): void {
     this.formGroup = this.createForm();
+    this.formGroup.get('occupancyValueKnown').valueChanges.pipe(debounceTime(1000)).subscribe((changes) => {
+      this.occupancyValue = changes;
+      console.log(changes);
+    });
+
   }
 
   createForm(): FormGroup {
@@ -47,15 +58,43 @@ export class GendetailsComponent implements OnInit {
       Netoccupiedfloorarea: ['', Validators.compose([Validators.required])],
       Nooffloors: ['', Validators.compose([Validators.required])],
       Occupanyhoursperweek: ['', Validators.compose([Validators.required])],
-      Occupancypeople: new FormControl('', Validators.required),
+      occupancy: ['', Validators.compose([Validators.required])],
+      occupancyValueKnown: ['', Validators.compose([Validators.required])],
       Electricitycost: ['', Validators.compose([Validators.required])],
       Fuelcost: ['', Validators.compose([Validators.required])]
     });
+  
   }
 
-  
+  showOccupancy(state: boolean): void {
+    if (state == true) {
+      this.hasOccupancy = true;
+      //  this.occupancy = 0;
+    }
+    else {
+      this.hasOccupancy = false;
+      this.occupancyValue = 5;
+    }
+  }
 
-  
+  showOccupantDensity(state: boolean): void {
+    this.hasOccupancy = false;
+    this.openOccupantDensity();
+  }
+
+
+  public openOccupantDensity() {
+    this.inputDialog.entervalue('Occupancy people',
+      'I know the occupant density of the building in [square meter per person] or [square feet per person].',
+      'You may choose to enter the values for any of the units mentioned below, Necessary units conversions will be made by the tool for respective calculations.',
+      'OK',
+      'cancel',
+      'Occupant density in [square meter per person]:',
+      'Occupant density in  [square feet per person]:')
+      .then((confirmed) => { this.occupancyValue = confirmed })
+      .catch(() => console.log('User dismissed the dialog'));
+  }
+
   opendialog(): void {
     this.dialogref = this.dialog.open(DialogComponent, {
       width: '80%',
@@ -77,3 +116,7 @@ export class GendetailsComponent implements OnInit {
   }
 
 }
+
+
+
+

@@ -5,8 +5,6 @@ import { debounceTime } from 'rxjs/operators';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
 
-
-
 @Component({
   selector: 'app-hvac',
   templateUrl: './hvac.component.html',
@@ -69,18 +67,6 @@ selectedValue: string;
       .catch(() => console.log('User dismissed the dialog'));
   }
 
-  /* openDialogventilation(){
-    const dialogref = this.dialog.open(HvacventilationdialogComponent,{
-      width: '60%',
-      autoFocus: false,
-      maxHeight: '90vh',
-    });
-    dialogref.afterClosed().subscribe(result => {
-      // this.plugloadvalue= result;
-      console.log(result); 
-    });
-  } */
-
   showInfiltrationRateValue(state:boolean):void{
     if(state== true)
     { this.hasInfiltrationRateValue = true;
@@ -92,6 +78,4 @@ selectedValue: string;
      this.infiltration =2;
   } 
   }  
-
-  
 }
