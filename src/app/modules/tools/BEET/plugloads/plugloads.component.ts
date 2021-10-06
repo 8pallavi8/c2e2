@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PlugloadavailablevaldialogComponent } from 'src/app/shared/plugloadavailablevaldialog/plugloadavailablevaldialog.component';
 import {PlugloadinputdialogComponent} from 'src/app/shared/plugloadinputdialog/plugloadinputdialog.component';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
+import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
 import { isObjectLiteralElement } from 'typescript';
 
 export interface OPTIONS {
@@ -51,7 +52,7 @@ export class PlugloadsComponent implements OnInit {
   dialogref: any;
   selecteditems: string[];
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) { }
+  constructor(private fb: FormBuilder, public dialog: MatDialog, private inputDialog: InputdialogService) { }
 
   ngOnInit(): void {
     this.formgroup = this.fb.group({
@@ -60,16 +61,16 @@ export class PlugloadsComponent implements OnInit {
     )
   }
 
-  openDialogplugload(){
-    const dialogref = this.dialog.open(PlugloadinputdialogComponent,{
-      width: '60%',
-      autoFocus: false,
-      maxHeight: '90vh',
-    });
-    dialogref.afterClosed().subscribe(result => {
-      this.plugloadvalue= result;
-      console.log(result);
-    });
+  public openPlugLoad() {
+    this.inputDialog.entervalue('Plug Loads',
+      'I know the PlugLoad density value of the outer wall for my building.',
+      'You may choose to enter the values for any of the units mentioned below, Necessary units conversions will be made by the tool for respective calculations.',
+      'OK',
+      'cancel',
+      'Plug Load density value in [Watts per square meter]:',
+      'Plug Load density value in [Watts per square foot]:')
+      .then((confirmed) => { this.plugloadvalue = confirmed })
+      .catch(() => console.log('User dismissed the dialog'));
   }
 
   openAvailableValDialog(){

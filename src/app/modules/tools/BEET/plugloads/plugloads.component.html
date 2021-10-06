@@ -22,10 +22,11 @@
                         </p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="plugloads">
-                        <mat-radio-button (click)= openDialogplugload() value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button  value="2">No, I don't know. Guide me to calculate.</mat-radio-button><br>
-                        <mat-radio-button (click)= openAvailableValDialog() value="3">I will select from already available values</mat-radio-button>
-                    </mat-radio-group><br>
+                        <mat-radio-button (click)=openPlugLoad() value="1">Yes, I know</mat-radio-button><br>
+                        <mat-radio-button value="2">No, I don't know. Guide me to calculate.</mat-radio-button><br>
+                        <mat-radio-button (click)=openAvailableValDialog() value="3">I will select from already
+                            available values</mat-radio-button>
+                    </mat-radio-group><br><br>
                     <b>Plug load density in [watts per square meter]: {{plugloadvalue}} </b>
                 </div>
             </mat-expansion-panel>

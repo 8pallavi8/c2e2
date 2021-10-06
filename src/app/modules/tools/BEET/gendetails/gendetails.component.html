@@ -37,22 +37,31 @@
                     </mat-form-field>
 
                     <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                        <mat-label>country</mat-label>
-                        <input matInput formControlName="Country" required>
+                        <mat-label>Select country</mat-label>
+                        <mat-select matNativeControl id="Country" formControlName="Country">
+                            <mat-option *ngFor="let con of countrylist" [value]="con">{{con}}</mat-option>
+                        </mat-select>
+                        <mat-hint color="primary">Select country</mat-hint>
                     </mat-form-field>
+
 
                     <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                        <mat-label>Province</mat-label>
-                        <input matInput formControlName="Province" required>
+                        <mat-label>Select Province</mat-label>
+                        <mat-select matNativeControl id="Province" formControlName="Province">
+                            <mat-option *ngFor="let pro of provincelist" [value]="pro">{{pro}}</mat-option>
+                        </mat-select>
+                        <mat-hint color="primary">Select Province</mat-hint>
                     </mat-form-field>
+
 
                     <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                        <mat-label>Location</mat-label>
-                        <input matInput formControlName="Location" required>
+                        <mat-label>Select Location</mat-label>
+                        <mat-select matNativeControl id="Location" formControlName="Location">
+                            <mat-option *ngFor="let loc of locationlist" [value]="loc">{{loc}}</mat-option>
+                        </mat-select>
+                        <mat-hint color="primary">Select Location</mat-hint>
                     </mat-form-field>
 
-                    <button class="w-100  mt-4 col-md-4" mat-raised-button (click)="opendialog()">Click here to load
-                        selected location climate data</button>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
@@ -76,12 +85,32 @@
                         </p>
                     </div>
 
-                   
 
-                    <button mat-raised-button (click)="opendialog()">Click here to select building spaces</button>
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
+                        <mat-label>Select Building Type</mat-label>
+                        <mat-select matNativeControl id="Buidling" formControlName="Buildingtype">
+                            <mat-option *ngFor="let buildtype of buildingTypeList" [value]="buildtype">{{buildtype}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint color="primary">Select Building Type</mat-hint>
+                    </mat-form-field>
 
-                    <div>
-                        <mat-label>Building Categories/Spaces : </mat-label>
+
+                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
+                        <mat-label>Select Building Spaces</mat-label>
+                        <mat-select matNativeControl id="BuidlingSpaces" formControlName="Categories">
+                            <mat-option *ngFor="let space of spacesList" [value]="space">{{space}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint color="primary">Select Building Spaces</mat-hint>
+                    </mat-form-field>
+
+                    <!-- 
+                    <button color="primary" class="w-100 mt-4 col-md-4 climate-button" mat-raised-button (click)="opendialog()">Click here to select
+                        building spaces</button> -->
+
+                    <div class="container-fluid" style="margin-top: 20px;">
+                        <mat-label><b>Building Categories/Spaces : </b></mat-label>
 
                         <li *ngFor="let item of selecteditems">
                             {{item}}
@@ -169,22 +198,24 @@
                             <mat-radio-button (click)=showOccupantDensity(true) value="2"> I know the occupant density
                                 of the building (m2/person or ft2/person)
                             </mat-radio-button><br>
-                            <mat-radio-button (click)=showOccupancy(false) value="3">I do not know the value</mat-radio-button>
+                            <mat-radio-button (click)=showOccupancy(false) value="3">I do not know the value
+                            </mat-radio-button>
                         </mat-radio-group>
                     </div>
 
                     <span *ngIf="hasOccupancy">
-                        <p style="margin-top: 1em;">I know the number of people occupying the buidling during normal working hours.</p>
+                        <p style="margin-top: 1em;">I know the number of people occupying the buidling during normal
+                            working hours.</p>
                         <p>Number of people occupying the building </p>
                         <mat-form-field appearance="outline">
                             <mat-label>Enter value here</mat-label>
-                            <input matInput placeholder="Enter value"  formControlName="occupancyValueKnown">
+                            <input matInput placeholder="Enter value" formControlName="occupancyValueKnown">
                         </mat-form-field>
                     </span>
 
                     <div>
                         <b>Occupant density (square meter per person):{{occupancyValue}}</b>
-    </div>
+                    </div>
 
                 </div>
             </mat-expansion-panel>
@@ -207,15 +238,39 @@
                         </p>
                     </div>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                        <mat-label>Electricity cost</mat-label>
-                        <input matInput required>
+                    <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
+                        <mat-label>Select Electricity cost units</mat-label>
+                        <mat-select formControlName="units">
+                            <mat-option *ngFor="let unit of unitslist" [value]="unit">{{unit}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
+                    <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
+                        <mat-label>Enter value here</mat-label>
+                        <input matInput placeholder="Enter value" required>
+                    </mat-form-field>
+
+                    <!-- <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
+                        <mat-label>Electricity cost</mat-label>
+                        <input matInput required>
+                    </mat-form-field> -->
+
+                    <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
+                        <mat-label>Select Fuel cost units</mat-label>
+                        <mat-select formControlName="fuelunits">
+                            <mat-option *ngFor="let units of fuelunitslist" [value]="units">{{units}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
+                        <mat-label>Enter value here</mat-label>
+                        <input matInput placeholder="Enter value" required>
+                    </mat-form-field>
+
+                    <!-- <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Fuel cost</mat-label>
                         <input matInput required>
-                    </mat-form-field>
+                    </mat-form-field> -->
 
                 </div>
             </mat-expansion-panel>

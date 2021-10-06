@@ -17,7 +17,9 @@ export class CO2EmissionsComponent implements OnInit {
   ngOnInit(): void {
     this.formgroup = this.fb.group({
       powergenerationco2emmisions: ['', Validators.compose([Validators.required])],
-      onsiteco2emmisions: ['', Validators.compose([Validators.required])]
+      onsiteco2emmisions: ['', Validators.compose([Validators.required])],
+      units: ['', Validators.compose([Validators.required])],
+
     }
     )
   }

@@ -78,7 +78,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       'cancel',
       'R value in [sqmt.°C/W]:',
       'R value in [sqft.°F/BTU]:')
-      .then((confirmed) => { this.RoofRValue = confirmed })
+      .then((confirmed) => { this.windowRValue = confirmed })
       .catch(() => console.log('User dismissed the dialog'));
   }
 

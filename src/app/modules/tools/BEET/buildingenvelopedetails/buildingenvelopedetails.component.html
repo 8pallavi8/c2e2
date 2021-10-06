@@ -17,16 +17,19 @@
                 <div class="container">
                     <p>Do you know the R value?</p>
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
+                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
+                            on R value of the wall.</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="outerwallr">
                         <mat-radio-button (click)="openOuterWallR()" value="1">Yes, I know</mat-radio-button><br>
                         <mat-radio-button value="2"> I want to select from predefined types (pictures available for
                             reference)</mat-radio-button><br>
-                        <mat-radio-button (click)="openOuterWallAdvancedR()" value="3"> Calculate the R value by adding custom layers from prelisted
+                        <mat-radio-button (click)="openOuterWallAdvancedR()" value="3"> Calculate the R value by adding
+                            custom layers from prelisted
                             materials(Advanced level)</mat-radio-button>
-                    </mat-radio-group>
-                    <mat-label>Dynamic Update Based Dialog Selection</mat-label>
+                    </mat-radio-group><br><br>
+
+                    <b>R Value in [m2 °K / W]: {{outerWallRValue}} </b>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
@@ -42,15 +45,19 @@
                 <div class="container">
                     <p>Do you know the R value?</p>
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
+                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
+                            on R value of the wall.</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="roofr">
                         <mat-radio-button (click)="openRoofR()" value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button value="2"> I want to select from predefined types (pictures available for reference)
+                        <mat-radio-button value="2"> I want to select from predefined types (pictures available for
+                            reference)
                         </mat-radio-button><br>
-                        <mat-radio-button value="3">Calculate the R value by adding custom layers from prelisted materials (Advanced level)</mat-radio-button>
-                    </mat-radio-group>
+                        <mat-radio-button value="3">Calculate the R value by adding custom layers from prelisted
+                            materials (Advanced level)</mat-radio-button>
+                    </mat-radio-group><br><br>
 
+                    <b>R Value in [m2 °K / W]: {{RoofRValue}} </b>
                 </div>
 
             </mat-expansion-panel>
@@ -68,14 +75,16 @@
                 <div class="container">
                     <p>Do you know the R value?</p>
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
+                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
+                            on R value of the wall.</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="windowr">
                         <mat-radio-button (click)="openWindowR()" value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button (click)="openWindowPredefinedR()" value="2"> I want to select from predefined types (list available)
+                        <mat-radio-button (click)="openWindowPredefinedR()" value="2"> I want to select from predefined
+                            types (list available)
                         </mat-radio-button>
-                    </mat-radio-group>
-
+                    </mat-radio-group><br><br>
+                    <b>R Value in [m2 °K / W]: {{windowRValue}} </b>
                 </div>
 
             </mat-expansion-panel>
@@ -93,7 +102,8 @@
                 <div class="container">
                     <p>Do you know the SHGC value?</p>
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on SHGC value of the window</p>
+                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
+                            on SHGC value of the window</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="shgcwindow">
                         <mat-radio-button (click)="showSHGC(true)" value="1">Yes, I know</mat-radio-button><br>
@@ -122,7 +132,8 @@
                 <div class="container">
                     <p>Do you know the Window to Wall Ratio</p>
                     <div class="fields-note">
-                        <p> <span class="notes-style"> Note:</span> You may select any of the options to provide details on WWR value of the window</p>
+                        <p> <span class="notes-style"> Note:</span> You may select any of the options to provide details
+                            on WWR value of the window</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="wwr">
                         <mat-radio-button (click)="showWWR(true)" value="1">Yes, I know</mat-radio-button><br>

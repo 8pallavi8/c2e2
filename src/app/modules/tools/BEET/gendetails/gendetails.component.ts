@@ -28,6 +28,13 @@ export class GendetailsComponent implements OnInit {
   hasOccupancy: boolean = false;
   hasOccupancyDensity: boolean = false;
   occupancyValue: number;
+  countrylist:string[] = ['Argentina', 'India'];
+  provincelist:string[] = ['CC Chaco', 'CH Chubut'];
+  locationlist:string[] = ['CC Resistencia', 'CC Saenz Pena'];
+  buildingTypeList:string[] = ['Correctional Facilities', 'Retail'];
+  spacesList:string[] = ['Correctional Facilities', 'Retail'];
+  unitslist = ["kgCO2/mmbtu","lbsCO2/mmbtu","kgCO2/therm","lbsCO2/therm","kgCO2/kcal","lbsCO2/kcal","kgCO2/m3","lbsCO2/ft3","metrictonsCO2/Mcf"];
+  fuelunitslist = ["kgCO2/mmbtu","lbsCO2/mmbtu","kgCO2/therm","lbsCO2/therm","kgCO2/kcal","lbsCO2/kcal","kgCO2/m3","lbsCO2/ft3","metrictonsCO2/Mcf"];
 
 
   constructor(private fb: FormBuilder,
@@ -61,7 +68,9 @@ export class GendetailsComponent implements OnInit {
       occupancy: ['', Validators.compose([Validators.required])],
       occupancyValueKnown: ['', Validators.compose([Validators.required])],
       Electricitycost: ['', Validators.compose([Validators.required])],
-      Fuelcost: ['', Validators.compose([Validators.required])]
+      Fuelcost: ['', Validators.compose([Validators.required])],
+      fuelunits: ['', Validators.compose([Validators.required])],
+      units: ['', Validators.compose([Validators.required])]
     });
   
   }
@@ -93,26 +102,6 @@ export class GendetailsComponent implements OnInit {
       'Occupant density in  [square feet per person]:')
       .then((confirmed) => { this.occupancyValue = confirmed })
       .catch(() => console.log('User dismissed the dialog'));
-  }
-
-  opendialog(): void {
-    this.dialogref = this.dialog.open(DialogComponent, {
-      width: '80%',
-      autoFocus: false,
-      data: {
-        textBoxData: this.textBoxData,
-        title: "sports"
-      }
-    }
-    );
-    this.dialogref.afterClosed().subscribe(result => {
-      if (result.length > 0) {
-        this.selecteditems = result;
-      }
-
-    }
-    )
-
   }
 
 }
