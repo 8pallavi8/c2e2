@@ -186,10 +186,12 @@ export class DisTransformerComponent implements OnInit {
           co2savingspercent: res.success.totalfinalvalues.totalco2savingspercent,
           finalco2emissions: res.success.totalfinalvalues.totalfinalco2emissions,
         });
+
         this.barChartData.forEach(ele => {
           ele.data.push(res.success.totalfinalvalues.totalco2baseline);
           ele.data.push(res.success.totalfinalvalues.totalfinalco2emissions);
         })
+        
         this.dataSource = finalOutValues;
         for (let i = 0; i < finalOutValues.length - 1; i++) {
           var calEnergy = (finalOutValues[i].energy / finalOutValues[finalOutValues.length - 1].energy) * 100;
@@ -205,7 +207,8 @@ export class DisTransformerComponent implements OnInit {
       else {
         this.showForms = true;
       }
-    });
+    }
+    );
 
 
   }

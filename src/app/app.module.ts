@@ -17,10 +17,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { LightingComponent } from './modules/tools/BEET/lighting/lighting.component';
 import { DialogComponent } from './shared/dialog/dialog.component';
 import { CO2EmissionsComponent } from './modules/tools/BEET/co2-emissions/co2-emissions.component';
-import { PlugloadinputdialogComponent } from './shared/plugloadinputdialog/plugloadinputdialog.component';
-import { PlugloadavailablevaldialogComponent } from './shared/plugloadavailablevaldialog/plugloadavailablevaldialog.component';
-import { WindowRdialogComponent } from './shared/window-rdialog/window-rdialog.component';
-import { OuterwallRadvancedleveldialogComponent } from './shared/outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
+
 
 @NgModule({
 

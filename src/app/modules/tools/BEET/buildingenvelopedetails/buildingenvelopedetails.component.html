@@ -22,7 +22,7 @@
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="outerwallr">
                         <mat-radio-button (click)="openOuterWallR()" value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button value="2"> I want to select from predefined types (pictures available for
+                        <mat-radio-button (click)="openOuterWallImagesR()" value="2"> I want to select from predefined types (pictures available for
                             reference)</mat-radio-button><br>
                         <mat-radio-button (click)="openOuterWallAdvancedR()" value="3"> Calculate the R value by adding
                             custom layers from prelisted
@@ -50,10 +50,10 @@
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="roofr">
                         <mat-radio-button (click)="openRoofR()" value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button value="2"> I want to select from predefined types (pictures available for
+                        <mat-radio-button (click)="openRoofImagesR()" value="2"> I want to select from predefined types (pictures available for
                             reference)
                         </mat-radio-button><br>
-                        <mat-radio-button value="3">Calculate the R value by adding custom layers from prelisted
+                        <mat-radio-button value="3" (click)="openOuterWallAdvancedR()">Calculate the R value by adding custom layers from prelisted
                             materials (Advanced level)</mat-radio-button>
                     </mat-radio-group><br><br>
 
@@ -105,7 +105,7 @@
                         <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
                             on SHGC value of the window</p>
                     </div>
-                    <mat-radio-group aria-label="Select an option" formControlName="shgcwindow">
+                    <mat-radio-group aria-label="Select an option" >
                         <mat-radio-button (click)="showSHGC(true)" value="1">Yes, I know</mat-radio-button><br>
                         <mat-radio-button (click)="showSHGC(false)" value="2"> No, I don't know.</mat-radio-button>
                     </mat-radio-group>
@@ -114,9 +114,10 @@
                         <p>Please enter the SHGC value here(value doesnot have units) : </p>
                         <mat-form-field appearance="outline">
                             <mat-label>Enter value here</mat-label>
-                            <input matInput placeholder="Enter value" required>
+                            <input matInput placeholder="Enter value" required formControlName="SHGC">
                         </mat-form-field>
-                    </span>
+                    </span><br><br>
+                    <b>SHGC : {{SHGC}}</b>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

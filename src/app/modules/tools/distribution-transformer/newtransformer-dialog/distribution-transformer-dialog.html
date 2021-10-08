@@ -21,8 +21,6 @@
             <mat-label>Power(kVA)</mat-label>
             <input type="number" class="pro-name" matInput placeholder="Enter Power(kVA)" formControlName="Power"
                 required>
-
-
             <mat-error *ngIf="DialogTransformerInputs.controls['Power'].hasError('required')">
                 Power is required
             </mat-error>

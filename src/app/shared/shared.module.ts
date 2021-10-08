@@ -19,6 +19,7 @@ import {textfieldsdialogComponent } from './textfieldsdialog/textfieldsdialog.co
 import { WindowRdialogComponent } from './window-rdialog/window-rdialog.component';
 import { OuterwallRadvancedleveldialogComponent } from './outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
 import { RouterModule } from '@angular/router';
+import { RvalueImagedialogComponent } from './rvalue-imagedialog/rvalue-imagedialog.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { RouterModule } from '@angular/router';
     PlugloadavailablevaldialogComponent,
     textfieldsdialogComponent,
     WindowRdialogComponent,
-    OuterwallRadvancedleveldialogComponent
+    OuterwallRadvancedleveldialogComponent,
+    RvalueImagedialogComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +65,8 @@ import { RouterModule } from '@angular/router';
     PlugloadavailablevaldialogComponent,
     textfieldsdialogComponent,
     WindowRdialogComponent,
-    OuterwallRadvancedleveldialogComponent
+    OuterwallRadvancedleveldialogComponent,
+    RvalueImagedialogComponent
   ],
   
   // If Service do not have Provider == root then add the below code to use the service by other components.

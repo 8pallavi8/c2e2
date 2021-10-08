@@ -1,0 +1,23 @@
+<mat-toolbar class="mat-toolbar">
+    <mat-toolbar-row class="d-flex justify-content-between">
+        <h3 mat-dialog-title>R value</h3>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onNoClick()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+
+<p>I want to select from pre defined types(Pictures avilable for reference).</p>
+<p>please select most representative picture composition of your building.</p>
+<p class="fields-note">Note:You may choose any one of the following pictures representing the composition of your building.</p>
+
+
+
+<div class="button-dialog" mat-dialog-actions>
+    <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="button"
+        (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="submit"
+        cdkFocusInitial>Ok</button>
+</div>

@@ -1,15 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatStepperModule } from '@angular/material/stepper';
-import { ARIA_LIVE_DELAY } from '@ng-bootstrap/ng-bootstrap/util/accessibility/live';
 import { debounceTime } from 'rxjs/operators';
-import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
 import { ToolsService } from 'src/app/shared/services/tools.service';
-
-
 
 @Component({
   selector: 'app-gendetails',
@@ -48,7 +43,6 @@ export class GendetailsComponent implements OnInit {
       this.occupancyValue = changes;
       console.log(changes);
     });
-
   }
 
   createForm(): FormGroup {
@@ -72,7 +66,6 @@ export class GendetailsComponent implements OnInit {
       fuelunits: ['', Validators.compose([Validators.required])],
       units: ['', Validators.compose([Validators.required])]
     });
-  
   }
 
   showOccupancy(state: boolean): void {
@@ -103,6 +96,8 @@ export class GendetailsComponent implements OnInit {
       .then((confirmed) => { this.occupancyValue = confirmed })
       .catch(() => console.log('User dismissed the dialog'));
   }
+
+
 
 }
 

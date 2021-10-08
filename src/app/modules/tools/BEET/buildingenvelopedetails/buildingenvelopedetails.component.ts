@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { debounceTime } from 'rxjs/operators';
 import { OuterwallRadvancedleveldialogComponent } from 'src/app/shared/outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
+import { RvalueImagedialogComponent } from 'src/app/shared/rvalue-imagedialog/rvalue-imagedialog.component';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
 import { WindowRdialogComponent } from 'src/app/shared/window-rdialog/window-rdialog.component';
 
@@ -17,6 +19,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   windowRValue: number;
   hasSHGC: boolean = false;
   hasWWR: boolean = false;
+  SHGC: number;
+  rimage: string[] = ["http://localhost:4200/assets/images/rvalue.png", "http://localhost:4200/assets/images/rvalue.png"]
 
 
   constructor(private fb: FormBuilder,
@@ -28,9 +32,13 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       outerwallr: ['', Validators.compose([Validators.required])],
       roofr: ['', Validators.compose([Validators.required])],
       windowr: ['', Validators.compose([Validators.required])],
-      shgcwindow: ['', Validators.compose([Validators.required])],
+      SHGC: ['', Validators.compose([Validators.required])],
       wwr: ['', Validators.compose([Validators.required])]
     })
+    this.formgroup.get('SHGC').valueChanges.pipe(debounceTime(1000)).subscribe((changes) => {
+      this.SHGC = changes;
+      console.log(changes);
+    });
   }
 
   public openOuterWallR() {
@@ -45,17 +53,29 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       .catch(() => console.log('User dismissed the dialog'));
   }
 
-
-  public openOuterWallAdvancedR(){
-    const dialogref = this.dialog.open(OuterwallRadvancedleveldialogComponent,{
+  public openOuterWallImagesR() {
+    const dialogref = this.dialog.open(RvalueImagedialogComponent, {
       width: '60%',
       autoFocus: false,
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      this.outerWallRValue= result;
+      this.outerWallRValue = result;
       console.log(result);
-    }); 
+    });
+  }
+
+
+  public openOuterWallAdvancedR() {
+    const dialogref = this.dialog.open(OuterwallRadvancedleveldialogComponent, {
+      width: '60%',
+      autoFocus: false,
+      maxHeight: '90vh',
+    });
+    dialogref.afterClosed().subscribe(result => {
+      this.outerWallRValue = result;
+      console.log(result);
+    });
   }
 
   public openRoofR() {
@@ -70,6 +90,19 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       .catch(() => console.log('User dismissed the dialog'));
   }
 
+  public openRoofImagesR() {
+    const dialogref = this.dialog.open(RvalueImagedialogComponent, {
+      width: '60%',
+      autoFocus: false,
+      maxHeight: '90vh',
+    });
+    dialogref.afterClosed().subscribe(result => {
+      this.RoofRValue = result;
+      console.log(result);
+    });
+  }
+
+
   public openWindowR() {
     this.inputDialog.entervalue('R Value-Window',
       'I know the R value of the Window for my building.',
@@ -82,26 +115,28 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       .catch(() => console.log('User dismissed the dialog'));
   }
 
- public openWindowPredefinedR(){
-    const dialogref = this.dialog.open(WindowRdialogComponent,{
+  public openWindowPredefinedR() {
+    const dialogref = this.dialog.open(WindowRdialogComponent, {
       width: '60%',
       autoFocus: false,
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      this.windowRValue= result;
+      this.windowRValue = result;
       console.log(result);
-    }); 
+    });
 
   }
 
-  
-
   showSHGC(state: boolean): void {
-    if (state == true)
+    if (state == true) {
       this.hasSHGC = true;
-    else
+      this.SHGC = 0;
+    }
+    else {
       this.hasSHGC = false;
+      this.SHGC = 0.25;
+    }
   }
 
   showWWR(state: boolean): void {
