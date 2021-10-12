@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime } from 'rxjs/operators';
@@ -9,7 +9,8 @@ import { ToolsService } from 'src/app/shared/services/tools.service';
 @Component({
   selector: 'app-gendetails',
   templateUrl: './gendetails.component.html',
-  styleUrls: ['./gendetails.component.scss']
+  styleUrls: ['./gendetails.component.scss'],
+
 })
 export class GendetailsComponent implements OnInit {
   formGroup: FormGroup;
@@ -55,7 +56,7 @@ export class GendetailsComponent implements OnInit {
       Buildingtype: ['', Validators.compose([Validators.required])],
       Categories: ['', Validators.compose([Validators.required])],
       Yearofconstruction: ['', Validators.compose([Validators.required])],
-      Buildinggrossarea: ['', Validators.compose([Validators.required])],
+      Buildinggrossarea: [''],
       Netoccupiedfloorarea: ['', Validators.compose([Validators.required])],
       Nooffloors: ['', Validators.compose([Validators.required])],
       Occupanyhoursperweek: ['', Validators.compose([Validators.required])],
@@ -64,7 +65,10 @@ export class GendetailsComponent implements OnInit {
       Electricitycost: ['', Validators.compose([Validators.required])],
       Fuelcost: ['', Validators.compose([Validators.required])],
       fuelunits: ['', Validators.compose([Validators.required])],
-      units: ['', Validators.compose([Validators.required])]
+      grossunits: ['', Validators.compose([Validators.required])],
+      netunits: ['', Validators.compose([Validators.required])],
+      units:['', Validators.compose([Validators.required])],
+      occupancyValue:['', Validators.compose([Validators.required])]
     });
   }
 
@@ -96,9 +100,6 @@ export class GendetailsComponent implements OnInit {
       .then((confirmed) => { this.occupancyValue = confirmed })
       .catch(() => console.log('User dismissed the dialog'));
   }
-
-
-
 }
 
 

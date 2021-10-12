@@ -8,3 +8,19 @@
     background-color: lightgoldenrodyellow;
 }
  */
+
+ td.mat-cell,th.mat-header-cell{
+    border-style: groove;
+    text-align: center;
+    padding-left: 24px !important;
+
+}
+
+.mat-row {
+    height: 30px !important;
+  }
+
+  table{
+      width: 75%;
+      margin-top: 1rem;
+  }
