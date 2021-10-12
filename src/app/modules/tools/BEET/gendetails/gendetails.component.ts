@@ -22,15 +22,15 @@ export class GendetailsComponent implements OnInit {
     "swimming", "disco", "gym", "gambling"];
   selecteditems: string[];
   hasOccupancy: boolean = false;
-  hasOccupancyDensity: boolean = false;
+  hasOccupancyDensity: boolean = true;
   occupancyValue: number;
-  countrylist:string[] = ['Argentina', 'India'];
-  provincelist:string[] = ['CC Chaco', 'CH Chubut'];
-  locationlist:string[] = ['CC Resistencia', 'CC Saenz Pena'];
-  buildingTypeList:string[] = ['Correctional Facilities', 'Retail'];
-  spacesList:string[] = ['Correctional Facilities', 'Retail'];
-  unitslist = ["kgCO2/mmbtu","lbsCO2/mmbtu","kgCO2/therm","lbsCO2/therm","kgCO2/kcal","lbsCO2/kcal","kgCO2/m3","lbsCO2/ft3","metrictonsCO2/Mcf"];
-  fuelunitslist = ["kgCO2/mmbtu","lbsCO2/mmbtu","kgCO2/therm","lbsCO2/therm","kgCO2/kcal","lbsCO2/kcal","kgCO2/m3","lbsCO2/ft3","metrictonsCO2/Mcf"];
+  countrylist: string[] = ['Argentina', 'India'];
+  provincelist: string[] = ['CC Chaco', 'CH Chubut'];
+  locationlist: string[] = ['CC Resistencia', 'CC Saenz Pena'];
+  buildingTypeList: string[] = ['Correctional Facilities', 'Retail'];
+  spacesList: string[] = ['Correctional Facilities', 'Retail'];
+  unitslist = ["kgCO2/mmbtu", "lbsCO2/mmbtu", "kgCO2/therm", "lbsCO2/therm", "kgCO2/kcal", "lbsCO2/kcal", "kgCO2/m3", "lbsCO2/ft3", "metrictonsCO2/Mcf"];
+  fuelunitslist = ["kgCO2/mmbtu", "lbsCO2/mmbtu", "kgCO2/therm", "lbsCO2/therm", "kgCO2/kcal", "lbsCO2/kcal", "kgCO2/m3", "lbsCO2/ft3", "metrictonsCO2/Mcf"];
 
 
   constructor(private fb: FormBuilder,
@@ -40,10 +40,10 @@ export class GendetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.createForm();
-    this.formGroup.get('occupancyValueKnown').valueChanges.pipe(debounceTime(1000)).subscribe((changes) => {
+    /* this.formGroup.get('occupancyValueKnown').valueChanges.pipe(debounceTime(1000)).subscribe((changes) => {
       this.occupancyValue = changes;
       console.log(changes);
-    });
+    }); */
   }
 
   createForm(): FormGroup {
@@ -61,14 +61,14 @@ export class GendetailsComponent implements OnInit {
       Nooffloors: ['', Validators.compose([Validators.required])],
       Occupanyhoursperweek: ['', Validators.compose([Validators.required])],
       occupancy: ['', Validators.compose([Validators.required])],
-      occupancyValueKnown: ['', Validators.compose([Validators.required])],
+      noOfPeopleOccupying: ['', Validators.compose([Validators.required])],
       Electricitycost: ['', Validators.compose([Validators.required])],
       Fuelcost: ['', Validators.compose([Validators.required])],
       fuelunits: ['', Validators.compose([Validators.required])],
       grossunits: ['', Validators.compose([Validators.required])],
       netunits: ['', Validators.compose([Validators.required])],
-      units:['', Validators.compose([Validators.required])],
-      occupancyValue:['', Validators.compose([Validators.required])]
+      units: ['', Validators.compose([Validators.required])],
+      occupancyValue: ['', Validators.compose([Validators.required])]
     });
   }
 
@@ -79,12 +79,14 @@ export class GendetailsComponent implements OnInit {
     }
     else {
       this.hasOccupancy = false;
-      this.occupancyValue = 5;
+      this.hasOccupancyDensity = false;
+
     }
   }
 
   showOccupantDensity(state: boolean): void {
     this.hasOccupancy = false;
+    this.hasOccupancyDensity = false;
     this.openOccupantDensity();
   }
 
