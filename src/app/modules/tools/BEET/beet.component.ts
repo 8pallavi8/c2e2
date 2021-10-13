@@ -79,7 +79,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
       { Parameter: 'Location', Units: null, Value: this.primaryComponent.formGroup.controls.Location.value},
       { Parameter: 'Building type', Units: null, Value: this.primaryComponent.formGroup.controls.Buildingtype.value },
       { Parameter: 'Building age', Units: 'Years', Value: this.primaryComponent.formGroup.controls.Yearofconstruction.value},
-      { Parameter: 'Building gross area', Units: this.primaryComponent.formGroup.controls.grossunits.value, Value: this.primaryComponent.formGroup.controls.Buildinggrossarea.value },
+      { Parameter: 'Building gross area', Units: this.primaryComponent.formGroup.controls.grossAreaUnits.value, Value: this.primaryComponent.formGroup.controls.Buildinggrossarea.value },
       { Parameter: 'Building net occupiable area', Units: this.primaryComponent.formGroup.controls.netunits.value, Value: this.primaryComponent.formGroup.controls.Netoccupiedfloorarea.value},
       { Parameter: 'No. of floors', Units: 'number', Value: this.primaryComponent.formGroup.controls.Nooffloors.value},
       { Parameter: 'Occupancy hours per week', Units: 'hours per week', Value: this.primaryComponent.formGroup.controls.Occupanyhoursperweek.value},

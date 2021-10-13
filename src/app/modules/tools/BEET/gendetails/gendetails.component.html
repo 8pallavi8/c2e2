@@ -38,7 +38,7 @@
 
                     <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Select country</mat-label>
-                        <mat-select matNativeControl id="Country" formControlName="Country">
+                        <mat-select matNativeControl id="Country" formControlName="Country" required>
                             <mat-option *ngFor="let con of countrylist" [value]="con">{{con}}</mat-option>
                         </mat-select>
                         <!-- <mat-hint color="primary">Select country</mat-hint> -->
@@ -47,7 +47,7 @@
 
                     <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Select Province</mat-label>
-                        <mat-select matNativeControl id="Province" formControlName="Province">
+                        <mat-select matNativeControl id="Province" formControlName="Province" required>
                             <mat-option *ngFor="let pro of provincelist" [value]="pro">{{pro}}</mat-option>
                         </mat-select>
                         <!-- <mat-hint color="primary">Select Province</mat-hint> -->
@@ -56,7 +56,7 @@
 
                     <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Select Location</mat-label>
-                        <mat-select matNativeControl id="Location" formControlName="Location">
+                        <mat-select matNativeControl id="Location" formControlName="Location" required>
                             <mat-option *ngFor="let loc of locationlist" [value]="loc">{{loc}}</mat-option>
                         </mat-select>
                         <!-- <mat-hint color="primary">Select Location</mat-hint> -->
@@ -88,7 +88,7 @@
 
                     <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Select Building Type</mat-label>
-                        <mat-select matNativeControl id="Buidling" formControlName="Buildingtype">
+                        <mat-select matNativeControl id="Buidling" formControlName="Buildingtype" required>
                             <mat-option *ngFor="let buildtype of buildingTypeList" [value]="buildtype">{{buildtype}}
                             </mat-option>
                         </mat-select>
@@ -98,7 +98,7 @@
 
                     <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                         <mat-label>Select Building Spaces</mat-label>
-                        <mat-select matNativeControl id="BuidlingSpaces" formControlName="Categories" multiple>
+                        <mat-select matNativeControl id="BuidlingSpaces" formControlName="Categories" multiple required>
                             <mat-option *ngFor="let space of spacesList" [value]="space">{{space}}
                             </mat-option>
                         </mat-select>
@@ -139,11 +139,11 @@
 
                     <span class="units-picker-component">
                         <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                            <mat-label>Building gross area(Optional)</mat-label>
+                            <mat-label>Building gross area</mat-label>
                             <input formControlName="Buildinggrossarea" matInput>
-                            <mat-select [(value)]="units" placeholder="units" formControlName="grossunits">
-                                <mat-option value="squarefeet">squarefeet</mat-option>
-                                <mat-option value="squaremeter">squaremeter</mat-option>
+                            <mat-select [(ngModel)]="grossUnits" placeholder="units" formControlName="grossAreaUnits">
+                                <mat-option value="squarefeet">SquareFeet</mat-option>
+                                <mat-option value="squaremeter">SquareMeter</mat-option>
                             </mat-select>
                             <!-- <mat-hint color="primary">Please enter building gross area(Optional)</mat-hint> -->
                         </mat-form-field>
@@ -152,10 +152,10 @@
                     <span class="units-picker-component">
                         <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                             <mat-label>Net occupied floor area</mat-label>
-                            <input formControlName="Netoccupiedfloorarea" matInput>
-                            <mat-select [(value)]="units" placeholder="units" formControlName="netunits">
-                                <mat-option value="squarefeet">squarefeet</mat-option>
-                                <mat-option value="squaremeter">squaremeter</mat-option>
+                            <input formControlName="Netoccupiedfloorarea" matInput required>
+                            <mat-select [(ngModel)]="netUnits" placeholder="units" formControlName="netAreaUnits">
+                                <mat-option value="squarefeet">SquareFeet</mat-option>
+                                <mat-option value="squaremeter">SquareMeter</mat-option>
                             </mat-select>
                             <!-- <mat-hint color="primary">Please enter Net occupied floor area</mat-hint> -->
                         </mat-form-field>
@@ -196,26 +196,48 @@
                         </p>
                     </div>
                     <div>
-                        <mat-radio-group aria-label="Select an option" formControlName="occupancy">
+                        <mat-radio-group aria-label="Select an option" formControlName="occupancyDensity">
                             <mat-radio-button (click)=showOccupancy(true) value="1">I only know the number of people
-                                occupying the building during normal working hours</mat-radio-button><br>
+                                occupying the building during normal working hours.</mat-radio-button><br>
                             <mat-radio-button (click)=showOccupantDensity(true) value="2"> I know the occupant density
-                                of the building (m2/person or ft2/person)
+                                of the building (m2/person or ft2/person).
                             </mat-radio-button><br>
-                            <mat-radio-button (click)=showOccupancy(false) value="3">I do not know the value
+                            <mat-radio-button (click)=showOccupancy(false) value="3">I do not know the value.
                             </mat-radio-button>
                         </mat-radio-group>
                     </div>
 
                     <span *ngIf="hasOccupancy">
-                        <p style="margin-top: 1em;">I know the number of people occupying the building during normal
-                            working hours.</p>
-                        <p>Number of people occupying the building </p>
-                        <mat-form-field appearance="outline">
+                        <!-- <p style="margin-top: 1em;">I know the number of people occupying the building during normal
+                            working hours.</p> -->
+                        <b style="margin-top: 1em;">Number of people occupying the building :</b>
+                        <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
                             <mat-label>Enter value here</mat-label>
                             <input matInput placeholder="Enter value" formControlName="noOfPeopleOccupying">
                         </mat-form-field>
                     </span>
+
+
+                    <span *ngIf="hasOccupancyDensity">
+                        <!-- <p style="margin-top: 1em;">I know the occupanct density of the building.</p> -->
+
+                        <p class="fields-note">You may choose to enter the values for any of the units mentioned
+                            below. Necessary units conversions will be made by
+                            the tool for respective calculations.</p>
+                        <b style="margin-top: 1em;">Occupant Density of the building :</b>
+                        <span class="units-picker-component">
+                            <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                                <mat-label>Enter value here</mat-label>
+                                <input matInput placeholder="Enter value" formControlName="occupantDensityKnown">
+                                <mat-select [(ngModel)]="grossUnits" placeholder="units"
+                                    formControlName="OoccupantDensityUnits">
+                                    <mat-option value="squarefeet">SquareFeet</mat-option>
+                                    <mat-option value="squaremeter">SquareMeter</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </span>
+                    </span>
+
                     <!--  <div>
                         <b>Occupant density (square meter per person):{{occupancyValue}}</b>
                     </div> -->
@@ -242,8 +264,8 @@
 
                     <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
                         <mat-label>Select Electricity cost units</mat-label>
-                        <mat-select formControlName="units">
-                            <mat-option *ngFor="let unit of unitslist" [value]="unit">{{unit}}</mat-option>
+                        <mat-select formControlName="electricityunits">
+                            <mat-option *ngFor="let unit of eletricityunitslist" [value]="unit">{{unit}}</mat-option>
                         </mat-select>
                     </mat-form-field>
 

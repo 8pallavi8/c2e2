@@ -17,19 +17,19 @@ export class GendetailsComponent implements OnInit {
   inputTableDataSource: any;
   inputDisplayedColumns: string[] = ['option', 'select']
   dialogref: any;
-  units: string = "squarefeet";
-  textBoxData: string[] = ["bowling Aalley", "game arcades", "health club",
-    "swimming", "disco", "gym", "gambling"];
+   netUnits: string ='squarefeet';
+  grossUnits: string = 'squarefeet'; 
   selecteditems: string[];
   hasOccupancy: boolean = false;
-  hasOccupancyDensity: boolean = true;
+  hasOccupancyDensity: boolean = false;
   occupancyValue: number;
   countrylist: string[] = ['Argentina', 'India'];
   provincelist: string[] = ['CC Chaco', 'CH Chubut'];
   locationlist: string[] = ['CC Resistencia', 'CC Saenz Pena'];
-  buildingTypeList: string[] = ['Correctional Facilities', 'Retail'];
-  spacesList: string[] = ['Correctional Facilities', 'Retail'];
-  unitslist = ["kgCO2/mmbtu", "lbsCO2/mmbtu", "kgCO2/therm", "lbsCO2/therm", "kgCO2/kcal", "lbsCO2/kcal", "kgCO2/m3", "lbsCO2/ft3", "metrictonsCO2/Mcf"];
+  buildingTypeList: string[] = ['Correctional Facilities', 'Retail','Sports'];
+  spacesList: string[] = ["Bowling Aalley", "Game arcades", "Health club",
+  "Swimming", "Disco", "Gym", "Gambling"];
+  eletricityunitslist = ["kgCO2/mmbtu", "lbsCO2/mmbtu", "kgCO2/therm", "lbsCO2/therm", "kgCO2/kcal", "lbsCO2/kcal", "kgCO2/m3", "lbsCO2/ft3", "metrictonsCO2/Mcf"];
   fuelunitslist = ["kgCO2/mmbtu", "lbsCO2/mmbtu", "kgCO2/therm", "lbsCO2/therm", "kgCO2/kcal", "lbsCO2/kcal", "kgCO2/m3", "lbsCO2/ft3", "metrictonsCO2/Mcf"];
 
 
@@ -60,21 +60,30 @@ export class GendetailsComponent implements OnInit {
       Netoccupiedfloorarea: ['', Validators.compose([Validators.required])],
       Nooffloors: ['', Validators.compose([Validators.required])],
       Occupanyhoursperweek: ['', Validators.compose([Validators.required])],
-      occupancy: ['', Validators.compose([Validators.required])],
+      occupancyDensity: ['', Validators.compose([Validators.required])],
       noOfPeopleOccupying: ['', Validators.compose([Validators.required])],
+      OoccupantDensityUnits: ['', Validators.compose([Validators.required])],
       Electricitycost: ['', Validators.compose([Validators.required])],
       Fuelcost: ['', Validators.compose([Validators.required])],
       fuelunits: ['', Validators.compose([Validators.required])],
-      grossunits: ['', Validators.compose([Validators.required])],
-      netunits: ['', Validators.compose([Validators.required])],
-      units: ['', Validators.compose([Validators.required])],
-      occupancyValue: ['', Validators.compose([Validators.required])]
+      grossAreaUnits: ['Square Feet', Validators.compose([Validators.required])],
+      netAreaUnits: ['', Validators.compose([Validators.required])],
+      electricityunits: ['', Validators.compose([Validators.required])],
+      occupancyValue: ['', Validators.compose([Validators.required])],
+      occupantDensityKnown: ['', Validators.compose([Validators.required])],
+
     });
   }
+
+
+
+
+
 
   showOccupancy(state: boolean): void {
     if (state == true) {
       this.hasOccupancy = true;
+      this.hasOccupancyDensity = false;
       //  this.occupancy = 0;
     }
     else {
@@ -86,8 +95,8 @@ export class GendetailsComponent implements OnInit {
 
   showOccupantDensity(state: boolean): void {
     this.hasOccupancy = false;
-    this.hasOccupancyDensity = false;
-    this.openOccupantDensity();
+    this.hasOccupancyDensity = true;
+    // this.openOccupantDensity();
   }
 
 
