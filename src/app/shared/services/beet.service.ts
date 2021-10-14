@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { BehaviorSubject, Observable } from "rxjs";
@@ -10,15 +10,22 @@ import { environment } from "src/environments/environment";
 export class beetService {
 
 
-    constructor(private fb: FormBuilder,private http: HttpClient) {
+    constructor(private fb: FormBuilder, private http: HttpClient) {
     }
-    /* postRegistration(): Observable<any> {
-        return this.http.post( environment.registrationUrl)
+
+    getCountries(): Observable<any> {
+        return this.http.get(environment.baseUrl + ':9998/api/user/v1/getcountries');
     }
-     getQuestion(params): Observable<any> { 
-        return this.http.get(environment.questionUrl,params);
+
+    getGeneralData(countyryCode: string): Observable<any> {
+        let params = new HttpParams();
+        params=params.append('countrycode', countyryCode);
+        console.log(countyryCode)
+        return this.http.get(environment.baseUrl + ':9998/api/user/v1/getgeneraldata', { params: params });
     }
-    postAnswer(answer): Observable<any> {
-        return this.http.post( environment.answerUrl , answer);
-    }  */
+
+    postAnswer(countryid): Observable<any> {
+        return this.http.post(environment.baseUrl + ':9998/api/user/v1/postgeneraldata', countryid);
+    }
+
 }

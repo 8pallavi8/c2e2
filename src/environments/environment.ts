@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrl: ' http://clicked2help.in:9999/api/v1/tool1',
-  inputUrl: ' http://clicked2help.in:9999/api/v1/getddvalues'
+  baseUrl: ' http://clicked2help.in',
+  
+  
 };
 
 /*

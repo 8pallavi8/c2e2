@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime } from 'rxjs/operators';
+import { OuterwallAdvLevelAirComponent } from 'src/app/shared/outerwall-adv-level-air/outerwall-adv-level-air.component';
+import { OuterwallAdvLevelbrickComponent } from 'src/app/shared/outerwall-adv-levelbrick/outerwall-adv-levelbrick.component';
 import { OuterwallRadvancedleveldialogComponent } from 'src/app/shared/outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
 import { RvalueImagedialogComponent } from 'src/app/shared/rvalue-imagedialog/rvalue-imagedialog.component';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
@@ -54,7 +56,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   }
 
   public openOuterWallImagesR() {
-    const dialogref = this.dialog.open(RvalueImagedialogComponent, {
+    const dialogref = this.dialog.open(OuterwallAdvLevelbrickComponent, {
       width: '60%',
       autoFocus: false,
       maxHeight: '90vh',

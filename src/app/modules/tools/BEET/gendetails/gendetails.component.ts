@@ -1,10 +1,18 @@
+import { HttpParams } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime } from 'rxjs/operators';
+import { beetService } from 'src/app/shared/services/beet.service';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
 import { ToolsService } from 'src/app/shared/services/tools.service';
+
+
+export interface CountryTable {
+  country?: string;
+  countrycode?: string;
+}
 
 @Component({
   selector: 'app-gendetails',
@@ -17,18 +25,18 @@ export class GendetailsComponent implements OnInit {
   inputTableDataSource: any;
   inputDisplayedColumns: string[] = ['option', 'select']
   dialogref: any;
-   netUnits: string ='squarefeet';
-  grossUnits: string = 'squarefeet'; 
+  netUnits: string = 'squarefeet';
+  grossUnits: string = 'squarefeet';
   selecteditems: string[];
   hasOccupancy: boolean = false;
   hasOccupancyDensity: boolean = false;
   occupancyValue: number;
-  countrylist: string[] = ['Argentina', 'India'];
+  countrylist: CountryTable[];
   provincelist: string[] = ['CC Chaco', 'CH Chubut'];
   locationlist: string[] = ['CC Resistencia', 'CC Saenz Pena'];
-  buildingTypeList: string[] = ['Correctional Facilities', 'Retail','Sports'];
+  buildingTypeList: string[] = ['Correctional Facilities', 'Retail', 'Sports'];
   spacesList: string[] = ["Bowling Aalley", "Game arcades", "Health club",
-  "Swimming", "Disco", "Gym", "Gambling"];
+    "Swimming", "Disco", "Gym", "Gambling"];
   eletricityunitslist = ["kgCO2/mmbtu", "lbsCO2/mmbtu", "kgCO2/therm", "lbsCO2/therm", "kgCO2/kcal", "lbsCO2/kcal", "kgCO2/m3", "lbsCO2/ft3", "metrictonsCO2/Mcf"];
   fuelunitslist = ["kgCO2/mmbtu", "lbsCO2/mmbtu", "kgCO2/therm", "lbsCO2/therm", "kgCO2/kcal", "lbsCO2/kcal", "kgCO2/m3", "lbsCO2/ft3", "metrictonsCO2/Mcf"];
 
@@ -36,21 +44,38 @@ export class GendetailsComponent implements OnInit {
   constructor(private fb: FormBuilder,
     public dialog: MatDialog,
     private inputDialog: InputdialogService,
-    private DialogService: ConfirmationDialogService) { }
+    private DialogService: ConfirmationDialogService,
+    private beetService: beetService) { }
 
   ngOnInit(): void {
     this.formGroup = this.createForm();
-    /* this.formGroup.get('occupancyValueKnown').valueChanges.pipe(debounceTime(1000)).subscribe((changes) => {
-      this.occupancyValue = changes;
-      console.log(changes);
-    }); */
+    this.getcountryList();
   }
+
+  getcountryList(): void {
+    this.beetService.getCountries().subscribe(res => {
+      console.log(res.success.countrydetails);
+  
+      this.countrylist = res.success.countrydetails;
+      console.log(this.countrylist)
+    });
+  }
+
+
+  getGenDetailsList(selectedCountry){
+    console.log(selectedCountry.value.toString());
+    this.beetService.getGeneralData(selectedCountry.value.toString()).subscribe(res => {
+      console.log(res.success);
+      
+    }) 
+  }
+
 
   createForm(): FormGroup {
     return this.fb.group({
       UserName: ['', Validators.compose([Validators.required])],
       ProjectName: ['', Validators.compose([Validators.required])],
-      Country: ['', Validators.compose([Validators.required])],
+      country: ['', Validators.compose([Validators.required])],
       Province: ['', Validators.compose([Validators.required])],
       Location: ['', Validators.compose([Validators.required])],
       Buildingtype: ['', Validators.compose([Validators.required])],
@@ -75,11 +100,6 @@ export class GendetailsComponent implements OnInit {
     });
   }
 
-
-
-
-
-
   showOccupancy(state: boolean): void {
     if (state == true) {
       this.hasOccupancy = true;
@@ -99,7 +119,6 @@ export class GendetailsComponent implements OnInit {
     // this.openOccupantDensity();
   }
 
-
   public openOccupantDensity() {
     this.inputDialog.entervalue('Occupancy people',
       'I know the occupant density of the building in [square meter per person] or [square feet per person].',
@@ -111,8 +130,17 @@ export class GendetailsComponent implements OnInit {
       .then((confirmed) => { this.occupancyValue = confirmed })
       .catch(() => console.log('User dismissed the dialog'));
   }
+
+
+
 }
 
+
+
+    /* this.formGroup.get('occupancyValueKnown').valueChanges.pipe(debounceTime(1000)).subscribe((changes) => {
+      this.occupancyValue = changes;
+      console.log(changes);
+    }); */
 
 
 

@@ -50,17 +50,19 @@
         <p style="margin-top: 20px;">Layer Number :</p>
         <mat-form-field appearance="outline">
             <mat-label>Select layer</mat-label>
-            <mat-select >
+            <mat-select>
                 <mat-option *ngFor="let layer of layersList" [value]="layer">{{layer}}</mat-option>
             </mat-select>
         </mat-form-field>
 
         <p style="margin-top: 20px;">Capa del elemento constructivo</p>
         <mat-form-field appearance="outline">
-            <mat-label>Select </mat-label>
+            <mat-label>Select</mat-label>
             <mat-select  #sel (selectionChange)="onOptionsSelected($event)" >
                 <mat-option *ngFor="let element of elementsList" [value]="element">{{element}}</mat-option>
             </mat-select>
         </mat-form-field>
     </span>
+
+    
 </div>

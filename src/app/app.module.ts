@@ -17,6 +17,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { LightingComponent } from './modules/tools/BEET/lighting/lighting.component';
 import { DialogComponent } from './shared/dialog/dialog.component';
 import { CO2EmissionsComponent } from './modules/tools/BEET/co2-emissions/co2-emissions.component';
+import { OuterwallAdvLevelAirComponent } from './shared/outerwall-adv-level-air/outerwall-adv-level-air.component';
+import { OuterwallAdvLevelbrickComponent } from './shared/outerwall-adv-levelbrick/outerwall-adv-levelbrick.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { CO2EmissionsComponent } from './modules/tools/BEET/co2-emissions/co2-em
   declarations: [
     AppComponent,
     FormHeaderComponent,
-    AutoFocusDirective
+    AutoFocusDirective,
+    OuterwallAdvLevelAirComponent,
+    OuterwallAdvLevelbrickComponent
   ],
   providers: [ConfirmationDialogService],
   entryComponents: [ConfirmationDialogComponent],
