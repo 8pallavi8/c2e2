@@ -4,7 +4,7 @@
         <h1 style="text-align: center; color: blue; font-style: oblique;">Self Assessment Building Energy Efficiency Tool (BEET)
         </h1>
 
-        <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
+        <mat-horizontal-stepper labelPosition="bottom" #stepper>
 
             <mat-step [stepControl]="genDetailsComponent?.genDetailsForm" label="General Details">
                 <app-gendetails></app-gendetails>
@@ -13,8 +13,7 @@
                 </div>
             </mat-step>
 
-            <mat-step [stepControl]="buildingdetailsComponent?.formgroup">
-                <ng-template matStepLabel>Building Envelope Details</ng-template>
+            <mat-step [stepControl]="buildingdetailsComponent?.formgroup" label="Building Envelope Details">
                 <app-buildingenvelopedetails></app-buildingenvelopedetails>
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>

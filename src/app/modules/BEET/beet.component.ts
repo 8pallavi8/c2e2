@@ -22,12 +22,6 @@ export interface summary {
 })
 export class BEETComponent implements OnInit, AfterViewInit {
   inputTableDataSource: any;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
-  fourthFormGroup: FormGroup;
-  fifthFormGroup: FormGroup;
-  sixthFormGroup: FormGroup;
   @ViewChild(GendetailsComponent) genDetailsComponent: GendetailsComponent;
   @ViewChild(BuildingenvelopedetailsComponent) buildingdetailsComponent: BuildingenvelopedetailsComponent;
   displayedColumns: string[] = ["Parameter", "Units", "Value"];
@@ -38,34 +32,18 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-    this.thirdFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-    this.fourthFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-    this.fifthFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-    this.sixthFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
   }
 
   ngAfterViewInit() {
     this.cd.detectChanges();
-    console.log('Values on ngAfterViewInit():');
-    console.log("UserName:", this.genDetailsComponent.genDetailsForm.controls.UserName.value);
   }
+
   selectionStepperChange(event) {
     if (event.selectedIndex == 6) {
       this.showSummary();
     }
   }
+  
   showSummary() {
     console.log("UserName:", this.genDetailsComponent.genDetailsForm.controls.UserName.value);
     this.summaryTable = [

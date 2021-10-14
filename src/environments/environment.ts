@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: ' http://clicked2help.in',
+  baseUrl: 'http://clicked2help.in',
   
   
 };
