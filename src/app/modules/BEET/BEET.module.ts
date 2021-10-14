@@ -27,7 +27,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-    MatStepperModule,
     MatInputModule,
     RouterModule.forChild(routes),
   ]

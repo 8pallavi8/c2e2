@@ -37,6 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatNativeDateModule} from '@angular/material/core';
 import { MatTableResponsiveModule } from './mat-table-responsive/mat-table-responsive.module';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
 const materialModules = [
     CdkTreeModule,
     MatAutocompleteModule,
@@ -74,7 +75,8 @@ const materialModules = [
     MatDialogModule,
     MatNativeDateModule,
     MatTableResponsiveModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatStepperModule
 ];
 
 @NgModule({

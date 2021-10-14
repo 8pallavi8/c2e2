@@ -14,9 +14,7 @@ import { FormHeaderComponent } from './form-header/form-header.component';
 import { AutoFocusDirective } from './auto-focus.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
-import { LightingComponent } from './modules/tools/BEET/lighting/lighting.component';
 import { DialogComponent } from './shared/dialog/dialog.component';
-import { CO2EmissionsComponent } from './modules/tools/BEET/co2-emissions/co2-emissions.component';
 import { OuterwallAdvLevelAirComponent } from './shared/outerwall-adv-level-air/outerwall-adv-level-air.component';
 import { OuterwallAdvLevelbrickComponent } from './shared/outerwall-adv-levelbrick/outerwall-adv-levelbrick.component';
 

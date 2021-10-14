@@ -24,8 +24,9 @@ export class beetService {
         return this.http.get(environment.baseUrl + ':9998/api/user/v1/getgeneraldata', { params: params });
     }
 
-    postAnswer(countryid): Observable<any> {
-        return this.http.post(environment.baseUrl + ':9998/api/user/v1/postgeneraldata', countryid);
+    postGeneralData(payload: any): Observable<any> {
+        console.log(payload);
+        return this.http.post(environment.baseUrl + ':9998/api/user/v1/postgeneraldata', payload);
     }
 
 }

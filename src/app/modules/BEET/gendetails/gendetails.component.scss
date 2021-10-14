@@ -1,0 +1,38 @@
+::ng-deep .mat-expansion-panel {
+    margin-bottom: 20px !important;
+    padding-top: 20px;
+}
+
+.mat-expansion-panel-header-title h2 {
+    font-size: 16px !important;
+}
+
+.climate-button {
+    margin-left: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-top: 50px;
+    line-height: 20px;
+}
+
+fieldset {
+    border: 2px solid gray;
+    padding: 1em;
+    float: left;
+    font-family: Arial;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+legend {
+    display: none;
+}
+
+h2 {
+    //border-bottom: 2px solid gray;
+    margin: 1em 0;
+}
+
+p {
+    margin: 1em 0;
+}

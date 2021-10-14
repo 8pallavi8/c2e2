@@ -59,3 +59,15 @@ export interface BEETSummary {
   general: FormGroup;
 }
 
+export interface LocationDetails{
+  province?: string;
+  locations?: string[];
+}
+
+export interface BuildingDetails{
+  buildingtype?: string;
+  buildingspaces?: string[];
+}
+
+
+
