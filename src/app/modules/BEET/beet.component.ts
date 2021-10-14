@@ -22,16 +22,19 @@ export interface summary {
 })
 export class BEETComponent implements OnInit, AfterViewInit {
   inputTableDataSource: any;
+  userId: string;
   @ViewChild(GendetailsComponent) genDetailsComponent: GendetailsComponent;
   @ViewChild(BuildingenvelopedetailsComponent) buildingdetailsComponent: BuildingenvelopedetailsComponent;
   displayedColumns: string[] = ["Parameter", "Units", "Value"];
   summaryTable: summary[];
   dataSource: any;
-
-  constructor(private _formBuilder: FormBuilder, private beetService: beetService, private cd: ChangeDetectorRef) { }
+  isGeneralDetailsUpdated: boolean;
+  constructor(private beetService: beetService, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-
+    if (sessionStorage.getItem('userId') !== null) {
+      this.userId = sessionStorage.getItem('userId');
+    }
   }
 
   ngAfterViewInit() {
@@ -43,7 +46,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
       this.showSummary();
     }
   }
-  
+
   showSummary() {
     console.log("UserName:", this.genDetailsComponent.genDetailsForm.controls.UserName.value);
     this.summaryTable = [
@@ -69,6 +72,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
     console.log(this.genDetailsComponent.genDetailsForm);
     if (this.genDetailsComponent.genDetailsForm.valid) {
       var payload: any = {
+        userid: this.userId,
         username: this.genDetailsComponent.genDetailsForm.controls.userName.value,
         projectname: this.genDetailsComponent.genDetailsForm.controls.projectName.value,
         country: this.genDetailsComponent.genDetailsForm.controls.country.value,
@@ -76,15 +80,15 @@ export class BEETComponent implements OnInit, AfterViewInit {
         location: this.genDetailsComponent.genDetailsForm.controls.location.value,
         buildingtype: this.genDetailsComponent.genDetailsForm.controls.buildingType.value,
         buildingspaces: this.genDetailsComponent.genDetailsForm.controls.buildingSpaces.value,
-        yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value,
+        yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value.toString(),
         buildinggrossareaunit: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
         netoccupiedarea: this.genDetailsComponent.genDetailsForm.controls.Netoccupiedfloorarea.value,
-        buildinggrossarea: this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value !== '' ? this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value : this.genDetailsComponent.genDetailsForm.controls.Netoccupiedfloorarea.value * 1.1 ,
+        buildinggrossarea: this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value !== '' ? this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value : this.genDetailsComponent.genDetailsForm.controls.Netoccupiedfloorarea.value * 1.1,
         nooffloors: this.genDetailsComponent.genDetailsForm.controls.Nooffloors.value,
         occupancyhrsperweek: this.genDetailsComponent.genDetailsForm.controls.Occupanyhoursperweek.value,
         occupancyknown: this.genDetailsComponent.genDetailsForm.controls.occupancyDensity.value == 2 ? true : false,
         noofpeopleoccupying: this.genDetailsComponent.genDetailsForm.controls.noOfPeopleOccupying.value,
-        occupantdensity: this.genDetailsComponent.genDetailsForm.controls.occupancyDensity.value,
+        occupantdensity: this.genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value,
         occupantdensityunit: this.genDetailsComponent.genDetailsForm.controls.OoccupantDensityUnits.value,
         electricitycost: this.genDetailsComponent.genDetailsForm.controls.Electricitycost.value,
         electricitycostunit: this.genDetailsComponent.genDetailsForm.controls.electricityunits.value,
@@ -94,10 +98,14 @@ export class BEETComponent implements OnInit, AfterViewInit {
       this.beetService.postGeneralData(payload).subscribe(res => {
         if (res.status == 'success') {
           console.log(res.success);
-
+          this.isGeneralDetailsUpdated = true;
+          this.userId = res.success;
+          sessionStorage.setItem('userId', this.userId);
         }
       });
     }
 
   }
+
+
 }

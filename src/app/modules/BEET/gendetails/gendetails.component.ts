@@ -115,7 +115,6 @@ export class GendetailsComponent implements OnInit {
   showOccupantDensity(state: boolean): void {
     this.hasOccupancy = false;
     this.hasOccupancyDensity = true;
-    // this.openOccupantDensity();
   }
 
   public openOccupantDensity() {
