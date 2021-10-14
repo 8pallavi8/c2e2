@@ -21,6 +21,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   @Input() countryCode: string;
   formgroup: FormGroup;
   outerWallRValue: number;
+  outerWallRUnits:string[]=['m2.degC/W','ft2.degF.h/BTU']
   RoofRValue: number;
   windowRValue: number;
   hasSHGC: boolean = false;
@@ -52,6 +53,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     { Layer: null, Capadelelementoconstructivo: 'Total', Espesordecadacapa: 0.305, Resistenciatermica: 0.613 },
   ];
   dataSource = new MatTableDataSource(this.ExampleTable);
+
+
   constructor(private fb: FormBuilder,
     private inputDialog: InputdialogService,
     public dialog: MatDialog,
@@ -61,6 +64,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     
     this.formgroup = this.fb.group({
       outerwallr: ['', Validators.compose([Validators.required])],
+      outerwallRKnown: ['0', Validators.compose([Validators.required])],
+      outerwallrUnits:['0', Validators.compose([Validators.required])],
       roofr: ['', Validators.compose([Validators.required])],
       windowr: ['', Validators.compose([Validators.required])],
       SHGC: ['', Validators.compose([Validators.required])],

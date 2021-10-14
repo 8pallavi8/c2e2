@@ -59,7 +59,7 @@ export class GendetailsComponent implements OnInit {
       Occupanyhoursperweek: ['', Validators.compose([Validators.required])],
       occupancyDensity: ['', Validators.compose([Validators.required])],
       noOfPeopleOccupying: [0, Validators.compose([Validators.required])],
-      OoccupantDensityUnits: ['square feet', Validators.compose([Validators.required])],
+      occupantDensityUnits: ['square feet', Validators.compose([Validators.required])],
       Electricitycost: ['', Validators.compose([Validators.required])],
       Fuelcost: ['', Validators.compose([Validators.required])],
       fuelunits: ['', Validators.compose([Validators.required])],

@@ -5,61 +5,81 @@
             <h2>R Value (Thermal resistance) - Outer Wall </h2>
             <p>Do you know the R value?</p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
+                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R
+                    value of the wall.</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="outerwallr">
-                <mat-radio-button (click)="openOuterWallR()" value="1">Yes, I know</mat-radio-button><br>
-                <mat-radio-button (click)="openOuterWallImagesR()" value="2"> I want to select from predefined types (pictures available for reference)
+                <mat-radio-button  value="1">Yes, I know</mat-radio-button><br>
+                <mat-radio-button (click)="openOuterWallImagesR()" value="2"> I want to select from predefined types
+                    (pictures available for reference)
                 </mat-radio-button><br>
-                <mat-radio-button (click)="openOuterWallAdvancedR()" value="3"> Calculate the R value by adding custom layers from prelisted materials(Advanced level)</mat-radio-button>
+                <mat-radio-button  value="3"> Calculate the R value by adding custom
+                    layers from prelisted materials(Advanced level)</mat-radio-button>
             </mat-radio-group><br><br>
+
+            <span *ngIf="formgroup.controls.outerwallr.value == 1" class="units-picker-component">
+            <p class="fields-note">You may choose to enter the values for any of the units mentioned
+                below. Necessary units conversions will be made by
+                the tool for respective calculations.</p>
+            <b style="margin-top: 1em;">Outer Wall R value : </b>
+                <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                    <mat-label>Enter value here</mat-label>
+                    <input matInput placeholder="Enter value" type="number" formControlName="outerwallRKnown"
+                        type="number">
+                    <mat-select  placeholder="units"
+                        formControlName="outerwallrUnits">
+                        <mat-option value="m2.degC/W">m2.degC/W</mat-option>
+                        <mat-option value="ft2.degF.h/BTU">ft2.degF.h/BTU</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </span>
+
+
             <div *ngIf="formgroup.controls.outerwallr.value == 3">
-                <h3> See below example table fro reference. Details to be filled in Table 1</h3>
+                <!-- <h3> See below example table fro reference. Details to be filled in Table 1</h3> -->
                 <p>Step1: Select the layer number from the dropdown list.</p>
                 <p>Step2: Select material from dropdown list.</p>
                 <p>Step3: Click load button and proceed with the tool. </p>
-                <p>Step4: Click return to insert the customR value.
-                    <p>
-                        <b>Example Table:</b>
+                <p>Step4: Click return to insert the custom R value.</p>
+                    <!--       <b>Example Table:</b>
 
-                        <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8">
-                            <ng-container matColumnDef="Layer">
-                                <th mat-header-cell *matHeaderCellDef> Layer</th>
-                                <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
-                            </ng-container>
+                <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="Layer">
+                        <th mat-header-cell *matHeaderCellDef> Layer</th>
+                        <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
+                    </ng-container>
 
-                            <ng-container matColumnDef="Capadelelementoconstructivo">
-                                <th mat-header-cell *matHeaderCellDef> Capa del elemento constructivo </th>
-                                <td mat-cell *matCellDef="let example"> {{example.Capadelelementoconstructivo}} </td>
-                            </ng-container>
+                    <ng-container matColumnDef="Capadelelementoconstructivo">
+                        <th mat-header-cell *matHeaderCellDef> Capa del elemento constructivo </th>
+                        <td mat-cell *matCellDef="let example"> {{example.Capadelelementoconstructivo}} </td>
+                    </ng-container>
 
-                            <ng-container matColumnDef="Espesordecadacapa">
-                                <th mat-header-cell *matHeaderCellDef> Espesor de cada capa(e) in m </th>
-                                <td mat-cell *matCellDef="let example"> {{example.Espesordecadacapa}} </td>
-                            </ng-container>
+                    <ng-container matColumnDef="Espesordecadacapa">
+                        <th mat-header-cell *matHeaderCellDef> Espesor de cada capa(e) in m </th>
+                        <td mat-cell *matCellDef="let example"> {{example.Espesordecadacapa}} </td>
+                    </ng-container>
 
-                            <ng-container matColumnDef="Resistenciatermica">
-                                <th mat-header-cell *matHeaderCellDef> Resistencia termica (R) in sqm.K/W </th>
-                                <td mat-cell *matCellDef="let example"> {{example.Resistenciatermica}} </td>
-                            </ng-container>
+                    <ng-container matColumnDef="Resistenciatermica">
+                        <th mat-header-cell *matHeaderCellDef> Resistencia termica (R) in sqm.K/W </th>
+                        <td mat-cell *matCellDef="let example"> {{example.Resistenciatermica}} </td>
+                    </ng-container>
 
-                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                        </table>
-                        <br>
-                        <div>
-                            <b>Table 1</b>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table> -->
+                    <br>
+                <div>
 
-                            <span class="d-flex justify-content-between">
-                        <p style="margin-top: 20px;">Layer Number :</p>
+                    <div>
+                        <b style="margin-top: 20px;padding-left: 2rem">Layer Number : </b>
                         <mat-form-field appearance="outline">
-                            <mat-label>Select layer</mat-label>
+                            <mat-label>Select </mat-label>
                             <mat-select>
                                 <mat-option *ngFor="let layer of layersList" [value]="layer">{{layer}}</mat-option>
                             </mat-select>
                         </mat-form-field>
 
-                        <p style="margin-top: 20px;">Capa del elemento constructivo</p>
+                        <b style="margin-top: 20px;padding-left: 2rem;">Capa del elemento constructivo : </b>
                         <mat-form-field appearance="outline">
                             <mat-label>Select</mat-label>
                             <mat-select #sel (selectionChange)="onOptionsSelected($event)">
@@ -67,12 +87,10 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-                    </span>
-
-
-                        </div>
+                    </div>
+                </div>
             </div>
-            <b>R Value in [m2 °K / W]: {{outerWallRValue}} </b>
+            <!-- <b>R Value in [m2 °K / W]: {{outerWallRValue}} </b> -->
 
         </fieldset>
 
@@ -81,16 +99,19 @@
             <h2>R Value (Thermal resistance) - Roof </h2>
             <p>Do you know the R value?</p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
+                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R
+                    value of the wall.</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="roofr">
                 <mat-radio-button (click)="openRoofR()" value="1">Yes, I know</mat-radio-button><br>
-                <mat-radio-button (click)="openRoofImagesR()" value="2"> I want to select from predefined types (pictures available for reference)
+                <mat-radio-button (click)="openRoofImagesR()" value="2"> I want to select from predefined types
+                    (pictures available for reference)
                 </mat-radio-button><br>
-                <mat-radio-button value="3" (click)="openOuterWallAdvancedR()">Calculate the R value by adding custom layers from prelisted materials (Advanced level)</mat-radio-button>
+                <mat-radio-button value="3" (click)="openOuterWallAdvancedR()">Calculate the R value by adding custom
+                    layers from prelisted materials (Advanced level)</mat-radio-button>
             </mat-radio-group><br><br>
 
-            <b>R Value in [m2 °K / W]: {{RoofRValue}} </b>
+            <!-- <b>R Value in [m2 °K / W]: {{RoofRValue}} </b> -->
 
         </fieldset>
         <!-- R Value (Thermal resistance) - window-->
@@ -101,14 +122,16 @@
 
             <p>Do you know the R value?</p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
+                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R
+                    value of the wall.</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="windowr">
                 <mat-radio-button (click)="openWindowR()" value="1">Yes, I know</mat-radio-button><br>
-                <mat-radio-button (click)="openWindowPredefinedR()" value="2"> I want to select from predefined types (list available)
+                <mat-radio-button (click)="openWindowPredefinedR()" value="2"> I want to select from predefined types
+                    (list available)
                 </mat-radio-button>
             </mat-radio-group><br><br>
-            <b>R Value in [m2 °K / W]: {{windowRValue}} </b>
+            <!-- <b>R Value in [m2 °K / W]: {{windowRValue}} </b> -->
         </fieldset>
 
 
@@ -119,7 +142,8 @@
 
             <p>Do you know the SHGC value?</p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on SHGC value of the window</p>
+                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on SHGC
+                    value of the window</p>
             </div>
             <mat-radio-group aria-label="Select an option">
                 <mat-radio-button (click)="showSHGC(true)" value="1">Yes, I know</mat-radio-button><br>
@@ -133,7 +157,7 @@
                     <input matInput placeholder="Enter value" required formControlName="SHGC">
                 </mat-form-field>
             </span><br><br>
-            <b>SHGC : {{SHGC}}</b>
+            <!-- <b>SHGC : {{SHGC}}</b> -->
 
         </fieldset>
         <!-- WWR -->
@@ -144,7 +168,8 @@
             <h2>Window to Wall Ratio (WWR)</h2>
             <p>Do you know the Window to Wall Ratio</p>
             <div class="fields-note">
-                <p> <span class="notes-style"> Note:</span> You may select any of the options to provide details on WWR value of the window</p>
+                <p> <span class="notes-style"> Note:</span> You may select any of the options to provide details on WWR
+                    value of the window</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="wwr">
                 <mat-radio-button (click)="showWWR(true)" value="1">Yes, I know</mat-radio-button><br>
