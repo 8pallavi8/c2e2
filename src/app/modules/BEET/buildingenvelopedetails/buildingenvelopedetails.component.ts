@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime } from 'rxjs/operators';
@@ -6,6 +6,7 @@ import { OuterwallAdvLevelAirComponent } from 'src/app/shared/outerwall-adv-leve
 import { OuterwallAdvLevelbrickComponent } from 'src/app/shared/outerwall-adv-levelbrick/outerwall-adv-levelbrick.component';
 import { OuterwallRadvancedleveldialogComponent } from 'src/app/shared/outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
 import { RvalueImagedialogComponent } from 'src/app/shared/rvalue-imagedialog/rvalue-imagedialog.component';
+import { beetService } from 'src/app/shared/services/beet.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
 import { WindowRdialogComponent } from 'src/app/shared/window-rdialog/window-rdialog.component';
 
@@ -15,6 +16,8 @@ import { WindowRdialogComponent } from 'src/app/shared/window-rdialog/window-rdi
   styleUrls: ['./buildingenvelopedetails.component.scss']
 })
 export class BuildingenvelopedetailsComponent implements OnInit {
+
+  @Input() countryCode: string;
   formgroup: FormGroup;
   outerWallRValue: number;
   RoofRValue: number;
@@ -23,11 +26,12 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   hasWWR: boolean = false;
   SHGC: number;
   rimage: string[] = ["http://localhost:4200/assets/images/rvalue.png", "http://localhost:4200/assets/images/rvalue.png"]
-
+  selCountryCode: string;
 
   constructor(private fb: FormBuilder,
     private inputDialog: InputdialogService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private beetService: beetService) { }
 
   ngOnInit(): void {
     this.formgroup = this.fb.group({
@@ -41,6 +45,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       this.SHGC = changes;
       console.log(changes);
     });
+    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
   }
 
   public openOuterWallR() {

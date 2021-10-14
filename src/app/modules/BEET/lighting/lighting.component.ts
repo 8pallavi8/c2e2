@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { beetService } from 'src/app/shared/services/beet.service';
 
 @Component({
   selector: 'app-lighting',
@@ -8,12 +9,13 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LightingComponent implements OnInit {
   formgroup: FormGroup;
-
-  constructor(private fb:FormBuilder) { }
+  selCountryCode: string;
+  constructor(private fb:FormBuilder, private beetService: beetService) { }
 
   ngOnInit(): void {
     this.formgroup = new FormGroup({
       lightdetails: new FormControl('',Validators.required),
-  })
+  });
+  this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
 }
 }

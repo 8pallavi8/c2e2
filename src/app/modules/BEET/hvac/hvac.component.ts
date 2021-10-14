@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime } from 'rxjs/operators';
+import { beetService } from 'src/app/shared/services/beet.service';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
 
@@ -17,10 +18,11 @@ selectedValue: string;
   hasInfiltrationRateValue:boolean= false;
   infiltration:number;
   ventilationvalue:number;
-
+  selCountryCode: string;
   constructor(private fb: FormBuilder,public dialog: MatDialog,
     private confirmationDialog: ConfirmationDialogService,
-    private inputDialog: InputdialogService) { }
+    private inputDialog: InputdialogService,
+    private beetService: beetService) { }
 
   options = [{ value: 'Yes' }, { value: 'No' }, { value: 'N/A' }];
 
@@ -40,6 +42,7 @@ selectedValue: string;
       this.infiltration = changes;
       console.log(changes);
     });
+    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
   }
 
 

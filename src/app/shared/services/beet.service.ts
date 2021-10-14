@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, ReplaySubject } from "rxjs";
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -9,8 +9,17 @@ import { environment } from "src/environments/environment";
 })
 export class beetService {
 
-
+    private selectedCountry = new ReplaySubject<string>(1);
     constructor(private fb: FormBuilder, private http: HttpClient) {
+    }
+
+    setSelectedCountry(country: string) {
+        sessionStorage.setItem('selectedCountry', JSON.stringify(country));
+        this.selectedCountry.next(country);
+    }
+
+    public getSelectedCountry(): ReplaySubject<string> {
+        return this.selectedCountry
     }
 
     getCountries(): Observable<any> {
@@ -28,5 +37,7 @@ export class beetService {
         console.log(payload);
         return this.http.post(environment.baseUrl + ':9998/api/user/v1/postgeneraldata', payload);
     }
+
+
 
 }
