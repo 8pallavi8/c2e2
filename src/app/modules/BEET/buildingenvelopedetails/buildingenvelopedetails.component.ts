@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime } from 'rxjs/operators';
 import { OuterwallAdvLevelAirComponent } from 'src/app/shared/outerwall-adv-level-air/outerwall-adv-level-air.component';
 import { OuterwallAdvLevelbrickComponent } from 'src/app/shared/outerwall-adv-levelbrick/outerwall-adv-levelbrick.component';
-import { OuterwallRadvancedleveldialogComponent } from 'src/app/shared/outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
+import { example, OuterwallRadvancedleveldialogComponent } from 'src/app/shared/outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
 import { RvalueImagedialogComponent } from 'src/app/shared/rvalue-imagedialog/rvalue-imagedialog.component';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
@@ -27,13 +28,37 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   SHGC: number;
   rimage: string[] = ["http://localhost:4200/assets/images/rvalue.png", "http://localhost:4200/assets/images/rvalue.png"]
   selCountryCode: string;
-
+  layersList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  elementsList = ["Camara de aire", "Ladrillo comun-picture options", "Select more from list of materials"]
+  displayedColumns: string[] = [
+    'Layer',
+    'Capadelelementoconstructivo',
+    'Espesordecadacapa',
+    'Resistenciatermica'
+  ];
+  ExampleTable: example[] = [
+    { Layer: null, Capadelelementoconstructivo: 'Resistencia superficial exterior', Espesordecadacapa: null, Resistenciatermica: 0.04 },
+    { Layer: 1, Capadelelementoconstructivo: 'Revoque', Espesordecadacapa: 0.015, Resistenciatermica: 0.013 },
+    { Layer: 2, Capadelelementoconstructivo: 'Ladrillo comun	', Espesordecadacapa: 0.12, Resistenciatermica: 0.13 },
+    { Layer: 3, Capadelelementoconstructivo: 'Camara de aire', Espesordecadacapa: 0.05, Resistenciatermica: 0.17 },
+    { Layer: 4, Capadelelementoconstructivo: 'Ladrillo comun', Espesordecadacapa: 0.12, Resistenciatermica: 0.13 },
+    { Layer: 5, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 6, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 7, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 8, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 9, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 10, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: null, Capadelelementoconstructivo: 'Resistencia superficial interior', Espesordecadacapa: null, Resistenciatermica: 0.13 },
+    { Layer: null, Capadelelementoconstructivo: 'Total', Espesordecadacapa: 0.305, Resistenciatermica: 0.613 },
+  ];
+  dataSource = new MatTableDataSource(this.ExampleTable);
   constructor(private fb: FormBuilder,
     private inputDialog: InputdialogService,
     public dialog: MatDialog,
     private beetService: beetService) { }
 
   ngOnInit(): void {
+    
     this.formgroup = this.fb.group({
       outerwallr: ['', Validators.compose([Validators.required])],
       roofr: ['', Validators.compose([Validators.required])],
