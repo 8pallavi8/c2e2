@@ -8,7 +8,7 @@
 </mat-toolbar>
 
 
-
+<form [formGroup]="OuterWallFG" novalidate >
 
 <div>
     <p>Calculate the R value by adding custom layersfrom prelisted materials(Advanced Level)</p>
@@ -39,6 +39,7 @@
 </div>
 
 <div class="button-dialog" mat-dialog-actions>
-    <button mat-raised-button color="primary" style="color: #fff;"  type="submit" cdkFocusInitial>Click to
+    <button mat-raised-button color="primary" style="color: #fff;"  type="submit"  (click)="submitInput()" cdkFocusInitial>Click to
         Return</button>
 </div>
+</form>

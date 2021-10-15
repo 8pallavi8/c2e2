@@ -11,10 +11,11 @@ export class OuterwallAdvLevelAirComponent implements OnInit {
   chamberSurfaceTypes:string[]=['Superficies de mediana o latanemitancia(caso general)','una o ambas superficies de baja emitancia']
   airLayerThicknessList:number[]=[5,10,20,50,60,70,80,90,100]
 
-
+  OuterWallFG: FormGroup;
   constructor(public dialogRef: MatDialogRef<OuterwallAdvLevelAirComponent>,private fb:FormBuilder) { }
 
   ngOnInit(): void {
+    this.OuterWallFG = this.createForm();
   }
   createForm(): FormGroup {
     return this.fb.group({
@@ -24,5 +25,8 @@ export class OuterwallAdvLevelAirComponent implements OnInit {
   }
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  submitInput():void{
+    this.dialogRef.close({"chamberSurface":this.OuterWallFG.controls['chamberSurface'].value ,"airLayerThickness":this.OuterWallFG.controls['airLayerThickness'].value });
   }
 }

@@ -30,7 +30,9 @@ selectedValue: string;
     this.formgroup = this.fb.group({
       heatefficiency: ['', Validators.compose([Validators.required])],
       airconditioning: ['', Validators.compose([Validators.required])],
-      ventilation: ['', Validators.compose([Validators.required])],
+      ventilation: ['0', Validators.compose([Validators.required])],
+      ventilationKnown: ['0', Validators.compose([Validators.required])],
+      ventilationUnits: ['', Validators.compose([Validators.required])],
       infiltration: ['', Validators.compose([Validators.required])],
       economizer: ['', Validators.compose([Validators.required])],
       avgIndoorAirTemp: ['', Validators.compose([Validators.required])],

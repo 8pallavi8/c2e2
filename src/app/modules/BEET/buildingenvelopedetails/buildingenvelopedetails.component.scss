@@ -1,3 +1,9 @@
 .justify-content-between {
     justify-content: space-between;
 }
+
+.mat-radio-group-image {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+  }

@@ -73,14 +73,26 @@
                             Default standard ventilation rates will be considered in case of option B</p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="ventilation">
-                        <mat-radio-button (click)="openInputVentilationDialog()" value="1">Yes, I know</mat-radio-button><br>
+                        <mat-radio-button  value="1">Yes, I know</mat-radio-button><br>
                         <mat-radio-button value="2">No, I don't know</mat-radio-button>
                     </mat-radio-group>
-                </div>
 
-                <div>
-                    <b>Ventilation rate(cubic meter  per minute per person):{{ventilationvalue}}</b>
-</div>
+                    <span *ngIf="formgroup.controls.ventilation.value == 1" class="units-picker-component">
+                        <p class="fields-note">You may choose to enter the values for any of the units mentioned
+                            below. Necessary units conversions will be made by
+                            the tool for respective calculations.</p>
+                        <b style="margin-top: 1em;">Outer Wall R value : </b>
+                        <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                            <mat-label>Enter value here</mat-label>
+                            <input matInput placeholder="Enter value" type="number" formControlName="ventilationKnown"
+                                type="number">
+                            <mat-select placeholder="units" formControlName="ventilationUnits">
+                                <mat-option value="cubic meter per minute per person">cubic meter per minute per person</mat-option>
+                                <mat-option value="cubic feet per minute per person">cubic feet per minute per person</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </span>
+                </div>
 
             </mat-expansion-panel>
         </mat-accordion>

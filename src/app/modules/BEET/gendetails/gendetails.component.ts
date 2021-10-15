@@ -26,6 +26,7 @@ export class GendetailsComponent implements OnInit {
   dialogref: any;
   netUnits: string = 'square feet';
   grossUnits: string = 'square feet';
+  occupancyUnits: string = 'square feet';
   selecteditems: string[];
   hasOccupancy: boolean = false;
   hasOccupancyDensity: boolean = false;
@@ -59,7 +60,7 @@ export class GendetailsComponent implements OnInit {
       Occupanyhoursperweek: ['', Validators.compose([Validators.required])],
       occupancyDensity: ['', Validators.compose([Validators.required])],
       noOfPeopleOccupying: [0, Validators.compose([Validators.required])],
-      occupantDensityUnits: ['square feet', Validators.compose([Validators.required])],
+      occupantDensityUnits: ['', Validators.compose([Validators.required])],
       Electricitycost: ['', Validators.compose([Validators.required])],
       Fuelcost: ['', Validators.compose([Validators.required])],
       fuelunits: ['', Validators.compose([Validators.required])],

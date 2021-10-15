@@ -170,7 +170,7 @@
                         <mat-label>Enter value here</mat-label>
                         <input matInput placeholder="Enter value" type="number" formControlName="occupantDensityKnown"
                             type="number">
-                        <mat-select  placeholder="units"
+                        <mat-select [(ngModel)]="occupancyUnits"  placeholder="units"
                             formControlName="occupantDensityUnits">
                             <mat-option value="square feet">square feet</mat-option>
                             <mat-option value="square meter">square meter</mat-option>
