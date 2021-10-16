@@ -25,6 +25,7 @@ export class PlugloadsComponent implements OnInit {
   displayedColumns = ['operations', 'options', 'quantity'];
   selectionOptions = ['Yes', 'No', 'NA'];
   plugloadvalue:number;
+  plugLoadUnits: string = 'watts per square meter';
   
   OPTIONS_DATA: OPTIONS[] = [
     { operations: 'Do you remove underused refrigerators ?', options: '', quantity: 0 },
@@ -56,7 +57,9 @@ export class PlugloadsComponent implements OnInit {
 
   ngOnInit(): void {
     this.formgroup = this.fb.group({
-      plugloads: ['', Validators.compose([Validators.required])]
+      plugloads: ['', Validators.compose([Validators.required])],
+      plugLoadValueKnown:['', Validators.compose([Validators.required])],
+      plugLoadUnits:['', Validators.compose([Validators.required])]
     }
     )
   }

@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { beetService } from '../services/beet.service';
 
 
 export interface materialElement {
-  Esquema: string;
+  brickimg: string;
   material: string;
-  Densidad: number;
-  /* e: number;
-  h: number;
-  l: number;
-  masa: number;
-  R: number; */
+  density: string;
+  emeasure: string;
+  hmeasure: string;
+  lmeasure: string;
+  mass: number;
+  rvalue: number; 
 }
+
+
 
 @Component({
   selector: 'app-outerwall-adv-levelbrick',
@@ -19,21 +23,29 @@ export interface materialElement {
   styleUrls: ['./outerwall-adv-levelbrick.component.scss']
 })
 export class OuterwallAdvLevelbrickComponent implements OnInit {
-  displayedColumns = [ 'Esquema', 'material', 'Densidad','selected'];
-  
+  displayedColumns = [ 'Esquema', 'Material', 'Densidad','e','h','l','masa','R','selected'];
+  lastDisplayedCols = [ 'e','h','l'];
+  rvaluewalladvancedData: materialElement[];
+  dataSource: any;
   selectedElement: materialElement;
+  
 
-  constructor(public dialogRef: MatDialogRef<OuterwallAdvLevelbrickComponent>) { }
-
+  constructor(public dialogRef: MatDialogRef<OuterwallAdvLevelbrickComponent>,private beetService: beetService) { }
   ngOnInit(): void {
+    this.beetService.getGeneralDetails().subscribe(res => { 
+      console.log("building Envelop "+JSON.stringify(res.success.buildingdata));
+      this.rvaluewalladvancedData=res.success.rvaluewalladvanced;
+      this.dataSource = this.rvaluewalladvancedData;
+    });
+
   }
-
-   R_DATA: materialElement[] = [
-    {Esquema: 'Hydrogen', material: '', Densidad:1 ,}
-  ];
-
-  dataSource = this.R_DATA;
-
+ 
+  selectedR($event: any, row:materialElement){
+    console.info("clicked", $event);
+    console.log(row.rvalue);
+    this.dialogRef.close(row.rvalue);
+    
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

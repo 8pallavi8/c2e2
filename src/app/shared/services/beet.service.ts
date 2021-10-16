@@ -10,9 +10,18 @@ import { environment } from "src/environments/environment";
 export class beetService {
 
     private selectedCountry = new ReplaySubject<string>(1);
+
+    private generalDetail =  new ReplaySubject<any>(1);
     constructor(private fb: FormBuilder, private http: HttpClient) {
     }
 
+    setGeneralDetails(genralDetails: any) {
+        this.generalDetail.next(genralDetails);
+    }
+
+    public getGeneralDetails(): ReplaySubject<any>{
+        return this.generalDetail;
+    }
     setSelectedCountry(country: string) {
         sessionStorage.setItem('selectedCountry', JSON.stringify(country));
         this.selectedCountry.next(country);

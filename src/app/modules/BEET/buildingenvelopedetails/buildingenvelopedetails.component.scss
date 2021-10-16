@@ -7,3 +7,9 @@
     width: 100%;
     grid-template-columns: repeat(3, 1fr);
   }
+
+  td.mat-cell,th.mat-header-cell{
+    border-style: groove;
+    text-align: center;
+    padding-left: 24px !important;
+}

@@ -6,9 +6,11 @@
   table {
     width: 100%;
   }
-  
+  .th-custom-border-cell{
+    border-style: groove;
+  }
 
-  td.mat-cell,th.mat-header-cell{
+  td.mat-cell,th.mat-header-cell,td.mat-header-cell{
     border-style: groove;
     text-align: center;
     padding-left: 24px !important;

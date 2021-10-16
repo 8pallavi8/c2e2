@@ -43,81 +43,14 @@
                 <div class="row">
 
                     <mat-radio-group class="mat-radio-group-image" formControlName="rimages">
-                        <mat-label>
-                          <mat-radio-button class="female-radio" value="1.49m">
+                          <mat-radio-button *ngFor="let con of outerRData"  value={{con.rvalue}}>
                             <img  src="/assets/images/outerwallR/outerwallr1.png">
-                            <p>R Value = 1.49m</p>
+                            <p>R Value = {{con.rvalue}} {{con.units}}</p>
                           </mat-radio-button>
-                          </mat-label>
-
-                          <mat-label>
-                            <mat-radio-button class="female-radio" value="0.37m">
-                              <img  src="/assets/images/outerwallR/outerwallr2.png">
-                              <p>R Value = 0.37m</p>
-                            </mat-radio-button>
-                          </mat-label>
-
-                          <mat-label>
-                            <mat-radio-button class="female-radio" value="0.54m">
-                              <img src="/assets/images/outerwallR/outerwallr3.png">
-                              <p>R Value = 0.54m</p>
-                            </mat-radio-button>
-                          </mat-label>
-
-                          <mat-label>
-                            <mat-radio-button class="female-radio" value="0.375m">
-                              <img  src="/assets/images/outerwallR/outerwallr4.png">
-                              <p>R Value = 0.375m</p>
-                            </mat-radio-button>
-                          </mat-label>
-
-                          <mat-label>
-                            <mat-radio-button class="female-radio" value="0.53m">
-                              <img src="/assets/images/outerwallR/outerwallr5.png">
-                              <p>R Value = 0.53m</p>
-                            </mat-radio-button>
-                          </mat-label>
-
-                          <mat-label>
-                            <mat-radio-button class="female-radio" value="0.58m">
-                              <img  src="/assets/images/outerwallR/outerwallr6.png">
-                              <p>R Value = 0.58m</p>
-                            </mat-radio-button>
-                          </mat-label>
-
-                          <mat-label>
-                            <mat-radio-button class="female-radio" value="1.25m">
-                              <img  src="/assets/images/outerwallR/outerwallr7.png">
-                              <p>R Value = 1.25m</p>
-                            </mat-radio-button>
-                          </mat-label>
-
-                          <mat-label>
-                            <mat-radio-button class="female-radio" value="1.14m">
-                              <img  src="/assets/images/outerwallR/outerwallr8.png">
-                              <p>R Value = 1.14m</p>
-                            </mat-radio-button>
-                          </mat-label>
-
-                          <mat-label>
-                            <mat-radio-button class="female-radio" value="0.38m">
-                              <img  src="/assets/images/outerwallR/outerwallr9.png">
-                              <p>R Value = 0.38m</p>
-                            </mat-radio-button>
-                          </mat-label>
-                          <mat-label>
-                            <mat-radio-button class="female-radio" value="1.09m">
-                              <img  src="/assets/images/outerwallR/outerwallr9.png">
-                              <p>R Value = 1.09m</p>
-                            </mat-radio-button>
-                          </mat-label>
-                      </mat-radio-group>
-
-
-                    
+                          
+                        </mat-radio-group>
                 </div>
             </div>
-
 
             <!-- Outerwall R Advanced -->
             <div *ngIf="formgroup.controls.outerwallr.value == 3">
@@ -148,9 +81,8 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
-                    <b>Result Table:</b>
-
-                    <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8">
+                    
+                    <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8 table-advancedR">
                         <ng-container matColumnDef="Layer">
                             <th mat-header-cell *matHeaderCellDef> Layer</th>
                             <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
@@ -191,7 +123,7 @@
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="roofr">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                <mat-radio-button (click)="openRoofImagesR()" value="2"> I want to select from predefined types
+                <mat-radio-button  value="2"> I want to select from predefined types
                     (pictures available for reference)
                 </mat-radio-button><br>
                 <mat-radio-button value="3">Calculate the R value by adding custom
@@ -215,7 +147,24 @@
                 </mat-form-field>
             </span>
 
+            <!-- Roof R images -->
 
+            <div *ngIf="formgroup.controls.roofr.value == 2" class="container-fluid">
+                <p>I want to select from predefined types.Please select most representative picture composition of your
+                    building outer wall.</p>
+                <div class="row">
+
+                    <mat-radio-group class="mat-radio-group-image" formControlName="rimages">
+                       
+                          <mat-radio-button *ngFor="let con of roofRData"   [value]="con.rvalue">
+                            <img  src="/assets/images/roofR/roofr1.png">
+                            <p>R Value = {{con.rvalue}} {{con.units}}}</p>
+                          </mat-radio-button>
+                          
+                      </mat-radio-group>
+                    
+                </div>
+            </div>
 
 
             <!-- Outerwall R Advanced -->
@@ -246,6 +195,31 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
+
+                    <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8 table-advancedR">
+                        <ng-container matColumnDef="Layer">
+                            <th mat-header-cell *matHeaderCellDef> Layer</th>
+                            <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="Capadelelementoconstructivo">
+                            <th mat-header-cell *matHeaderCellDef> Capa del elemento constructivo </th>
+                            <td mat-cell *matCellDef="let example"> {{example.Capadelelementoconstructivo}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="Espesordecadacapa">
+                            <th mat-header-cell *matHeaderCellDef> Espesor de cada capa(e) in m </th>
+                            <td mat-cell *matCellDef="let example"> {{example.Espesordecadacapa}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="Resistenciatermica">
+                            <th mat-header-cell *matHeaderCellDef> Resistencia termica (R) in sqm.K/W </th>
+                            <td mat-cell *matCellDef="let example"> {{example.Resistenciatermica}} </td>
+                        </ng-container>
+    
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
                 </div>
             </div>
 

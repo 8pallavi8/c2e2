@@ -83,14 +83,16 @@ export class GendetailsComponent implements OnInit {
   onChangeCountry(selectedCountry){
     this.beetService.setSelectedCountry(selectedCountry.value);
     this.beetService.getGeneralData(selectedCountry.value.toString()).subscribe(res => {
-      console.log(res.success);
+      //console.log(res.success);
       this.locationDetails = res.success.locationdata;
       this.buildingDetails = res.success.buildingdata;
+      console.log("General details "+res.success.buildingdata);
       this.eletricityunitslist = res.success.energycostunits.electricitycostunits;
       this.fuelunitslist = res.success.energycostunits.fuelcostunits;
+      this.beetService.setGeneralDetails(res);
     });
-
   }
+
 
   onChangeProvince(event){
     console.log(event.value);

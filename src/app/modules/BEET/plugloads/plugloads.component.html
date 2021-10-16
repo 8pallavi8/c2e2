@@ -22,12 +22,26 @@
                         </p>
                     </div>
                     <mat-radio-group aria-label="Select an option" formControlName="plugloads">
-                        <mat-radio-button (click)=openPlugLoad() value="1">Yes, I know</mat-radio-button><br>
+                        <mat-radio-button  value="1">Yes, I know</mat-radio-button><br>
                         <mat-radio-button value="2">No, I don't know. Guide me to calculate.</mat-radio-button><br>
                         <mat-radio-button (click)=openAvailableValDialog() value="3">I will select from already
                             available values</mat-radio-button>
                     </mat-radio-group><br><br>
-                    <b>Plug load density in [watts per square meter]: {{plugloadvalue}} </b>
+                    <span *ngIf="formgroup.controls.plugloads.value == 1" class="units-picker-component">
+                        <p class="fields-note">You may choose to enter the values for any of the units mentioned
+                            below. Necessary units conversions will be made by
+                            the tool for respective calculations.</p>
+                        <b style="margin-top: 1em;">Plug Load value : </b>
+                        <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                            <mat-label>Enter value here</mat-label>
+                            <input matInput placeholder="Enter value"  formControlName="plugLoadValueKnown"
+                                type="number">
+                            <mat-select placeholder="units" [(ngModel)]="plugLoadUnits" formControlName="plugLoadUnits">
+                                <mat-option value="watts per square meter">watts per square meter</mat-option>
+                                <mat-option value="watts per square foot">watts per square foot</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </span>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

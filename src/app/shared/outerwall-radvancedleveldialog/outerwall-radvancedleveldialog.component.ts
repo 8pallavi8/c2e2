@@ -3,6 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 
+export interface materialElement {
+  Esquema: string;
+  Material: string;
+  Densidad: string;
+  e: string;
+  h: string;
+  l: string;
+  masa: number;
+  R: number; 
+}
 
 
 @Component({
@@ -14,15 +24,15 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export class OuterwallRadvancedleveldialogComponent implements OnInit {
   categoryList:string[]=["ROCAS Y SUELOS NATURALES","HORMIGONES","MADERAS","MATERIALES AISLANTES","MATERIALES EN POLVO O EN GRANO","MORTEROS","PLASTICOS RIGIDOS EN PLANCHAS"];
-
+  OuterWallAdvFG:FormGroup;
 
   constructor(public dialogRef: MatDialogRef<OuterwallRadvancedleveldialogComponent>,
     private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    this.OuterWallAdvFG=this.createForm();
   }
-
 
   createForm(): FormGroup {
     return this.fb.group({

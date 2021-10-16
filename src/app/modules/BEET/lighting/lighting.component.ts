@@ -5,8 +5,8 @@ import { beetService } from 'src/app/shared/services/beet.service';
 
 
 export interface Lighting {
-  name: string;
-  Yearofinstallation: number;
+  Technology: string;
+  Yearofinstallation: string;
   LampPower: number;
   StockofFixtures: string;
   LumenOutput: string;
@@ -22,6 +22,11 @@ export interface Lighting {
 export class LightingComponent implements OnInit {
   formgroup: FormGroup;
   selCountryCode: string;
+  displayedColumns=["Technology","Yearofinstallation","LampPower","StockofFixtures","LumenOutput","Averagedailyworkinghours"];
+    yearsList:string[]=["Older than 2018","2018 or newer"];
+
+
+
   constructor(private fb:FormBuilder, private beetService: beetService) { }
 
   ngOnInit(): void {
@@ -30,4 +35,58 @@ export class LightingComponent implements OnInit {
   });
   this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
 }
+
+ getStyleDisplay(index,div){
+   return index%div==0
+ }
+ dataSource: Lighting[] = [
+  { Technology: '/assets/images/lighting/led.png', Yearofinstallation:'NA', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: 'NA', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: 'NA', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: 'NA', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: 'NA', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: 'NA', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  
+  { Technology: '/assets/images/lighting/cfl.png', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+
+  { Technology: '/assets/images/lighting/lfl.png', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+
+  { Technology: '/assets/images/lighting/incandescent.png', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+
+  { Technology: '/assets/images/lighting/hpmv.png', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+
+  { Technology: '/assets/images/lighting/hpsv.png', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+
+  { Technology: '/assets/images/lighting/metalhalide.png', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+  { Technology: '', Yearofinstallation: '', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
+];
 }

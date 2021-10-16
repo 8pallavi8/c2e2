@@ -12,54 +12,52 @@
 
 <div>
 
-    <div class=row>
+    <form [formGroup]="windowRFG" novalidate>
+        <div class=row>
+            <p class="w-100 mt-4 col-md-6 column-name">Window Frame Type : </p>
 
-        <p class="w-100 mt-4 col-md-6 column-name">Window Frame Type : </p>
 
-        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-            <mat-label>Select frame type</mat-label>
-            <mat-select formControlName="windowFrameType">
-                <mat-option *ngFor="let type of windowFrameType" [value]="type">{{type}}</mat-option>
-            </mat-select>
-        </mat-form-field><br>
-    </div>
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+                <mat-label>Select frame type</mat-label>
+                <mat-select formControlName="windowFrameType" (selectionChange)="onFrameType($event)">
+                    <mat-option *ngFor="let type of windowRData"  [value]="type.frametype">{{type.frametype}}</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+        </div>
 
-    <div class=row>
-     
-        <p class="w-100 mt-4 col-md-6 column-name">Window Glazing Type : </p>
+        <div class=row>
+            <p class="w-100 mt-4 col-md-6 column-name">Window Glazing Type : </p>
 
-        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-            <mat-label>Select Window Glazing Type</mat-label>
-            <mat-select formControlName="windowGlazingType">
-                <mat-option *ngFor="let type of windowGlazingType" [value]="type">{{type}}</mat-option>
-            </mat-select>
-        </mat-form-field><br>
-    </div>
-   
-    <div class=row>
-       
-        <p class="w-100 mt-4 col-md-6 column-name">Gap Between Panes :  </p>
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+                <mat-label>Select Window Glazing Type</mat-label>
+                <mat-select formControlName="windowGlazingType">
+                    <mat-option *ngFor="let type of glazingList" [value]="type">{{type}}</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+        </div>
 
-        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-            <mat-label>Select gap Between Panes</mat-label>
-            <mat-select formControlName="gapBetweenPanes">
-                <mat-option *ngFor="let type of gapBetweenPanes" [value]="type">{{type}}</mat-option>
-            </mat-select>
-        </mat-form-field><br>
-    </div>
-    
+        <div class=row>
 
-    <div class=row>
+            <p class="w-100 mt-4 col-md-6 column-name">Gap Between Panes : </p>
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+                <mat-label>Select gap Between Panes</mat-label>
+                <mat-select formControlName="gapBetweenPanes">
+                    <mat-option *ngFor="let type of gapBetweenPanes" [value]="type">{{type}}</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+        </div>
 
-        <p class="w-100 mt-4 col-md-6 column-name">Thermal Break:  </p>
+        <div class=row>
+            <p class="w-100 mt-4 col-md-6 column-name">Thermal Break: </p>
+            <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+                <mat-label>Select Thermal Break</mat-label>
+                <mat-select formControlName="thermalBreak">
+                    <mat-option *ngFor="let type of thermalBreak" [value]="type">{{type}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-            <mat-label>Select Thermal Break</mat-label>
-            <mat-select formControlName="thermalBreak">
-                <mat-option *ngFor="let type of thermalBreak" [value]="type">{{type}}</mat-option>
-            </mat-select>
-        </mat-form-field></div>
-    
+    </form>
 </div>
 
 <div class="button-dialog" mat-dialog-actions>

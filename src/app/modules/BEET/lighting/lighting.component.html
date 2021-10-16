@@ -2,8 +2,62 @@
     <form [formGroup]="formgroup" class="form">
         <h2>Lighting fixture details(Stock and Technology type of lighting fixtures.) </h2>
         <div class="fields-note">
-            <p><span class="notes-style"> Note:</span> Please be ready with type, number, power rating (wattage) details of the lighting fixtures</p>
+            <p><span class="notes-style"> Note:</span> Please be ready with type, number, power rating (wattage) details
+                of the lighting fixtures</p>
         </div>
-
     </form>
+
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+
+        <ng-container matColumnDef="Technology">    
+            <th mat-header-cell *matHeaderCellDef> Technology </th>
+            <td mat-cell *matCellDef="let element ;let i = dataIndex" [attr.rowspan]="6" [style.display]="getStyleDisplay(i,6) ? '' : 'none' ">
+                <img [src]="element.Technology" />
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Yearofinstallation">
+            <th mat-header-cell *matHeaderCellDef> Yearofinstallation </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-select >
+                    <mat-option *ngFor="let year of yearsList" [value]="year">{{year}}
+                    </mat-option>
+                </mat-select>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="LampPower">
+            <th mat-header-cell *matHeaderCellDef> LampPower (Watts)</th>
+            <td mat-cell *matCellDef="let element">
+                <input matInput type="text">
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="StockofFixtures">
+            <th mat-header-cell *matHeaderCellDef> StockofFixtures(Optional) </th>
+            <td mat-cell *matCellDef="let element">
+                <input matInput type="text">
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="LumenOutput">
+            <th mat-header-cell *matHeaderCellDef> LumenOutput(Optional) </th>
+            <td mat-cell *matCellDef="let element" > 
+                <input  matInput type="text" >
+             </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Averagedailyworkinghours">
+            <th mat-header-cell *matHeaderCellDef> Averagedailyworkinghours </th>
+            <td mat-cell *matCellDef="let element"> 
+                <input  matInput type="text" >
+            </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row class="mat-row-class" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
 </div>

@@ -20,6 +20,12 @@ export interface BuildingLayerValues {
   Resistenciatermica: number;
 }
 
+export interface outerRValues{
+  imagepath:string;
+  rvalue:number;
+  units:string;
+}
+
 
 @Component({
   selector: 'app-buildingenvelopedetails',
@@ -29,6 +35,8 @@ export interface BuildingLayerValues {
 export class BuildingenvelopedetailsComponent implements OnInit {
 
   @Input() countryCode: string;
+  outerRData:outerRValues[];
+  roofRData:outerRValues[];
   formgroup: FormGroup;
   outerWallRValue: number;
   outerWallRUnits: string[] = ['m2.degC/W', 'ft2.degF.h/BTU']
@@ -50,14 +58,24 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   ];
   layerValues: BuildingLayerValues[] = [
     { Layer: null, Capadelelementoconstructivo: 'Resistencia superficial exterior', Espesordecadacapa: null, Resistenciatermica: 0.04 },
+    { Layer: 1, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 2, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 3, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 4, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 5, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 6, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 7, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 8, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 9, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 10, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
     { Layer: null, Capadelelementoconstructivo: 'Resistencia superficial interior', Espesordecadacapa: null, Resistenciatermica: 0.13 },
-    { Layer: null, Capadelelementoconstructivo: 'Total', Espesordecadacapa: 0.305, Resistenciatermica: 0.613 },
+    { Layer: null, Capadelelementoconstructivo: 'Total', Espesordecadacapa: null, Resistenciatermica: null},
   ];
   dataSource = new MatTableDataSource(this.layerValues);
 
 
   constructor(private fb: FormBuilder,
-    private inputDialog: InputdialogService,
+    private inputDialog: InputdialogService,  
     public dialog: MatDialog,
     private beetService: beetService) { }
 
@@ -79,6 +97,10 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       wwr: ['0', Validators.compose([Validators.required])]
     })
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
+    this.beetService.getGeneralDetails().subscribe(res => { 
+      console.log("building Envelop "+JSON.stringify(res.success.buildingdata));
+      this.outerRData=res.success.rvaluewall;
+    });
   }
 
 
@@ -103,7 +125,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      this.addBuildingLayerValues(result);
+      this.addBuildingLayerValues(result.airLayerThickness,result.chamberSurface,);
       console.log(result);
     });
   }
@@ -116,6 +138,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     });
     dialogref.afterClosed().subscribe(result => {
       console.log(result);
+      this.addBuildingLayerValues('',result);
+
     });
   }
 
@@ -132,8 +156,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   }
 
 
-
-  public addBuildingLayerValues(result) {
+  public addBuildingLayerValues(chamberSurface,airLayerThickness) {
 
     let layerInput: BuildingLayerValues;
     console.log("callingLayer ");
@@ -142,8 +165,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     {
       Layer: this.selectedLayerValue,
       Capadelelementoconstructivo: this.selectedCapa,
-      Espesordecadacapa: result.chamberSurface,
-      Resistenciatermica: result.airLayerThickness
+      Espesordecadacapa: chamberSurface,
+      Resistenciatermica: airLayerThickness
     }
     console.log(this.selectedLayerValue);
     console.log(this.selectedCapa);
