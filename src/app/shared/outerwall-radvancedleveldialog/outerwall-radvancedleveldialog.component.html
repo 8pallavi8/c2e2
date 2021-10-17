@@ -13,12 +13,67 @@
     <form [formGroup]="OuterWallAdvFG" novalidate >
     <mat-form-field appearance="outline">
         <mat-label>Select main material category</mat-label>
-        <mat-select  >
-            <mat-option *ngFor="let list of categoryList" [value]="list">{{list}}</mat-option>
+        <mat-select (selectionChange)="onChangeMaterial($event)" >
+            <mat-option *ngFor="let list of rvalueadvancedmaterialData" [value]="list.mainmaterial">{{list.mainmaterial}}</mat-option>
         </mat-select>
     </mat-form-field>
 
-    
+    <table mat-table [dataSource]="dataSource">
+
+        <!-- Selected Column -->
+        <ng-container matColumnDef="selected">
+            <th mat-header-cell *matHeaderCellDef>
+                Selected Element
+            </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-radio-button [value]="element" (click)="selectedR($event, element)">
+                </mat-radio-button>
+            </td>
+        </ng-container>
+
+       <!--  <ng-container matColumnDef="mainmaterialcategory">
+            <th mat-header-cell *matHeaderCellDef> Material </th>
+            <td mat-cell *matCellDef="let element"> {{element.mainmaterialcategory}} </td>
+        </ng-container> -->
+
+        <ng-container matColumnDef="MATERIAL SUB-CATEGORY 1">
+            <th mat-header-cell *matHeaderCellDef> MATERIAL SUB-CATEGORY 1 </th>
+            <td mat-cell *matCellDef="let element"> {{element.subcategory1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="MATERIAL SUB-CATEGORY 2">
+            <th mat-header-cell *matHeaderCellDef> MATERIAL SUB-CATEGORY 2 </th>
+            <td mat-cell *matCellDef="let element"> {{element.subcategory2}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="DENSIDAD APARENTE">
+            <th mat-header-cell *matHeaderCellDef> DENSIDAD APARENTE (kg/m3)</th>
+            <td mat-cell *matCellDef="let element"> {{element.bulkdensity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="CONDUCTIVIDAD TERMICA">
+            <th mat-header-cell *matHeaderCellDef> CONDUCTIVIDAD TERMICA W/m. </th>
+            <td mat-cell *matCellDef="let element"> {{element.thermcalconductivityfrom}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="CONDUCTIVIDAD TERMICA(to)">
+            <th mat-header-cell *matHeaderCellDef> CONDUCTIVIDAD TERMICA W/m.K (to) </th>
+            <td mat-cell *matCellDef="let element"> {{element.thermcalconductivityto}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="THICKNESS">
+            <th mat-header-cell *matHeaderCellDef>Enter Thickness</th>
+            <td mat-cell *matCellDef="let element">
+                <input matInput type="text">
+            </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
 </form>
 </div>

@@ -7,13 +7,10 @@
     <form [formGroup]="formgroup" class="form">
 
         <!-- Heating efficiency  -->
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel expanded='true'>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <h2>Heating efficiency</h2>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+
+        <fieldset>
+            <legend>Heating efficiency</legend>
+            <h2>Heating efficiency</h2>
                 <div class="container">
                     <p>Do you know the heating equipment efficiency of your building?</p>
                     <div class="fields-note">
@@ -28,17 +25,12 @@
                             heating equipment</mat-radio-button>
                     </mat-radio-group>
                 </div>
-            </mat-expansion-panel>
-        </mat-accordion>
+           </fieldset>
         <!-- Air-Conditioning (Cooling) -->
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel>
+        <fieldset>
+            <legend>Air-Conditioning (Cooling)</legend>
+            <h2>Air-Conditioning (Cooling)</h2>
 
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <h2>Air-Conditioning (Cooling)</h2>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
                 <div class="container">
 <p>Do you know the cooling equipment performance parameters of your building? </p>
                     <div class="fields-note">
@@ -53,17 +45,14 @@
                             cooling equipment</mat-radio-button>
                     </mat-radio-group>
                 </div>
-            </mat-expansion-panel>
-        </mat-accordion>
-        <!-- ventilation -->
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel>
+        </fieldset>
 
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <h2>Ventilation</h2>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+        <!-- ventilation -->
+
+        <fieldset>
+            <legend>Ventilation</legend>
+            <h2>Ventilation</h2>
+
                 <div class="container">
                     <p>Do you know the ventilation rate value for your building?</p>
 
@@ -93,18 +82,14 @@
                         </mat-form-field>
                     </span>
                 </div>
+        </fieldset>
 
-            </mat-expansion-panel>
-        </mat-accordion>
         <!-- Infiltration rate  -->
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel>
 
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <h2>Infiltration rate </h2>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+        <fieldset>
+            <legend>Infiltration rate </legend>
+            <h2>Infiltration rate </h2>
+
                 <div class="container">
                     <p>Do you know the infiltration rate value for your building?</p>
                     <div class="fields-note">
@@ -132,17 +117,13 @@
                     <b>Infiltration Rate(Air changes per Hour):{{infiltration}}</b>
 </div>
                 </div>
-            </mat-expansion-panel>
-        </mat-accordion>
+            
+        </fieldset>
         <!-- Economizer / free cooling  -->
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel>
 
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <h2>Economizer/free cooling</h2>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+        <fieldset>
+            <legend>Economizer/free cooling</legend>
+            <h2>Economizer/free cooling</h2>
 
                 <div class="container">
                     <div class="fields-note">
@@ -170,19 +151,13 @@
                     </div>
 
                 </div>
-            </mat-expansion-panel>
-        </mat-accordion>
+        </fieldset>
+           
         <!-- Other miscellaneous data -->
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel>
 
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <h2> Other miscellaneous data
-                        </h2>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-
+        <fieldset>
+            <legend>Other miscellaneous data</legend>
+            <h2>Other miscellaneous data</h2>
                 <div class="container">
                     <div class="fields-note">
                         <p><span class="notes-style"> Note:</span> Average indoor air temperature being maintained
@@ -226,8 +201,7 @@
 
 
                 </div>
-            </mat-expansion-panel>
-        </mat-accordion>
+        </fieldset>
     </form>
 
 </div>

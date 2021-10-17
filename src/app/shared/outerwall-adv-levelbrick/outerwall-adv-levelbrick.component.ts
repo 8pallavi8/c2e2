@@ -37,14 +37,12 @@ export class OuterwallAdvLevelbrickComponent implements OnInit {
       this.rvaluewalladvancedData=res.success.rvaluewalladvanced;
       this.dataSource = this.rvaluewalladvancedData;
     });
-
   }
  
   selectedR($event: any, row:materialElement){
     console.info("clicked", $event);
     console.log(row.rvalue);
-    this.dialogRef.close(row.rvalue);
-    
+    this.dialogRef.close(row.rvalue); 
   }
 
   onNoClick(): void {

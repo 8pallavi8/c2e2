@@ -6,14 +6,9 @@
 <div class="container-fluid beet-container">
     <form [formGroup]="formgroup" class="form">
 
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel expanded='true'>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <h2>Power generation CO2 emissions</h2>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-
+        <fieldset>
+            <legend>Power generation CO2 emissions </legend>
+            <h2>Power generation CO2 emissions</h2>
                 <div class="container">
                     <p>Do you know the local grid emission factor ?</p>
                     <div class="fields-note mt-0">
@@ -70,9 +65,7 @@
                             <input matInput placeholder="Enter value" required>
                         </mat-form-field>
                     </span>
-
                 </div>
-            </mat-expansion-panel>
-        </mat-accordion>
+        </fieldset>
     </form>
 </div>

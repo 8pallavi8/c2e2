@@ -6,98 +6,89 @@
 <div class="container-fluid beet-container">
     <form [formGroup]="formgroup" class="form">
 
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel expanded='true'>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <h2>Plug loads (equipment/appliances inside occupied conditioned area)</h2>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+        <fieldset>
+            <legend>Plug loads (equipment/appliances inside occupied conditioned area)</legend>
+            <h2>Plug loads (equipment/appliances inside occupied conditioned area) </h2>
 
-                <div class="container">
-                    <p>Do you know the plug load density for your building ?</p>
-                    <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span>You may select any of the options. Option C available
-                            for selected cases only.
-                        </p>
-                    </div>
-                    <mat-radio-group aria-label="Select an option" formControlName="plugloads">
-                        <mat-radio-button  value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button value="2">No, I don't know. Guide me to calculate.</mat-radio-button><br>
-                        <mat-radio-button (click)=openAvailableValDialog() value="3">I will select from already
-                            available values</mat-radio-button>
-                    </mat-radio-group><br><br>
-                    <span *ngIf="formgroup.controls.plugloads.value == 1" class="units-picker-component">
-                        <p class="fields-note">You may choose to enter the values for any of the units mentioned
-                            below. Necessary units conversions will be made by
-                            the tool for respective calculations.</p>
-                        <b style="margin-top: 1em;">Plug Load value : </b>
-                        <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                            <mat-label>Enter value here</mat-label>
-                            <input matInput placeholder="Enter value"  formControlName="plugLoadValueKnown"
-                                type="number">
-                            <mat-select placeholder="units" [(ngModel)]="plugLoadUnits" formControlName="plugLoadUnits">
-                                <mat-option value="watts per square meter">watts per square meter</mat-option>
-                                <mat-option value="watts per square foot">watts per square foot</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </span>
+            <div class="container">
+                <p>Do you know the plug load density for your building ?</p>
+                <div class="fields-note">
+                    <p><span class="notes-style"> Note:</span>You may select any of the options. Option C available
+                        for selected cases only.
+                    </p>
                 </div>
-            </mat-expansion-panel>
-        </mat-accordion>
+                <mat-radio-group aria-label="Select an option" formControlName="plugloads">
+                    <mat-radio-button  value="1">Yes, I know</mat-radio-button><br>
+                    <mat-radio-button value="2">No, I don't know. Guide me to calculate.</mat-radio-button><br>
+                    <mat-radio-button (click)=openAvailableValDialog() value="3">I will select from already
+                        available values</mat-radio-button>
+                </mat-radio-group><br><br>
+                <span *ngIf="formgroup.controls.plugloads.value == 1" class="units-picker-component">
+                    <p class="fields-note">You may choose to enter the values for any of the units mentioned
+                        below. Necessary units conversions will be made by
+                        the tool for respective calculations.</p>
+                    <b style="margin-top: 1em;">Plug Load value : </b>
+                    <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                        <mat-label>Enter value here</mat-label>
+                        <input matInput placeholder="Enter value"  formControlName="plugLoadValueKnown"
+                            type="number">
+                        <mat-select placeholder="units" [(ngModel)]=plugLoadUnits formControlName="plugLoadUnits">
+                            <mat-option value="watts per square meter">watts per square meter</mat-option>
+                            <mat-option value="watts per square foot">watts per square foot</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </span>
+            </div>
+        </fieldset>
 
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <h2>Plug loads operations and practices</h2>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
 
-                <div class="container">
+        <fieldset>
+            <legend>Plug loads operations and practices</legend>
+            <h2>Plug loads operations and practices</h2>
 
-                    <p>Select the option "Yes" or "No" and enter the quantity</p>
-                    <div class="example-container mat-elevation-z8">
+            <div class="container">
 
-                        <mat-table #table [dataSource]="dataSource">
+                <p>Select the option "Yes" or "No" and enter the quantity</p>
+                <div class="example-container mat-elevation-z8">
 
-                            <!-- operations Column -->
-                            <ng-container matColumnDef="operations">
-                                <mat-header-cell *matHeaderCellDef> Operations and pratices </mat-header-cell>
-                                <mat-cell *matCellDef="let option"> {{option.operations}} </mat-cell>
-                            </ng-container>
+                    <mat-table #table [dataSource]="dataSource">
 
-                            <!-- options Column -->
-                            <ng-container matColumnDef="options">
-                                <mat-header-cell *matHeaderCellDef> Yes/No/NA </mat-header-cell>
-                                <mat-cell *matCellDef="let element">
-                                    <mat-form-field floatLabel="never">
-                                        <mat-select [(value)]="element.options" placeholder="select">
-                                            <mat-option value="NA">NA</mat-option>
-                                            <mat-option value="Yes">Yes</mat-option>
-                                            <mat-option value="No">No</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </mat-cell>
-                            </ng-container>
+                        <!-- operations Column -->
+                        <ng-container matColumnDef="operations">
+                            <mat-header-cell *matHeaderCellDef> Operations and pratices </mat-header-cell>
+                            <mat-cell *matCellDef="let option"> {{option.operations}} </mat-cell>
+                        </ng-container>
 
-                            <ng-container matColumnDef="quantity">
-                                <mat-header-cell *matHeaderCellDef>Quantity</mat-header-cell>
-                                <mat-cell *matCellDef="let quantity">
-                                    <mat-form-field floatLabel="never">
-                                        <input matInput placeholder="Quantity">
-                                    </mat-form-field>
-                                </mat-cell>
-                            </ng-container>
+                        <!-- options Column -->
+                        <ng-container matColumnDef="options">
+                            <mat-header-cell *matHeaderCellDef> Yes/No/NA </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <mat-form-field floatLabel="never">
+                                    <mat-select [(value)]="element.options" placeholder="select">
+                                        <mat-option value="NA">NA</mat-option>
+                                        <mat-option value="Yes">Yes</mat-option>
+                                        <mat-option value="No">No</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </mat-cell>
+                        </ng-container>
 
-                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                        </mat-table>
-                    </div>
+                        <ng-container matColumnDef="quantity">
+                            <mat-header-cell *matHeaderCellDef>Quantity</mat-header-cell>
+                            <mat-cell *matCellDef="let quantity">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput placeholder="Quantity">
+                                </mat-form-field>
+                            </mat-cell>
+                        </ng-container>
 
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
                 </div>
-            </mat-expansion-panel>
-        </mat-accordion>
+
+            </div>
+        </fieldset>
 
     </form>
 </div>

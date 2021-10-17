@@ -6,6 +6,7 @@ import { debounceTime } from 'rxjs/operators';
 import { OuterwallAdvLevelAirComponent } from 'src/app/shared/outerwall-adv-level-air/outerwall-adv-level-air.component';
 import { OuterwallAdvLevelbrickComponent } from 'src/app/shared/outerwall-adv-levelbrick/outerwall-adv-levelbrick.component';
 import { OuterwallRadvancedleveldialogComponent } from 'src/app/shared/outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
+import { RoofradvancedComponent } from 'src/app/shared/roofradvanced/roofradvanced.component';
 import { RvalueImagedialogComponent } from 'src/app/shared/rvalue-imagedialog/rvalue-imagedialog.component';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
@@ -20,10 +21,10 @@ export interface BuildingLayerValues {
   Resistenciatermica: number;
 }
 
-export interface outerRValues{
-  imagepath:string;
-  rvalue:number;
-  units:string;
+export interface outerRValues {
+  imagepath: string;
+  rvalue: number;
+  units: string;
 }
 
 
@@ -35,8 +36,8 @@ export interface outerRValues{
 export class BuildingenvelopedetailsComponent implements OnInit {
 
   @Input() countryCode: string;
-  outerRData:outerRValues[];
-  roofRData:outerRValues[];
+  outerRData: outerRValues[];
+  roofRData: outerRValues[];
   formgroup: FormGroup;
   outerWallRValue: number;
   outerWallRUnits: string[] = ['m2.degC/W', 'ft2.degF.h/BTU']
@@ -45,17 +46,14 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   hasSHGC: boolean = false;
   hasWWR: boolean = false;
   selectedLayerValue: number;
-  selectedCapa: string
+  selectedRoofLayerValue: number;
+  selectedCapa: string;
+  selectedMaterial: string;
   SHGC: number;
   selCountryCode: string;
   layersList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   elementsList = ["Camara de aire", "Ladrillo comun-picture options", "Select more from list of materials"]
-  displayedColumns: string[] = [
-    'Layer',
-    'Capadelelementoconstructivo',
-    'Espesordecadacapa',
-    'Resistenciatermica'
-  ];
+  displayedColumns: string[] = ['Layer', 'Capadelelementoconstructivo', 'Espesordecadacapa', 'Resistenciatermica'];
   layerValues: BuildingLayerValues[] = [
     { Layer: null, Capadelelementoconstructivo: 'Resistencia superficial exterior', Espesordecadacapa: null, Resistenciatermica: 0.04 },
     { Layer: 1, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
@@ -69,13 +67,29 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     { Layer: 9, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
     { Layer: 10, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
     { Layer: null, Capadelelementoconstructivo: 'Resistencia superficial interior', Espesordecadacapa: null, Resistenciatermica: 0.13 },
-    { Layer: null, Capadelelementoconstructivo: 'Total', Espesordecadacapa: null, Resistenciatermica: null},
+    { Layer: null, Capadelelementoconstructivo: 'Total', Espesordecadacapa: null, Resistenciatermica: null },
+  ];
+  roofLayerValues: BuildingLayerValues[] = [
+    { Layer: null, Capadelelementoconstructivo: 'Resistencia superficial exterior', Espesordecadacapa: null, Resistenciatermica: 0.04 },
+    { Layer: 1, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 2, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 3, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 4, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 5, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 6, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 7, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 8, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 9, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: 10, Capadelelementoconstructivo: '', Espesordecadacapa: null, Resistenciatermica: null },
+    { Layer: null, Capadelelementoconstructivo: 'Resistencia superficial interior', Espesordecadacapa: null, Resistenciatermica: 0.13 },
+    { Layer: null, Capadelelementoconstructivo: 'Total', Espesordecadacapa: null, Resistenciatermica: null },
   ];
   dataSource = new MatTableDataSource(this.layerValues);
+  roofdataSource = new MatTableDataSource(this.roofLayerValues);
 
 
   constructor(private fb: FormBuilder,
-    private inputDialog: InputdialogService,  
+    private inputDialog: InputdialogService,
     public dialog: MatDialog,
     private beetService: beetService) { }
 
@@ -97,9 +111,11 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       wwr: ['0', Validators.compose([Validators.required])]
     })
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
-    this.beetService.getGeneralDetails().subscribe(res => { 
-      console.log("building Envelop "+JSON.stringify(res.success.buildingdata));
-      this.outerRData=res.success.rvaluewall;
+    this.beetService.getGeneralDetails().subscribe(res => {
+      // console.log("building Envelop "+JSON.stringify(res.success.buildingdata));
+      this.outerRData = res.success.rvaluewall;
+      this.roofRData = res.success.rvalueroof;
+
     });
   }
 
@@ -118,6 +134,34 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   }
 
 
+  onOptionsSelectedroof(event) {
+    console.log(event.value);
+    if (event.value == 'Camara de aire') {
+      this.openCamaraDie();
+    }
+    else if (event.value == 'Ladrillo comun-picture options') {
+      this.openLadrilloroof();
+    }
+    else if (event.value == 'Select more from list of materials') {
+      this.openlistOfMaterials();
+    }
+  }
+
+
+  public openLadrilloroof() {
+    const dialogref = this.dialog.open(RoofradvancedComponent, {
+      width: '80%',
+      autoFocus: false,
+      maxHeight: '100vh',
+    });
+    dialogref.afterClosed().subscribe(result => {
+      console.log(result);
+      this.addRoofLayerValues('', result);
+
+    });
+  }
+
+
   public openCamaraDie() {
     const dialogref = this.dialog.open(OuterwallAdvLevelAirComponent, {
       width: '60%',
@@ -125,26 +169,26 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      this.addBuildingLayerValues(result.airLayerThickness,result.chamberSurface,);
+      this.addBuildingLayerValues(result.airLayerThickness, result.chamberSurface,);
       console.log(result);
     });
   }
 
   public openLadrillo() {
     const dialogref = this.dialog.open(OuterwallAdvLevelbrickComponent, {
-      width: '60%',
+      width: '80%',
       autoFocus: false,
-      maxHeight: '90vh',
+      maxHeight: '100vh',
     });
     dialogref.afterClosed().subscribe(result => {
       console.log(result);
-      this.addBuildingLayerValues('',result);
+      this.addBuildingLayerValues('', result);
 
     });
   }
 
 
-  public  openlistOfMaterials(){
+  public openlistOfMaterials() {
     const dialogref = this.dialog.open(OuterwallRadvancedleveldialogComponent, {
       width: '60%',
       autoFocus: false,
@@ -156,8 +200,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   }
 
 
-  public addBuildingLayerValues(chamberSurface,airLayerThickness) {
-
+  public addBuildingLayerValues(chamberSurface, airLayerThickness) {
     let layerInput: BuildingLayerValues;
     console.log("callingLayer ");
     //this.selectedLayerValue
@@ -168,11 +211,36 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       Espesordecadacapa: chamberSurface,
       Resistenciatermica: airLayerThickness
     }
-    console.log(this.selectedLayerValue);
-    console.log(this.selectedCapa);
-    console.log(layerInput);
     this.layerValues.splice(this.selectedLayerValue, 1, layerInput)
+    this.calculateSum(this.layerValues);
     this.dataSource = new MatTableDataSource(this.layerValues);
+  }
+  public calculateSum(tempArray: BuildingLayerValues[]) {
+    let avgLayerValue = null;
+    for (var i = 0; i <= 11; i++) {
+      if (tempArray[i] != null) {
+        avgLayerValue += tempArray[i].Resistenciatermica;
+      }
+    }
+    const [last] = tempArray.slice(-1);
+    last.Resistenciatermica = avgLayerValue.toFixed(2);
+  }
+  public addRoofLayerValues(chamberSurface, airLayerThickness) {
+
+    let layerInput: BuildingLayerValues;
+    console.log("callingLayer ");
+    //this.selectedLayerValue
+    layerInput =
+    {
+      Layer: this.selectedRoofLayerValue,
+      Capadelelementoconstructivo: this.selectedMaterial,
+      Espesordecadacapa: chamberSurface,
+      Resistenciatermica: airLayerThickness
+    }
+
+    this.roofLayerValues.splice(this.selectedRoofLayerValue, 1, layerInput)
+    this.calculateSum(this.roofLayerValues);
+    this.roofdataSource = new MatTableDataSource(this.roofLayerValues);
   }
 
   /* public openOuterWallImagesR() {

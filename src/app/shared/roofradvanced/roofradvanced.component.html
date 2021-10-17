@@ -1,0 +1,105 @@
+<mat-toolbar class="mat-toolbar">
+    <mat-toolbar-row class="d-flex justify-content-between">
+        <h3 mat-dialog-title>Resistencia térmica de forjados. Bloques cerámicos huecos</h3>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onNoClick()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div mat-dialog-content>
+
+    <div class="example-container mat-elevation-z8">
+
+        <mat-radio-group [(ngModel)]="selectedElement">
+
+            <table mat-table [dataSource]="dataSource">
+
+                <!-- Selected Column -->
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        Selected Element
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-radio-button [value]="element" (click)="selectedR($event, element)">
+                        </mat-radio-button>
+                    </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Tipo de fojado">
+                    <th mat-header-cell *matHeaderCellDef> Tipo de fojado </th>
+                    <td mat-cell *matCellDef="let element">
+                        <img src="{{element.foamimg}}">
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="h">
+                    <th mat-header-cell *matHeaderCellDef> h </th>
+                    <td mat-cell *matCellDef="let element"> {{element.hdimension}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="L">
+                    <th mat-header-cell *matHeaderCellDef> L </th>
+                    <td mat-cell *matCellDef="let element"> {{element.ldimension}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Invierno">
+                    <th mat-header-cell *matHeaderCellDef> Invierno </th>
+                    <td mat-cell *matCellDef="let element"> {{element.uwinter}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Verano">
+                    <th mat-header-cell *matHeaderCellDef> Verano </th>
+                    <td mat-cell *matCellDef="let element"> {{element.usummer}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Invierno(w)">
+                    <th mat-header-cell *matHeaderCellDef> Invierno(w) </th>
+                    <td mat-cell *matCellDef="let element"> {{element.rwinter}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Verano(s)">
+                    <th mat-header-cell *matHeaderCellDef> Verano(s) </th>
+                    <td mat-cell *matCellDef="let element"> {{element.rsummer}} </td>
+                </ng-container>
+
+               
+
+                <ng-container matColumnDef="header-row-first-group">
+                    <td mat-header-cell class="th-custom-border-cell" *matHeaderCellDef [attr.rowspan]="2">Tipo de fojado</td>
+                </ng-container>
+                
+                
+                <ng-container matColumnDef="header-row-Medidas-group">
+                    <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">Medidas del forjado (cm)</th>
+                </ng-container>
+
+                <ng-container matColumnDef="header-row-Transmitancia-group">
+                    <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">Transmitancia termica U, (W/m2.K)</th>
+                </ng-container>
+
+
+                <ng-container matColumnDef="header-row-Resistencia-group">
+                    <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">Resistencia térmica R, (W/m2.K)</th>
+                </ng-container>
+
+                <ng-container matColumnDef="header-row-first-selected">
+                    <td mat-header-cell class="th-custom-border-cell" *matHeaderCellDef [attr.rowspan]="2">selected</td>
+                </ng-container>
+                
+
+
+                <tr mat-header-row
+                    *matHeaderRowDef="['header-row-first-group','header-row-Medidas-group','header-row-Transmitancia-group','header-row-Resistencia-group','header-row-first-selected']">
+                </tr>
+                <tr mat-header-row *matHeaderRowDef="lastDisplayedCols; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+        </mat-radio-group>
+
+    </div>
+</div>

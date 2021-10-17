@@ -9,9 +9,7 @@
 
 <p>Select R Value from predefined types</p>
 
-
 <div>
-
     <form [formGroup]="windowRFG" novalidate>
         <div class=row>
             <p class="w-100 mt-4 col-md-6 column-name">Window Frame Type : </p>
@@ -20,7 +18,8 @@
             <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
                 <mat-label>Select frame type</mat-label>
                 <mat-select formControlName="windowFrameType" (selectionChange)="onFrameType($event)">
-                    <mat-option *ngFor="let type of windowRData"  [value]="type.frametype">{{type.frametype}}</mat-option>
+                    <mat-option *ngFor="let type of windowRData" [value]="type.frametype">{{type.frametype}}
+                    </mat-option>
                 </mat-select>
             </mat-form-field><br>
         </div>
@@ -56,11 +55,10 @@
                 </mat-select>
             </mat-form-field>
         </div>
-
+        <div class="button-dialog" mat-dialog-actions>
+            <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" 
+             type="submit" cdkFocusInitial>Click to Return</button>
+        </div>
     </form>
-</div>
 
-<div class="button-dialog" mat-dialog-actions>
-    <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="submit"
-        cdkFocusInitial>Click to Return</button>
 </div>

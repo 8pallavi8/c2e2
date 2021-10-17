@@ -19,6 +19,7 @@ import { OuterwallAdvLevelAirComponent } from './shared/outerwall-adv-level-air/
 import { OuterwallAdvLevelbrickComponent } from './shared/outerwall-adv-levelbrick/outerwall-adv-levelbrick.component';
 
 
+
 @NgModule({
 
   imports: [
@@ -36,7 +37,8 @@ import { OuterwallAdvLevelbrickComponent } from './shared/outerwall-adv-levelbri
     FormHeaderComponent,
     AutoFocusDirective,
     OuterwallAdvLevelAirComponent,
-    OuterwallAdvLevelbrickComponent
+    OuterwallAdvLevelbrickComponent,
+    
   ],
   providers: [ConfirmationDialogService],
   entryComponents: [ConfirmationDialogComponent],

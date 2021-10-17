@@ -24,6 +24,7 @@ export class LightingComponent implements OnInit {
   selCountryCode: string;
   displayedColumns=["Technology","Yearofinstallation","LampPower","StockofFixtures","LumenOutput","Averagedailyworkinghours"];
     yearsList:string[]=["Older than 2018","2018 or newer"];
+    displayYear:string="Older than 2018 ";
 
 
 
@@ -38,6 +39,9 @@ export class LightingComponent implements OnInit {
 
  getStyleDisplay(index,div){
    return index%div==0
+ }
+ getenableyearofinstallation(startindex ,endindex, currentindex ){
+   return currentindex >= startindex && currentindex <=endindex ;
  }
  dataSource: Lighting[] = [
   { Technology: '/assets/images/lighting/led.png', Yearofinstallation:'NA', LampPower:null , StockofFixtures:null , LumenOutput: null,Averagedailyworkinghours: null},
