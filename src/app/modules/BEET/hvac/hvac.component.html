@@ -11,40 +11,86 @@
         <fieldset>
             <legend>Heating efficiency</legend>
             <h2>Heating efficiency</h2>
-                <div class="container">
-                    <p>Do you know the heating equipment efficiency of your building?</p>
-                    <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select any of the options.
-                            You may find these values on the equipment name plate or design document or from supplier
-                        </p>
-                    </div>
-                    <mat-radio-group aria-label="Select an option" formControlName="heatefficiency">
-                        <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button value="2">No, I don't know</mat-radio-button><br>
-                        <mat-radio-button (click)="openConfirmationDialog()" value="3">The building does not use any
-                            heating equipment</mat-radio-button>
-                    </mat-radio-group>
+            <div class="container">
+                <p>Do you know the heating equipment efficiency of your building?</p>
+                <div class="fields-note">
+                    <p><span class="notes-style"> Note:</span> You may select any of the options.
+                        You may find these values on the equipment name plate or design document or from supplier
+                    </p>
                 </div>
-           </fieldset>
+                <mat-radio-group aria-label="Select an option" formControlName="heatefficiency">
+                    <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                    <mat-radio-button value="2">No, I don't know</mat-radio-button><br>
+                    <mat-radio-button (click)="openConfirmationDialog()" value="3">The building does not use any
+                        heating equipment</mat-radio-button>
+                </mat-radio-group><br><br>
+
+                <span *ngIf="formgroup.controls.heatefficiency.value == 1">
+
+                    <b style="margin-top: 1em;">Please Enter the heatingequipment efficiencyvalue here(%) : </b>
+                    <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                        <mat-label>Enter value here</mat-label>
+                        <input matInput placeholder="Enter value" type="number" formControlName="heatefficiencyKnown"
+                            type="number">
+                    </mat-form-field>
+                </span>
+
+                <span *ngIf="formgroup.controls.heatefficiency.value == 2">
+
+                    <p style="margin-top: 1em;">Please select the most representative picture for your heating equipment
+                        type.<br>
+                    </p>
+                    <div class="row">
+
+                        <mat-radio-group class="mat-radio-group-image" formControlName="heatImages">
+                            <mat-radio-button *ngFor="let con of heatingData">
+                                <img src="{{con.imagepath}}">
+                                <p>{{con.heatingequipmentname}}</p>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </span>
+
+            </div>
+        </fieldset>
         <!-- Air-Conditioning (Cooling) -->
         <fieldset>
             <legend>Air-Conditioning (Cooling)</legend>
             <h2>Air-Conditioning (Cooling)</h2>
 
-                <div class="container">
-<p>Do you know the cooling equipment performance parameters of your building? </p>
-                    <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select any of the options.
-                            You may find these values on the equipment name plate or design document or from supplier.
-                        </p>
-                    </div>
-                    <mat-radio-group aria-label="Select an option" formControlName="airconditioning">
-                        <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button value="2">No, I don't know</mat-radio-button><br>
-                        <mat-radio-button (click)="openConfirmationDialogac()" value="3">The building does not use any
-                            cooling equipment</mat-radio-button>
-                    </mat-radio-group>
+            <div class="container">
+                <p>Do you know the cooling equipment performance parameters of your building? </p>
+                <div class="fields-note">
+                    <p><span class="notes-style"> Note:</span> You may select any of the options.
+                        You may find these values on the equipment name plate or design document or from supplier.
+                    </p>
                 </div>
+                <mat-radio-group aria-label="Select an option" formControlName="airconditioning">
+                    <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                    <mat-radio-button value="2">No, I don't know</mat-radio-button><br>
+                    <mat-radio-button (click)="openConfirmationDialogac()" value="3">The building does not use any
+                        cooling equipment</mat-radio-button>
+                </mat-radio-group>
+
+
+                <span *ngIf="formgroup.controls.airconditioning.value == 2">
+
+                    <p style="margin-top: 1em;">Please select the most representative picture for your cooling equipment
+                        type.<br>
+                    </p>
+                    <div class="row">
+
+                        <mat-radio-group class="mat-radio-group-image" formControlName="coolImages">
+                            <mat-radio-button *ngFor="let con of heatingData">
+                                <img src="{{con.imagepath}}">
+                                <p>{{con.heatingequipmentname}}</p>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </span>
+
+
+            </div>
         </fieldset>
 
         <!-- ventilation -->
@@ -53,35 +99,37 @@
             <legend>Ventilation</legend>
             <h2>Ventilation</h2>
 
-                <div class="container">
-                    <p>Do you know the ventilation rate value for your building?</p>
+            <div class="container">
+                <p>Do you know the ventilation rate value for your building?</p>
 
-                    <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
-                            on Ventilation rates of the building.
-                            Default standard ventilation rates will be considered in case of option B</p>
-                    </div>
-                    <mat-radio-group aria-label="Select an option" formControlName="ventilation">
-                        <mat-radio-button  value="1">Yes, I know</mat-radio-button><br>
-                        <mat-radio-button value="2">No, I don't know</mat-radio-button>
-                    </mat-radio-group>
-
-                    <span *ngIf="formgroup.controls.ventilation.value == 1" class="units-picker-component">
-                        <p class="fields-note">You may choose to enter the values for any of the units mentioned
-                            below. Necessary units conversions will be made by
-                            the tool for respective calculations.</p>
-                        <b style="margin-top: 1em;">Outer Wall R value : </b>
-                        <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                            <mat-label>Enter value here</mat-label>
-                            <input matInput placeholder="Enter value" type="number" formControlName="ventilationKnown"
-                                type="number">
-                            <mat-select placeholder="units" formControlName="ventilationUnits">
-                                <mat-option value="cubic meter per minute per person">cubic meter per minute per person</mat-option>
-                                <mat-option value="cubic feet per minute per person">cubic feet per minute per person</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </span>
+                <div class="fields-note">
+                    <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
+                        on Ventilation rates of the building.
+                        Default standard ventilation rates will be considered in case of option B</p>
                 </div>
+                <mat-radio-group aria-label="Select an option" formControlName="ventilation">
+                    <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                    <mat-radio-button value="2">No, I don't know</mat-radio-button>
+                </mat-radio-group>
+
+                <span *ngIf="formgroup.controls.ventilation.value == 1" class="units-picker-component">
+                    <p class="fields-note">You may choose to enter the values for any of the units mentioned
+                        below. Necessary units conversions will be made by
+                        the tool for respective calculations.</p>
+                    <b style="margin-top: 1em;">Outer Wall R value : </b>
+                    <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                        <mat-label>Enter value here</mat-label>
+                        <input matInput placeholder="Enter value" type="number" formControlName="ventilationKnown"
+                            type="number">
+                        <mat-select placeholder="units" formControlName="ventilationUnits">
+                            <mat-option value="cubic meter per minute per person">cubic meter per minute per person
+                            </mat-option>
+                            <mat-option value="cubic feet per minute per person">cubic feet per minute per person
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </span>
+            </div>
         </fieldset>
 
         <!-- Infiltration rate  -->
@@ -90,34 +138,34 @@
             <legend>Infiltration rate </legend>
             <h2>Infiltration rate </h2>
 
-                <div class="container">
-                    <p>Do you know the infiltration rate value for your building?</p>
-                    <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
-                            on R value of the wall.</p>
-                    </div>
-
-                    <div>
-                        <mat-radio-group aria-label="Select an option">
-                            <mat-radio-button (click)="showInfiltrationRateValue(true)" value="1">Yes, I know
-                            </mat-radio-button><br>
-                            <mat-radio-button (click)="showInfiltrationRateValue(false)" value="2">No, I don't know.
-                            </mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                    <span *ngIf="hasInfiltrationRateValue">
-                        <p style="margin-top: 1em;">Please enter the Infiltration Rate value in Air Changes per
-                            Hour(ACH)</p>
-                        <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
-                            <mat-label>Enter value here</mat-label>
-                            <input matInput placeholder="Enter value" required formControlName="infiltration">
-                        </mat-form-field>
-                    </span>
-<div>
-                    <b>Infiltration Rate(Air changes per Hour):{{infiltration}}</b>
-</div>
+            <div class="container">
+                <p>Do you know the infiltration rate value for your building?</p>
+                <div class="fields-note">
+                    <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
+                        on R value of the wall.</p>
                 </div>
-            
+
+                <div>
+                    <mat-radio-group aria-label="Select an option">
+                        <mat-radio-button (click)="showInfiltrationRateValue(true)" value="1">Yes, I know
+                        </mat-radio-button><br>
+                        <mat-radio-button (click)="showInfiltrationRateValue(false)" value="2">No, I don't know.
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <span *ngIf="hasInfiltrationRateValue">
+                    <p style="margin-top: 1em;">Please enter the Infiltration Rate value in Air Changes per
+                        Hour(ACH)</p>
+                    <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
+                        <mat-label>Enter value here</mat-label>
+                        <input matInput placeholder="Enter value" required formControlName="infiltration">
+                    </mat-form-field>
+                </span>
+                <div>
+                    <b>Infiltration Rate(Air changes per Hour):{{infiltration}}</b>
+                </div>
+            </div>
+
         </fieldset>
         <!-- Economizer / free cooling  -->
 
@@ -125,82 +173,82 @@
             <legend>Economizer/free cooling</legend>
             <h2>Economizer/free cooling</h2>
 
-                <div class="container">
-                    <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> Economizer is a part of the outdoor system of an HVAC
-                            system. It can be used to avail optimal
-                            free cooling using outside air if the outside ambient conditions are favourable with respect
-                            to the temperatures and humidity levels.
-                            N/A: Not applicable
-                        </p>
-                    </div>
-                    <div>
-                        <span>
-                            <p>Do you have and actively manage the economizer / free cooling to cater to your cooling
-                                needs?</p>
-                        </span>
-                        <span>
-                            <mat-form-field>
-                                <mat-select placeholder="select" formControlName="economizer">
-                                    <mat-option *ngFor="let option of options" [value]="option.value">
-                                        {{option.value}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </span>
-                    </div>
-
+            <div class="container">
+                <div class="fields-note">
+                    <p><span class="notes-style"> Note:</span> Economizer is a part of the outdoor system of an HVAC
+                        system. It can be used to avail optimal
+                        free cooling using outside air if the outside ambient conditions are favourable with respect
+                        to the temperatures and humidity levels.
+                        N/A: Not applicable
+                    </p>
                 </div>
+                <div>
+                    <span>
+                        <p>Do you have and actively manage the economizer / free cooling to cater to your cooling
+                            needs?</p>
+                    </span>
+                    <span>
+                        <mat-form-field>
+                            <mat-select placeholder="select" formControlName="economizer">
+                                <mat-option *ngFor="let option of options" [value]="option.value">
+                                    {{option.value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </span>
+                </div>
+
+            </div>
         </fieldset>
-           
+
         <!-- Other miscellaneous data -->
 
         <fieldset>
             <legend>Other miscellaneous data</legend>
             <h2>Other miscellaneous data</h2>
-                <div class="container">
-                    <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> Average indoor air temperature being maintained
-                            throughout the year inside the building. It
-                            can also be the temperature set points at the user side (occupant areas).
-                            Enter the value in either units i.e. degree Centigrade (ºC) or degree Fahrenheit (ºF)
-                            N/A: Not applicable
-                        </p>
-                    </div>
-                    <span class="units-picker-component">
-                        <p class="fieldname-align">Average indoor air temperature (set-point):</p>
-                        <mat-form-field appearance="outline" >
-                            <mat-label>Enter value</mat-label>
-                            <input matInput formControlName="avgIndoorAirTemp">
-                            <mat-select [(value)]="units">
-                                <mat-option value="centigrade">ºC</mat-option>
-                                <mat-option value="farenheit">ºF</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </span>
-
-                    <p>Inverter / VFD / Speed controller for HVAC compressors installed? </p>
-
-                    <mat-form-field>
-                        <mat-select placeholder="select" formControlName="HvacCompressorInstalled">
-                            <mat-option *ngFor="let option of options" [value]="option.value">
-                                {{option.value}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <p>Inverter / VFD / Speed controller for HVAC fans and blowers installed?</p>
-
-                    <mat-form-field>
-                        <mat-select placeholder="select" formControlName="HvacFansandBlowersInstalled">
-                            <mat-option *ngFor="let option of options" [value]="option.value">
-                                {{option.value}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-
+            <div class="container">
+                <div class="fields-note">
+                    <p><span class="notes-style"> Note:</span> Average indoor air temperature being maintained
+                        throughout the year inside the building. It
+                        can also be the temperature set points at the user side (occupant areas).
+                        Enter the value in either units i.e. degree Centigrade (ºC) or degree Fahrenheit (ºF)
+                        N/A: Not applicable
+                    </p>
                 </div>
+                <span class="units-picker-component">
+                    <p class="fieldname-align">Average indoor air temperature (set-point):</p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter value</mat-label>
+                        <input matInput formControlName="avgIndoorAirTemp">
+                        <mat-select [(value)]="units">
+                            <mat-option value="centigrade">ºC</mat-option>
+                            <mat-option value="farenheit">ºF</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </span>
+
+                <p>Inverter / VFD / Speed controller for HVAC compressors installed? </p>
+
+                <mat-form-field>
+                    <mat-select placeholder="select" formControlName="HvacCompressorInstalled">
+                        <mat-option *ngFor="let option of options" [value]="option.value">
+                            {{option.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <p>Inverter / VFD / Speed controller for HVAC fans and blowers installed?</p>
+
+                <mat-form-field>
+                    <mat-select placeholder="select" formControlName="HvacFansandBlowersInstalled">
+                        <mat-option *ngFor="let option of options" [value]="option.value">
+                            {{option.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+            </div>
         </fieldset>
     </form>
 
