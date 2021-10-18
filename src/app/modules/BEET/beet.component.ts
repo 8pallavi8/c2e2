@@ -4,7 +4,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { ToolsService } from 'src/app/shared/services/tools.service';
 import { BuildingenvelopedetailsComponent } from './buildingenvelopedetails/buildingenvelopedetails.component';
+import { CO2EmissionsComponent } from './co2-emissions/co2-emissions.component';
 import { GendetailsComponent } from './gendetails/gendetails.component';
+import { HvacComponent } from './hvac/hvac.component';
+import { LightingComponent } from './lighting/lighting.component';
+import { PlugloadsComponent } from './plugloads/plugloads.component';
 
 
 export interface summary {
@@ -25,6 +29,12 @@ export class BEETComponent implements OnInit, AfterViewInit {
   userId: string;
   @ViewChild(GendetailsComponent) genDetailsComponent: GendetailsComponent;
   @ViewChild(BuildingenvelopedetailsComponent) buildingdetailsComponent: BuildingenvelopedetailsComponent;
+  /* @ViewChild(LightingComponent) lightingDetailsComponent: LightingComponent;
+  @ViewChild(HvacComponent) hvacDetailsComponent: HvacComponent;
+  @ViewChild(PlugloadsComponent) plugLoaDetailsComponent: PlugloadsComponent;
+  @ViewChild(CO2EmissionsComponent) co2EmissionsDetailsComponent: CO2EmissionsComponent; */
+  
+
   displayedColumns: string[] = ["Parameter", "Units", "Value"];
   summaryTable: summary[];
   dataSource: any;

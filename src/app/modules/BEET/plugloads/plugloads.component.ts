@@ -16,6 +16,7 @@ export interface OPTIONS {
 }
 
 export interface PlugLoadAvailableTable {
+  select?:number;
   buildingtype: string;
   avgpplwperft2: number;
   avgpplwperm2: number;
@@ -72,7 +73,8 @@ export class PlugloadsComponent implements OnInit {
   plugLoadPredefined: PlugLoadAvailableTable[];
   plugLoadGuide:PlugLoadGuideTable[];
   selectedElement:PlugLoadAvailableTable;
-  displayOPTCColumns = ["buildingtype","avgpplwperft2","avgpplwperm2","totalareaft2","totalaream2"];
+  displayOPTCColumns = ["select","buildingtype","avgpplwperft2","avgpplwperm2","totalareaft2","totalaream2"];
+  displayOptBColumns=[];
   
   
 
@@ -100,9 +102,6 @@ export class PlugloadsComponent implements OnInit {
   }
 
 
-
-
-
   onChangeAvailbePlugLoad(event) {
     if (event.value == 3) {
       console.log(event);
@@ -113,7 +112,6 @@ export class PlugloadsComponent implements OnInit {
   selectedR($event: any, row: PlugLoadAvailableTable) {
     console.info("clicked", $event);
     console.log(row);
-
   }
 
   public openPlugLoad() {
