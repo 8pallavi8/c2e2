@@ -2,3 +2,9 @@
     margin-right: 5rem;
     margin-top: 1rem;
 }
+
+.mat-radio-group-image {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+  }

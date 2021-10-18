@@ -115,7 +115,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       // console.log("building Envelop "+JSON.stringify(res.success.buildingdata));
       this.outerRData = res.success.rvaluewall;
       this.roofRData = res.success.rvalueroof;
-
     });
   }
 

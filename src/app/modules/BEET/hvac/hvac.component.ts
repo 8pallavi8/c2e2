@@ -6,6 +6,18 @@ import { beetService } from 'src/app/shared/services/beet.service';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
 
+
+export interface  HeatingEquip{
+  heatingequipmentname:string;
+  imgpath:string;
+}
+
+export interface  CoolingEquip{
+  coolingequipmentname:string;
+  imgpath:string;
+}
+
+
 @Component({
   selector: 'app-hvac',
   templateUrl: './hvac.component.html',
@@ -19,6 +31,10 @@ selectedValue: string;
   infiltration:number;
   ventilationvalue:number;
   selCountryCode: string;
+  heatingData:HeatingEquip;
+  coolingRData:CoolingEquip
+
+
   constructor(private fb: FormBuilder,public dialog: MatDialog,
     private confirmationDialog: ConfirmationDialogService,
     private inputDialog: InputdialogService,
@@ -29,6 +45,9 @@ selectedValue: string;
   ngOnInit(): void {
     this.formgroup = this.fb.group({
       heatefficiency: ['', Validators.compose([Validators.required])],
+      heatefficiencyKnown: ['', Validators.compose([Validators.required])],
+      heatImages:['', Validators.compose([Validators.required])],
+      coolImages:['', Validators.compose([Validators.required])],
       airconditioning: ['', Validators.compose([Validators.required])],
       ventilation: ['0', Validators.compose([Validators.required])],
       ventilationKnown: ['0', Validators.compose([Validators.required])],
@@ -40,11 +59,16 @@ selectedValue: string;
       HvacFansandBlowersInstalled: ['', Validators.compose([Validators.required])]
     }
     )
-    this.formgroup.get('infiltration').valueChanges.pipe(debounceTime(1000)).subscribe((changes) => {
+    /* this.formgroup.get('infiltration').valueChanges.pipe(debounceTime(1000)).subscribe((changes) => {
       this.infiltration = changes;
       console.log(changes);
-    });
+    }); */
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
+    this.beetService.getGeneralDetails().subscribe(res => {
+      this.heatingData = res.success.heatingequipment;
+      this.coolingRData = res.success.coolingequipment;
+    });
+
   }
 
 

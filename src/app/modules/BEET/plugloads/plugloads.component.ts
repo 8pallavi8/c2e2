@@ -3,15 +3,30 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { PlugloadavailablevaldialogComponent } from 'src/app/shared/plugloadavailablevaldialog/plugloadavailablevaldialog.component';
-import {PlugloadinputdialogComponent} from 'src/app/shared/plugloadinputdialog/plugloadinputdialog.component';
+import { PlugloadinputdialogComponent } from 'src/app/shared/plugloadinputdialog/plugloadinputdialog.component';
+import { beetService } from 'src/app/shared/services/beet.service';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
 import { isObjectLiteralElement } from 'typescript';
 
 export interface OPTIONS {
-  operations : string;
+  operations: string;
   options: string;
   quantity: number;
+}
+
+export interface PlugLoadAvailableTable {
+  buildingtype: string;
+  avgpplwperft2: number;
+  avgpplwperm2: number;
+  totalareaft2: number;
+  totalaream2: number;
+}
+
+
+export interface PlugLoadGuideTable {
+  space: string;
+  plugloadappliance: string[];
 }
 
 @Component({
@@ -24,9 +39,8 @@ export class PlugloadsComponent implements OnInit {
   formgroup: FormGroup;
   displayedColumns = ['operations', 'options', 'quantity'];
   selectionOptions = ['Yes', 'No', 'NA'];
-  plugloadvalue:number;
+  plugloadvalue: number;
   plugLoadUnits: string = 'watts per square meter';
-  
   OPTIONS_DATA: OPTIONS[] = [
     { operations: 'Do you remove underused refrigerators ?', options: '', quantity: 0 },
     { operations: 'Do you replace inefficient refrigerators with most efficient one regularly ?', options: '', quantity: 0 },
@@ -51,17 +65,55 @@ export class PlugloadsComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource(this.OPTIONS_DATA);
   dialogref: any;
+  selCountryCode: string;
   selecteditems: string[];
+  availablePlugLoaddataSource: MatTableDataSource<PlugLoadGuideTable> ; 
+  guidePlugLoaddataSource:any;
+  plugLoadPredefined: PlugLoadAvailableTable[];
+  plugLoadGuide:PlugLoadGuideTable[];
+  selectedElement:PlugLoadAvailableTable;
+  displayOPTCColumns = ["buildingtype","avgpplwperft2","avgpplwperm2","totalareaft2","totalaream2"];
+  
+  
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog, private inputDialog: InputdialogService) { }
+ optcDataSource : MatTableDataSource<PlugLoadAvailableTable> ; 
+   
+  constructor(private fb: FormBuilder, public dialog: MatDialog, private inputDialog: InputdialogService,
+    private beetService: beetService) { }
 
   ngOnInit(): void {
     this.formgroup = this.fb.group({
       plugloads: ['', Validators.compose([Validators.required])],
-      plugLoadValueKnown:['', Validators.compose([Validators.required])],
-      plugLoadUnits:['', Validators.compose([Validators.required])]
+      plugLoadValueKnown: ['', Validators.compose([Validators.required])],
+      plugLoadUnits: ['', Validators.compose([Validators.required])]
     }
-    )
+    );
+    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
+    this.beetService.getGeneralDetails().subscribe(res => {
+      this.plugLoadPredefined = res.success.plugloadoptctable;
+
+     this.plugLoadGuide = res.success.plugloadoptbtable;
+      
+      this.availablePlugLoaddataSource = new MatTableDataSource(this.plugLoadGuide);
+      this.optcDataSource = new MatTableDataSource(this.plugLoadPredefined);
+    });
+  }
+
+
+
+
+
+  onChangeAvailbePlugLoad(event) {
+    if (event.value == 3) {
+      console.log(event);
+      //this.availablePlugLoaddataSource = new MatTableDataSource(this.plugLoadPredefined);
+    }
+  }
+
+  selectedR($event: any, row: PlugLoadAvailableTable) {
+    console.info("clicked", $event);
+    console.log(row);
+
   }
 
   public openPlugLoad() {
@@ -76,14 +128,14 @@ export class PlugloadsComponent implements OnInit {
       .catch(() => console.log('User dismissed the dialog'));
   }
 
-  openAvailableValDialog(){
-    const dialogref = this.dialog.open(PlugloadavailablevaldialogComponent,{
+  openAvailableValDialog() {
+    const dialogref = this.dialog.open(PlugloadavailablevaldialogComponent, {
       width: '60%',
       autoFocus: false,
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      this.plugloadvalue= result;
+      this.plugloadvalue = result;
       console.log(result);
     });
   }
