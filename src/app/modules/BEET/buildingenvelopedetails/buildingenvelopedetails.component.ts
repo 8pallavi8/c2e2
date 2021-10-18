@@ -160,7 +160,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     });
   }
 
-
   public openCamaraDie() {
     const dialogref = this.dialog.open(OuterwallAdvLevelAirComponent, {
       width: '60%',
@@ -168,8 +167,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      this.addBuildingLayerValues(result.airLayerThickness, result.chamberSurface,);
-      console.log(result);
+      this.addBuildingLayerValues(result.airLayerThickness, '');
+      console.log(result.airLayerThickness, result.chamberSurface);
     });
   }
 
@@ -199,21 +198,22 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   }
 
 
-  public addBuildingLayerValues(chamberSurface, airLayerThickness) {
+  public addBuildingLayerValues(airLayerThickness, Rvalue) {
     let layerInput: BuildingLayerValues;
     console.log("callingLayer ");
-    //this.selectedLayerValue
     layerInput =
     {
       Layer: this.selectedLayerValue,
       Capadelelementoconstructivo: this.selectedCapa,
-      Espesordecadacapa: chamberSurface,
-      Resistenciatermica: airLayerThickness
+      Espesordecadacapa: airLayerThickness,
+      Resistenciatermica: Rvalue
     }
     this.layerValues.splice(this.selectedLayerValue, 1, layerInput)
     this.calculateSum(this.layerValues);
     this.dataSource = new MatTableDataSource(this.layerValues);
   }
+
+
   public calculateSum(tempArray: BuildingLayerValues[]) {
     let avgLayerValue = null;
     for (var i = 0; i <= 11; i++) {
@@ -222,9 +222,11 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       }
     }
     const [last] = tempArray.slice(-1);
-    last.Resistenciatermica = avgLayerValue.toFixed(2);
+    last.Resistenciatermica = avgLayerValue;
   }
-  public addRoofLayerValues(chamberSurface, airLayerThickness) {
+
+
+  public addRoofLayerValues(airLayerThickness, Rvalue) {
 
     let layerInput: BuildingLayerValues;
     console.log("callingLayer ");
@@ -233,8 +235,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     {
       Layer: this.selectedRoofLayerValue,
       Capadelelementoconstructivo: this.selectedMaterial,
-      Espesordecadacapa: chamberSurface,
-      Resistenciatermica: airLayerThickness
+      Espesordecadacapa: airLayerThickness,
+      Resistenciatermica: Rvalue
     }
 
     this.roofLayerValues.splice(this.selectedRoofLayerValue, 1, layerInput)
