@@ -40,11 +40,11 @@
                     <p style="margin-top: 1em;">Please select the most representative picture for your heating equipment
                         type.<br>
                     </p>
-                    <div class="row">
+                    <div>
 
                         <mat-radio-group class="mat-radio-group-image" formControlName="heatImages">
                             <mat-radio-button *ngFor="let con of heatingData">
-                                <img src="{{con.imagepath}}">
+                                <img src="{{con.imgpath}}">
                                 <p>{{con.heatingequipmentname}}</p>
                             </mat-radio-button>
                         </mat-radio-group>
@@ -73,6 +73,38 @@
                 </mat-radio-group>
 
 
+                <span *ngIf="formgroup.controls.airconditioning.value == 1">
+
+                    <p> Please Enter the values in below respective text boxes:</p>
+
+                    <b style="margin-top: 1em;">Energy Efficiency Ratio(EER)[Btu/h refrigeration effect/Watt input]:</b>
+                    <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                        <mat-label>Enter value here</mat-label>
+                        <input matInput placeholder="Enter value" type="number" formControlName="aircoolingopta"
+                            type="number">
+                    </mat-form-field>
+                    <p style="align-items: center;"> OR</p>
+                    <b style="margin-top: 1em;">Coefficient of performance (COP)[kW refrigeration effect/kW]:</b>
+                    <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                        <mat-label>Enter value here</mat-label>
+                        <input matInput placeholder="Enter value" type="number" formControlName="aircoolingoptb"
+                            type="number">
+                    </mat-form-field>
+                    <p style="align-items: center;">OR</p>
+                    <b style="margin-top: 1em;">Specific Power Consumption(SPC) (COP)[kW input]:</b>
+                    <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                        <mat-label>Enter value here</mat-label>
+                        <input matInput placeholder="Enter value" type="number" formControlName="aircoolingoptc"
+                            type="number">
+                    </mat-form-field>
+
+                    <p>Note:The value should be available on the equipment name plate or contact the supplier.</p>
+
+
+
+                </span>
+
+
                 <span *ngIf="formgroup.controls.airconditioning.value == 2">
 
                     <p style="margin-top: 1em;">Please select the most representative picture for your cooling equipment
@@ -82,7 +114,7 @@
 
                         <mat-radio-group class="mat-radio-group-image" formControlName="coolImages">
                             <mat-radio-button *ngFor="let con of heatingData">
-                                <img src="{{con.imagepath}}">
+                                <img src="{{con.imgpath}}">
                                 <p>{{con.heatingequipmentname}}</p>
                             </mat-radio-button>
                         </mat-radio-group>
