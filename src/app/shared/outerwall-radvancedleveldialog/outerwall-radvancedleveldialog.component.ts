@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { beetService } from '../services/beet.service';
+import { textfieldsdialogComponent } from '../textfieldsdialog/textfieldsdialog.component';
 
 export interface AdvancedMaterialTable {
   mainmaterial?:string;
@@ -30,10 +31,13 @@ export class OuterwallRadvancedleveldialogComponent implements OnInit {
   rvalueadvancedmaterialData:AdvancedMaterialTable[];
   otherTableData:OtherData[];
   dataSource:any;
+  dialog: any;
   
 
   constructor(public dialogRef: MatDialogRef<OuterwallRadvancedleveldialogComponent>,
-    private fb: FormBuilder,private beetService:beetService) { }
+    private fb: FormBuilder,
+    private beetService:beetService,
+    public innerDialogRef: MatDialogRef<textfieldsdialogComponent>) { }
 
   ngOnInit(): void {
     this.beetService.getGeneralDetails().subscribe(res => { 
@@ -47,8 +51,7 @@ export class OuterwallRadvancedleveldialogComponent implements OnInit {
   createForm(): FormGroup {
     return this.fb.group({
       elements: ['', Validators.compose([Validators.required])],
-      layers: ['', Validators.compose([Validators.required])]
-
+      layers: ['', Validators.compose([Validators.required])],
     });
   }
 
@@ -60,11 +63,40 @@ export class OuterwallRadvancedleveldialogComponent implements OnInit {
   }
 
 
-  selectedR($event: any, row:OtherData){
-    console.info("clicked", $event);
+  selectedR(event: any, row:OtherData){
+    this.openThicknessDialog();
+    console.info("clicked", event);
     console.log(row.thermcalconductivityfrom);
-    this.dialogRef.close(row.thermcalconductivityfrom); 
+    //this.dialogRef.close(row.thermcalconductivityfrom); 
   }
+
+  public openThicknessDialog() {
+    const dialogref = this.dialog.open(textfieldsdialogComponent, {
+      width: '80%',
+      autoFocus: false,
+      maxHeight: '100vh',
+    });
+    dialogref.afterClosed().subscribe(result => {
+      console.log(result);
+    
+    });
+  }
+
+
+
+  postcalculateAdvancedMaterial(): void {
+    var payload: any = {
+   
+      "thermalconductivity": this.OuterWallAdvFG.controls.surfacecondition.value,
+      "thickness": this.OuterWallAdvFG.controls.airLayerThickness.value
+    }
+    this.beetService.postcalculateRAir(payload).subscribe(res =>{
+      console.log(res);
+      this.onNoClick();
+    })
+  }
+
+
 
   onNoClick(): void {
     this.dialogRef.close();

@@ -31,6 +31,14 @@
             </td>
         </ng-container>
 
+        
+        <ng-container matColumnDef="THICKNESS">
+            <th mat-header-cell *matHeaderCellDef>Enter Thickness</th>
+            <td mat-cell *matCellDef="let element">
+                <input matInput type="text">
+            </td>
+        </ng-container>
+
 
         <ng-container matColumnDef="MATERIAL SUB-CATEGORY 1">
             <th mat-header-cell *matHeaderCellDef> MATERIAL SUB-CATEGORY 1 </th>
@@ -58,12 +66,7 @@
             <td mat-cell *matCellDef="let element"> {{element.thermcalconductivityto}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="THICKNESS">
-            <th mat-header-cell *matHeaderCellDef>Enter Thickness</th>
-            <td mat-cell *matCellDef="let element">
-                <input matInput type="text">
-            </td>
-        </ng-container>
+        
 
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

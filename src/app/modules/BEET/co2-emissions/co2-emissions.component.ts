@@ -11,7 +11,7 @@ export class CO2EmissionsComponent implements OnInit {
   formgroup: FormGroup;
   hasonsiteCO2Emission: boolean = false;
   haspowergenerationCO2emission: boolean = false;
-  unitslist = ["kgCO2/mmbtu", "lbsCO2/mmbtu", "kgCO2/therm", "lbsCO2/therm", "kgCO2/kcal", "lbsCO2/kcal", "kgCO2/m3", "lbsCO2/ft3", "metrictonsCO2/Mcf"];
+  co2emissionsunits:string[];
   selCountryCode: string;
   constructor(private fb: FormBuilder, private beetService: beetService) { }
 
@@ -22,6 +22,12 @@ export class CO2EmissionsComponent implements OnInit {
       units: ['', Validators.compose([Validators.required])],
     });
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
+    this.beetService.getGeneralDetails().subscribe(res => {
+      // console.log("building Envelop "+JSON.stringify(res.success.buildingdata));
+      this.co2emissionsunits = res.success.co2emissionsunits;
+    });
+
+
   }
 
   showonsiteCO2emission(state: boolean): void {

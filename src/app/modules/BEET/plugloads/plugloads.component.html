@@ -43,84 +43,92 @@
 
                 <!-- plugload guide to calculate -->
                 <span *ngIf="formgroup.controls.plugloads.value == 2" class="container-fluid beet-container">
-                   
-                        
+
+
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> Note: Plug load refer to energy used by equipment that is plugged into an outlet. For example, in an office, key plug loads include computer and monitors, printers, and copiers. Equipment/Appliances include other connected load such as the prefilled examples in the table. 
-                            Do not include major lighting fixture details that have already been entered in the lighting section. Table lamps, plugged task lightings, etc. which were not covered in the lighting section may be entered here.
-                            Do not include large HVAC system components here.  
-                            </p>
+                        <p><span class="notes-style"> Note:</span> Note: Plug load refer to energy used by equipment
+                            that is plugged into an outlet. For example, in an office, key plug loads include computer
+                            and monitors, printers, and copiers. Equipment/Appliances include other connected load such
+                            as the prefilled examples in the table.
+                            Do not include major lighting fixture details that have already been entered in the lighting
+                            section. Table lamps, plugged task lightings, etc. which were not covered in the lighting
+                            section may be entered here.
+                            Do not include large HVAC system components here.
+                        </p>
                     </div>
 
-                    <table mat-table [dataSource]="optcDataSource" class="mat-elevation-z8">
+                    <table mat-table [dataSource]="optbDataSource" class="mat-elevation-z8">
 
-                        <ng-container matColumnDef="select">
-                            <th mat-header-cell *matHeaderCellDef>
-                                Selected Element
-                            </th>
+                        
+                        <ng-container matColumnDef="space">
+                            <th mat-header-cell *matHeaderCellDef> Space</th>
                             <td mat-cell *matCellDef="let element">
-                                <mat-radio-button [value]="element" (click)="selectedR($event, element)">
-                                </mat-radio-button>
+                                <ng-container *ngIf="element.space !='' ">
+                                    {{element.space}}
+                                  </ng-container>
+                                  <ng-container *ngIf="element.space =='' ">
+                                    <input matInput type="text">
+                                  </ng-container>
+
                             </td>
                         </ng-container>
 
-                       
-                        <ng-container matColumnDef="buildingtype">
-                            <th mat-header-cell *matHeaderCellDef> Building Type </th>
-                            <td mat-cell *matCellDef="let element"> 
-                                {{element.buildingtype}}
-                            </td>
-                        </ng-container>
-            
-                    
-                        <ng-container matColumnDef="avgpplwperft2">
-                            <th mat-header-cell *matHeaderCellDef> Average PPL ft2</th>
+
+                        <ng-container matColumnDef="plugloadappliance">
+                            <th mat-header-cell *matHeaderCellDef> plugloadappliance</th>
                             <td mat-cell *matCellDef="let element">
-                                {{element.avgpplwperft2}}
+                                {{element.plugloadappliance}}
                             </td>
                         </ng-container>
-            
-                        <ng-container matColumnDef="avgpplwperm2">
-                            <th mat-header-cell *matHeaderCellDef> Average PPL mt2 </th>
+
+                        <ng-container matColumnDef="Yearofinstallation">
+                            <th mat-header-cell *matHeaderCellDef> Yearofinstallation</th>
                             <td mat-cell *matCellDef="let element">
-                                {{element.avgpplwperm2}}
+                                <input matInput type="text">
                             </td>
                         </ng-container>
-            
-                        <ng-container matColumnDef="totalareaft2">
-                            <th mat-header-cell *matHeaderCellDef> Total Area in ft2 </th>
+
+                        <ng-container matColumnDef="Average Power">
+                            <th mat-header-cell *matHeaderCellDef> Average Power</th>
                             <td mat-cell *matCellDef="let element">
-                                {{element.totalareaft2}}
+                                <input matInput type="text">
                             </td>
                         </ng-container>
-            
-                        <ng-container matColumnDef="totalaream2">
-                            <th mat-header-cell *matHeaderCellDef> Total Area in mt2</th>
+
+                        <ng-container matColumnDef="Connected stock of equipment">
+                            <th mat-header-cell *matHeaderCellDef> Connected stock of equipment</th>
                             <td mat-cell *matCellDef="let element">
-                                {{element.totalaream2}}
+                                <input matInput type="text">
                             </td>
                         </ng-container>
-                      
-                        <tr mat-header-row *matHeaderRowDef="displayOPTCColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayOPTCColumns;"></tr>
-                      </table>
-                      
-                      
-            </span>
+
+                        <ng-container matColumnDef="Average operating hours per day">
+                            <th mat-header-cell *matHeaderCellDef> Average operating hours per day</th>
+                            <td mat-cell *matCellDef="let element">
+                                <input matInput type="text">
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayOptBColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayOptBColumns;"></tr>
+                    </table>
+
+
+                </span>
 
                 <!-- plugload available -->
 
                 <span *ngIf="formgroup.controls.plugloads.value == 3" class="container-fluid beet-container">
-                   
-                        
+
+
                     <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> Please be ready with type, number, power rating (wattage)
-                            details
-                            of the lighting fixtures</p>
+                        <p><span class="notes-style"> Note:</span> Note: Options available for selected cases only.
+                            Select the most suitable type and closest area to your building.
+                            If the values in the options are far from your building values, please opt for Option B.</p>
                     </div>
 
-             
-               
+
+
                     <table mat-table [dataSource]="optcDataSource" class="mat-elevation-z8">
 
                         <ng-container matColumnDef="select">
@@ -133,51 +141,51 @@
                             </td>
                         </ng-container>
 
-                       
+
                         <ng-container matColumnDef="buildingtype">
                             <th mat-header-cell *matHeaderCellDef> Building Type </th>
-                            <td mat-cell *matCellDef="let element"> 
+                            <td mat-cell *matCellDef="let element">
                                 {{element.buildingtype}}
                             </td>
                         </ng-container>
-            
-                    
+
+
                         <ng-container matColumnDef="avgpplwperft2">
                             <th mat-header-cell *matHeaderCellDef> Average PPL ft2</th>
                             <td mat-cell *matCellDef="let element">
                                 {{element.avgpplwperft2}}
                             </td>
                         </ng-container>
-            
+
                         <ng-container matColumnDef="avgpplwperm2">
                             <th mat-header-cell *matHeaderCellDef> Average PPL mt2 </th>
                             <td mat-cell *matCellDef="let element">
                                 {{element.avgpplwperm2}}
                             </td>
                         </ng-container>
-            
+
                         <ng-container matColumnDef="totalareaft2">
                             <th mat-header-cell *matHeaderCellDef> Total Area in ft2 </th>
                             <td mat-cell *matCellDef="let element">
                                 {{element.totalareaft2}}
                             </td>
                         </ng-container>
-            
+
                         <ng-container matColumnDef="totalaream2">
                             <th mat-header-cell *matHeaderCellDef> Total Area in mt2</th>
                             <td mat-cell *matCellDef="let element">
                                 {{element.totalaream2}}
                             </td>
                         </ng-container>
-                      
+
                         <tr mat-header-row *matHeaderRowDef="displayOPTCColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayOPTCColumns;"></tr>
-                      </table>
-                      
-                      
-            </span>
+                    </table>
 
-                
+
+                </span>
+
+
 
             </div>
         </fieldset>
@@ -192,12 +200,12 @@
                 <p>Select the option "Yes" or "No" and enter the quantity</p>
                 <div class="example-container mat-elevation-z8">
 
-                    <mat-table #table [dataSource]="dataSource">
+                    <mat-table #table [dataSource]="plugloadOptionsDataSource">
 
                         <!-- operations Column -->
-                        <ng-container matColumnDef="operations">
+                        <ng-container matColumnDef="plugloadops">
                             <mat-header-cell *matHeaderCellDef> Operations and pratices </mat-header-cell>
-                            <mat-cell *matCellDef="let option"> {{option.operations}} </mat-cell>
+                            <mat-cell *matCellDef="let option"> {{option.plugloadops}} </mat-cell>
                         </ng-container>
 
                         <!-- options Column -->

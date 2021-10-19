@@ -32,7 +32,7 @@ selectedValue: string;
   ventilationvalue:number;
   selCountryCode: string;
   heatingData:HeatingEquip;
-  coolingRData:CoolingEquip
+  coolingData:CoolingEquip
 
 
   constructor(private fb: FormBuilder,public dialog: MatDialog,
@@ -69,7 +69,7 @@ selectedValue: string;
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
     this.beetService.getGeneralDetails().subscribe(res => {
       this.heatingData = res.success.heatingequipment;
-      this.coolingRData = res.success.coolingequipment;
+      this.coolingData = res.success.coolingequipment;
     });
 
   }

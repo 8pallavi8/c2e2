@@ -18,8 +18,8 @@
 
         <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
             <mat-label>Select</mat-label>
-            <mat-select formControlName="chamberSurface">
-                <mat-option *ngFor="let type of chamberSurfaceTypes" [value]="type">{{type}}</mat-option>
+            <mat-select formControlName="surfacecondition" >
+                <mat-option *ngFor="let type of surfaceemittance" [value]="type">{{type}}</mat-option>
             </mat-select>
         </mat-form-field><br>
     </div>
@@ -39,7 +39,7 @@
 </div>
 
 <div class="button-dialog" mat-dialog-actions>
-    <button mat-raised-button color="primary" style="color: #fff;"  type="submit"  (click)="submitInput()" cdkFocusInitial>Click to
+    <button mat-raised-button color="primary" style="color: #fff;"  type="submit"  (click)="postcalculateRAir()" cdkFocusInitial>Click to
         Return</button>
 </div>
 </form>

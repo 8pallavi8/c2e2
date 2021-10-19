@@ -11,7 +11,7 @@ export class beetService {
 
     private selectedCountry = new ReplaySubject<string>(1);
 
-    private generalDetail =  new ReplaySubject<any>(1);
+    private generalDetail = new ReplaySubject<any>(1);
     constructor(private fb: FormBuilder, private http: HttpClient) {
     }
 
@@ -19,7 +19,7 @@ export class beetService {
         this.generalDetail.next(genralDetails);
     }
 
-    public getGeneralDetails(): ReplaySubject<any>{
+    public getGeneralDetails(): ReplaySubject<any> {
         return this.generalDetail;
     }
     setSelectedCountry(country: string) {
@@ -37,16 +37,33 @@ export class beetService {
 
     getGeneralData(countyryCode: string): Observable<any> {
         let params = new HttpParams();
-        params=params.append('countrycode', countyryCode);
+        params = params.append('countrycode', countyryCode);
         console.log(countyryCode)
         return this.http.get(environment.baseUrl + ':9998/api/user/v1/getgeneraldata', { params: params });
     }
+
+    calculateRAir(countrycode: string, surfacecondition: string, thickness: number): Observable<any> {
+        let params = new HttpParams();
+        params = params.append('countrycode', countrycode);
+        params = params.append('surfacecondition', surfacecondition);
+        params = params.append('thickness', 'thickness');
+        return this.http.get(environment.baseUrl + ':9998/api/user/v1/calculaterair',)
+    }
+
 
     postGeneralData(payload: any): Observable<any> {
         console.log(payload);
         return this.http.post(environment.baseUrl + ':9998/api/user/v1/postgeneraldata', payload);
     }
 
+
+    postcalculateRAir(payload: any): Observable<any>{
+        return this.http.post(environment.baseUrl + ':9998/api/user/v1/calculaterair', payload);
+    }
+
+    postcalculateAdvancedMaterial(payload: any): Observable<any>{
+        return this.http.post(environment.baseUrl + ':9998/api/user/v1/calculateradvancedmaterial', payload);
+    }
 
 
 }

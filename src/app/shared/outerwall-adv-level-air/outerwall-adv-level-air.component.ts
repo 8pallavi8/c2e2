@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { beetService } from '../services/beet.service';
 
 @Component({
   selector: 'app-outerwall-adv-level-air',
@@ -8,25 +9,41 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./outerwall-adv-level-air.component.scss']
 })
 export class OuterwallAdvLevelAirComponent implements OnInit {
-  chamberSurfaceTypes:string[]=['Superficies de mediana o latanemitancia(caso general)','una o ambas superficies de baja emitancia']
-  airLayerThicknessList:number[]=[5,10,20,50,60,70,80,90,100]
+  surfaceemittance: string[];
+  airLayerThicknessList: number[] = [5, 10, 20, 50, 60, 70, 80, 90, 100];
+  selCountryCode: string;
 
   OuterWallFG: FormGroup;
-  constructor(public dialogRef: MatDialogRef<OuterwallAdvLevelAirComponent>,private fb:FormBuilder) { }
+  constructor(public dialogRef: MatDialogRef<OuterwallAdvLevelAirComponent>, private fb: FormBuilder, private beetService: beetService) { }
 
   ngOnInit(): void {
     this.OuterWallFG = this.createForm();
+    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
+    this.beetService.getGeneralDetails().subscribe(res => {
+      this.surfaceemittance = res.success.airtabledropdown.surfaceemittance;
+    });
   }
   createForm(): FormGroup {
     return this.fb.group({
-      chamberSurface: ['', Validators.compose([Validators.required])],
+      surfacecondition: ['', Validators.compose([Validators.required])],
       airLayerThickness: ['', Validators.compose([Validators.required])],
     });
   }
   onNoClick(): void {
     this.dialogRef.close();
   }
-  submitInput():void{
-    this.dialogRef.close({"chamberSurface":this.OuterWallFG.controls['chamberSurface'].value ,"airLayerThickness":this.OuterWallFG.controls['airLayerThickness'].value });
+
+
+  postcalculateRAir(): void {
+    var payload: any = {
+      "countrycode": this.selCountryCode,
+      "surfacecondition": this.OuterWallFG.controls.surfacecondition.value,
+      "airLayerThickness": this.OuterWallFG.controls.airLayerThickness.value
+    }
+    this.beetService.postcalculateRAir(payload).subscribe(res =>{
+      console.log(res);
+      this.onNoClick();
+    })
   }
+
 }

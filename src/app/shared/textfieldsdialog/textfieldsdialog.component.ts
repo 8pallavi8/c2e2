@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -9,33 +10,29 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class textfieldsdialogComponent implements OnInit {
+  OuterWallAdvFG:FormGroup;
 
-  @Input() title: string;
-  @Input() text: string;
-  @Input() notes: string;
-  @Input() btnOkText: string;
-  @Input() btnCancelText: string;
-  @Input() inputfield1text:string;
-  @Input() inputfield2text:string;
-  enteredValue1:number;
-  enteredValue2:number;
-
-  constructor(private activeModal: NgbActiveModal) { }
+ 
+  constructor(private activeModal: NgbActiveModal,private fb: FormBuilder,private dialogRef: MatDialogRef<textfieldsdialogComponent>) { }
 
   ngOnInit(): void {
+    this.OuterWallAdvFG=this.createForm();
   }
 
-  public decline() {
-    this.activeModal.close(false);
+  createForm(): FormGroup {
+    return this.fb.group({
+      thickness: ['', Validators.compose([Validators.required])],
+    });
   }
 
   public accept() {
-    this.activeModal.close(this.enteredValue1 ? this.enteredValue1  : this.enteredValue2);
+    this.dialogRef.close(this.OuterWallAdvFG.controls.thickness.value);
   }
 
-  public dismiss() {
-    this.activeModal.dismiss();
+  onNoClick(): void {
+    this.dialogRef.close();
   }
+
   /* 
   enteredPlugLoad() {
     this.dialogRef.close(this.ventilationcubicmt ? this.ventilationcubicmt  : this.ventilationcubicft);

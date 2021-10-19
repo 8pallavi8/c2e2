@@ -21,7 +21,7 @@ export interface BuildingLayerValues {
   Resistenciatermica: number;
 }
 
-export interface outerRValues {
+export interface OuterRValues {
   imagepath: string;
   rvalue: number;
   units: string;
@@ -36,8 +36,8 @@ export interface outerRValues {
 export class BuildingenvelopedetailsComponent implements OnInit {
 
   @Input() countryCode: string;
-  outerRData: outerRValues[];
-  roofRData: outerRValues[];
+  outerRData: OuterRValues[];
+  roofRData: OuterRValues[];
   formgroup: FormGroup;
   outerWallRValue: number;
   outerWallRUnits: string[] = ['m2.degC/W', 'ft2.degF.h/BTU']
@@ -117,6 +117,9 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       this.roofRData = res.success.rvalueroof;
     });
   }
+
+
+  
 
 
   onOptionsSelected(event) {

@@ -16,7 +16,7 @@ export interface OPTIONS {
 }
 
 export interface PlugLoadAvailableTable {
-  select?:number;
+  select?: number;
   buildingtype: string;
   avgpplwperft2: number;
   avgpplwperm2: number;
@@ -24,11 +24,17 @@ export interface PlugLoadAvailableTable {
   totalaream2: number;
 }
 
-
 export interface PlugLoadGuideTable {
   space: string;
   plugloadappliance: string[];
 }
+
+export interface PlugLoadOptionsTable {
+  plugloadops: string[];
+  options?:string;
+  quantity?: number;
+}
+
 
 @Component({
   selector: 'app-plugloads',
@@ -38,7 +44,7 @@ export interface PlugLoadGuideTable {
 
 export class PlugloadsComponent implements OnInit {
   formgroup: FormGroup;
-  displayedColumns = ['operations', 'options', 'quantity'];
+  displayedColumns = ['plugloadops', 'options', 'quantity'];
   selectionOptions = ['Yes', 'No', 'NA'];
   plugloadvalue: number;
   plugLoadUnits: string = 'watts per square meter';
@@ -68,18 +74,16 @@ export class PlugloadsComponent implements OnInit {
   dialogref: any;
   selCountryCode: string;
   selecteditems: string[];
-  availablePlugLoaddataSource: MatTableDataSource<PlugLoadGuideTable> ; 
-  guidePlugLoaddataSource:any;
   plugLoadPredefined: PlugLoadAvailableTable[];
-  plugLoadGuide:PlugLoadGuideTable[];
-  selectedElement:PlugLoadAvailableTable;
-  displayOPTCColumns = ["select","buildingtype","avgpplwperft2","avgpplwperm2","totalareaft2","totalaream2"];
-  displayOptBColumns=[];
-  
-  
+  plugLoadGuide: PlugLoadGuideTable[];
+  selectedElement: PlugLoadAvailableTable;
+  displayOPTCColumns = ["select", "buildingtype", "avgpplwperft2", "avgpplwperm2", "totalareaft2", "totalaream2"];
+  displayOptBColumns = ["space","plugloadappliance","Yearofinstallation","Average Power","Connected stock of equipment","Average operating hours per day"];
+  optcDataSource: MatTableDataSource<PlugLoadAvailableTable>;
+  optbDataSource: MatTableDataSource<PlugLoadGuideTable>;
+  plugloadOptionsDataSource:MatTableDataSource<PlugLoadOptionsTable>;
+  plugloadoptions:PlugLoadOptionsTable[];
 
- optcDataSource : MatTableDataSource<PlugLoadAvailableTable> ; 
-   
   constructor(private fb: FormBuilder, public dialog: MatDialog, private inputDialog: InputdialogService,
     private beetService: beetService) { }
 
@@ -93,10 +97,11 @@ export class PlugloadsComponent implements OnInit {
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
     this.beetService.getGeneralDetails().subscribe(res => {
       this.plugLoadPredefined = res.success.plugloadoptctable;
-
-     this.plugLoadGuide = res.success.plugloadoptbtable;
-      
-      this.availablePlugLoaddataSource = new MatTableDataSource(this.plugLoadGuide);
+      this.plugLoadGuide = res.success.plugloadoptbtable;
+      this.plugloadoptions=res.success.plugloadops;
+      console.log(this.plugloadoptions);
+      this.plugloadOptionsDataSource=new MatTableDataSource(this.plugloadoptions);
+      this.optbDataSource = new MatTableDataSource(this.plugLoadGuide);
       this.optcDataSource = new MatTableDataSource(this.plugLoadPredefined);
     });
   }
