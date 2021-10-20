@@ -31,14 +31,6 @@
             </td>
         </ng-container>
 
-        
-        <ng-container matColumnDef="THICKNESS">
-            <th mat-header-cell *matHeaderCellDef>Enter Thickness</th>
-            <td mat-cell *matCellDef="let element">
-                <input matInput type="text">
-            </td>
-        </ng-container>
-
 
         <ng-container matColumnDef="MATERIAL SUB-CATEGORY 1">
             <th mat-header-cell *matHeaderCellDef> MATERIAL SUB-CATEGORY 1 </th>
@@ -66,12 +58,13 @@
             <td mat-cell *matCellDef="let element"> {{element.thermcalconductivityto}} </td>
         </ng-container>
 
-        
-
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
+
+    <div class="button-dialog" mat-dialog-actions>
+        <button mat-raised-button color="primary" style="color: #fff;"  type="submit"  (click)="postcalculateAdvancedMaterial()" cdkFocusInitial>Ok</button>
+    </div>
 </form>
 </div>

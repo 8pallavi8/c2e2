@@ -56,6 +56,7 @@ selectedValue: string;
       ventilationKnown: ['0', Validators.compose([Validators.required])],
       ventilationUnits: ['', Validators.compose([Validators.required])],
       infiltration: ['', Validators.compose([Validators.required])],
+      infiltrationknown:['', Validators.compose([Validators.required])],
       economizer: ['', Validators.compose([Validators.required])],
       avgIndoorAirTemp: ['', Validators.compose([Validators.required])],
       HvacCompressorInstalled: ['', Validators.compose([Validators.required])],

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { beetService } from '../services/beet.service';
 import { textfieldsdialogComponent } from '../textfieldsdialog/textfieldsdialog.component';
@@ -26,16 +26,18 @@ export interface OtherData{
 })
 
 export class OuterwallRadvancedleveldialogComponent implements OnInit {
-  displayedColumns:string[]=["MATERIAL SUB-CATEGORY 1","MATERIAL SUB-CATEGORY 2","DENSIDAD APARENTE","CONDUCTIVIDAD TERMICA","CONDUCTIVIDAD TERMICA(to)","selected","THICKNESS"];
+  displayedColumns:string[]=["MATERIAL SUB-CATEGORY 1","MATERIAL SUB-CATEGORY 2","DENSIDAD APARENTE","CONDUCTIVIDAD TERMICA","CONDUCTIVIDAD TERMICA(to)","selected"];
   OuterWallAdvFG:FormGroup;
   rvalueadvancedmaterialData:AdvancedMaterialTable[];
   otherTableData:OtherData[];
   dataSource:any;
-  dialog: any;
-  
+  thermalConductivitySelected:OtherData;
+  selectedTable:AdvancedMaterialTable;
+  enteredThickness:number;
 
   constructor(public dialogRef: MatDialogRef<OuterwallRadvancedleveldialogComponent>,
     private fb: FormBuilder,
+    public dialog: MatDialog,
     private beetService:beetService,
     public innerDialogRef: MatDialogRef<textfieldsdialogComponent>) { }
 
@@ -59,43 +61,43 @@ export class OuterwallRadvancedleveldialogComponent implements OnInit {
     console.log(event.value);
    let tempData = this.rvalueadvancedmaterialData.find(ele => ele.mainmaterial == event.value);
    console.log(tempData.otherdata);
+   this.selectedTable = tempData;
    this.dataSource = new MatTableDataSource(tempData.otherdata);
   }
 
 
   selectedR(event: any, row:OtherData){
     this.openThicknessDialog();
-    console.info("clicked", event);
+    console.log("clicked", event);
+    console.log(row);
     console.log(row.thermcalconductivityfrom);
+    this.thermalConductivitySelected=row;
     //this.dialogRef.close(row.thermcalconductivityfrom); 
   }
 
   public openThicknessDialog() {
     const dialogref = this.dialog.open(textfieldsdialogComponent, {
-      width: '80%',
+      width: '50%',
       autoFocus: false,
       maxHeight: '100vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      console.log(result);
-    
+      this.enteredThickness=result;
+      console.log("valueeeee"+this.enteredThickness);
     });
   }
 
-
-
   postcalculateAdvancedMaterial(): void {
+    console.log(this.thermalConductivitySelected)
     var payload: any = {
-   
-      "thermalconductivity": this.OuterWallAdvFG.controls.surfacecondition.value,
-      "thickness": this.OuterWallAdvFG.controls.airLayerThickness.value
+      "thermalconductivity": this.thermalConductivitySelected.thermcalconductivityfrom,
+      "thickness": Number(this.enteredThickness)
     }
-    this.beetService.postcalculateRAir(payload).subscribe(res =>{
+    this.beetService.postcalculateAdvancedMaterial(payload).subscribe(res =>{
       console.log(res);
-      this.onNoClick();
+      this.dialogRef.close(res.success);
     })
   }
-
 
 
   onNoClick(): void {

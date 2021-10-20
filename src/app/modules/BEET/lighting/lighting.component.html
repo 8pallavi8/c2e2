@@ -13,17 +13,21 @@
             </div>
         </form>
 
-        <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+        <table mat-table [dataSource]="lightingOptionsDataSource" multiTemplateDataRows>
 
-
-
-
-
-            <ng-container matColumnDef="Technology">
+            <ng-container matColumnDef="technology">
                 <th mat-header-cell *matHeaderCellDef> Technology </th>
+                <td mat-cell *matCellDef="let element;let i = dataIndex" [attr.rowspan]="6"
+                [style.display]="getStyleDisplay(i,6) ? '' : 'none'">
+                    {{element.technology}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="lightingimagepath">
+                <th mat-header-cell *matHeaderCellDef> Technology Image </th>
                 <td mat-cell *matCellDef="let element ;let i = dataIndex" [attr.rowspan]="6"
                     [style.display]="getStyleDisplay(i,6) ? '' : 'none' ">
-                    <img [src]="element.Technology" />
+                    <img [src]="element.lightingimagepath" />
                 </td>
             </ng-container>
 
@@ -73,6 +77,8 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row class="mat-row-class" *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+
+
 
     </div>
 </fieldset>

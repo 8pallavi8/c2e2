@@ -21,7 +21,7 @@ export class textfieldsdialogComponent implements OnInit {
 
   createForm(): FormGroup {
     return this.fb.group({
-      thickness: ['', Validators.compose([Validators.required])],
+      thickness: [, Validators.compose([Validators.required])],
     });
   }
 

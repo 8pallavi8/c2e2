@@ -38,11 +38,11 @@ export class OuterwallAdvLevelAirComponent implements OnInit {
     var payload: any = {
       "countrycode": this.selCountryCode,
       "surfacecondition": this.OuterWallFG.controls.surfacecondition.value,
-      "airLayerThickness": this.OuterWallFG.controls.airLayerThickness.value
+      "thickness": this.OuterWallFG.controls.airLayerThickness.value
     }
     this.beetService.postcalculateRAir(payload).subscribe(res =>{
-      console.log(res);
-      this.onNoClick();
+      console.log(res.success);
+      this.dialogRef.close(res.success);
     })
   }
 

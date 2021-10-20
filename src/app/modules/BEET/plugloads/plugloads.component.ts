@@ -98,7 +98,7 @@ export class PlugloadsComponent implements OnInit {
     this.beetService.getGeneralDetails().subscribe(res => {
       this.plugLoadPredefined = res.success.plugloadoptctable;
       this.plugLoadGuide = res.success.plugloadoptbtable;
-      this.plugloadoptions=res.success.plugloadops;
+      this.plugloadoptions=res.success.plugloadoperations;
       console.log(this.plugloadoptions);
       this.plugloadOptionsDataSource=new MatTableDataSource(this.plugloadoptions);
       this.optbDataSource = new MatTableDataSource(this.plugLoadGuide);

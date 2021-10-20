@@ -51,6 +51,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   selectedMaterial: string;
   SHGC: number;
   selCountryCode: string;
+  selProvince:string;
   layersList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   elementsList = ["Camara de aire", "Ladrillo comun-picture options", "Select more from list of materials"]
   displayedColumns: string[] = ['Layer', 'Capadelelementoconstructivo', 'Espesordecadacapa', 'Resistenciatermica'];
@@ -108,9 +109,13 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       windowrUnits: ['', Validators.compose([Validators.required])],
       SHGC: ['', Validators.compose([Validators.required])],
       SHGCknown: ['0', Validators.compose([Validators.required])],
-      wwr: ['0', Validators.compose([Validators.required])]
+      wwr: ['0', Validators.compose([Validators.required])],
+      wwrKnown: ['0', Validators.compose([Validators.required])],
+      wwrGuide: ['0', Validators.compose([Validators.required])],
     })
-    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
+    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res;});
+    this.beetService.getSelectedProvince().subscribe(res => { this.selProvince = res; console.log(res); });
+
     this.beetService.getGeneralDetails().subscribe(res => {
       // console.log("building Envelop "+JSON.stringify(res.success.buildingdata));
       this.outerRData = res.success.rvaluewall;
@@ -118,60 +123,32 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     });
   }
 
-
-  
-
-
   onOptionsSelected(event) {
     console.log(event.value);
     if (event.value == 'Camara de aire') {
-      this.openCamaraDie();
+      this.openCamaraDie(0);
     }
     else if (event.value == 'Ladrillo comun-picture options') {
       this.openLadrillo();
     }
     else if (event.value == 'Select more from list of materials') {
-      this.openlistOfMaterials();
+      this.openlistOfMaterials(0);
     }
   }
 
-
-  onOptionsSelectedroof(event) {
-    console.log(event.value);
-    if (event.value == 'Camara de aire') {
-      this.openCamaraDie();
-    }
-    else if (event.value == 'Ladrillo comun-picture options') {
-      this.openLadrilloroof();
-    }
-    else if (event.value == 'Select more from list of materials') {
-      this.openlistOfMaterials();
-    }
-  }
-
-
-  public openLadrilloroof() {
-    const dialogref = this.dialog.open(RoofradvancedComponent, {
-      width: '80%',
-      autoFocus: false,
-      maxHeight: '100vh',
-    });
-    dialogref.afterClosed().subscribe(result => {
-      console.log(result);
-      this.addRoofLayerValues('', result);
-
-    });
-  }
-
-  public openCamaraDie() {
+  public openCamaraDie(typeofroof:number) {
     const dialogref = this.dialog.open(OuterwallAdvLevelAirComponent, {
       width: '60%',
       autoFocus: false,
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      this.addBuildingLayerValues(result.airLayerThickness, '');
-      console.log(result.airLayerThickness, result.chamberSurface);
+      console.log(result.thickness, result.rvalue);
+      if(typeofroof == 0 ){
+        this.addOuterWallLayerValues(result.thickness, result.rvalue);
+      }else {
+        this.addRoofLayerValues(result.thickness, result.rvalue);
+      } 
     });
   }
 
@@ -182,40 +159,45 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       maxHeight: '100vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      console.log(result);
-      this.addBuildingLayerValues('', result);
-
+      if(result!=undefined){
+        this.addOuterWallLayerValues('', result);
+      }
+     
     });
   }
 
 
-  public openlistOfMaterials() {
+  public openlistOfMaterials(typeofroof:number) {
     const dialogref = this.dialog.open(OuterwallRadvancedleveldialogComponent, {
       width: '60%',
       autoFocus: false,
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      console.log(result);
+      console.log("adv" + result);
+      if(typeofroof == 0 ){
+        this.addOuterWallLayerValues(result.thickness, result.rvalue);
+      }else {
+        this.addRoofLayerValues(result.thickness, result.rvalue);
+      }      
     });
   }
 
 
-  public addBuildingLayerValues(airLayerThickness, Rvalue) {
+  public addOuterWallLayerValues(thickness, Rvalue) {
     let layerInput: BuildingLayerValues;
     console.log("callingLayer ");
     layerInput =
-    {
-      Layer: this.selectedLayerValue,
+    { Layer: this.selectedLayerValue,
       Capadelelementoconstructivo: this.selectedCapa,
-      Espesordecadacapa: airLayerThickness,
+      Espesordecadacapa: thickness,
       Resistenciatermica: Rvalue
     }
     this.layerValues.splice(this.selectedLayerValue, 1, layerInput)
     this.calculateSum(this.layerValues);
     this.dataSource = new MatTableDataSource(this.layerValues);
+    this.selectedCapa= '';
   }
-
 
   public calculateSum(tempArray: BuildingLayerValues[]) {
     let avgLayerValue = null;
@@ -228,9 +210,34 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     last.Resistenciatermica = avgLayerValue;
   }
 
+  onOptionsSelectedroof(event) {
+    console.log(event.value);
+    if (event.value == 'Camara de aire') {
+      this.openCamaraDie(1);
+    }
+    else if (event.value == 'Ladrillo comun-picture options') {
+      this.openLadrilloroof();
+    }
+    else if (event.value == 'Select more from list of materials') {
+      this.openlistOfMaterials(1);
+    }
+  }
 
-  public addRoofLayerValues(airLayerThickness, Rvalue) {
+  public openLadrilloroof() {
+    const dialogref = this.dialog.open(RoofradvancedComponent, {
+      width: '80%',
+      autoFocus: false,
+      maxHeight: '100vh',
+    });
+    dialogref.afterClosed().subscribe(result => {
+      console.log(result);
+      if(result!=undefined){
+        this.addRoofLayerValues('', result);
+      }
+    });
+  }
 
+  public addRoofLayerValues(thickness, Rvalue) {
     let layerInput: BuildingLayerValues;
     console.log("callingLayer ");
     //this.selectedLayerValue
@@ -238,78 +245,15 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     {
       Layer: this.selectedRoofLayerValue,
       Capadelelementoconstructivo: this.selectedMaterial,
-      Espesordecadacapa: airLayerThickness,
+      Espesordecadacapa: thickness,
       Resistenciatermica: Rvalue
     }
-
     this.roofLayerValues.splice(this.selectedRoofLayerValue, 1, layerInput)
     this.calculateSum(this.roofLayerValues);
     this.roofdataSource = new MatTableDataSource(this.roofLayerValues);
+    this.selectedMaterial= '';
   }
 
-  /* public openOuterWallImagesR() {
-    const dialogref = this.dialog.open(OuterwallAdvLevelbrickComponent, {
-      width: '60%',
-      autoFocus: false,
-      maxHeight: '90vh',
-    });
-    dialogref.afterClosed().subscribe(result => {
-      //this.outerWallRValue = result;
-      console.log("test");
-      console.log(result);
-      this.addBuildingLayerValues(result);
-    });
-  } */
-
-
-  /* public openOuterWallAdvancedR() {
-    const dialogref = this.dialog.open(OuterwallRadvancedleveldialogComponent, {
-      width: '60%',
-      autoFocus: false,
-      maxHeight: '90vh',
-    });
-    dialogref.afterClosed().subscribe(result => {
-      this.addBuildingLayerValues(result);
-      console.log(result);
-    });
-  } */
-
-  public openRoofR() {
-    this.inputDialog.entervalue('R Value-Roof',
-      'I know the R value of the Roof for my building.',
-      'You may choose to enter the values for any of the units mentioned below, Necessary units conversions will be made by the tool for respective calculations.',
-      'OK',
-      'cancel',
-      'R value in [sqmt.°C/W]:',
-      'R value in [sqft.°F/BTU]:')
-      .then((confirmed) => { this.RoofRValue = confirmed })
-      .catch(() => console.log('User dismissed the dialog'));
-  }
-
-  public openRoofImagesR() {
-    const dialogref = this.dialog.open(RvalueImagedialogComponent, {
-      width: '60%',
-      autoFocus: false,
-      maxHeight: '90vh',
-    });
-    dialogref.afterClosed().subscribe(result => {
-      this.RoofRValue = result;
-      console.log(result);
-    });
-  }
-
-
-  public openWindowR() {
-    this.inputDialog.entervalue('R Value-Window',
-      'I know the R value of the Window for my building.',
-      'You may choose to enter the values for any of the units mentioned below, Necessary units conversions will be made by the tool for respective calculations.',
-      'OK',
-      'cancel',
-      'R value in [sqmt.°C/W]:',
-      'R value in [sqft.°F/BTU]:')
-      .then((confirmed) => { this.windowRValue = confirmed })
-      .catch(() => console.log('User dismissed the dialog'));
-  }
 
   public openWindowPredefinedR() {
     const dialogref = this.dialog.open(WindowRdialogComponent, {
@@ -321,19 +265,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       this.windowRValue = result;
       console.log(result);
     });
-
   }
 
-  showSHGC(state: boolean): void {
-    if (state == true) {
-      this.hasSHGC = true;
-      this.SHGC = 0;
-    }
-    else {
-      this.hasSHGC = false;
-      this.SHGC = 0.25;
-    }
-  }
 
   showWWR(state: boolean): void {
     if (state == true)
@@ -341,5 +274,18 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     else
       this.hasWWR = false;
   }
+
+
+   postCalculateshgc(): void {
+    var payload: any = {
+      "countrycode": this.selCountryCode,
+      "province": this.selProvince
+    }
+    console.log(payload);
+    this.beetService.postCalculateshgc(payload).subscribe(res =>{
+      console.log(res.success);
+      
+    })
+  } 
 
 }

@@ -104,7 +104,7 @@
             <span class="units-picker-component">
                 <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                     <mat-label>Net occupied floor area</mat-label>
-                    <input formControlName="Netoccupiedfloorarea" type="number" matInput required style="width: 185px;">
+                    <input formControlName="Netoccupiedfloorarea" (change)="calculateGross($event)" type="number" matInput required style="width: 185px;">
                     <mat-select [(ngModel)]="netUnits" placeholder="units" formControlName="netAreaUnits">
                         <mat-option value="square feet">square feet</mat-option>
                         <mat-option value="square meter">square meter</mat-option>
@@ -139,26 +139,33 @@
             </div>
             <div>
                 <mat-radio-group aria-label="Select an option" formControlName="occupancyDensity">
-                    <mat-radio-button (click)=showOccupancy(true) value="1">I only know the number of people occupying the building during normal working hours.</mat-radio-button><br>
+                    <mat-radio-button  value="1">I only know the number of people occupying the building during normal working hours.</mat-radio-button><br>
                     <mat-radio-button (click)=showOccupantDensity(true) value="2"> I know the occupant density of the building (m2/person or ft2/person).
                     </mat-radio-button><br>
-                    <mat-radio-button (click)=showOccupancy(false) value="3">I do not know the value.
+                    <mat-radio-button (click)=postCalculateOccupancyUnknown() value="3">I do not know the value.
                     </mat-radio-button>
                 </mat-radio-group>
             </div>
 
-            <span *ngIf="hasOccupancy">
+            <div class="field-button-calculate" *ngIf="genDetailsForm.controls.occupancyDensity.value==1">
                 <!-- <p style="margin-top: 1em;">I know the number of people occupying the building during normal
                             working hours.</p> -->
-                <b style="margin-top: 1em;">Number of people occupying the building :</b>
+                <b style="margin-top: 1.5rem;">Number of people occupying the building :</b>
                 <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
                     <mat-label>Enter value here</mat-label>
                     <input matInput placeholder="Enter value" formControlName="noOfPeopleOccupying" type="number">
                 </mat-form-field>
-            </span>
+
+                <div>
+
+                    <button mat-raised-button color="primary" style="margin-top: 1rem;" (click)="postCalculateOccupancyPeople()">Calculate Occupant Density</button>
+                    
+                </div>
+
+            </div>
 
 
-            <span *ngIf="hasOccupancyDensity">
+            <span *ngIf="genDetailsForm.controls.occupancyDensity.value==2">
                 <!-- <p style="margin-top: 1em;">I know the occupanct density of the building.</p> -->
 
                 <p class="fields-note">You may choose to enter the values for any of the units mentioned
@@ -172,16 +179,15 @@
                             type="number">
                         <mat-select [(ngModel)]="occupancyUnits"  placeholder="units"
                             formControlName="occupantDensityUnits">
-                            <mat-option value="square feet">square feet</mat-option>
-                            <mat-option value="square meter">square meter</mat-option>
+                            <mat-option value="square feet per person">square feet per person</mat-option>
+                            <mat-option value="square meter per person">square meter per person</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </span>
             </span>
 
-            <!--  <div>
-                        <b>Occupant density (square meter per person):{{occupancyValue}}</b>
-                    </div> -->
+                        <!-- <b>Occupant density:{{occupancyValue}}</b> -->
+                
         </fieldset>
 
         <fieldset>

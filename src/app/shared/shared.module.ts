@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
@@ -73,7 +73,7 @@ import { RoofradvancedComponent } from './roofradvanced/roofradvanced.component'
   ],
   
   // If Service do not have Provider == root then add the below code to use the service by other components.
-  providers: [ ConfirmationDialogService ],
+  providers: [ ConfirmationDialogService,NgbActiveModal ],
   entryComponents: [ ConfirmationDialogComponent ],
 })
 export class SharedModule { }

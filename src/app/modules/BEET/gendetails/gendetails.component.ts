@@ -38,6 +38,7 @@ export class GendetailsComponent implements OnInit {
   fuelunitslist = [];
   locationDetails: LocationDetails[] = [];
   buildingDetails: BuildingDetails[] = [];
+  selectedCountryCode : CountryTable;
 
   constructor(private fb: FormBuilder,
     public dialog: MatDialog,
@@ -54,7 +55,7 @@ export class GendetailsComponent implements OnInit {
       buildingType: ['', Validators.compose([Validators.required])],
       buildingSpaces: ['', Validators.compose([Validators.required])],
       yearOfConstruction: ['', Validators.compose([Validators.required])],
-      buildingGrossArea: [''],
+      buildingGrossArea: ['0'],
       Netoccupiedfloorarea: ['', Validators.compose([Validators.required])],
       Nooffloors: ['', Validators.compose([Validators.required])],
       Occupanyhoursperweek: ['', Validators.compose([Validators.required])],
@@ -72,16 +73,20 @@ export class GendetailsComponent implements OnInit {
 
     });;
     this.getcountryList();
+    console.log("code:"+this.countrylist)
   }
 
   getcountryList(): void {
     this.beetService.getCountries().subscribe(res => {
       this.countrylist = res.success.countrydetails;
+     
     });
+    
   }
 
   onChangeCountry(selectedCountry){
     this.beetService.setSelectedCountry(selectedCountry.value);
+    this.selectedCountryCode = selectedCountry.value;
     this.beetService.getGeneralData(selectedCountry.value.toString()).subscribe(res => {
       //console.log(res.success);
       this.locationDetails = res.success.locationdata;
@@ -95,6 +100,7 @@ export class GendetailsComponent implements OnInit {
 
 
   onChangeProvince(event){
+    this.beetService.setSelectedProvince(event.value);
     console.log(event.value);
     this.locationlist = this.locationDetails.find(ele => ele.province == event.value).locations;
   }
@@ -104,6 +110,13 @@ export class GendetailsComponent implements OnInit {
     this.spacesList = this.buildingDetails.find(ele => ele.buildingtype == event.value).buildingspaces;
   }
 
+  calculateGross(event:any){
+    if (this.genDetailsForm.controls.buildingGrossArea.value == 0) {
+      this.genDetailsForm.controls['buildingGrossArea'].setValue( event.target.value*1.1);
+    }
+  }
+
+/* 
   showOccupancy(state: boolean): void {
     if (state == true) {
       this.hasOccupancy = true;
@@ -113,26 +126,40 @@ export class GendetailsComponent implements OnInit {
     else {
       this.hasOccupancy = false;
       this.hasOccupancyDensity = false;
-
     }
   }
-
+ */
   showOccupantDensity(state: boolean): void {
     this.hasOccupancy = false;
     this.hasOccupancyDensity = true;
   }
 
-  public openOccupantDensity() {
-    this.inputDialog.entervalue('Occupancy people',
-      'I know the occupant density of the building in [square meter per person] or [square feet per person].',
-      'You may choose to enter the values for any of the units mentioned below, Necessary units conversions will be made by the tool for respective calculations.',
-      'OK',
-      'cancel',
-      'Occupant density in [square meter per person]:',
-      'Occupant density in  [square feet per person]:')
-      .then((confirmed) => { this.occupancyValue = confirmed })
-      .catch(() => console.log('User dismissed the dialog'));
-  }
+
+  postCalculateOccupancyPeople(): void {
+    var payload: any = {
+      "noofpeople": this.genDetailsForm.controls.noOfPeopleOccupying.value,
+      "buildinggrossarea": this.genDetailsForm.controls.buildingGrossArea.value,
+      "buildinggrossareaunit":this.genDetailsForm.controls.buildingSpaces.value
+    }
+    console.log(payload);
+    this.beetService.postCalculateOccupancyPeople(payload).subscribe(res =>{
+      console.log(res.success);
+      
+    })
+  } 
+
+   postCalculateOccupancyUnknown(): void {
+    var payload: any = {
+      "countrycode": this.selectedCountryCode,
+      "buildingtype": this.genDetailsForm.controls.buildingType.value,
+      "buildingspaces":this.genDetailsForm.controls.buildingSpaces.value
+    }
+    
+    this.beetService.postCalculateOccupancyUnknown(payload).subscribe(res =>{
+      console.log(res.success.occupantdensity);
+      
+    })
+  }  
 
 }
 

@@ -63,7 +63,7 @@
                         <b style="margin-top: 20px;padding-left: 2rem">Layer Number : </b>
                         <mat-form-field appearance="outline">
                             <mat-label>Select </mat-label>
-                            <mat-select [(value)]="selectedLayerValue">
+                            <mat-select [(value)]="selectedLayerValue" >
                                 <mat-option *ngFor="let layer of layersList" [value]="layer">{{layer}}</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -267,8 +267,8 @@
                     value of the window</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="SHGC">
-                <mat-radio-button (click)="showSHGC(true)" value="1">Yes, I know</mat-radio-button><br>
-                <mat-radio-button (click)="showSHGC(false)" value="2"> No, I don't know.</mat-radio-button>
+                <mat-radio-button  value="1">Yes, I know</mat-radio-button><br>
+                <mat-radio-button (click)="postCalculateshgc()" value="2"> No, I don't know.</mat-radio-button>
             </mat-radio-group>
 
             <span *ngIf="formgroup.controls.SHGC.value == 1">
@@ -305,8 +305,24 @@
                     <p style="margin-top: 1rem;">Please enter the WWR value here(value doesnot have units) : </p>
                     <mat-form-field appearance="outline">
                         <mat-label>Enter value here</mat-label>
-                        <input matInput placeholder="Enter value" required>
+                        <input matInput placeholder="Enter value" formControlName="wwrKnown" required>
                     </mat-form-field>
+                </div>
+            </span>
+
+            <span *ngIf="formgroup.controls.wwr.value == 2">
+                <p style="margin-top: 1em;">I dont't know.Help me in selecting suitable  window to wall ratio value for my building.</p>
+                <div style="display: flex;">
+                    <p style="margin-top: 1rem;">Please enter the WWR value in(%) by refering to pictures: </p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter value here</mat-label>
+                        <input matInput placeholder="Enter value" formControlName="wwrGuide" required>
+                    </mat-form-field>
+                    <div class="images-wwr"> 
+                    <img src="/assets/images/wwr/wwr1.jpg">
+                    <img src="/assets/images/wwr/wwr3.jpeg">
+                </div>
+
                 </div>
             </span>
         </fieldset>
