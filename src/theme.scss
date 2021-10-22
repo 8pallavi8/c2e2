@@ -1,10 +1,10 @@
 // src/theme.scss
 // 👇 Importing `Quicksand` font for headings, you can change this if you want
-@import url('https://fonts.googleapis.com/css2?family=Recursive:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import "~@angular/material/theming";
 @include mat-core();
 // 👇 1. Default theme
-$floradlite-primary: ( 50: #e1e9ec,
+$c2e2-primary: ( 50: #e1e9ec,
 100: #b3c8cf,
 200: #80a3af,
 300: #4d7e8f,
@@ -19,7 +19,7 @@ A200: #37a4ff,
 A400: #048cff,
 A700: #007fea,
 contrast: ( 50: #000000, 100: #000000, 200: #000000, 300: #ffffff, 400: #ffffff, 500: #ffffff, 600: #ffffff, 700: #ffffff, 800: #ffffff, 900: #ffffff, A100: #000000, A200: #000000, A400: #ffffff, A700: #ffffff, ));
-$floradlite-accent: ( 50: #e0f3fc,
+$c2e2-accent: ( 50: #e0f3fc,
 100: #b3e1f8,
 200: #80cdf4,
 300: #4db9ef,
@@ -34,15 +34,14 @@ A200: #cde3ff,
 A400: #9ac7ff,
 A700: #80b9ff,
 contrast: ( 50: #000000, 100: #000000, 200: #000000, 300: #000000, 400: #000000, 500: #ffffff, 600: #ffffff, 700: #ffffff, 800: #ffffff, 900: #ffffff, A100: #000000, A200: #000000, A400: #000000, A700: #000000, ));
-$floradlite-theme-primary: mat-palette($floradlite-primary);
-$floradlite-theme-accent: mat-palette($floradlite-accent);
-$floradlite-theme-warn: mat-palette($mat-red);
-$floradlite-theme: mat-light-theme($floradlite-theme-primary,
-$floradlite-theme-accent,
-$floradlite-theme-warn);
+$c2e2-theme-primary: mat-palette($c2e2-primary);
+$c2e2-theme-accent: mat-palette($c2e2-accent);
+$c2e2-theme-warn: mat-palette($mat-red);
+$c2e2-theme: mat-light-theme($c2e2-theme-primary,
+$c2e2-theme-accent,
+$c2e2-theme-warn);
 // Define a custom heading typography config
-$floradlite-typography: mat-typography-config($font-family: '"Recursive", sans-serif');
-@include angular-material-theme($floradlite-theme);
+$c2e2-typography: mat-typography-config($font-family: '"Roboto", sans-serif');
+@include angular-material-theme($c2e2-theme);
 // Override typography for all Angular Material, including mat-base-typography and all components.
-@include mat-core($floradlite-typography);
-   
+@include mat-core($c2e2-typography);

@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BuildingDetails, LocationDetails } from 'src/app/shared/models/models';
@@ -38,7 +38,7 @@ export class GendetailsComponent implements OnInit {
   fuelunitslist = [];
   locationDetails: LocationDetails[] = [];
   buildingDetails: BuildingDetails[] = [];
-  selectedCountryCode : CountryTable;
+  selectedCountryCode: CountryTable;
 
   constructor(private fb: FormBuilder,
     public dialog: MatDialog,
@@ -55,7 +55,7 @@ export class GendetailsComponent implements OnInit {
       buildingType: ['', Validators.compose([Validators.required])],
       buildingSpaces: ['', Validators.compose([Validators.required])],
       yearOfConstruction: ['', Validators.compose([Validators.required])],
-      buildingGrossArea: ['0'],
+      buildingGrossArea: [0],
       Netoccupiedfloorarea: ['', Validators.compose([Validators.required])],
       Nooffloors: ['', Validators.compose([Validators.required])],
       Occupanyhoursperweek: ['', Validators.compose([Validators.required])],
@@ -73,7 +73,7 @@ export class GendetailsComponent implements OnInit {
 
     });;
     this.getcountryList();
-    console.log("code:"+this.countrylist)
+    console.log("code:" + this.countrylist)
   }
 
   getcountryList(): void {
@@ -82,13 +82,13 @@ export class GendetailsComponent implements OnInit {
     });
   }
 
-  onChangeCountry(selectedCountry){
+  onChangeCountry(selectedCountry) {
     this.beetService.setSelectedCountry(selectedCountry.value);
     this.selectedCountryCode = selectedCountry.value;
     this.beetService.getGeneralData(selectedCountry.value.toString()).subscribe(res => {
       this.locationDetails = res.success.locationdata;
       this.buildingDetails = res.success.buildingdata;
-      console.log("General details "+res.success.buildingdata);
+      console.log("General details " + res.success.buildingdata);
       this.eletricityunitslist = res.success.energycostunits.electricitycostunits;
       this.fuelunitslist = res.success.energycostunits.fuelcostunits;
       this.beetService.setGeneralDetails(res);
@@ -96,57 +96,56 @@ export class GendetailsComponent implements OnInit {
   }
 
 
-  onChangeProvince(event){
+  onChangeProvince(event) {
     this.beetService.setSelectedProvince(event.value);
     console.log(event.value);
     this.locationlist = this.locationDetails.find(ele => ele.province == event.value).locations;
   }
 
-  onChangeBuildingType(event){
+  onChangeBuildingType(event) {
     this.beetService.setSelectedbuildingType(event.value);
     console.log(event.value);
     this.spacesList = this.buildingDetails.find(ele => ele.buildingtype == event.value).buildingspaces;
   }
 
 
-  onChangeBuildingSpaces(event){
+  onChangeBuildingSpaces(event) {
     this.beetService.setSelectedbuildingSpaces(event.value);
   }
 
-  calculateGross(event:any){
-    
-    if (this.genDetailsForm.controls.buildingGrossArea.value == 0 && this.genDetailsForm.controls.netAreaUnits.value != undefined)
-      {
-      this.genDetailsForm.controls['grossAreaUnits'].setValue(this.genDetailsForm.controls.netAreaUnits.value );
-      this.genDetailsForm.controls['buildingGrossArea'].setValue( event.target.value*1.1);
+  calculateGross(event: any) {
+
+    if (this.genDetailsForm.controls.buildingGrossArea.value == 0 && this.genDetailsForm.controls.netAreaUnits.value != undefined) {
+      this.genDetailsForm.controls['grossAreaUnits'].setValue(this.genDetailsForm.controls.netAreaUnits.value);
+      this.genDetailsForm.controls['buildingGrossArea'].setValue(event.target.value * 1.1);
     }
   }
 
   postCalculateOccupancyPeople(): void {
     var payload: any = {
-      "noofpeople": this.genDetailsForm.controls.noOfPeopleOccupying.value,
-      "buildinggrossarea": this.genDetailsForm.controls.buildingGrossArea.value,
-      "buildinggrossareaunit":this.genDetailsForm.controls.buildingSpaces.value
+      noofpeople: this.genDetailsForm.controls.noOfPeopleOccupying.value,
+      buildinggrossarea: this.genDetailsForm.controls.buildingGrossArea.value,
+      buildinggrossareaunit: this.genDetailsForm.controls.grossAreaUnits.value
     }
     console.log(payload);
-    this.beetService.postCalculateOccupancyPeople(payload).subscribe(res =>{
+    this.beetService.postCalculateOccupancyPeople(payload).subscribe(res => {
       console.log(res.success);
+      if (res.status == 'success') {
+        this.genDetailsForm.controls['occupantDensityKnown'].setValue(res.success.occupantdensity.toFixed(2));
+        this.genDetailsForm.controls['occupantDensityUnits'].setValue(res.success.occupantdensityunit);
+      }
+    });
+  }
 
-      this.genDetailsForm.controls['occupantDensityKnown'].setValue(res.success);
-      
-    })
-  } 
-
-   postCalculateOccupancyUnknown(): void {
+  postCalculateOccupancyUnknown(): void {
     var payload: any = {
       "countrycode": this.selectedCountryCode,
       "buildingtype": this.genDetailsForm.controls.buildingType.value,
-      "buildingspaces":this.genDetailsForm.controls.buildingSpaces.value
+      "buildingspaces": this.genDetailsForm.controls.buildingSpaces.value
     }
-    this.beetService.postCalculateOccupancyUnknown(payload).subscribe(res =>{
-      console.log(res.success.occupantdensity);
-      this.genDetailsForm.controls['occupantDensityKnown'].setValue(res.success.occupantdensity);
-      
-    })
-  }  
+    this.beetService.postCalculateOccupancyUnknown(payload).subscribe(res => {
+      this.genDetailsForm.controls['occupantDensityKnown'].setValue(res.success.occupantdensity.toFixed(2));
+        this.genDetailsForm.controls['occupantDensityUnits'].setValue(res.success.occupantdensityunit);
+    });
+  }
 }

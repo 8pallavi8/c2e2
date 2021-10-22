@@ -10,14 +10,9 @@ import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './layout/layout.module';
 import { ConfirmationDialogService } from './shared/services/confirmation-dialog.service';
 import { ConfirmationDialogComponent } from './shared/deleteconfirmationdialog/deleteconfirmationdialog.component';
-import { FormHeaderComponent } from './form-header/form-header.component';
 import { AutoFocusDirective } from './auto-focus.directive';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatStepperModule } from '@angular/material/stepper';
-import { DialogComponent } from './shared/dialog/dialog.component';
 import { OuterwallAdvLevelAirComponent } from './shared/outerwall-adv-level-air/outerwall-adv-level-air.component';
 import { OuterwallAdvLevelbrickComponent } from './shared/outerwall-adv-levelbrick/outerwall-adv-levelbrick.component';
-import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -35,7 +30,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
   ],
   declarations: [
     AppComponent,
-    FormHeaderComponent,
     AutoFocusDirective,
     OuterwallAdvLevelAirComponent,
     OuterwallAdvLevelbrickComponent,

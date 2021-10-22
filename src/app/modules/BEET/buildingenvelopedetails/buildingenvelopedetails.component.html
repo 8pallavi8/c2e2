@@ -6,16 +6,13 @@
             <h2>R Value (Thermal resistance) - Outer Wall </h2>
             <p>Do you know the R value?</p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R
-                    value of the wall.</p>
+                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="outerwallr">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                <mat-radio-button value="2"> I want to select from predefined types
-                    (pictures available for reference)
+                <mat-radio-button value="2"> I want to select from predefined types (pictures available for reference)
                 </mat-radio-button><br>
-                <mat-radio-button value="3"> Calculate the R value by adding custom
-                    layers from prelisted materials(Advanced level)</mat-radio-button>
+                <mat-radio-button value="3"> Calculate the R value by adding custom layers from prelisted materials(Advanced level)</mat-radio-button>
             </mat-radio-group><br><br>
 
             <!-- Outerwall R known -->
@@ -37,8 +34,7 @@
 
             <!-- Outerwall R Images -->
             <div *ngIf="formgroup.controls.outerwallr.value == 2" class="container-fluid">
-                <p>I want to select from predefined types.Please select most representative picture composition of your
-                    building outer wall.</p>
+                <p>I want to select from predefined types.Please select most representative picture composition of your building outer wall.</p>
                 <div class="row">
 
                     <mat-radio-group class="mat-radio-group-image" formControlName="rimages">
@@ -63,7 +59,7 @@
                         <b style="margin-top: 20px;padding-left: 2rem">Layer Number : </b>
                         <mat-form-field appearance="outline">
                             <mat-label>Select </mat-label>
-                            <mat-select [(value)]="selectedLayerValue" >
+                            <mat-select [(value)]="selectedLayerValue">
                                 <mat-option *ngFor="let layer of layersList" [value]="layer">{{layer}}</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -78,8 +74,7 @@
                         </mat-form-field>
                     </div>
 
-                    <table mat-table matSort matTableResponsive [dataSource]="dataSource"
-                        class="mat-elevation-z8 table-advancedR">
+                    <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8 table-advancedR">
                         <ng-container matColumnDef="Layer">
                             <th mat-header-cell *matHeaderCellDef> Layer</th>
                             <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
@@ -115,16 +110,13 @@
             <h2>R Value (Thermal resistance) - Roof </h2>
             <p>Do you know the R value?</p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R
-                    value of the wall.</p>
+                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="roofr">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                <mat-radio-button value="2"> I want to select from predefined types
-                    (pictures available for reference)
+                <mat-radio-button value="2"> I want to select from predefined types (pictures available for reference)
                 </mat-radio-button><br>
-                <mat-radio-button value="3">Calculate the R value by adding custom
-                    layers from prelisted materials (Advanced level)</mat-radio-button>
+                <mat-radio-button value="3">Calculate the R value by adding custom layers from prelisted materials (Advanced level)</mat-radio-button>
             </mat-radio-group><br><br>
 
             <!-- Roof R known -->
@@ -145,20 +137,19 @@
 
             <!-- Roof R images -->
             <div *ngIf="formgroup.controls.roofr.value == 2" class="container-fluid">
-                <p>I want to select from predefined types.Please select most representative picture composition of your
-                    building outer wall.</p>
-                    
+                <p>I want to select from predefined types.Please select most representative picture composition of your building outer wall.</p>
+
                 <div class="row">
-                    
+
 
                     <mat-radio-group class="mat-radio-group-image" formControlName="rimages">
                         <mat-radio-button *ngFor="let con of roofRData" [value]="con.rvalue">
                             <img src="{{con.imagepath}}">
                             <p>R Value = {{con.rvalue}} {{con.units}}}</p>
                         </mat-radio-button>
-                    </mat-radio-group> 
+                    </mat-radio-group>
 
-  
+
                 </div>
             </div>
 
@@ -190,8 +181,7 @@
                         </mat-form-field>
                     </div>
 
-                    <table mat-table matSort matTableResponsive [dataSource]="roofdataSource"
-                        class="mat-elevation-z8 table-advancedR">
+                    <table mat-table matSort matTableResponsive [dataSource]="roofdataSource" class="mat-elevation-z8 table-advancedR">
                         <ng-container matColumnDef="Layer">
                             <th mat-header-cell *matHeaderCellDef> Layer</th>
                             <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
@@ -227,13 +217,11 @@
 
             <p>Do you know the R value?</p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R
-                    value of the wall.</p>
+                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="windowr">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                <mat-radio-button (click)="openWindowPredefinedR()" value="2"> I want to select from predefined types
-                    (list available)
+                <mat-radio-button (click)="openWindowPredefinedR()" value="2"> I want to select from predefined types (list available)
                 </mat-radio-button>
             </mat-radio-group><br><br>
 
@@ -267,11 +255,10 @@
 
             <p>Do you know the SHGC value?</p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on SHGC
-                    value of the window</p>
+                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on SHGC value of the window</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="SHGC">
-                <mat-radio-button  value="1">Yes, I know</mat-radio-button><br>
+                <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                 <mat-radio-button (click)="postCalculateshgc()" value="2"> No, I don't know.</mat-radio-button>
             </mat-radio-group>
 
@@ -295,12 +282,11 @@
             <h2>Window to Wall Ratio (WWR)</h2>
             <p>Do you know the Window to Wall Ratio</p>
             <div class="fields-note">
-                <p> <span class="notes-style"> Note:</span> You may select any of the options to provide details on WWR
-                    value of the window</p>
+                <p> <span class="notes-style"> Note:</span> You may select any of the options to provide details on WWR value of the window</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="wwr">
-                <mat-radio-button  value="1">Yes, I know</mat-radio-button><br>
-                <mat-radio-button  value="2"> No, I don't know.</mat-radio-button>
+                <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                <mat-radio-button value="2"> No, I don't know.</mat-radio-button>
             </mat-radio-group>
 
             <span *ngIf="formgroup.controls.wwr.value == 1">

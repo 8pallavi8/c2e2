@@ -2,18 +2,34 @@
     justify-content: space-between;
 }
 
+// .mat-radio-group-image {
+//     display: grid;
+//     width: 100%;
+//     grid-template-columns: repeat(3, 1fr);
+//   }
 .mat-radio-group-image {
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(3, 1fr);
-  }
+    .mat-radio-button {
+        max-width: 300px;
+        img {
+            width: 100%;
+            height: auto;
+        }
+        p {
+            font-weight: 600;
+            text-align: center;
+            padding-top: 20px;
+            font-size: 18px;
+        }
+    }
+}
 
-  td.mat-cell,th.mat-header-cell{
+td.mat-cell,
+th.mat-header-cell {
     border-style: groove;
     text-align: center;
     padding-left: 24px !important;
 }
 
-.images-wwr{
-  display: flex;
-} 
+.images-wwr {
+    display: flex;
+}
