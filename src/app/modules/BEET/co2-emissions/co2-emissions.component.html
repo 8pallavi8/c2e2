@@ -18,22 +18,24 @@
 
                     <div>
                         <mat-radio-group aria-label="Select an option" formControlName="powergenerationco2emmisions">
-                            <mat-radio-button (click)="showpowergenerationCO2emission(true)" value="1">Yes, I know
+                            <mat-radio-button value="1">Yes, I know
                             </mat-radio-button><br>
-                            <mat-radio-button (click)="showpowergenerationCO2emission(false)" value="2">No, I don't
+                            <mat-radio-button  value="2" (click)="defaultEmissionFactor()">No, I don't
                                 know.</mat-radio-button>
                         </mat-radio-group>
                     </div>
-                    <span *ngIf="haspowergenerationCO2emission">
+                    <span *ngIf="formgroup.controls.powergenerationco2emmisions.value == 1">
                         <p style="margin-top: 1em;">I know the grid emission factor.</p>
                         <p>Please enter grid emission factor[kg CO2/kWh] : </p>
                         <mat-form-field appearance="outline">
                             <mat-label>Enter value here</mat-label>
-                            <input matInput placeholder="Enter value" required formControlName="powergenerationco2emmisions">
+                            <input matInput placeholder="Enter value" required formControlName="powergenerationco2emmisionsValue">
                         </mat-form-field>
                     </span>
-
                 </div>
+
+                <b class="calculated-values">CO2 emissions:{{formgroup.controls.powergenerationco2emmisionsValue.value}}</b>
+
                 <div class="container">
                     <p style="margin-top: 1em;">Do you know the fuel CO2 emission factor?</p>
                     <div class="fields-note">
@@ -45,14 +47,20 @@
                     </div>
                     <div>
                         <mat-radio-group aria-label="Select an option" formControlName="onsiteco2emmisions">
-                            <mat-radio-button (click)="showonsiteCO2emission(true)" value="1">Yes, I know
+                            <mat-radio-button  value="1">Yes, I know
                             </mat-radio-button><br>
-                            <mat-radio-button (click)="showonsiteCO2emission(false)" value="2">No, I don't know.
+                            <mat-radio-button (click)="postCalculateFuelEmissionFactor()" value="2">No, I don't know.
                             </mat-radio-button>
                         </mat-radio-group>
                     </div>
-                    <span *ngIf="hasonsiteCO2Emission">
+                    <span *ngIf="formgroup.controls.onsiteco2emmisions.value == 1">
                         <p style="margin-top: 1em;">Choose any one from the available units</p>
+
+                        <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
+                            <mat-label>Enter value here</mat-label>
+                            <input matInput placeholder="Enter value" required formControlName="onsiteco2emmisionsValue">
+                        </mat-form-field>
+
                         <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
                             <mat-label>Select CO2 emissions units</mat-label>
                             <mat-select formControlName="units">
@@ -60,12 +68,12 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
-                            <mat-label>Enter value here</mat-label>
-                            <input matInput placeholder="Enter value" required>
-                        </mat-form-field>
+                        
                     </span>
+
                 </div>
+
+                <b class="calculated-values"> On site  CO2 emissions:{{formgroup.controls.onsiteco2emmisionsValue.value}}{{formgroup.controls.units.value}}</b>
         </fieldset>
     </form>
 </div>

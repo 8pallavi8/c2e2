@@ -34,16 +34,15 @@
                             type="number">
                     </mat-form-field>
                 </span>
-
                 <span *ngIf="formgroup.controls.heatefficiency.value == 2">
-
                     <p style="margin-top: 1em;">Please select the most representative picture for your heating equipment
                         type.<br>
                     </p>
                     <div>
 
-                        <mat-radio-group class="mat-radio-group-image" formControlName="heatImages">
-                            <mat-radio-button *ngFor="let con of heatingData">
+                        <mat-radio-group class="mat-radio-group-image" formControlName="heatValueImages" (change)="processHeatCoolEvent($event,'heating')"
+                        >
+                            <mat-radio-button *ngFor="let con of heatingData" [value]="con.heatingequipmentname" >
                                 <img src="{{con.imgpath}}">
                                 <p>{{con.heatingequipmentname}}</p>
                             </mat-radio-button>
@@ -112,8 +111,9 @@
                     </p>
                     <div class="row">
 
-                        <mat-radio-group class="mat-radio-group-image" formControlName="coolImages">
-                            <mat-radio-button *ngFor="let con of coolingData">
+                        <mat-radio-group class="mat-radio-group-image" formControlName="coolImages"
+                        (change)="processHeatCoolEvent($event,'cooling')">
+                            <mat-radio-button *ngFor="let con of coolingData" [value]="con.coolingequipmentname">
                                 <img src="{{con.imgpath}}">
                                 <p>{{con.coolingequipmentname}}</p>
                             </mat-radio-button>
@@ -141,7 +141,7 @@
                 </div>
                 <mat-radio-group aria-label="Select an option" formControlName="ventilation">
                     <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                    <mat-radio-button value="2">No, I don't know</mat-radio-button>
+                    <mat-radio-button value="2"(click)="postCalculateVentilationRate()">No, I don't know</mat-radio-button>
                 </mat-radio-group>
 
                 <span *ngIf="formgroup.controls.ventilation.value == 1" class="units-picker-component">
@@ -179,9 +179,9 @@
 
                 <div>
                     <mat-radio-group aria-label="Select an option" formControlName="infiltration">
-                        <mat-radio-button (click)="showInfiltrationRateValue(true)" value="1">Yes, I know
+                        <mat-radio-button value="1">Yes, I know
                         </mat-radio-button><br>
-                        <mat-radio-button (click)="showInfiltrationRateValue(false)" value="2">No, I don't know.
+                        <mat-radio-button (click)="defaultInfiltration()" value="2">No, I don't know.
                         </mat-radio-button>
                     </mat-radio-group>
                 </div>

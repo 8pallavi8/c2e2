@@ -70,7 +70,7 @@
 
             <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>Select Building Spaces</mat-label>
-                <mat-select matNativeControl id="BuidlingSpaces" formControlName="buildingSpaces" multiple required>
+                <mat-select matNativeControl id="BuidlingSpaces" formControlName="buildingSpaces" multiple required (selectionChange)="onChangeBuildingSpaces($event)">
                     <mat-option *ngFor="let space of spacesList" [value]="space">{{space}}
                     </mat-option>
                 </mat-select>
@@ -140,7 +140,7 @@
             <div>
                 <mat-radio-group aria-label="Select an option" formControlName="occupancyDensity">
                     <mat-radio-button  value="1">I only know the number of people occupying the building during normal working hours.</mat-radio-button><br>
-                    <mat-radio-button (click)=showOccupantDensity(true) value="2"> I know the occupant density of the building (m2/person or ft2/person).
+                    <mat-radio-button  value="2"> I know the occupant density of the building (m2/person or ft2/person).
                     </mat-radio-button><br>
                     <mat-radio-button (click)=postCalculateOccupancyUnknown() value="3">I do not know the value.
                     </mat-radio-button>
@@ -213,11 +213,6 @@
                 <input type="number" matInput formControlName="Electricitycost" placeholder="Enter value" required>
             </mat-form-field>
 
-            <!-- <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                        <mat-label>Electricity cost</mat-label>
-                        <input matInput required>
-                    </mat-form-field> -->
-
             <mat-form-field class="w-100 mt-1 col-md-6" appearance="outline">
                 <mat-label>Select Fuel cost units</mat-label>
                 <mat-select formControlName="fuelunits">
@@ -229,12 +224,6 @@
                 <mat-label>Enter value here</mat-label>
                 <input matInput type="number" formControlName="Fuelcost" placeholder="Enter value" required>
             </mat-form-field>
-
-            <!-- <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                        <mat-label>Fuel cost</mat-label>
-                        <input matInput required>
-                    </mat-form-field> -->
-
 
         </fieldset>
     </form>

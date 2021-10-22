@@ -82,14 +82,14 @@ export class BEETComponent implements OnInit, AfterViewInit {
     console.log(this.genDetailsComponent.genDetailsForm);
     if (this.genDetailsComponent.genDetailsForm.valid) {
       var payload: any = {
-        userid: this.userId,
+        //userid: this.userId,
         username: this.genDetailsComponent.genDetailsForm.controls.userName.value,
         projectname: this.genDetailsComponent.genDetailsForm.controls.projectName.value,
         country: this.genDetailsComponent.genDetailsForm.controls.country.value,
         province: this.genDetailsComponent.genDetailsForm.controls.province.value,
         location: this.genDetailsComponent.genDetailsForm.controls.location.value,
         buildingtype: this.genDetailsComponent.genDetailsForm.controls.buildingType.value,
-        buildingspaces: this.genDetailsComponent.genDetailsForm.controls.buildingSpaces.value,
+        //buildingspaces: this.genDetailsComponent.genDetailsForm.controls.buildingSpaces.value,
         yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value.toString(),
         buildinggrossareaunit: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
         netoccupiedarea: this.genDetailsComponent.genDetailsForm.controls.Netoccupiedfloorarea.value,

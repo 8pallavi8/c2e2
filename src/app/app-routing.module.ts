@@ -16,7 +16,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'transformer',
+        loadChildren: () => import('./modules/landingpage/landingpage.module').then(m => m.LandingpageModule),
       }
     ]
   }

@@ -17,6 +17,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { DialogComponent } from './shared/dialog/dialog.component';
 import { OuterwallAdvLevelAirComponent } from './shared/outerwall-adv-level-air/outerwall-adv-level-air.component';
 import { OuterwallAdvLevelbrickComponent } from './shared/outerwall-adv-levelbrick/outerwall-adv-levelbrick.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -38,7 +39,6 @@ import { OuterwallAdvLevelbrickComponent } from './shared/outerwall-adv-levelbri
     AutoFocusDirective,
     OuterwallAdvLevelAirComponent,
     OuterwallAdvLevelbrickComponent,
-    
   ],
   providers: [ConfirmationDialogService,NgbActiveModal],
   entryComponents: [ConfirmationDialogComponent],

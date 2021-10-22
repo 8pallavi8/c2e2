@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const routes: Routes = [
   {

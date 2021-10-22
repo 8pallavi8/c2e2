@@ -79,16 +79,13 @@ export class GendetailsComponent implements OnInit {
   getcountryList(): void {
     this.beetService.getCountries().subscribe(res => {
       this.countrylist = res.success.countrydetails;
-     
     });
-    
   }
 
   onChangeCountry(selectedCountry){
     this.beetService.setSelectedCountry(selectedCountry.value);
     this.selectedCountryCode = selectedCountry.value;
     this.beetService.getGeneralData(selectedCountry.value.toString()).subscribe(res => {
-      //console.log(res.success);
       this.locationDetails = res.success.locationdata;
       this.buildingDetails = res.success.buildingdata;
       console.log("General details "+res.success.buildingdata);
@@ -106,32 +103,20 @@ export class GendetailsComponent implements OnInit {
   }
 
   onChangeBuildingType(event){
+    this.beetService.setSelectedbuildingType(event.value);
     console.log(event.value);
     this.spacesList = this.buildingDetails.find(ele => ele.buildingtype == event.value).buildingspaces;
+  }
+
+
+  onChangeBuildingSpaces(event){
+    this.beetService.setSelectedbuildingSpaces(event.value);
   }
 
   calculateGross(event:any){
     if (this.genDetailsForm.controls.buildingGrossArea.value == 0) {
       this.genDetailsForm.controls['buildingGrossArea'].setValue( event.target.value*1.1);
     }
-  }
-
-/* 
-  showOccupancy(state: boolean): void {
-    if (state == true) {
-      this.hasOccupancy = true;
-      this.hasOccupancyDensity = false;
-      //  this.occupancy = 0;
-    }
-    else {
-      this.hasOccupancy = false;
-      this.hasOccupancyDensity = false;
-    }
-  }
- */
-  showOccupantDensity(state: boolean): void {
-    this.hasOccupancy = false;
-    this.hasOccupancyDensity = true;
   }
 
 
@@ -154,15 +139,9 @@ export class GendetailsComponent implements OnInit {
       "buildingtype": this.genDetailsForm.controls.buildingType.value,
       "buildingspaces":this.genDetailsForm.controls.buildingSpaces.value
     }
-    
     this.beetService.postCalculateOccupancyUnknown(payload).subscribe(res =>{
       console.log(res.success.occupantdensity);
       
     })
   }  
-
 }
-
-
-
-

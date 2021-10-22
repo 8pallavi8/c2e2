@@ -15,7 +15,9 @@ export class beetService {
 
     private selectedProvince = new ReplaySubject<string>(1);
     
+    private selectedBuildingType = new ReplaySubject<string>(1);
 
+    private selectedBuildingSpaces = new ReplaySubject<string[]>(1);
 
 
     constructor(private fb: FormBuilder, private http: HttpClient) {
@@ -47,6 +49,23 @@ export class beetService {
         return this.selectedProvince
     }
 
+
+    setSelectedbuildingType(buidlingType:string){
+        sessionStorage.setItem('selectedbuildingType', JSON.stringify(buidlingType));
+        this.selectedBuildingType.next(buidlingType);
+    }
+
+    public getSelectedbuildingType(): ReplaySubject<string> {
+        return this.selectedBuildingType
+    }
+
+    setSelectedbuildingSpaces(buidlingSpaces:string[]){
+        this.selectedBuildingSpaces.next(buidlingSpaces);
+    }
+
+    public getSelectedbuildingSpaces(): ReplaySubject<string[]> {
+        return this.selectedBuildingSpaces
+    }
 
 
     getCountries(): Observable<any> {
@@ -93,6 +112,19 @@ export class beetService {
 
     postCalculateOccupancyUnknown(payload: any): Observable<any>{
         return this.http.post(environment.baseUrl + ':9998/api/user/v1/calculateoccupancyunknown', payload);
+    }
+
+    postCalculateEquipEfficiency(payload: any): Observable<any>{
+        return this.http.post(environment.baseUrl + ':9998/api/user/v1/calculateefficiency', payload);
+    }
+
+
+    postCalculateVentilationRate(payload: any): Observable<any>{
+        return this.http.post(environment.baseUrl + ':9998/api/user/v1/calculateventilationrate', payload);
+    }
+
+    postCalculateFuelEmissionFactor(payload: any): Observable<any>{
+        return this.http.post(environment.baseUrl + ':9998/api/user/v1/calculatefuelemissionfactor', payload);
     }
 
 

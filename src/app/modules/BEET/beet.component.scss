@@ -4,10 +4,11 @@
     margin-right: 5rem;
 }
 
-/* .calculator-tool5{
-    background-color: lightgoldenrodyellow;
+.calculator-tool5{
+    background-color: #bbe4e9;
+   
 }
- */
+ 
 
  td.mat-cell,th.mat-header-cell{
     border-style: groove;
@@ -23,4 +24,30 @@
   table{
       width: 75%;
       margin-top: 1rem;
+  }
+
+  .row_inline{
+      display: flex;
+      padding-top: 2rem;
+      padding-bottom: 1rem;
+  }
+
+  .form-head{
+    text-align: left;
+    color: #35495e;
+    font-style: oblique;
+    margin-top: 2rem;
+    padding-left: 1rem;
+  }
+
+  .buidling-logo{
+    border-radius: 60%;  
+      margin-left: 3rem;
+      
+  }
+
+  .stepper-class{
+   // background-color: #bbe4e9;
+    padding-top:2rem;
+
   }
