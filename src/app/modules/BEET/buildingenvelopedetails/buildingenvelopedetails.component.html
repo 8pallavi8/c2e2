@@ -299,8 +299,8 @@
                     value of the window</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="wwr">
-                <mat-radio-button (click)="showWWR(true)" value="1">Yes, I know</mat-radio-button><br>
-                <mat-radio-button (click)="showWWR(false)" value="2"> No, I don't know.</mat-radio-button>
+                <mat-radio-button  value="1">Yes, I know</mat-radio-button><br>
+                <mat-radio-button  value="2"> No, I don't know.</mat-radio-button>
             </mat-radio-group>
 
             <span *ngIf="formgroup.controls.wwr.value == 1">
@@ -329,6 +329,11 @@
 
                 </div>
             </span>
+            <div>
+                <b class="calculated-values">
+                    WWR :
+                </b>
+            </div>
         </fieldset>
     </form>
 </div>

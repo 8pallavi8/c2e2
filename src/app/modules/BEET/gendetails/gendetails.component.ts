@@ -59,7 +59,7 @@ export class GendetailsComponent implements OnInit {
       Netoccupiedfloorarea: ['', Validators.compose([Validators.required])],
       Nooffloors: ['', Validators.compose([Validators.required])],
       Occupanyhoursperweek: ['', Validators.compose([Validators.required])],
-      occupancyDensity: ['', Validators.compose([Validators.required])],
+      occupantDensity: ['', Validators.compose([Validators.required])],
       noOfPeopleOccupying: [0, Validators.compose([Validators.required])],
       occupantDensityUnits: ['', Validators.compose([Validators.required])],
       Electricitycost: ['', Validators.compose([Validators.required])],
@@ -114,11 +114,13 @@ export class GendetailsComponent implements OnInit {
   }
 
   calculateGross(event:any){
-    if (this.genDetailsForm.controls.buildingGrossArea.value == 0) {
+    
+    if (this.genDetailsForm.controls.buildingGrossArea.value == 0 && this.genDetailsForm.controls.netAreaUnits.value != undefined)
+      {
+      this.genDetailsForm.controls['grossAreaUnits'].setValue(this.genDetailsForm.controls.netAreaUnits.value );
       this.genDetailsForm.controls['buildingGrossArea'].setValue( event.target.value*1.1);
     }
   }
-
 
   postCalculateOccupancyPeople(): void {
     var payload: any = {
@@ -129,6 +131,8 @@ export class GendetailsComponent implements OnInit {
     console.log(payload);
     this.beetService.postCalculateOccupancyPeople(payload).subscribe(res =>{
       console.log(res.success);
+
+      this.genDetailsForm.controls['occupantDensityKnown'].setValue(res.success);
       
     })
   } 
@@ -141,6 +145,7 @@ export class GendetailsComponent implements OnInit {
     }
     this.beetService.postCalculateOccupancyUnknown(payload).subscribe(res =>{
       console.log(res.success.occupantdensity);
+      this.genDetailsForm.controls['occupantDensityKnown'].setValue(res.success.occupantdensity);
       
     })
   }  

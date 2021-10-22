@@ -6,7 +6,9 @@
             <p>Please select and share building location details
             </p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> It is important to select Provice first and then Location before clicking and loading the climate data. If exact location is not available, please select the nearest / most suitable location (or)
+                <p><span class="notes-style"> Note:</span> It is important to select Provice first and then Location
+                    before clicking and loading the climate data. If exact location is not available, please select the
+                    nearest / most suitable location (or)
                     reach out to us.
                 </p>
             </div>
@@ -32,7 +34,8 @@
 
             <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>Select Province</mat-label>
-                <mat-select matNativeControl id="Province" formControlName="province" required (selectionChange)="onChangeProvince($event)">
+                <mat-select matNativeControl id="Province" formControlName="province" required
+                    (selectionChange)="onChangeProvince($event)">
                     <mat-option *ngFor="let location of locationDetails" [value]="location.province">
                         {{location.province}}</mat-option>
                 </mat-select>
@@ -48,19 +51,23 @@
                 <!-- <mat-hint color="primary">Select Location</mat-hint> -->
             </mat-form-field>
         </fieldset>
+
         <fieldset>
             <legend>Type of building</legend>
             <h2>Type of building</h2>
             <p>Please select the main building type.
             </p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> Please first select the building type from drop down list and then click the button to select building spaces. If your building type is not available in the list, please select the most representative
+                <p><span class="notes-style"> Note:</span> Please first select the building type from drop down list and
+                    then click the button to select building spaces. If your building type is not available in the list,
+                    please select the most representative
                     building type.
                 </p>
             </div>
             <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>Select Building Type</mat-label>
-                <mat-select matNativeControl id="Buidling" formControlName="buildingType" required (selectionChange)="onChangeBuildingType($event)">
+                <mat-select matNativeControl id="Buidling" formControlName="buildingType" required
+                    (selectionChange)="onChangeBuildingType($event)">
                     <mat-option *ngFor="let building of buildingDetails" [value]="building.buildingtype">
                         {{building.buildingtype}}
                     </mat-option>
@@ -70,18 +77,21 @@
 
             <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>Select Building Spaces</mat-label>
-                <mat-select matNativeControl id="BuidlingSpaces" formControlName="buildingSpaces" multiple required (selectionChange)="onChangeBuildingSpaces($event)">
+                <mat-select matNativeControl id="BuidlingSpaces" formControlName="buildingSpaces" multiple required
+                    (selectionChange)="onChangeBuildingSpaces($event)">
                     <mat-option *ngFor="let space of spacesList" [value]="space">{{space}}
                     </mat-option>
                 </mat-select>
                 <!-- <mat-hint color="primary">Select Building Spaces</mat-hint> -->
             </mat-form-field>
         </fieldset>
+
         <fieldset>
             <legend>Building age, area, no. of floors, occupancy hours</legend>
             <h2>Building age, area, no. of floors, occupancy hours</h2>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select the units in which you may want to enter the building area value using drop down button.
+                <p><span class="notes-style"> Note:</span> You may select the units in which you may want to enter the
+                    building area value using drop down button.
                 </p>
             </div>
             <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
@@ -104,8 +114,10 @@
             <span class="units-picker-component">
                 <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                     <mat-label>Net occupied floor area</mat-label>
-                    <input formControlName="Netoccupiedfloorarea" (change)="calculateGross($event)" type="number" matInput required style="width: 185px;">
-                    <mat-select [(ngModel)]="netUnits" placeholder="units" formControlName="netAreaUnits">
+                    <input formControlName="Netoccupiedfloorarea" (change)="calculateGross($event)" type="number"
+                        matInput required style="width: 185px;">
+                    <mat-select style="padding-left: 8px" [(ngModel)]="netUnits" placeholder="units"
+                        formControlName="netAreaUnits">
                         <mat-option value="square feet">square feet</mat-option>
                         <mat-option value="square meter">square meter</mat-option>
                     </mat-select>
@@ -134,20 +146,23 @@
             </p>
 
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> Select from following options. For option C, standard values will be considered based on the building categories and spaces selected. More details on this is given in the Assumptions section.
+                <p><span class="notes-style"> Note:</span> Select from following options. For option C, standard values
+                    will be considered based on the building categories and spaces selected. More details on this is
+                    given in the Assumptions section.
                 </p>
             </div>
             <div>
-                <mat-radio-group aria-label="Select an option" formControlName="occupancyDensity">
-                    <mat-radio-button  value="1">I only know the number of people occupying the building during normal working hours.</mat-radio-button><br>
-                    <mat-radio-button  value="2"> I know the occupant density of the building (m2/person or ft2/person).
+                <mat-radio-group aria-label="Select an option" formControlName="occupantDensity">
+                    <mat-radio-button value="1">I only know the number of people occupying the building during normal
+                        working hours.</mat-radio-button><br>
+                    <mat-radio-button value="2"> I know the occupant density of the building.
                     </mat-radio-button><br>
                     <mat-radio-button (click)=postCalculateOccupancyUnknown() value="3">I do not know the value.
                     </mat-radio-button>
                 </mat-radio-group>
             </div>
 
-            <div class="field-button-calculate" *ngIf="genDetailsForm.controls.occupancyDensity.value==1">
+            <div class="field-button-calculate" *ngIf="genDetailsForm.controls.occupantDensity.value==1">
                 <!-- <p style="margin-top: 1em;">I know the number of people occupying the building during normal
                             working hours.</p> -->
                 <b style="margin-top: 1.5rem;">Number of people occupying the building :</b>
@@ -158,15 +173,15 @@
 
                 <div>
 
-                    <button mat-raised-button color="primary" style="margin-top: 1rem;" (click)="postCalculateOccupancyPeople()">Calculate Occupant Density</button>
-                    
+                    <button mat-raised-button color="primary" style="margin-top: 1rem;"
+                        (click)="postCalculateOccupancyPeople()">Calculate Occupant Density</button>
+
                 </div>
 
             </div>
 
 
-            <span *ngIf="genDetailsForm.controls.occupancyDensity.value==2">
-                <!-- <p style="margin-top: 1em;">I know the occupanct density of the building.</p> -->
+            <span *ngIf="genDetailsForm.controls.occupantDensity.value==2">
 
                 <p class="fields-note">You may choose to enter the values for any of the units mentioned
                     below. Necessary units conversions will be made by
@@ -177,7 +192,7 @@
                         <mat-label>Enter value here</mat-label>
                         <input matInput placeholder="Enter value" type="number" formControlName="occupantDensityKnown"
                             type="number">
-                        <mat-select [(ngModel)]="occupancyUnits"  placeholder="units"
+                        <mat-select [(ngModel)]="occupancyUnits" placeholder="units"
                             formControlName="occupantDensityUnits">
                             <mat-option value="square feet per person">square feet per person</mat-option>
                             <mat-option value="square meter per person">square meter per person</mat-option>
@@ -186,9 +201,14 @@
                 </span>
             </span>
 
-                        <!-- <b>Occupant density:{{occupancyValue}}</b> -->
-                
+            <div>
+            <b class="calculated-values">
+                Occupant density:{{genDetailsForm.controls.occupantDensityKnown.value}}{{genDetailsForm.controls.occupantDensityUnits.value}}
+            </b>
+            </div>
         </fieldset>
+
+       
 
         <fieldset>
             <legend>Energy and Fuel cost</legend>
@@ -197,7 +217,8 @@
             <p>Please enter energy and fuel details associated with the building.
             </p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> Fuel considered as Natural Gas. If any other forms of fuel is being used, please reach out to us.
+                <p><span class="notes-style"> Note:</span> Fuel considered as Natural Gas. If any other forms of fuel is
+                    being used, please reach out to us.
                 </p>
             </div>
 
