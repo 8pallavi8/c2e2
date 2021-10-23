@@ -4,10 +4,6 @@
     margin-right: 5rem;
 }
 
-.calculator-tool5 {
-    background-color: #bbe4e9;
-}
-
 td.mat-cell,
 th.mat-header-cell {
     border-style: groove;
@@ -24,11 +20,6 @@ table {
     margin-top: 1rem;
 }
 
-.row_inline {
-    display: flex;
-    padding-top: 2rem;
-    padding-bottom: 1rem;
-}
 
 .form-head {
     text-align: left;
@@ -43,6 +34,35 @@ table {
 }
 
 .stepper-class {
-    // background-color: #bbe4e9;
+    background: #c5e9e7;    
     padding-top: 2rem;
+} 
+
+.calculator-tools{
+    background: #c5e9e7; 
+}
+
+.UNEP-logo{
+   width:20%;
+    padding: 0px 15px;
+    float: right;
+}
+
+
+/* .calculator-tools {
+    padding: 20px;
+    background: #c5e9e7;
+    background: linear-gradient( 221deg, rgba(0, 156, 147, .23), rgba(13, 97, 124, .23));
+    background-image: linear-gradient( 221deg, rgba(0, 156, 147, 0.23), rgba(13, 97, 124, 0.23));
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+} */
+
+.calculator-tools {
+    margin-top: 4rem;
 }

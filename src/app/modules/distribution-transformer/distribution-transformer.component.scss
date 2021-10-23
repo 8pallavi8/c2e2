@@ -9,6 +9,12 @@ table {
     border: 1px solid #040404;
 }
 
+
+.UNEP-logo{
+    width:20%;
+     padding: 0px 15px;
+     float: right;
+ } 
 table td,
 table th {
     border: 1px solid rgb(3, 3, 3);
@@ -42,9 +48,58 @@ table {
     background: inherit;
 }
 
-.calculator-tools-header .transformer-logo {
+
+.buidling-logo {
+    border-radius: 60%;
+    margin-left: 3rem;
+}
+
+
+.calculator-tools .transformer-logo {
     display: flex;
     justify-content: flex-end;
     padding-bottom: .5rem;
     padding: 20px
+}
+
+
+.Transfomer-tool{
+    background-color: #c5e9e7 ;
+}
+
+
+/* .calculator-tools .row_inline {
+    display: flex;
+   
+} */
+
+ .calculator-tools .title-container {
+    color: darkred;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    flex: 0 0 100%;
+    font-size: 48px;
+    padding-top: 1.5rem;
+}  
+
+.calculator-tools .hero-logo .title-container h2 {
+    color:#c50000;
+    font-size: 48px;
+    line-height: 58px;
+    font-weight: 500;
+    margin-bottom: unset;
+    text-transform: uppercase;
+    font-family: Gotham-Black;
+}
+
+.calculator-tools .hero-logo .title-container p {
+    font-size: 30px;
+    margin-bottom: 0;
+}
+
+
+.Transfomer-tool{
+    margin-top: 4rem;
 }

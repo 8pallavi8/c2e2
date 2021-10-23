@@ -59,9 +59,7 @@ body {
     background: transparent;
 }
 
-.calculator-tool5 {
-    background-color: #bbe4e9;
-}
+
 
 .mat-toolbar {
     position: -webkit-sticky;
@@ -70,9 +68,6 @@ body {
     background: transparent;
 }
 
-.calculator-tool5 {
-    background-color: lightgoldenrodyellow;
-}
 
 .units-picker-component .mat-form-field-infix {
     display: inherit;
@@ -125,7 +120,7 @@ p {
 ::ng-deep .mat-radio-label-content {
     white-space: break-spaces;
 }
-
+/* 
 .calculator-tools {
     padding: 20px;
     background: #c5e9e7;
@@ -138,7 +133,7 @@ p {
     background-origin: initial;
     background-clip: initial;
     background-color: initial;
-}
+} */
 
 .page-title {
     font-size: 20px !important;

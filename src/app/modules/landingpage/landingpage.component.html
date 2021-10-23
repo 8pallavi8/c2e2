@@ -1,6 +1,6 @@
-<div class="grid-container">
+<div class="grid-container container">
 
-    <mat-grid-list [cols]="breakpoint" rowHeight="1:1" gutterSize="16px" (window:resize)="onResize($event)">
+    <mat-grid-list  [cols]="breakpoint"  gutterSize="16px" rowHeight="12rem" (window:resize)="onResize($event)">
         <mat-grid-tile>
             <figure>
                 <a [routerLink]="['/transformer']"> <img src="/assets/images/Logos/Transformers.jpg"></a>
@@ -24,7 +24,7 @@
                 </figcaption>
 
             </figure>
-        </mat-grid-tile>
+        </mat-grid-tile >
         <mat-grid-tile>
             <figure>
                 <img src="./assets/images/Logos/Motor-pump.jpg">
@@ -59,3 +59,4 @@
         </mat-grid-tile>
     </mat-grid-list>
 </div>
+
