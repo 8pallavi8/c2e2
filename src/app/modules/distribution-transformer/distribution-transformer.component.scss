@@ -3,25 +3,31 @@
     margin: 0px !important;
 }
 
+.example-table-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 400px;
+    overflow: auto;
+}
+
 table {
     margin-top: 1em;
     width: 100%;
-    border: 1px solid #040404;
+    border: 1px solid #01465f;
+    td,
+    th {
+        border: 1px solid #01465f;
+        padding: 8px;
+    }
 }
 
-
-.UNEP-logo{
-    width:20%;
-     padding: 0px 15px;
-     float: right;
- } 
-table td,
-table th {
-    border: 1px solid rgb(3, 3, 3);
-    padding: 8px;
+.UNEP-logo {
+    width: 20%;
+    padding: 0px 15px;
+    float: right;
 }
 
-.row {
+table .row {
     margin-right: 0px;
     margin-left: 0px;
 }
@@ -48,13 +54,6 @@ table {
     background: inherit;
 }
 
-
-.buidling-logo {
-    border-radius: 60%;
-    margin-left: 3rem;
-}
-
-
 .calculator-tools .transformer-logo {
     display: flex;
     justify-content: flex-end;
@@ -62,44 +61,46 @@ table {
     padding: 20px
 }
 
-
-.Transfomer-tool{
-    background-color: #c5e9e7 ;
+::ng-deep .mat-raised-button.mat-button-disabled:not([class*=mat-elevation-z]) {
+    background: #fff;
 }
 
-
-/* .calculator-tools .row_inline {
-    display: flex;
-   
-} */
-
- .calculator-tools .title-container {
-    color: darkred;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    flex: 0 0 100%;
-    font-size: 48px;
-    padding-top: 1.5rem;
-}  
-
-.calculator-tools .hero-logo .title-container h2 {
-    color:#c50000;
-    font-size: 48px;
-    line-height: 58px;
-    font-weight: 500;
-    margin-bottom: unset;
-    text-transform: uppercase;
-    font-family: Gotham-Black;
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    border-radius: 5px;
 }
 
-.calculator-tools .hero-logo .title-container p {
-    font-size: 30px;
-    margin-bottom: 0;
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-should-float {
+    .mat-form-field-label {
+        transform: none;
+        width: initial;
+        opacity: 0;
+    }
+    .mat-form-field-outline-gap {
+        border-top-color: initial !important;
+    }
 }
 
+::ng-deep .mat-form-field-label {
+    font-size: 0.8em!important;
+}
 
-.Transfomer-tool{
-    margin-top: 4rem;
+::ng-deep .mat-form-field-flex>.mat-form-field-infix {
+    padding: 0.4em 0px !important;
+}
+
+::ng-deep .mat-form-field-label-wrapper {
+    top: -1.5em;
+}
+
+// ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+//     transform: translateY(-1.1em) scale(.75);
+//     width: 133.33333%;
+// }
+::ng-deep .mat-form-field-label {
+    padding-top: 7px;
+}
+
+::ng-deep .mat-raised-button {
+    line-height: 30px !important;
 }

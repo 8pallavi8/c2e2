@@ -1,7 +1,7 @@
 .step-button {
     float: right;
     margin-top: 20px;
-    margin-right: 5rem;
+    margin-right: 0.5rem;
 }
 
 td.mat-cell,
@@ -20,7 +20,6 @@ table {
     margin-top: 1rem;
 }
 
-
 .form-head {
     text-align: left;
     font-style: oblique;
@@ -34,16 +33,12 @@ table {
 }
 
 .stepper-class {
-    background: #c5e9e7;    
+    background: transparent !important;
     padding-top: 2rem;
-} 
-
-.calculator-tools{
-    background: #c5e9e7; 
 }
 
-.UNEP-logo{
-   width:20%;
+.UNEP-logo {
+    width: 20%;
     padding: 0px 15px;
     float: right;
 }
@@ -65,4 +60,59 @@ table {
 
 .calculator-tools {
     margin-top: 4rem;
+}
+
+::ng-deep .mat-step-text-label {
+    text-overflow: unset !important;
+    white-space: break-spaces !important;
+}
+
+@media only screen and (max-width: 600px) {
+     ::ng-deep .mat-horizontal-stepper-header-container {
+        display: none !important;
+    }
+}
+
+::ng-deep .mat-raised-button.mat-button-disabled:not([class*=mat-elevation-z]) {
+    background: #fff;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    border-radius: 5px;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-should-float {
+    .mat-form-field-label {
+        transform: none;
+        width: initial;
+        opacity: 0;
+    }
+    .mat-form-field-outline-gap {
+        border-top-color: initial !important;
+    }
+}
+
+::ng-deep .mat-form-field-label {
+    font-size: 0.8em!important;
+}
+
+::ng-deep .mat-form-field-flex>.mat-form-field-infix {
+    padding: 0.4em 0px !important;
+}
+
+::ng-deep .mat-form-field-label-wrapper {
+    top: -1.5em;
+}
+
+// ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+//     transform: translateY(-1.1em) scale(.75);
+//     width: 133.33333%;
+// }
+::ng-deep .mat-form-field-label {
+    padding-top: 7px;
+}
+
+::ng-deep .mat-raised-button {
+    line-height: 30px !important;
 }

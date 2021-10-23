@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BuildingDetails, LocationDetails } from 'src/app/shared/models/models';
@@ -40,7 +41,9 @@ export class GendetailsComponent implements OnInit {
   buildingDetails: BuildingDetails[] = [];
   selectedCountryCode: CountryTable;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    @Inject(DOCUMENT) private readonly document: Document, 
+    private fb: FormBuilder,
     public dialog: MatDialog,
     private inputDialog: InputdialogService,
     private beetService: beetService) { }
@@ -73,7 +76,23 @@ export class GendetailsComponent implements OnInit {
 
     });;
     this.getcountryList();
-    console.log("code:" + this.countrylist)
+    //console.log("code:" + this.countrylist);
+  }
+
+  ngAfterViewInit(){
+    var acc = this.document.getElementsByClassName('accordion');
+    console.log(this.document.getElementsByClassName('accordion'));
+    for (let i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
   }
 
   getcountryList(): void {

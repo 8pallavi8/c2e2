@@ -1,4 +1,4 @@
-.fieldname-align{
+.fieldname-align {
     margin-right: 5rem;
     margin-top: 1rem;
 }
@@ -7,4 +7,9 @@
     display: grid;
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
-  }
+}
+
+ ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    border-radius: 5px;
+}

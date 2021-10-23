@@ -1,9 +1,32 @@
-td.mat-cell,th.mat-header-cell{
+td.mat-cell,
+th.mat-header-cell {
     border-style: groove;
     text-align: center;
-    padding-left: 24px !important;
+    //padding-left: 24px !important;
 }
 
-tr.mat-row{
+tr.mat-row {
     height: auto;
+}
+
+::ng-deep .mat-column-lightingimagepath {
+    padding-left: 0px !important;
+}
+
+.light-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.example-table-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 400px;
+    overflow: auto;
 }

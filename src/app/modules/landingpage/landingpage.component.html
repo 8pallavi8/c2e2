@@ -1,62 +1,65 @@
-<div class="grid-container container">
+<div class="container">
+    <div class="row1-grid-container">
+        <mat-grid-list style="padding-top: 30px;" [cols]="row1" rowHeight="150px" (window:resize)="onResize($event)">
+            <mat-grid-tile>
+                <figure>
+                    <a [routerLink]="['/transformer']"> <img src="/assets/images/tools/trans.png"></a>
+                    <figcaption class="caption-text">
+                        <p>Transformers</p>
+                    </figcaption>
+                </figure>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <figure>
+                    <a [routerLink]="['/building']"><img src="./assets/images/tools/building.png"></a>
+                    <figcaption class="caption-text">Buildings</figcaption>
+                </figure>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <figure>
+                    <a [routerLink]="['/district-energy']"><img src="./assets/images/tools/energy.png"></a>
+                    <figcaption class="caption-text">
+                        <p>District Energy</p>
+                    </figcaption>
 
-    <mat-grid-list  [cols]="breakpoint"  gutterSize="16px" rowHeight="12rem" (window:resize)="onResize($event)">
-        <mat-grid-tile>
-            <figure>
-                <a [routerLink]="['/transformer']"> <img src="/assets/images/Logos/Transformers.jpg"></a>
-                <figcaption class="caption-text">
-                    <p>Transformers</p>
-                </figcaption>
-            </figure>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <figure>
-                <a [routerLink]="['/building']"><img src="./assets/images/Logos/Buildings.jpg"></a>
-                <figcaption class="caption-text">Buildings</figcaption>
-            </figure>
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <figure>
-                <img src="./assets/images/Logos/District Energy.jpg">
-                <figcaption class="caption-text">
-                    <p>District Energy</p>
-                </figcaption>
-
-            </figure>
-        </mat-grid-tile >
-        <mat-grid-tile>
-            <figure>
-                <img src="./assets/images/Logos/Motor-pump.jpg">
-                <figcaption class="caption-text">
-                    <p>Motor-pump</p>
-                </figcaption>
-            </figure>
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <figure>
-                <img src="./assets/images/Logos/Street Lighting.jpg">
-                <figcaption class="caption-text">
-                    <p>Street Lighting</p>
-                </figcaption>
-            </figure>
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <figure>
-                <img src="/assets/images/Logos/Motor.jpg">
-                <figcaption class="caption-text">
-                    <p> Motor</p>
-                </figcaption>
-            </figure>
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <figure>
-                <img src="./assets/images/Logos/Water supply.jpg">
-                <figcaption class="caption-text">
-                    <p>Water supply</p>
-                </figcaption>
-            </figure>
-        </mat-grid-tile>
-    </mat-grid-list>
+                </figure>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <figure>
+                    <a [routerLink]="['/motor-pump']"> <img src="./assets/images/tools/motor-pump.png"></a>
+                    <figcaption class="caption-text">
+                        <p>Motor-pump</p>
+                    </figcaption>
+                </figure>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div class="row2-grid-container">
+        <mat-grid-list [cols]="row2" rowHeight="150px">
+            <mat-grid-tile>
+                <figure>
+                    <a [routerLink]="['/street-light']"><img src="./assets/images/tools/street.png"></a>
+                    <figcaption class="caption-text">
+                        <p>Street Lighting</p>
+                    </figcaption>
+                </figure>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <figure>
+                    <a [routerLink]="['/motor']"> <img src="/assets/images/tools/motor.png"></a>
+                    <figcaption class="caption-text">
+                        <p> Motor</p>
+                    </figcaption>
+                </figure>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <figure>
+                    <a [routerLink]="['/water-supply']"><img src="./assets/images/tools/water-supply.png"></a>
+                    <figcaption class="caption-text">
+                        <p>Water supply</p>
+                    </figcaption>
+                </figure>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
 </div>
-

@@ -15,6 +15,26 @@ const routes: Routes = [
         loadChildren: () => import('./modules/BEET/BEET.module').then(m => m.BEETModule)
       },
       {
+        path: 'district-energy',
+        loadChildren: () => import('./modules/district-energy/district-energy.module').then(m => m.DistrictEnergyModule)
+      },
+      {
+        path: 'motor',
+        loadChildren: () => import('./modules/motor/motor.module').then(m => m.MotorModule)
+      },
+      {
+        path: 'motor-pump',
+        loadChildren: () => import('./modules/motor-pump/motor-pump.module').then(m => m.MotorPumpModule)
+      },
+      {
+        path: 'street-light',
+        loadChildren: () => import('./modules/street-light/street-light.module').then(m => m.StreetLightModule)
+      },
+      {
+        path: 'water-supply',
+        loadChildren: () => import('./modules/water-supply/water-supply.module').then(m => m.WaterSupplyModule)
+      },
+      {
         path: '**',
         loadChildren: () => import('./modules/landingpage/landingpage.module').then(m => m.LandingpageModule),
       }

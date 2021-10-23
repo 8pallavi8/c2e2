@@ -21,11 +21,15 @@ import { OuterwallRadvancedleveldialogComponent } from './outerwall-radvancedlev
 import { RouterModule } from '@angular/router';
 import { RvalueImagedialogComponent } from './rvalue-imagedialog/rvalue-imagedialog.component';
 import { RoofradvancedComponent } from './roofradvanced/roofradvanced.component';
+import { HeaderTwoComponent } from './header-two/header-two.component';
+import { FooterTwoComponent } from './footer-two/footer-two.component';
+
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
+    HeaderTwoComponent,
     FooterComponent,
     PieChartComponent,
     BarChartComponent,
@@ -37,7 +41,8 @@ import { RoofradvancedComponent } from './roofradvanced/roofradvanced.component'
     WindowRdialogComponent,
     OuterwallRadvancedleveldialogComponent,
     RvalueImagedialogComponent,
-    RoofradvancedComponent
+    RoofradvancedComponent,
+    FooterTwoComponent,
   ],
   imports: [
     CommonModule,
@@ -69,7 +74,9 @@ import { RoofradvancedComponent } from './roofradvanced/roofradvanced.component'
     WindowRdialogComponent,
     OuterwallRadvancedleveldialogComponent,
     RvalueImagedialogComponent,
-    RoofradvancedComponent
+    RoofradvancedComponent,
+    HeaderTwoComponent,
+    FooterTwoComponent
   ],
   
   // If Service do not have Provider == root then add the below code to use the service by other components.

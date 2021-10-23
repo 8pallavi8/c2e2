@@ -7,11 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingpageComponent implements OnInit {
 
-  breakpoint: number;
+  row1: number;
+  row2: number
   constructor() { }
 
   ngOnInit() {
-    this.breakpoint = (window.innerWidth <= 400) ? 2 : 6;
+    this.row1 = (window.innerWidth <= 600) ? 2 : 4;
+    this.row2 = (window.innerWidth <= 600) ? 2 : 3;
   }
   
   onResize(event) {
@@ -19,7 +21,8 @@ export class LandingpageComponent implements OnInit {
     switch(windowWidth){
        case 2560 : 
     }
-    this.breakpoint = (event.target.innerWidth <= 400) ? 2 : 6;
+    this.row1 = (window.innerWidth <= 600) ? 2 : 4;
+    this.row2 = (window.innerWidth <= 600) ? 2 : 3;
   }
 
 }

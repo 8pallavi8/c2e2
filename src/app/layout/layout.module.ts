@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { AppToolLayoutComponent } from './app-tool-layout/app-tool-layout.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,7 @@ const routes: Routes = [
   }
 ];
 @NgModule({
-  declarations: [AppLayoutComponent],
+  declarations: [AppLayoutComponent, AppToolLayoutComponent],
   imports: [
     CommonModule,
     SharedModule,
