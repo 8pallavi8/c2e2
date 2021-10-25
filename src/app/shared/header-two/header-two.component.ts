@@ -10,6 +10,7 @@ export class HeaderTwoComponent implements OnInit {
 
   constructor(private router: Router) { }
   showSearch: boolean = false;
+  showMenu: boolean = false;
   ngOnInit(): void {
   }
 
