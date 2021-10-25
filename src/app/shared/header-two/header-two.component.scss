@@ -16,6 +16,7 @@ header {
 .nav-link {
     padding: 0.5rem 0.8rem !important;
     color: #000;
+    cursor: pointer;
 }
 
 .navbar {
@@ -28,4 +29,224 @@ header {
     font-size: 22px;
     padding: 0px 0px 10px 0px;
     letter-spacing: 1px;
+}
+
+.navbar-toggler-icon i {
+    color: #009be8;
+    position: absolute;
+    display: inline-block;
+    border-radius: 0.09375rem;
+    transform-origin: center center;
+    top: 50%;
+    right: 20%;
+    transform: translateX(-50%) translateY(-50%);
+    transition: all 220ms ease-in-out;
+}
+
+.close-icon {
+    color: #fff;
+    width: 1.5rem;
+    height: 0.1875rem;
+    position: absolute;
+    display: inline-block;
+    border-radius: 0.09375rem;
+    transform-origin: center center;
+    top: 30px;
+    right: 0;
+    transform: translateX(-50%) translateY(-50%);
+    transition: all 220ms ease-in-out;
+}
+
+
+/* ditch the ugle blue outline */
+
+.navbar-toggler:focus,
+.navbar-toggler:active {
+    outline: 0;
+}
+
+.search-link {
+    position: absolute;
+    right: 10%;
+    cursor: pointer;
+    height: 3rem;
+    width: 3rem;
+    display: inline-block;
+    background-image: url(https://c2e2.unepdtu.org/wp-content/themes/unepdtu/assets/img/icon-magnifier-blue.svg);
+    background-size: 1.5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 3;
+    transition: all 120ms ease-in-out;
+    margin: 0rem -16px 0 0.5rem;
+    &:hover {
+        transform: scale(1.1);
+    }
+    &::before {
+        content: " ";
+        background-color: rgba(255, 255, 255, 0);
+        width: 1.5rem;
+        height: 0.1875rem;
+        border-radius: 0.09375rem;
+        display: inline-block;
+        position: absolute;
+        transform-origin: center center;
+        top: 22px;
+        left: 12px;
+        transform: rotate(45deg);
+    }
+    &::after {
+        transform: rotate(-45deg);
+        content: " ";
+        background-color: rgba(255, 255, 255, 0);
+        width: 1.5rem;
+        height: 0.1875rem;
+        border-radius: 0.09375rem;
+        display: inline-block;
+        position: absolute;
+        transform-origin: center center;
+        top: 22px;
+        left: 12px;
+    }
+    &.active {}
+    span.search-text {
+        display: none;
+    }
+}
+
+.search-link.active {
+    background-image: none;
+    z-index: 4;
+}
+
+.search-link.active::before {
+    background-color: white;
+}
+
+.search-link.active::after {
+    background-color: white;
+}
+
+
+/* hide close when burger shown */
+
+.navbar-toggler.collapsed .close-icon {
+    display: none;
+}
+
+.navbar-toggler:not(.collapsed) .navbar-toggler-icon {
+    display: inline;
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+    margin-right: 100px;
+}
+
+@media only screen and (max-width: 600px) {
+    #collapsingNavbar {
+        background-color: #009be8;
+        font-size: 1.375rem;
+        position: fixed;
+        top: 0px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 3;
+        overflow: hidden;
+        ul {
+            margin: 3rem 0 0;
+            padding: 0;
+            li {
+                list-style: none;
+                margin: 0;
+                padding: 1rem;
+                border-bottom: 1px solid #ffffff;
+                a {
+                    text-decoration: none;
+                    color: #ffffff;
+                    position: relative;
+                }
+            }
+        }
+    }
+    .search-input {
+        font-size: 0.8rem !important;
+    }
+}
+
+.search-div {
+    background: linear-gradient(to right, #ffffff 0%, #009be8 50%, #009be8 100%);
+    background-position: 0 0;
+    background-size: 200% 100%;
+    color: #ffffff;
+    padding: 1rem 0;
+    height: 5.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateX(100%);
+    transition: transform 300ms ease-in-out, background-position 100ms ease-in-out;
+    &.active {
+        transform: translateX(0);
+        transition: transform 100ms ease-in-out, background-position 500ms ease-in-out;
+        background-position: 100% 0;
+        z-index: 3;
+    }
+    .search-inner {
+        text-align: center;
+        .search-form {
+            display: block;
+            margin-right: 2.5rem;
+            .search-form-group {
+                position: relative;
+            }
+        }
+    }
+}
+
+.search-label {
+    position: absolute;
+    left: 0;
+    top: 12px;
+    color: #ffffff;
+    font-size: 32px;
+    font-size: 2rem;
+    transition: all 220ms ease-in-out;
+    pointer-events: none;
+    display: none;
+}
+
+.search-input {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    padding: 1rem 0;
+    font-size: 1rem;
+    transition: all 150ms ease-out;
+    outline: none;
+    width: 85%;
+    margin: 0 0 0 1rem;
+    border-bottom: 2px solid #ffffff;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+}
+
+.search-button {
+    position: absolute;
+    right: 8%;
+    top: 4px;
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    height: 3rem;
+    width: 3rem;
+    background-image: url(https://c2e2.unepdtu.org/wp-content/themes/unepdtu/assets/img/icon-magnifier-white.svg);
+    background-size: 1.5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-indent: -9999px;
 }

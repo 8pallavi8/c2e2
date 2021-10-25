@@ -7,6 +7,10 @@ const routes: Routes = [
     path: '', component: AppLayoutComponent,
     children: [
       {
+        path: '',
+        loadChildren: () => import('./modules/landingpage/landingpage.module').then(m => m.LandingpageModule),
+      },
+      {
         path: 'transformer',
         loadChildren: () => import('./modules/distribution-transformer/distribution-transformer.module').then(m => m.DistributionTransformerModule)
       },

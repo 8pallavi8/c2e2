@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-two',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderTwoComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private router: Router) { }
+  showSearch: boolean = false;
   ngOnInit(): void {
+  }
+
+  naviagateToHome(){
+     this.router.navigateByUrl('');
   }
 
 }

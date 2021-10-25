@@ -58,7 +58,7 @@
                         Add Transformer</button>
                 </div>
                 <div class="example-table-container">
-                    <table mat-table *ngIf="inputTableDataSource" matSort matTableResponsive [dataSource]="inputTableDataSource">
+                    <table mat-table *ngIf="inputTableDataSource" matSort [dataSource]="inputTableDataSource">
 
                         <ng-container matColumnDef="Power">
                             <th mat-header-cell *matHeaderCellDef> Power </th>
@@ -141,7 +141,7 @@
         <h2 class="page-title">Proposed changes and potential savings</h2>
         <div class="row">
             <div class="example-table-container">
-                <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8 finaltable">
+                <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8 finaltable">
 
                     <ng-container matColumnDef="efficacy">
                         <th mat-header-cell *matHeaderCellDef> Efficacy(%) </th>
