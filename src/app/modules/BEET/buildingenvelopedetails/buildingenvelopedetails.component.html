@@ -8,97 +8,106 @@
             <div class="fields-note">
                 <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
             </div>
-            <mat-radio-group aria-label="Select an option" formControlName="outerwallr">
+            <mat-radio-group aria-label="Select an option" formControlName="outerwallr" (change)="onChangeOuterWallROption($event)">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                 <mat-radio-button value="2"> I want to select from predefined types (pictures available for reference)
                 </mat-radio-button><br>
                 <mat-radio-button value="3"> Calculate the R value by adding custom layers from prelisted materials(Advanced level)</mat-radio-button>
             </mat-radio-group><br><br>
+            <div formArrayName="outerWallArray" *ngIf="formgroup.controls.outerwallr.value !== ''">
+                <div *ngFor="let item of  formgroup.get('outerWallArray')['controls'];let i = index;">
+                    <div [formGroupName]="i">
+                        <!-- Outerwall R known -->
+                        <span *ngIf="formgroup.controls.outerwallr.value == 1" class="units-picker-component">
+                            <p class="fields-note">You may choose to enter the values for any of the units mentioned
+                                below. Necessary units conversions will be made by
+                                the tool for respective calculations.</p>
+                            <b style="margin-top: 1em;">Outer Wall R value : </b>
+                            <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                                <mat-label>Enter value here</mat-label>
+                                <input matInput placeholder="Enter value" type="number"
+                                    formControlName="outerwallRKnown" type="number">
+                                <mat-select placeholder="units" formControlName="outerwallrUnits">
+                                    <mat-option value="m2.°C/W">m<sup>2</sup>.°C/W</mat-option>
+                                    <mat-option value="ft2.°F.h/BTU">ft<sup>2</sup>.°F.h/BTU</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </span>
 
-            <!-- Outerwall R known -->
-            <span *ngIf="formgroup.controls.outerwallr.value == 1" class="units-picker-component">
-                <p class="fields-note">You may choose to enter the values for any of the units mentioned
-                    below. Necessary units conversions will be made by
-                    the tool for respective calculations.</p>
-                <b style="margin-top: 1em;">Outer Wall R value : </b>
-                <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                    <mat-label>Enter value here</mat-label>
-                    <input matInput placeholder="Enter value" type="number" formControlName="outerwallRKnown"
-                        type="number">
-                    <mat-select placeholder="units" formControlName="outerwallrUnits">
-                        <mat-option value="m2.°C/W">m<sup>2</sup>.°C/W</mat-option>
-                        <mat-option value="ft2.°F.h/BTU">ft<sup>2</sup>.°F.h/BTU</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </span>
+                        <!-- Outerwall R Images -->
+                        <div *ngIf="formgroup.controls.outerwallr.value == 2" class="container-fluid">
+                            <p>I want to select from predefined types.Please select most representative picture composition of your building outer wall.</p>
+                            <div class="row">
 
-            <!-- Outerwall R Images -->
-            <div *ngIf="formgroup.controls.outerwallr.value == 2" class="container-fluid">
-                <p>I want to select from predefined types.Please select most representative picture composition of your building outer wall.</p>
-                <div class="row">
+                                <mat-radio-group class="mat-radio-group-image" formControlName="rimages">
+                                    <mat-radio-button *ngFor="let con of outerRData" [value]=con>
+                                        <img src="{{con.imagepath}}">
+                                        <p>R Value = {{con.rvalue}} {{con.units}}</p>
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
 
-                    <mat-radio-group class="mat-radio-group-image" formControlName="rimages">
-                        <mat-radio-button *ngFor="let con of outerRData" value={{con.rvalue}}>
-                            <img src="{{con.imagepath}}">
-                            <p>R Value = {{con.rvalue}} {{con.units}}</p>
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </div>
-            </div>
+                        <!-- Outerwall R Advanced -->
+                        <div *ngIf="formgroup.controls.outerwallr.value == 3">
+                            <!-- <h3> See below example table fro reference. Details to be filled in Table 1</h3> -->
+                            <p>Step1: Select the layer number from the dropdown list.</p>
+                            <p>Step2: Select material from dropdown list.</p>
+                            <p>Step3: Click load button and proceed with the tool. </p>
+                            <p>Step4: Click return to insert the custom R value.</p>
+                            <br>
+                            <div>
+                                <div>
+                                    <b style="margin-top: 20px;padding-left: 2rem">Layer Number : </b>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Select </mat-label>
+                                        <mat-select [(value)]="selectedLayerValue">
+                                            <mat-option *ngFor="let layer of layersList" [value]="layer">{{layer}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
 
-            <!-- Outerwall R Advanced -->
-            <div *ngIf="formgroup.controls.outerwallr.value == 3">
-                <!-- <h3> See below example table fro reference. Details to be filled in Table 1</h3> -->
-                <p>Step1: Select the layer number from the dropdown list.</p>
-                <p>Step2: Select material from dropdown list.</p>
-                <p>Step3: Click load button and proceed with the tool. </p>
-                <p>Step4: Click return to insert the custom R value.</p>
-                <br>
-                <div>
-                    <div>
-                        <b style="margin-top: 20px;padding-left: 2rem">Layer Number : </b>
-                        <mat-form-field appearance="outline">
-                            <mat-label>Select </mat-label>
-                            <mat-select [(value)]="selectedLayerValue">
-                                <mat-option *ngFor="let layer of layersList" [value]="layer">{{layer}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                                    <b style="margin-top: 20px;padding-left: 2rem;">Capa del elemento constructivo :
+                                    </b>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Select</mat-label>
+                                        <mat-select [(value)]="selectedCapa" #sel (selectionChange)="onOptionsSelected($event)">
+                                            <mat-option *ngFor="let element of elementsList" [value]="element">
+                                                {{element}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
 
-                        <b style="margin-top: 20px;padding-left: 2rem;">Capa del elemento constructivo : </b>
-                        <mat-form-field appearance="outline">
-                            <mat-label>Select</mat-label>
-                            <mat-select [(value)]="selectedCapa" #sel (selectionChange)="onOptionsSelected($event)">
-                                <mat-option *ngFor="let element of elementsList" [value]="element">{{element}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                                <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8 table-advancedR">
+                                    <ng-container matColumnDef="Layer">
+                                        <th mat-header-cell *matHeaderCellDef> Layer</th>
+                                        <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Capadelelementoconstructivo">
+                                        <th mat-header-cell *matHeaderCellDef> Capa del elemento constructivo </th>
+                                        <td mat-cell *matCellDef="let example"> {{example.Capadelelementoconstructivo}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Espesordecadacapa">
+                                        <th mat-header-cell *matHeaderCellDef> Espesor de cada capa(e) in m </th>
+                                        <td mat-cell *matCellDef="let example"> {{example.Espesordecadacapa}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Resistenciatermica">
+                                        <th mat-header-cell *matHeaderCellDef> Resistencia termica (R) in sqm.K/W </th>
+                                        <td mat-cell *matCellDef="let example"> {{example.Resistenciatermica}} </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+
+                            </div>
+                        </div>
                     </div>
-
-                    <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8 table-advancedR">
-                        <ng-container matColumnDef="Layer">
-                            <th mat-header-cell *matHeaderCellDef> Layer</th>
-                            <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Capadelelementoconstructivo">
-                            <th mat-header-cell *matHeaderCellDef> Capa del elemento constructivo </th>
-                            <td mat-cell *matCellDef="let example"> {{example.Capadelelementoconstructivo}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Espesordecadacapa">
-                            <th mat-header-cell *matHeaderCellDef> Espesor de cada capa(e) in m </th>
-                            <td mat-cell *matCellDef="let example"> {{example.Espesordecadacapa}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Resistenciatermica">
-                            <th mat-header-cell *matHeaderCellDef> Resistencia termica (R) in sqm.K/W </th>
-                            <td mat-cell *matCellDef="let example"> {{example.Resistenciatermica}} </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-
                 </div>
             </div>
         </fieldset>
@@ -112,99 +121,110 @@
             <div class="fields-note">
                 <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
             </div>
-            <mat-radio-group aria-label="Select an option" formControlName="roofr">
+            <mat-radio-group aria-label="Select an option" formControlName="roofr" (change)="onChangeroofrOption($event)">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                 <mat-radio-button value="2"> I want to select from predefined types (pictures available for reference)
                 </mat-radio-button><br>
                 <mat-radio-button value="3">Calculate the R value by adding custom layers from prelisted materials (Advanced level)</mat-radio-button>
             </mat-radio-group><br><br>
 
-            <!-- Roof R known -->
-            <span *ngIf="formgroup.controls.roofr.value == 1" class="units-picker-component">
-                <p class="fields-note">You may choose to enter the values for any of the units mentioned
-                    below. Necessary units conversions will be made by
-                    the tool for respective calculations.</p>
-                <b style="margin-top: 1em;">Roof R value : </b>
-                <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                    <mat-label>Enter value here</mat-label>
-                    <input matInput placeholder="Enter value" type="number" formControlName="roofRKnown" type="number">
-                    <mat-select placeholder="units" formControlName="roofrUnits">
-                        <mat-option value="m2.°C/W">m<sup>2</sup>.°C/W</mat-option>
-                        <mat-option value="ft2.°F.h/BTU">ft<sup>2</sup>.°F.h/BTU</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </span>
+            <div formArrayName="roofrArray" *ngIf="formgroup.controls.roofr.value !== ''">
+                <div *ngFor="let item of  formgroup.get('roofrArray')['controls'];let i = index;">
+                    <div [formGroupName]="i">
+                        <!-- Roof R known -->
+                        <span *ngIf="formgroup.controls.roofr.value == 1" class="units-picker-component">
+                            <p class="fields-note">You may choose to enter the values for any of the units mentioned
+                                below. Necessary units conversions will be made by
+                                the tool for respective calculations.</p>
+                            <b style="margin-top: 1em;">Roof R value : </b>
+                            <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                                <mat-label>Enter value here</mat-label>
+                                <input matInput placeholder="Enter value" type="number" formControlName="roofRKnown"
+                                    type="number">
+                                <mat-select placeholder="units" formControlName="roofrUnits">
+                                    <mat-option value="m2.°C/W">m<sup>2</sup>.°C/W</mat-option>
+                                    <mat-option value="ft2.°F.h/BTU">ft<sup>2</sup>.°F.h/BTU</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </span>
 
-            <!-- Roof R images -->
-            <div *ngIf="formgroup.controls.roofr.value == 2" class="container-fluid">
-                <p>I want to select from predefined types.Please select most representative picture composition of your building outer wall.</p>
+                        <!-- Roof R images -->
+                        <div *ngIf="formgroup.controls.roofr.value == 2" class="container-fluid">
+                            <p>I want to select from predefined types.Please select most representative picture composition of your building outer wall.</p>
 
-                <div class="row">
-
-
-                    <mat-radio-group class="mat-radio-group-image" formControlName="rimages">
-                        <mat-radio-button *ngFor="let con of roofRData" [value]="con.rvalue">
-                            <img src="{{con.imagepath}}">
-                            <p>R Value = {{con.rvalue}} {{con.units}}}</p>
-                        </mat-radio-button>
-                    </mat-radio-group>
+                            <div class="row">
 
 
-                </div>
-            </div>
+                                <mat-radio-group class="mat-radio-group-image" formControlName="rimages">
+                                    <mat-radio-button *ngFor="let con of roofRData" [value]="con.rvalue">
+                                        <img src="{{con.imagepath}}">
+                                        <p>R Value = {{con.rvalue}} {{con.units}}}</p>
+                                    </mat-radio-button>
+                                </mat-radio-group>
 
-            <!-- Outerwall R Advanced -->
-            <div *ngIf="formgroup.controls.roofr.value == 3">
 
-                <p>Step1: Select the layer number from the dropdown list.</p>
-                <p>Step2: Select material from dropdown list.</p>
-                <p>Step3: Click load button and proceed with the tool. </p>
-                <p>Step4: Click return to insert the custom R value.</p>
-                <br>
-                <div>
-                    <div>
-                        <b style="margin-top: 20px;padding-left: 2rem">Layer Number : </b>
-                        <mat-form-field appearance="outline">
-                            <mat-label>Select </mat-label>
-                            <mat-select [(value)]="selectedRoofLayerValue">
-                                <mat-option *ngFor="let layer of layersList" [value]="layer">{{layer}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                            </div>
+                        </div>
 
-                        <b style="margin-top: 20px;padding-left: 2rem;">Capa del elemento constructivo : </b>
-                        <mat-form-field appearance="outline">
-                            <mat-label>Select</mat-label>
-                            <mat-select [(value)]="selectedMaterial" #sel (selectionChange)="onOptionsSelectedroof($event)">
-                                <mat-option *ngFor="let element of elementsList" [value]="element">{{element}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                        <!-- Outerwall R Advanced -->
+                        <div *ngIf="formgroup.controls.roofr.value == 3">
+
+                            <p>Step1: Select the layer number from the dropdown list.</p>
+                            <p>Step2: Select material from dropdown list.</p>
+                            <p>Step3: Click load button and proceed with the tool. </p>
+                            <p>Step4: Click return to insert the custom R value.</p>
+                            <br>
+                            <div>
+                                <div>
+                                    <b style="margin-top: 20px;padding-left: 2rem">Layer Number : </b>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Select </mat-label>
+                                        <mat-select [(value)]="selectedRoofLayerValue">
+                                            <mat-option *ngFor="let layer of layersList" [value]="layer">{{layer}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <b style="margin-top: 20px;padding-left: 2rem;">Capa del elemento constructivo :
+                                    </b>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Select</mat-label>
+                                        <mat-select [(value)]="selectedMaterial" #sel (selectionChange)="onOptionsSelectedroof($event)">
+                                            <mat-option *ngFor="let element of elementsList" [value]="element">
+                                                {{element}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <table mat-table matSort matTableResponsive [dataSource]="roofdataSource" class="mat-elevation-z8 table-advancedR">
+                                    <ng-container matColumnDef="Layer">
+                                        <th mat-header-cell *matHeaderCellDef> Layer</th>
+                                        <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Capadelelementoconstructivo">
+                                        <th mat-header-cell *matHeaderCellDef> Capa del elemento constructivo </th>
+                                        <td mat-cell *matCellDef="let example"> {{example.Capadelelementoconstructivo}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Espesordecadacapa">
+                                        <th mat-header-cell *matHeaderCellDef> Espesor de cada capa(e) in m </th>
+                                        <td mat-cell *matCellDef="let example"> {{example.Espesordecadacapa}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Resistenciatermica">
+                                        <th mat-header-cell *matHeaderCellDef> Resistencia termica (R) in sqm.K/W </th>
+                                        <td mat-cell *matCellDef="let example"> {{example.Resistenciatermica}} </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-
-                    <table mat-table matSort matTableResponsive [dataSource]="roofdataSource" class="mat-elevation-z8 table-advancedR">
-                        <ng-container matColumnDef="Layer">
-                            <th mat-header-cell *matHeaderCellDef> Layer</th>
-                            <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Capadelelementoconstructivo">
-                            <th mat-header-cell *matHeaderCellDef> Capa del elemento constructivo </th>
-                            <td mat-cell *matCellDef="let example"> {{example.Capadelelementoconstructivo}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Espesordecadacapa">
-                            <th mat-header-cell *matHeaderCellDef> Espesor de cada capa(e) in m </th>
-                            <td mat-cell *matCellDef="let example"> {{example.Espesordecadacapa}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Resistenciatermica">
-                            <th mat-header-cell *matHeaderCellDef> Resistencia termica (R) in sqm.K/W </th>
-                            <td mat-cell *matCellDef="let example"> {{example.Resistenciatermica}} </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
                 </div>
             </div>
         </fieldset>
@@ -219,30 +239,34 @@
             <div class="fields-note">
                 <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
             </div>
-            <mat-radio-group aria-label="Select an option" formControlName="windowr">
+            <mat-radio-group aria-label="Select an option" formControlName="windowr" (change)="onChangewindowrOption($event)">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                 <mat-radio-button (click)="openWindowPredefinedR()" value="2"> I want to select from predefined types (list available)
                 </mat-radio-button>
             </mat-radio-group><br><br>
 
             <!-- Window R known -->
-
-            <span *ngIf="formgroup.controls.windowr.value == 1" class="units-picker-component">
-                <p class="fields-note">You may choose to enter the values for any of the units mentioned
-                    below. Necessary units conversions will be made by
-                    the tool for respective calculations.</p>
-                <b style="margin-top: 1em;">Window R value : </b>
-                <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                    <mat-label>Enter value here</mat-label>
-                    <input matInput placeholder="Enter value" type="number" formControlName="windowRKnown"
-                        type="number">
-                    <mat-select placeholder="units" formControlName="windowrUnits">
-                        <mat-option value="m2.°C/W">m<sup>2</sup>.°C/W</mat-option>
-                        <mat-option value="ft2.°F.h/BTU">ft<sup>2</sup>.°F.h/BTU</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </span>
-
+            <div formArrayName="windowrArray" *ngIf="formgroup.controls.windowr.value !== ''">
+                <div *ngFor="let item of  formgroup.get('windowrArray')['controls'];let i = index;">
+                    <div [formGroupName]="i">
+                        <span *ngIf="formgroup.controls.windowr.value == 1" class="units-picker-component">
+                            <p class="fields-note">You may choose to enter the values for any of the units mentioned
+                                below. Necessary units conversions will be made by
+                                the tool for respective calculations.</p>
+                            <b style="margin-top: 1em;">Window R value : </b>
+                            <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                                <mat-label>Enter value here</mat-label>
+                                <input matInput placeholder="Enter value" type="number" formControlName="windowRKnown"
+                                    type="number">
+                                <mat-select placeholder="units" formControlName="windowrUnits">
+                                    <mat-option value="m2.°C/W">m<sup>2</sup>.°C/W</mat-option>
+                                    <mat-option value="ft2.°F.h/BTU">ft<sup>2</sup>.°F.h/BTU</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </span>
+                    </div>
+                </div>
+            </div>
 
             <!-- <b>R Value in [m2 °K / W]: {{windowRValue}} </b> -->
         </fieldset>
@@ -301,17 +325,18 @@
             </span>
 
             <span *ngIf="formgroup.controls.wwr.value == 2">
-                <p style="margin-top: 1em;">I dont't know.Help me in selecting suitable  window to wall ratio value for my building.</p>
+                <p style="margin-top: 1em;">I dont't know.Help me in selecting suitable window to wall ratio value for
+                    my building.</p>
                 <div style="display: flex;">
-                     <p style="margin-top: 1rem;">Please enter the WWR value in(%) by refering to pictures: </p>
+                    <p style="margin-top: 1rem;">Please enter the WWR value in(%) by refering to pictures: </p>
                     <mat-form-field appearance="outline">
                         <mat-label>Enter value here</mat-label>
                         <input matInput placeholder="Enter value" formControlName="wwrGuide" required>
                     </mat-form-field>
-                    <div class="images-wwr"> 
-                     <img src="/assets/images/wwr/wwr1.jpg">
-                    <img src="/assets/images/wwr/wwr3.jpeg"> 
-                </div>
+                    <div class="images-wwr">
+                        <img src="/assets/images/wwr/wwr1.jpg">
+                        <img src="/assets/images/wwr/wwr3.jpeg">
+                    </div>
 
                 </div>
             </span>

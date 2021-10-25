@@ -1,7 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatRadioChange } from '@angular/material/radio';
 import { BuildingDetails, LocationDetails } from 'src/app/shared/models/models';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
@@ -13,10 +14,11 @@ export interface CountryTable {
   countrycode?: string;
 }
 
+
 @Component({
   selector: 'app-gendetails',
   templateUrl: './gendetails.component.html',
-  styleUrls: ['./gendetails.component.scss'],
+  styleUrls: ['../beet.component.scss'],
 
 })
 export class GendetailsComponent implements OnInit {
@@ -40,9 +42,9 @@ export class GendetailsComponent implements OnInit {
   locationDetails: LocationDetails[] = [];
   buildingDetails: BuildingDetails[] = [];
   selectedCountryCode: CountryTable;
-
+  isEnteredGross: boolean = false;
   constructor(
-    @Inject(DOCUMENT) private readonly document: Document, 
+    @Inject(DOCUMENT) private readonly document: Document,
     private fb: FormBuilder,
     public dialog: MatDialog,
     private inputDialog: InputdialogService,
@@ -68,18 +70,20 @@ export class GendetailsComponent implements OnInit {
       Electricitycost: ['', Validators.compose([Validators.required])],
       Fuelcost: ['', Validators.compose([Validators.required])],
       fuelunits: ['', Validators.compose([Validators.required])],
-      grossAreaUnits: ['square feet', Validators.compose([Validators.required])],
+      grossAreaUnits: ['', Validators.compose([Validators.required])],
       netAreaUnits: ['', Validators.compose([Validators.required])],
       electricityunits: ['', Validators.compose([Validators.required])],
       //occupancyValue: [0, Validators.compose([Validators.required])],
       occupantDensityKnown: [0, Validators.compose([Validators.required])],
 
+
     });;
     this.getcountryList();
+    //this.genDetailsForm.valueChanges.subscribe(res => this.calculateGross());
     //console.log("code:" + this.countrylist);
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     var acc = this.document.getElementsByClassName('accordion');
     console.log(this.document.getElementsByClassName('accordion'));
     for (let i = 0; i < acc.length; i++) {
@@ -132,39 +136,79 @@ export class GendetailsComponent implements OnInit {
     this.beetService.setSelectedbuildingSpaces(event.value);
   }
 
-  calculateGross(event: any) {
-
-    if (this.genDetailsForm.controls.buildingGrossArea.value == 0 && this.genDetailsForm.controls.netAreaUnits.value != undefined) {
-      this.genDetailsForm.controls['grossAreaUnits'].setValue(this.genDetailsForm.controls.netAreaUnits.value);
-      this.genDetailsForm.controls['buildingGrossArea'].setValue(event.target.value * 1.1);
+  calculateGross() {
+    console.log(this.genDetailsForm.controls.netAreaUnits.value);
+    if(!this.isEnteredGross){
+      this.genDetailsForm.controls.grossAreaUnits.patchValue(this.genDetailsForm.controls.netAreaUnits.value);
+      this.genDetailsForm.controls.buildingGrossArea.setValue((this.genDetailsForm.controls.Netoccupiedfloorarea.value * 1.1).toFixed(2));
     }
+    
   }
 
-  postCalculateOccupancyPeople(): void {
-    var payload: any = {
-      noofpeople: this.genDetailsForm.controls.noOfPeopleOccupying.value,
-      buildinggrossarea: this.genDetailsForm.controls.buildingGrossArea.value,
-      buildinggrossareaunit: this.genDetailsForm.controls.grossAreaUnits.value
+  resetGross(event) {
+    if(event.target.value == ''){
+     this.isEnteredGross = false;
+    } else{
+      this.isEnteredGross = true;
     }
-    console.log(payload);
-    this.beetService.postCalculateOccupancyPeople(payload).subscribe(res => {
-      console.log(res.success);
-      if (res.status == 'success') {
+   
+  }
+
+  // postCalculateOccupancyPeople(): void {
+  //   var payload: any = {
+  //     noofpeople: this.genDetailsForm.controls.noOfPeopleOccupying.value,
+  //     buildinggrossarea: this.genDetailsForm.controls.buildingGrossArea.value,
+  //     buildinggrossareaunit: this.genDetailsForm.controls.grossAreaUnits.value
+  //   }
+  //   console.log(payload);
+  //   this.beetService.postCalculateOccupancyPeople(payload).subscribe(res => {
+  //     console.log(res.success);
+  //     if (res.status == 'success') {
+  //       this.genDetailsForm.controls['occupantDensityKnown'].patchValue(res.success.occupantdensity.toFixed(2));
+  //       this.genDetailsForm.controls['occupantDensityUnits'].patchValue(res.success.occupantdensityunit);
+  //     }
+  //   });
+  // }
+
+  // postCalculateOccupancyUnknown(): void {
+  //   var payload: any = {
+  //     "countrycode": this.selectedCountryCode,
+  //     "buildingtype": this.genDetailsForm.controls.buildingType.value,
+  //     "buildingspaces": this.genDetailsForm.controls.buildingSpaces.value
+  //   }
+  //   this.beetService.postCalculateOccupancyUnknown(payload).subscribe(res => {
+  //     this.genDetailsForm.controls['occupantDensityKnown'].setValue(res.success.occupantdensity.toFixed(2));
+  //     this.genDetailsForm.controls['occupantDensityUnits'].setValue(res.success.occupantdensityunit);
+  //   });
+  // }
+
+  onChangeOccupancy() {
+    this.genDetailsForm.controls['occupantDensityKnown'].reset();
+    this.genDetailsForm.controls['occupantDensityUnits'].reset();
+    if (this.genDetailsForm.controls.occupantDensity.value == 1 && this.genDetailsForm.controls.noOfPeopleOccupying.value !== 0) {
+      var payload: any = {
+        noofpeople: this.genDetailsForm.controls.noOfPeopleOccupying.value,
+        buildinggrossarea: Number(this.genDetailsForm.controls.buildingGrossArea.value),
+        buildinggrossareaunit: this.genDetailsForm.controls.grossAreaUnits.value
+      }
+      this.beetService.postCalculateOccupancyPeople(payload).subscribe(res => {
+        console.log(res.success);
+        if (res.status == 'success') {
+          this.genDetailsForm.controls['occupantDensityKnown'].patchValue(res.success.occupantdensity.toFixed(2));
+          this.genDetailsForm.controls['occupantDensityUnits'].patchValue(res.success.occupantdensityunit);
+        }
+      });
+    }
+    else if (this.genDetailsForm.controls.occupantDensity.value == 3) {
+      var payload: any = {
+        "countrycode": this.selectedCountryCode,
+        "buildingtype": this.genDetailsForm.controls.buildingType.value,
+        "buildingspaces": this.genDetailsForm.controls.buildingSpaces.value
+      }
+      this.beetService.postCalculateOccupancyUnknown(payload).subscribe(res => {
         this.genDetailsForm.controls['occupantDensityKnown'].setValue(res.success.occupantdensity.toFixed(2));
         this.genDetailsForm.controls['occupantDensityUnits'].setValue(res.success.occupantdensityunit);
-      }
-    });
-  }
-
-  postCalculateOccupancyUnknown(): void {
-    var payload: any = {
-      "countrycode": this.selectedCountryCode,
-      "buildingtype": this.genDetailsForm.controls.buildingType.value,
-      "buildingspaces": this.genDetailsForm.controls.buildingSpaces.value
+      });
     }
-    this.beetService.postCalculateOccupancyUnknown(payload).subscribe(res => {
-      this.genDetailsForm.controls['occupantDensityKnown'].setValue(res.success.occupantdensity.toFixed(2));
-        this.genDetailsForm.controls['occupantDensityUnits'].setValue(res.success.occupantdensityunit);
-    });
   }
 }

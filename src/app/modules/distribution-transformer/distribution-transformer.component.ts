@@ -119,7 +119,7 @@ export class DisTransformerComponent implements OnInit {
 
   openDialog(action, obj): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '80%',
+      width: '90%',
       autoFocus: false,
       maxHeight: '90vh',
       data: {

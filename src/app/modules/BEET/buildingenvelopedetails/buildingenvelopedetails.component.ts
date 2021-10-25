@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatRadioChange } from '@angular/material/radio';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime } from 'rxjs/operators';
 import { OuterwallAdvLevelAirComponent } from 'src/app/shared/outerwall-adv-level-air/outerwall-adv-level-air.component';
@@ -51,7 +52,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   selectedMaterial: string;
   SHGC: number;
   selCountryCode: string;
-  selProvince:string;
+  selProvince: string;
   layersList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   elementsList = ["Camara de aire", "Ladrillo comun-picture options", "Select more from list of materials"]
   displayedColumns: string[] = ['Layer', 'Capadelelementoconstructivo', 'Espesordecadacapa', 'Resistenciatermica'];
@@ -98,22 +99,18 @@ export class BuildingenvelopedetailsComponent implements OnInit {
 
     this.formgroup = this.fb.group({
       outerwallr: ['', Validators.compose([Validators.required])],
-      outerwallRKnown: ['0', Validators.compose([Validators.required])],
-      outerwallrUnits: ['', Validators.compose([Validators.required])],
+      outerWallArray: this.fb.array([]),
       roofr: ['', Validators.compose([Validators.required])],
-      roofRKnown: ['0', Validators.compose([Validators.required])],
-      roofrUnits: ['', Validators.compose([Validators.required])],
-      rimages: ['0', Validators.compose([Validators.required])],
+      roofrArray: this.fb.array([]),
       windowr: ['', Validators.compose([Validators.required])],
-      windowRKnown: ['0', Validators.compose([Validators.required])],
-      windowrUnits: ['', Validators.compose([Validators.required])],
+      windowrArray: this.fb.array([]),
       SHGC: ['', Validators.compose([Validators.required])],
-      SHGCknown: ['0', Validators.compose([Validators.required])],
-      wwr: ['0', Validators.compose([Validators.required])],
-      wwrKnown: ['0', Validators.compose([Validators.required])],
-      wwrGuide: ['0', Validators.compose([Validators.required])],
+      SHGCknown: [0, Validators.compose([Validators.required])],
+      wwr: [0, Validators.compose([Validators.required])],
+      wwrKnown: [0, Validators.compose([Validators.required])],
+      wwrGuide: [0, Validators.compose([Validators.required])],
     })
-    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res;});
+    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; });
     this.beetService.getSelectedProvince().subscribe(res => { this.selProvince = res; console.log(res); });
 
     this.beetService.getGeneralDetails().subscribe(res => {
@@ -123,6 +120,54 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     });
   }
 
+  onChangeOuterWallROption(event: MatRadioChange) {
+    console.log(this.formgroup.get('outerWallArray'));
+    (<FormArray>this.formgroup.get('outerWallArray')).removeAt(0)
+
+    if (event.value == 1) {
+      (<FormArray>this.formgroup.get('outerWallArray')).push(this.fb.group({
+        outerwallRKnown: ['', Validators.required],
+        outerwallrUnits: ['', Validators.required],
+      }));
+    } else if (event.value == 2) {
+      (<FormArray>this.formgroup.get('outerWallArray')).push(this.fb.group({
+        rimages: ['', Validators.required],
+      }));
+    }
+  }
+
+  onChangeroofrOption(event: MatRadioChange) {
+    console.log(this.formgroup.get('roofrArray'));
+    (<FormArray>this.formgroup.get('roofrArray')).removeAt(0)
+
+    if (event.value == 1) {
+      (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
+        roofRKnown: ['', Validators.required],
+        roofrUnits: ['', Validators.required],
+      }));
+    } else if (event.value == 2) {
+      (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
+        rimages: ['', Validators.required],
+      }));
+    }
+  }
+
+  onChangewindowrOption(event: MatRadioChange) {
+    console.log(this.formgroup.get('windowrArray'));
+    (<FormArray>this.formgroup.get('windowrArray')).removeAt(0)
+    if (event.value == 1) {
+      (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
+        windowRKnown: ['', Validators.required],
+        windowrUnits: ['', Validators.required],
+      }));
+    } else if (event.value == 2) {
+      (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
+        rimages: ['', Validators.required],
+      }));
+    }
+  }
+
+  
   onOptionsSelected(event) {
     console.log(event.value);
     if (event.value == 'Camara de aire') {
@@ -136,7 +181,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     }
   }
 
-  public openCamaraDie(typeofroof:number) {
+  public openCamaraDie(typeofroof: number) {
     const dialogref = this.dialog.open(OuterwallAdvLevelAirComponent, {
       width: '60%',
       autoFocus: false,
@@ -144,11 +189,11 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     });
     dialogref.afterClosed().subscribe(result => {
       console.log(result.thickness, result.rvalue);
-      if(typeofroof == 0 ){
+      if (typeofroof == 0) {
         this.addOuterWallLayerValues(result.thickness, result.rvalue);
-      }else {
+      } else {
         this.addRoofLayerValues(result.thickness, result.rvalue);
-      } 
+      }
     });
   }
 
@@ -159,15 +204,15 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       maxHeight: '100vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      if(result!=undefined){
+      if (result != undefined) {
         this.addOuterWallLayerValues('', result);
       }
-     
+
     });
   }
 
 
-  public openlistOfMaterials(typeofroof:number) {
+  public openlistOfMaterials(typeofroof: number) {
     const dialogref = this.dialog.open(OuterwallRadvancedleveldialogComponent, {
       width: '60%',
       autoFocus: false,
@@ -175,11 +220,11 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     });
     dialogref.afterClosed().subscribe(result => {
       console.log("adv" + result);
-      if(typeofroof == 0 ){
+      if (typeofroof == 0) {
         this.addOuterWallLayerValues(result.thickness, result.rvalue);
-      }else {
+      } else {
         this.addRoofLayerValues(result.thickness, result.rvalue);
-      }      
+      }
     });
   }
 
@@ -188,7 +233,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     let layerInput: BuildingLayerValues;
     console.log("callingLayer ");
     layerInput =
-    { Layer: this.selectedLayerValue,
+    {
+      Layer: this.selectedLayerValue,
       Capadelelementoconstructivo: this.selectedCapa,
       Espesordecadacapa: thickness,
       Resistenciatermica: Rvalue
@@ -196,7 +242,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     this.layerValues.splice(this.selectedLayerValue, 1, layerInput)
     this.calculateSum(this.layerValues);
     this.dataSource = new MatTableDataSource(this.layerValues);
-    this.selectedCapa= '';
+    this.selectedCapa = '';
   }
 
   public calculateSum(tempArray: BuildingLayerValues[]) {
@@ -231,7 +277,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     });
     dialogref.afterClosed().subscribe(result => {
       console.log(result);
-      if(result!=undefined){
+      if (result != undefined) {
         this.addRoofLayerValues('', result);
       }
     });
@@ -251,7 +297,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     this.roofLayerValues.splice(this.selectedRoofLayerValue, 1, layerInput)
     this.calculateSum(this.roofLayerValues);
     this.roofdataSource = new MatTableDataSource(this.roofLayerValues);
-    this.selectedMaterial= '';
+    this.selectedMaterial = '';
   }
 
 
@@ -276,16 +322,15 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   }
 
 
-   postCalculateshgc(): void {
+  postCalculateshgc(): void {
     var payload: any = {
       "countrycode": this.selCountryCode,
       "province": this.selProvince
     }
     console.log(payload);
-    this.beetService.postCalculateshgc(payload).subscribe(res =>{
-      console.log(res.success);
-      
-    })
-  } 
+    this.beetService.postCalculateshgc(payload).subscribe(res => {
+      this.formgroup.controls.SHGCknown.patchValue(res.success);
+    });
+  }
 
 }

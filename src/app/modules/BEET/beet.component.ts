@@ -117,5 +117,9 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   }
 
+  saveBuildingDetails(){
+    console.log(this.buildingdetailsComponent?.formgroup);
+  }
+
 
 }

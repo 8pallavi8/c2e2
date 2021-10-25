@@ -25,7 +25,7 @@
                     </li>
                 </ul>
             </div>
-            <a *ngIf="!showMenu" class="search-link pull-right" [ngClass]="{'active' : showSearch}" (click)="showSearch = !showSearch">
+            <a class="search-link pull-right" [ngClass]="{'active' : showSearch}" (click)="showSearch = !showSearch">
                 <span class="search-text">Search</span>
             </a>
             <div class="search-div" *ngIf="showSearch" [ngClass]="{'active' : showSearch}">

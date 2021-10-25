@@ -19,8 +19,7 @@
 
         <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
             <mat-label>Power(kVA)</mat-label>
-            <input type="number" class="pro-name" matInput placeholder="Enter Power(kVA)" formControlName="Power"
-                required>
+            <input type="number" class="pro-name" matInput placeholder="Enter Power(kVA)" formControlName="Power" required>
             <mat-error *ngIf="DialogTransformerInputs.controls['Power'].hasError('required')">
                 Power is required
             </mat-error>
@@ -32,8 +31,7 @@
 
         <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
             <mat-label>Stock(No)</mat-label>
-            <input type="number" class="pro-name" matInput placeholder="Enter Stock(No)" formControlName="Stock"
-                required>
+            <input type="number" class="pro-name" matInput placeholder="Enter Stock(No)" formControlName="Stock" required>
 
             <mat-error *ngIf="DialogTransformerInputs.controls['Stock'].hasError('required')">
                 stock is required
@@ -42,8 +40,7 @@
 
         <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
             <mat-label>PlateEfficiency(%)</mat-label>
-            <input type="number" class="pro-name" matInput placeholder="Enter PlateEfficiency(%)"
-                formControlName="PlateEfficiency" required>
+            <input type="number" class="pro-name" matInput placeholder="Enter PlateEfficiency(%)" formControlName="PlateEfficiency" required>
             <!-- <mat-hint color="primary">Provide PlateEfficiency</mat-hint> -->
             <mat-error *ngIf="DialogTransformerInputs.controls['PlateEfficiency'].hasError('required')">
                 PlateEfficiency is required
@@ -52,8 +49,7 @@
 
         <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
             <mat-label>Energy(MWh/yr)</mat-label>
-            <input type="number" class="pro-name" matInput placeholder="Enter Energy(MWh/yr)" formControlName="Energy"
-                required>
+            <input type="number" class="pro-name" matInput placeholder="Enter Energy(MWh/yr)" formControlName="Energy" required>
             <!-- <mat-hint color="primary">Provide PlateEfficiency</mat-hint> -->
             <mat-error *ngIf="DialogTransformerInputs.controls['Energy'].hasError('required')">
                 Energy is required
@@ -62,8 +58,7 @@
 
         <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
             <mat-label>EnergyPrice(USD/MWh)</mat-label>
-            <input type="number" class="pro-name" matInput placeholder="Enter EnergyPrice(USD/MWh)"
-                formControlName="EnergyPrice" required>
+            <input type="number" class="pro-name" matInput placeholder="Enter EnergyPrice(USD/MWh)" formControlName="EnergyPrice" required>
             <!-- <mat-hint color="primary">Provide PlateEfficiency</mat-hint> -->
             <mat-error *ngIf="DialogTransformerInputs.controls['EnergyPrice'].hasError('required')">
                 EnergyPrice is required
@@ -77,14 +72,14 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
+        <mat-form-field class="w-100 mt-4 col-md-12" appearance="outline">
             <mat-label>FireRegulation</mat-label>
             <mat-select matNativeControl id="FireRegulation" formControlName="FireRegulation">
                 <mat-option *ngFor="let Regulation of FireRegulation" [value]="Regulation">{{Regulation}}</mat-option>
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
+        <mat-form-field class="w-100 mt-4 col-md-12" appearance="outline">
             <mat-label>HighestVoltageValues</mat-label>
             <mat-select matNativeControl id="HighestVoltageValues" formControlName="HighestVoltageValues">
                 <mat-option *ngFor="let voltage of data.highestVoltageValueslist" [value]="voltage">{{voltage}}
@@ -92,7 +87,7 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
+        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
             <mat-label>DualVoltWindings</mat-label>
             <mat-select matNativeControl id="DualVoltWindings" formControlName="DualVoltWindings">
                 <mat-option *ngFor="let voltwindings of data.dualVoltWindings" [value]="voltwindings">{{voltwindings}}
@@ -100,10 +95,9 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
+        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
             <mat-label>Capex(USD/unit)</mat-label>
-            <input type="number" class="pro-name" matInput placeholder="Enter Capex(USD/unit)" formControlName="Capex"
-                required>
+            <input type="number" class="pro-name" matInput placeholder="Enter Capex(USD/unit)" formControlName="Capex" required>
             <!-- <mat-hint color="primary">Provide Capex</mat-hint> -->
             <mat-error *ngIf="DialogTransformerInputs.controls['Capex'].hasError('required')">
                 Capex is required
@@ -113,10 +107,8 @@
 
 
         <div class="button-dialog" mat-dialog-actions>
-            <button mat-raised-button color="accent" style="color: #fff;" class="mat-elevation-z6" type="button"
-                (click)="onNoClick()">Cancel</button>
-            <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="submit"
-                cdkFocusInitial>{{data.action}}</button>
+            <button mat-raised-button color="accent" style="color: #fff;" class="mat-elevation-z6" type="button" (click)="onNoClick()">Cancel</button>
+            <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="submit" cdkFocusInitial>{{data.action}}</button>
         </div>
 
     </form>

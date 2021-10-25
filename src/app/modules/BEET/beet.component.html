@@ -36,8 +36,9 @@
     <div class="tools-header">
         <div class="top-logo container-fluid">
             <div class="row-logo">
-                <img src="./assets/images/Logos/UNEP-partnershiplogo.png" width="150px" height="auto">
                 <img src="./assets/images/logo_copenhagen-centre.svg" width="150px" height="auto">
+                <img src="./assets/images/Logos/UNEP-partnershiplogo.png" width="150px" height="auto">
+
             </div>
         </div>
         <div class="container-fluid" style="display: flex;padding-top: 10px;">
@@ -47,8 +48,8 @@
                 </div>
                 <div class="col-9 col-md-9 d-flex">
                     <div class="title-container">
-                        <h2 style="color:#35495e">BEET</h2>
-                        <p>Building Energy Efficiency Tool</p>
+                        <h2 style="color:#35495e">Building Energy Efficiency Tool(BEET)</h2>
+                        <!-- <p>Building Energy Efficiency Tool</p> -->
                     </div>
                 </div>
             </div>
@@ -56,11 +57,12 @@
         </div>
     </div>
     <div class="container-fluid">
-        <mat-horizontal-stepper linear class="stepper-class" labelPosition="bottom" #stepper>
+        <mat-horizontal-stepper class="stepper-class" labelPosition="bottom" #stepper>
             <mat-step [stepControl]="genDetailsComponent?.genDetailsForm" label="General Details">
                 <app-gendetails></app-gendetails>
                 <div class="step-button">
-                    <button [disabled]="genDetailsComponent?.genDetailsForm.invalid" mat-raised-button color="primary" matStepperNext (click)="saveGenDetails()">Next to building envelope details</button>
+                    <!-- [disabled]="genDetailsComponent?.genDetailsForm.invalid" -->
+                    <button mat-raised-button color="primary" matStepperNext (click)="saveGenDetails()">Next to building envelope details</button>
                 </div>
             </mat-step>
 
@@ -68,7 +70,8 @@
                 <app-buildingenvelopedetails></app-buildingenvelopedetails>
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
-                    <button [disabled]="buildingdetailsComponent?.formgroup.invalid" mat-raised-button color="primary" matStepperNext>Next</button>
+                    <!-- [disabled]="buildingdetailsComponent?.formgroup.invalid" -->
+                    <button mat-raised-button color="primary" matStepperNext (click)="saveBuildingDetails()">Next</button>
                 </div>
             </mat-step>
 
