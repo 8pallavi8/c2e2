@@ -79,7 +79,7 @@
                                     </mat-form-field>
                                 </div>
 
-                                <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8 table-advancedR">
+                                <table style="margin-bottom: 20px;" mat-table matSort matTableResponsive [dataSource]="dataSource" class="table-advancedR">
                                     <ng-container matColumnDef="Layer">
                                         <th mat-header-cell *matHeaderCellDef> Layer</th>
                                         <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
@@ -106,6 +106,17 @@
                                 </table>
 
                             </div>
+                        </div>
+                        <div>
+                            <b *ngIf="formgroup.controls.outerwallr.value == 1">R Value :
+                                {{formgroup.get('outerWallArray')['controls'][0].controls.outerwallRKnown.value}}
+                                {{formgroup.get('outerWallArray')['controls'][0].controls.outerwallrUnits.value}}</b>
+                            <b *ngIf="formgroup.controls.outerwallr.value == 2">R Value :
+                                {{formgroup.get('outerWallArray')['controls'][0].controls.rimages.value.rvalue}}
+                                {{formgroup.get('outerWallArray')['controls'][0].controls.rimages.value.units}}</b>
+                            <b *ngIf="formgroup.controls.outerwallr.value == 3">R Value :
+                                {{formgroup.get('outerWallArray')['controls'][0].controls.rValueAdvanced.value}}
+                            </b>
                         </div>
                     </div>
                 </div>
@@ -241,7 +252,7 @@
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="windowr" (change)="onChangewindowrOption($event)">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                <mat-radio-button (click)="openWindowPredefinedR()" value="2"> I want to select from predefined types (list available)
+                <mat-radio-button value="2"> I want to select from predefined types (list available)
                 </mat-radio-button>
             </mat-radio-group><br><br>
 

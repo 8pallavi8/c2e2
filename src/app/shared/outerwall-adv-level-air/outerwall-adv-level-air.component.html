@@ -8,38 +8,38 @@
 </mat-toolbar>
 
 
-<form [formGroup]="OuterWallFG" novalidate >
+<form [formGroup]="OuterWallFG" novalidate>
 
-<div>
-    <p>Calculate the R value by adding custom layersfrom prelisted materials(Advanced Level)</p>
-    <div class=row>
+    <div>
+        <p>Calculate the R value by adding custom layersfrom prelisted materials(Advanced Level)</p>
+        <div class=row>
 
-        <p class="w-100 mt-4 col-md-6 column-name">Estaddo de la superficie de la camara de: </p>
+            <p class="w-100 mt-4 col-md-5 column-name">Estaddo de la superficie de la camara de: </p>
 
-        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-            <mat-label>Select</mat-label>
-            <mat-select formControlName="surfacecondition" >
-                <mat-option *ngFor="let type of surfaceemittance" [value]="type">{{type}}</mat-option>
-            </mat-select>
-        </mat-form-field><br>
+            <mat-form-field class="w-100 mt-4 col-md-7" appearance="outline">
+                <mat-label>Select</mat-label>
+                <mat-select formControlName="surfacecondition">
+                    <mat-option *ngFor="let type of surfaceemittance" [value]="type">{{type}}</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+        </div>
+
+        <div class=row>
+
+            <p class="w-100 mt-4 col-md-5 column-name">Espesor de la capa de aire(mm): </p>
+
+            <mat-form-field class="w-100 mt-4 col-md-7" appearance="outline">
+                <mat-label>Select</mat-label>
+                <mat-select formControlName="airLayerThickness">
+                    <mat-option *ngFor="let list of airLayerThicknessList" [value]="list">{{list}}</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+        </div>
+
     </div>
 
-    <div class=row>
-
-        <p class="w-100 mt-4 col-md-6 column-name">Espesor de la capa de aire(mm): </p>
-
-        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-            <mat-label>Select</mat-label>
-            <mat-select formControlName="airLayerThickness">
-                <mat-option *ngFor="let list of airLayerThicknessList" [value]="list">{{list}}</mat-option>
-            </mat-select>
-        </mat-form-field><br>
-    </div>
-
-</div>
-
-<div class="button-dialog" mat-dialog-actions>
-    <button mat-raised-button color="primary" style="color: #fff;"  type="submit"  (click)="postcalculateRAir()" cdkFocusInitial>Click to
+    <div class="button-dialog" mat-dialog-actions>
+        <button mat-raised-button color="primary" style="color: #fff;" type="submit" (click)="postcalculateRAir()" cdkFocusInitial>Click to
         Return</button>
-</div>
+    </div>
 </form>

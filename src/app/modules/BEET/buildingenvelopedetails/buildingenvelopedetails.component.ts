@@ -29,6 +29,7 @@ export interface OuterRValues {
 }
 
 
+
 @Component({
   selector: 'app-buildingenvelopedetails',
   templateUrl: './buildingenvelopedetails.component.html',
@@ -122,7 +123,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
 
   onChangeOuterWallROption(event: MatRadioChange) {
     console.log(this.formgroup.get('outerWallArray'));
-    (<FormArray>this.formgroup.get('outerWallArray')).removeAt(0)
+    (<FormArray>this.formgroup.get('outerWallArray')).removeAt(0);
 
     if (event.value == 1) {
       (<FormArray>this.formgroup.get('outerWallArray')).push(this.fb.group({
@@ -132,6 +133,10 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     } else if (event.value == 2) {
       (<FormArray>this.formgroup.get('outerWallArray')).push(this.fb.group({
         rimages: ['', Validators.required],
+      }));
+    } else if (event.value == 3) {
+      (<FormArray>this.formgroup.get('outerWallArray')).push(this.fb.group({
+        rValueAdvanced: ['', Validators.required],
       }));
     }
   }
@@ -149,6 +154,10 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
         rimages: ['', Validators.required],
       }));
+    } else if (event.value == 3) {
+      (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
+        rValueAdvanced: ['', Validators.required],
+      }));
     }
   }
 
@@ -161,13 +170,21 @@ export class BuildingenvelopedetailsComponent implements OnInit {
         windowrUnits: ['', Validators.required],
       }));
     } else if (event.value == 2) {
-      (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
-        rimages: ['', Validators.required],
-      }));
+      const dialogref = this.dialog.open(WindowRdialogComponent, {
+        width: '60%',
+        autoFocus: false,
+        maxHeight: '90vh',
+      });
+      dialogref.afterClosed().subscribe(result => {
+        this.windowRValue = result;
+        (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
+          windowRCaluclated: [result, Validators.required],
+        }));
+      });
     }
   }
 
-  
+
   onOptionsSelected(event) {
     console.log(event.value);
     if (event.value == 'Camara de aire') {
@@ -254,6 +271,12 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     }
     const [last] = tempArray.slice(-1);
     last.Resistenciatermica = avgLayerValue;
+    if (this.formgroup.controls.outerwallr.value == 3) {
+      this.formgroup.get('outerWallArray')['controls'][0].controls.rValueAdvanced.setValue(last.Resistenciatermica);
+    }
+    if (this.formgroup.controls.roofr.value == 3) {
+      this.formgroup.get('roofrArray')['controls'][0].controls?.rValueAdvanced?.setValue(last.Resistenciatermica);
+    }
   }
 
   onOptionsSelectedroof(event) {
