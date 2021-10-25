@@ -138,6 +138,10 @@ header {
     display: inline;
 }
 
+.navbar-toggler:not(.collapsed) .search-link {
+    display: none;
+}
+
 .navbar-collapse {
     justify-content: flex-end;
     margin-right: 100px;
