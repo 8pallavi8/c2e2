@@ -155,9 +155,9 @@
             <span class="units-picker-component">
                 <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
                     <mat-label>Building gross area</mat-label>
-                    <input formControlName="buildingGrossArea" matInput type="number" (keyup)="resetGross($event)">
+                    <input formControlName="buildingGrossArea" matInput type="number" (keyup)="resetGross($event)" (input)="applyFilter($event)">
                     <mat-select  placeholder="units" formControlName="grossAreaUnits"
-                        style="width: 180px;">
+                        style="width: 180px;"   (selectionChange)="setGrossUnits($event)" >
                         <mat-option value="square feet">Square Feet</mat-option>
                         <mat-option value="square meter">Square Meter</mat-option>
                     </mat-select>

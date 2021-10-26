@@ -136,13 +136,27 @@ export class GendetailsComponent implements OnInit {
     this.beetService.setSelectedbuildingSpaces(event.value);
   }
 
+
   calculateGross() {
     console.log(this.genDetailsForm.controls.netAreaUnits.value);
     if(!this.isEnteredGross){
       this.genDetailsForm.controls.grossAreaUnits.patchValue(this.genDetailsForm.controls.netAreaUnits.value);
       this.genDetailsForm.controls.buildingGrossArea.setValue((this.genDetailsForm.controls.Netoccupiedfloorarea.value * 1.1).toFixed(2));
-    }
-    
+      this.beetService.setBuildingGrossArea(this.genDetailsForm.controls.buildingGrossArea.value);
+      this.beetService.setBuildingGrossAreaUnits(this.genDetailsForm.controls.grossAreaUnits.value);
+    } 
+  }
+
+
+  applyFilter(event: any){
+
+    console.log(event.target.value)
+    this.beetService.setBuildingGrossArea(event.target.value);
+  }
+
+  
+  setGrossUnits(event){
+    this.beetService.setBuildingGrossAreaUnits(event.value);
   }
 
   resetGross(event) {

@@ -29,7 +29,6 @@ export interface OuterRValues {
 }
 
 
-
 @Component({
   selector: 'app-buildingenvelopedetails',
   templateUrl: './buildingenvelopedetails.component.html',

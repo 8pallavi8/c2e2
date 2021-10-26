@@ -19,6 +19,16 @@ export class beetService {
 
     private selectedBuildingSpaces = new ReplaySubject<string[]>(1);
 
+    private buildingGrossArea = new ReplaySubject<number>(1);
+
+    private buildingGrossAreaUnits = new ReplaySubject<string>(1);
+
+
+    
+
+
+    
+
 
     constructor(private fb: FormBuilder, private http: HttpClient) {
     }
@@ -26,7 +36,6 @@ export class beetService {
     setGeneralDetails(genralDetails: any) {
         this.generalDetail.next(genralDetails);
     }
-
     public getGeneralDetails(): ReplaySubject<any> {
         return this.generalDetail;
     }
@@ -35,7 +44,6 @@ export class beetService {
         sessionStorage.setItem('selectedCountry', JSON.stringify(country));
         this.selectedCountry.next(country);
     }
-
     public getSelectedCountry(): ReplaySubject<string> {
         return this.selectedCountry
     }
@@ -54,18 +62,32 @@ export class beetService {
         sessionStorage.setItem('selectedbuildingType', JSON.stringify(buidlingType));
         this.selectedBuildingType.next(buidlingType);
     }
-
     public getSelectedbuildingType(): ReplaySubject<string> {
         return this.selectedBuildingType
     }
 
+
     setSelectedbuildingSpaces(buidlingSpaces:string[]){
         this.selectedBuildingSpaces.next(buidlingSpaces);
     }
-
     public getSelectedbuildingSpaces(): ReplaySubject<string[]> {
         return this.selectedBuildingSpaces
     }
+
+    setBuildingGrossArea(grossarea:number){
+        this.buildingGrossArea.next(grossarea);
+    }
+    public getBuildingGrossArea(): ReplaySubject<number> {
+        return this.buildingGrossArea
+    }
+
+    setBuildingGrossAreaUnits(grossareaunits:string){
+        this.buildingGrossAreaUnits.next(grossareaunits);
+    }
+    public getBuildingGrossAreaUnits(): ReplaySubject<string> {
+        return this.buildingGrossAreaUnits
+    }
+
 
 
     getCountries(): Observable<any> {
@@ -125,6 +147,10 @@ export class beetService {
 
     postCalculateFuelEmissionFactor(payload: any): Observable<any>{
         return this.http.post(environment.baseUrl + ':9998/api/user/v1/calculatefuelemissionfactor', payload);
+    }
+
+    postCalculateLightingPower(payload: any): Observable<any>{
+        return this.http.post(environment.baseUrl + ':9998/api/user/v1/calculatelightingpower', payload);
     }
 
 
