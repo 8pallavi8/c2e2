@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatRadioChange } from '@angular/material/radio';
 import { debounceTime } from 'rxjs/operators';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
@@ -31,11 +32,13 @@ export class HvacComponent implements OnInit {
   infiltration: number;
   ventilationvalue: number;
   selCountryCode: string;
-  selBuildingCode:string;
-  selBuildingSpaces:string[];
+  selBuildingCode: string;
+  selBuildingSpaces: string[];
   heatingData: HeatingEquip;
   coolingData: CoolingEquip;
-  defaultInfiltrationRate:number;
+  defaultInfiltrationRate: number;
+  heatingImageEffValue: Number;
+  coolingImageEffValue: Number;
 
 
   constructor(private fb: FormBuilder, public dialog: MatDialog,
@@ -48,13 +51,9 @@ export class HvacComponent implements OnInit {
   ngOnInit(): void {
     this.formgroup = this.fb.group({
       heatefficiency: ['', Validators.compose([Validators.required])],
-      heatefficiencyKnown: ['', Validators.compose([Validators.required])],
-      heatValueImages: ['', Validators.compose([Validators.required])],
-      coolImages: ['', Validators.compose([Validators.required])],
+      heatefficiencyArray: this.fb.array([]),
+      coolefficiencyArray: this.fb.array([]),
       airconditioning: ['', Validators.compose([Validators.required])],
-      aircoolingopta: ['', Validators.compose([Validators.required])],
-      aircoolingoptb: ['', Validators.compose([Validators.required])],
-      aircoolingoptc: ['', Validators.compose([Validators.required])],
       ventilation: ['0', Validators.compose([Validators.required])],
       ventilationKnown: ['0', Validators.compose([Validators.required])],
       ventilationUnits: ['', Validators.compose([Validators.required])],
@@ -66,22 +65,60 @@ export class HvacComponent implements OnInit {
       HvacFansandBlowersInstalled: ['', Validators.compose([Validators.required])]
     }
     )
-    /* this.formgroup.get('infiltration').valueChanges.pipe(debounceTime(1000)).subscribe((changes) => {
-      this.infiltration = changes;
-      console.log(changes);
-    }); */
+
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
-    this.beetService.getSelectedbuildingType().subscribe(res => { this.selBuildingCode = res;});
-    this.beetService.getSelectedbuildingSpaces().subscribe(res => { this.selBuildingSpaces = res;});
+    this.beetService.getSelectedbuildingType().subscribe(res => { this.selBuildingCode = res; });
+    this.beetService.getSelectedbuildingSpaces().subscribe(res => { this.selBuildingSpaces = res; });
 
     this.beetService.getGeneralDetails().subscribe(res => {
       this.heatingData = res.success.heatingequipment;
       this.coolingData = res.success.coolingequipment;
-      this.defaultInfiltrationRate=res.success.defaultinfiltration;
+      this.defaultInfiltrationRate = res.success.defaultinfiltration;
 
     });
 
   }
+
+
+  onChangecoolingEffOption(event: MatRadioChange) {
+    console.log(this.formgroup.get('coolefficiencyArray'));
+    (<FormArray>this.formgroup.get('coolefficiencyArray')).removeAt(0);
+
+    if (event.value == 1) {
+      (<FormArray>this.formgroup.get('coolefficiencyArray')).push(this.fb.group({
+        aircoolingopta: ['', Validators.required],
+        aircoolingoptb: ['', Validators.required],
+        aircoolingoptc: ['', Validators.required]
+      }));
+    } else if (event.value == 2) {
+      (<FormArray>this.formgroup.get('coolefficiencyArray')).push(this.fb.group({
+        heatValueImages: ['', Validators.required],
+      }));
+    }
+    else if (event.value == 3) {
+      this.openConfirmationDialog()
+    }
+  }
+
+  onChangeHeatEffOption(event: MatRadioChange) {
+    console.log(this.formgroup.get('heatefficiencyArray'));
+    (<FormArray>this.formgroup.get('heatefficiencyArray')).removeAt(0);
+
+    if (event.value == 1) {
+      (<FormArray>this.formgroup.get('heatefficiencyArray')).push(this.fb.group({
+        heatefficiencyKnown: ['', Validators.required]
+      }));
+    } else if (event.value == 2) {
+      (<FormArray>this.formgroup.get('heatefficiencyArray')).push(this.fb.group({
+        coolImages: ['', Validators.required],
+      }));
+    }
+
+    else if (event.value == 3) {
+      this.openConfirmationDialog()
+    }
+  }
+
 
   public openConfirmationDialog() {
     this.confirmationDialog.confirm('Confirm', 'You have selected No Heating Equipment In The Building', 'OK', null)
@@ -95,8 +132,8 @@ export class HvacComponent implements OnInit {
   }
 
   processHeatCoolEvent(event, type) {
-    this.postCalculateEquipEfficiency(type,event.value );
-    console.log("heat"+event)
+    this.postCalculateEquipEfficiency(type, event.value);
+    console.log("heat" + event)
   }
 
 
@@ -108,6 +145,13 @@ export class HvacComponent implements OnInit {
     }
     console.log(payload);
     this.beetService.postCalculateEquipEfficiency(payload).subscribe(res => {
+      if (type == 'heating') {
+        this.heatingImageEffValue = res.success.efficiency
+
+      } else {
+        this.coolingImageEffValue = res.success.efficiency
+      }
+
       console.log(res.success);
     })
   }
@@ -125,7 +169,7 @@ export class HvacComponent implements OnInit {
     })
   }
 
-  defaultInfiltration(){
+  defaultInfiltration() {
     this.formgroup.controls['infiltration'].setValue(this.defaultInfiltrationRate);
     console.log(this.formgroup.controls.infiltration.value)
   }

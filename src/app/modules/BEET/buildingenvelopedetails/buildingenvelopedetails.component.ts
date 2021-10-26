@@ -89,14 +89,12 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   dataSource = new MatTableDataSource(this.layerValues);
   roofdataSource = new MatTableDataSource(this.roofLayerValues);
 
-
   constructor(private fb: FormBuilder,
     private inputDialog: InputdialogService,
     public dialog: MatDialog,
     private beetService: beetService) { }
 
   ngOnInit(): void {
-
     this.formgroup = this.fb.group({
       outerwallr: ['', Validators.compose([Validators.required])],
       outerWallArray: this.fb.array([]),
@@ -112,9 +110,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     })
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; });
     this.beetService.getSelectedProvince().subscribe(res => { this.selProvince = res; console.log(res); });
-
     this.beetService.getGeneralDetails().subscribe(res => {
-      // console.log("building Envelop "+JSON.stringify(res.success.buildingdata));
       this.outerRData = res.success.rvaluewall;
       this.roofRData = res.success.rvalueroof;
     });
