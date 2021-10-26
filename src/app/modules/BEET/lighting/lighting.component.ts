@@ -8,24 +8,12 @@ import { beetService } from 'src/app/shared/services/beet.service';
 export interface Lighting {
   technology: string;
   lightingimagepath: string;
-  Yearofinstallation?: string;
-  LampPower?: number;
-  StockofFixtures?: string;
-  LumenOutput?: string;
-  Averagedailyworkinghours?: number;
+  yearofinstallation?: string;
+  lamppower?: number;
+  fixtures?: string;
+  lumenoutput?: string;
+  avgdailyworkinghours?: number;
 }
-
-
-export interface LightingData {
-  technology: string;
-  Yearofinstallation?: string;
-  LampPower?: number;
-  StockofFixtures?: string;
-  LumenOutput?: string;
-  Averagedailyworkinghours?: number;
-}
-
-
 
 @Component({
   selector: 'app-lighting',
@@ -47,8 +35,6 @@ export class LightingComponent implements OnInit {
   totalLightingPowerUnit:string;
   totalLightingPowerValue:number;
   lightingPowerDensityUnit:string;
-  
-
 
   constructor(private fb: FormBuilder, private beetService: beetService) { }
 
@@ -67,6 +53,7 @@ export class LightingComponent implements OnInit {
   }
 
   getStyleDisplay(index, div) {
+    console.log(index, div, index % div == 0);
     return index % div == 0
   }
   getenableyearofinstallation(startindex, endindex, currentindex) {

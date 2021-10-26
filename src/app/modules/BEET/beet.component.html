@@ -57,12 +57,12 @@
         </div>
     </div>
     <div class="container-fluid">
-        <mat-horizontal-stepper linear class="stepper-class" labelPosition="bottom" #stepper>
+        <mat-horizontal-stepper class="stepper-class" labelPosition="bottom" #stepper>
             <mat-step [stepControl]="genDetailsComponent?.genDetailsForm" label="General Details">
                 <app-gendetails></app-gendetails>
                 <div class="step-button">
-                    <!--  -->
-                    <button mat-raised-button [disabled]="genDetailsComponent?.genDetailsForm.invalid" color="primary" matStepperNext>Next to building envelope details</button>
+                    <!-- [disabled]="genDetailsComponent?.genDetailsForm.invalid" -->
+                    <button mat-raised-button color="primary" matStepperNext>Next to building envelope details</button>
                 </div>
             </mat-step>
 
@@ -70,8 +70,8 @@
                 <app-buildingenvelopedetails></app-buildingenvelopedetails>
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
-                    <!-- -->
-                    <button mat-raised-button  [disabled]="buildingdetailsComponent?.formgroup.invalid" color="primary" matStepperNext (click)="saveBuildingDetails()">Next</button>
+                    <!-- [disabled]="buildingdetailsComponent?.formgroup.invalid" -->
+                    <button mat-raised-button color="primary" matStepperNext (click)="saveBuildingDetails()">Next</button>
                 </div>
             </mat-step>
 

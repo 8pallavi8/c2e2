@@ -30,3 +30,7 @@ tr.mat-row {
     max-height: 400px;
     overflow: auto;
 }
+
+::ng-deep th.mat-column-Yearofinstallation {
+    width: 80px;
+}

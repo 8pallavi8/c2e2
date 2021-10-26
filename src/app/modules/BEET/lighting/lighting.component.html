@@ -4,34 +4,34 @@
 
 
     <div class="container-fluid beet-container">
- 
 
-            <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> Please be ready with type, number, power rating (wattage) details of the lighting fixtures</p>
-            </div>
-       
+
+        <div class="fields-note">
+            <p><span class="notes-style"> Note:</span> Please be ready with type, number, power rating (wattage) details of the lighting fixtures</p>
+        </div>
+
 
         <div class="example-table-container">
             <table mat-table [dataSource]="lightingOptionsDataSource" multiTemplateDataRows>
 
                 <ng-container matColumnDef="technology">
                     <th mat-header-cell *matHeaderCellDef> Technology </th>
-                    <td mat-cell *matCellDef="let element;let i = dataIndex" [attr.rowspan]="6" [style.display]="getStyleDisplay(i,6) ? '' : 'none'" >
+                    <td mat-cell *matCellDef="let element;let i = dataIndex" [attr.rowspan]="6" [style.display]="getStyleDisplay(i,6) ? '' : 'none'">
                         {{element.technology}}
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="lightingimagepath">
                     <th mat-header-cell *matHeaderCellDef> Technology Image </th>
-                    <td mat-cell *matCellDef="let element ;let i = dataIndex" [attr.rowspan]="6" [style.display]="getStyleDisplay(i,6) ? '' : 'none' " >
+                    <td mat-cell *matCellDef="let element ;let i = dataIndex" [attr.rowspan]="6" [style.display]="getStyleDisplay(i,6) ? '' : 'none' ">
                         <img [src]="element.lightingimagepath" class="light-image" />
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Yearofinstallation">
-                    <th mat-header-cell *matHeaderCellDef> Yearofinstallation </th>
+                    <th mat-header-cell *matHeaderCellDef> Year of installation </th>
                     <td mat-cell *matCellDef="let element;let i = dataIndex" [style.background]="getenableyearofinstallation(0,5,i) || getenableyearofinstallation(24,41,i)  ? 'gray' :'' ">
-                        <mat-select [disabled]="getenableyearofinstallation(0,5,i) || getenableyearofinstallation(24,41,i)" [(ngModel)]="lightingOptions[i].Yearofinstallation"  >
+                        <mat-select [disabled]="getenableyearofinstallation(0,5,i) || getenableyearofinstallation(24,41,i)" [(ngModel)]="lightingOptions[i].yearofinstallation">
                             <mat-option *ngFor="let year of yearsList" [value]="year">{{year}}
                             </mat-option>
                         </mat-select>
@@ -40,30 +40,30 @@
 
 
                 <ng-container matColumnDef="LampPower">
-                    <th mat-header-cell *matHeaderCellDef> LampPower (Watts)</th>
+                    <th mat-header-cell *matHeaderCellDef> Lamp Power (Watts)</th>
                     <td mat-cell *matCellDef="let element; let i = dataIndex">
-                        <input matInput type="text" [(ngModel)]="lightingOptions[i].LampPower" >
+                        <input matInput type="number" [(ngModel)]="lightingOptions[i].lamppower">
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="StockofFixtures">
-                    <th mat-header-cell *matHeaderCellDef> StockofFixtures(Optional) </th>
+                    <th mat-header-cell *matHeaderCellDef> Stock of Fixtures</th>
                     <td mat-cell *matCellDef="let element; let i = dataIndex">
-                        <input matInput type="text"  [(ngModel)]="lightingOptions[i].StockofFixtures">
+                        <input matInput type="number" [(ngModel)]="lightingOptions[i].fixtures">
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="LumenOutput">
-                    <th mat-header-cell *matHeaderCellDef> LumenOutput(Optional) </th>
+                    <th mat-header-cell *matHeaderCellDef> Lumen Output(Optional) </th>
                     <td mat-cell *matCellDef="let element;let i = dataIndex" [style.background]="getenableyearofinstallation(6,41,i) ? 'gray' :'' ">
-                        <input [disabled]="getenableyearofinstallation(6,41,i)" matInput type="text" [(ngModel)]="lightingOptions[i].LumenOutput">
+                        <input [disabled]="getenableyearofinstallation(6,41,i)" matInput type="number" [(ngModel)]="lightingOptions[i].lumenoutput">
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Averagedailyworkinghours">
-                    <th mat-header-cell *matHeaderCellDef> Averagedailyworkinghours </th>
+                    <th mat-header-cell *matHeaderCellDef> Average daily working hours(Optional) </th>
                     <td mat-cell *matCellDef="let element;let i = dataIndex">
-                        <input matInput type="text" [(ngModel)]="lightingOptions[i].Averagedailyworkinghours" >
+                        <input matInput type="number" [(ngModel)]="lightingOptions[i].avgdailyworkinghours">
                     </td>
                 </ng-container>
 
@@ -80,7 +80,7 @@
 
         <b>Lighting power density :{{totalLightingPowerValue}}{{totalLightingPowerUnit}}</b><br>
         <b>Total lighting power :{{ this.lightingPowerDensityValue}}{{lightingPowerDensityUnit}}</b>
-        
+
 
     </div>
 </fieldset>
