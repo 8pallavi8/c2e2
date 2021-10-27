@@ -22,7 +22,7 @@ export interface BuildingLayerValues {
   Resistenciatermica: number;
 }
 
-export interface OuterRValues {
+export interface ImageRValues {
   imagepath: string;
   rvalue: number;
   units: string;
@@ -37,12 +37,13 @@ export interface OuterRValues {
 export class BuildingenvelopedetailsComponent implements OnInit {
 
   @Input() countryCode: string;
-  outerRData: OuterRValues[];
-  roofRData: OuterRValues[];
+  outerRData: ImageRValues[];
+  roofRData: ImageRValues[];
   formgroup: FormGroup;
   outerWallRValue: number;
-  outerWallRUnits: string[] = ['m2.degC/W', 'ft2.degF.h/BTU']
+  outerWallRUnits: string[] = ['m².°C/W', 'ft2.°F/BTU']
   RoofRValue: number;
+  roofRUnits: string[] = ['m².°C/W', 'ft2.°F/BTU']
   windowRValue: number;
   hasSHGC: boolean = false;
   hasWWR: boolean = false;
@@ -132,6 +133,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     } else if (event.value == 3) {
       (<FormArray>this.formgroup.get('outerWallArray')).push(this.fb.group({
         rValueAdvanced: ['', Validators.required],
+        outerwallrUnits: ['m²K/W', Validators.required],
       }));
     }
   }
@@ -147,11 +149,12 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       }));
     } else if (event.value == 2) {
       (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
-        rimages: ['', Validators.required],
+        roofrimages: ['', Validators.required],
       }));
     } else if (event.value == 3) {
       (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
         rValueAdvanced: ['', Validators.required],
+        roofrUnits: ['', Validators.required],
       }));
     }
   }
@@ -165,6 +168,9 @@ export class BuildingenvelopedetailsComponent implements OnInit {
         windowrUnits: ['', Validators.required],
       }));
     } else if (event.value == 2) {
+      (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
+        windowRCaluclated: [this.windowRValue, Validators.required],
+      }));
       const dialogref = this.dialog.open(WindowRdialogComponent, {
         width: '60%',
         autoFocus: false,
@@ -172,9 +178,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       });
       dialogref.afterClosed().subscribe(result => {
         this.windowRValue = result;
-        (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
-          windowRCaluclated: [result, Validators.required],
-        }));
+      ( <FormGroup> (<FormArray>this.formgroup.get('windowrArray')).at(0)).controls.windowRCaluclated.patchValue(result);
+        
       });
     }
   }
@@ -317,28 +322,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     this.roofdataSource = new MatTableDataSource(this.roofLayerValues);
     this.selectedMaterial = '';
   }
-
-
-  public openWindowPredefinedR() {
-    const dialogref = this.dialog.open(WindowRdialogComponent, {
-      width: '60%',
-      autoFocus: false,
-      maxHeight: '90vh',
-    });
-    dialogref.afterClosed().subscribe(result => {
-      this.windowRValue = result;
-      console.log(result);
-    });
-  }
-
-
-  showWWR(state: boolean): void {
-    if (state == true)
-      this.hasWWR = true;
-    else
-      this.hasWWR = false;
-  }
-
 
   postCalculateshgc(): void {
     var payload: any = {
