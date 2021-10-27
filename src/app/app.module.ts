@@ -32,7 +32,7 @@ import { OuterwallAdvLevelbrickComponent } from './shared/outerwall-adv-levelbri
     AppComponent,
     AutoFocusDirective,
     OuterwallAdvLevelAirComponent,
-    OuterwallAdvLevelbrickComponent,
+    OuterwallAdvLevelbrickComponent
   ],
   providers: [ConfirmationDialogService,NgbActiveModal],
   entryComponents: [ConfirmationDialogComponent],

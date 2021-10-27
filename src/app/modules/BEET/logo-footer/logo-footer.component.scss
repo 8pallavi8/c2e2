@@ -1,0 +1,22 @@
+
+.block,
+li {
+  border: 1px solid;
+  padding: 1em;
+  width:100%
+}
+
+ul {
+  display: flex;
+  list-style: none;
+}
+
+@media (max-width: 767px) {
+    .ul {
+        display: flex;
+        list-style: none;
+        flex-direction: column;
+    }
+}
+
+   

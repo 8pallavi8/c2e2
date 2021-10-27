@@ -119,14 +119,14 @@
                                 </mat-form-field>
                                 <p style="align-items: center;"> OR</p>
                                 <b style="margin-top: 1em;">Coefficient of performance (COP)[kW refrigeration effect/kW]:</b>
-                                <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                                <mat-form-field class="w-100 mt-2 col-md-6" appearance="outline">
                                     <mat-label>Enter value here</mat-label>
                                     <input matInput placeholder="Enter value" type="number" formControlName="aircoolingoptb"
                                         type="number">
                                 </mat-form-field>
                                 <p style="align-items: center;">OR</p>
-                                <b style="margin-top: 1em;">Specific Power Consumption(SPC) (COP)[kW input]:</b>
-                                <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                                <b style="margin-top: 1em;">Specific Power Consumption(SPC)[kW /TR]:</b>
+                                <mat-form-field class="w-100 mt-2 col-md-6" appearance="outline">
                                     <mat-label>Enter value here</mat-label>
                                     <input matInput placeholder="Enter value" type="number" formControlName="aircoolingoptc"
                                         type="number">
@@ -155,13 +155,13 @@
                                 </div>
                             </span>
                             <div>
-                                <b *ngIf="formgroup.controls.heatefficiency.value == 1">Cooling efficiency :
+                                <b *ngIf="formgroup.controls.airconditioning.value == 1">Cooling efficiency :
                                     {{formgroup.get('heatefficiencyArray')['controls'][0].controls.heatefficiencyKnown.value}}%
                                 </b>
-                                <b *ngIf="formgroup.controls.heatefficiency.value == 2">Cooling efficiency :
+                                <b *ngIf="formgroup.controls.airconditioning.value == 2">Cooling efficiency :
                                     {{formgroup.get('heatefficiencyArray')['controls'][0].controls.coolImages.value.efficiency}}%
                                 </b>
-                                <b *ngIf="formgroup.controls.heatefficiency.value == 3">R Value : No heating equipment
+                                <b *ngIf="formgroup.controls.airconditioning.value == 3">R Value : No heating equipment
                                 </b>
                             </div>
 

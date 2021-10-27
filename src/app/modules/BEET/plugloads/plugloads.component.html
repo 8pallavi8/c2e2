@@ -31,7 +31,7 @@
                         below. Necessary units conversions will be made by
                         the tool for respective calculations.</p>
                     <b style="margin-top: 1em;">Plug Load value : </b>
-                    <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                    <mat-form-field class="w-100 mt-2 col-md-5" appearance="outline">
                         <mat-label>Enter value here</mat-label>
                         <input matInput placeholder="Enter value" formControlName="plugLoadValueKnown" type="number">
                         <mat-select placeholder="units" [(ngModel)]=plugLoadUnits formControlName="plugLoadUnits">
@@ -184,8 +184,8 @@
 
 
                 </span>
-
-<b>Plug Load value</b>
+<div><b>Plug Load value:</b></div>
+                 
             </div>
         </fieldset>
 
@@ -202,13 +202,13 @@
                     <mat-table #table [dataSource]="plugloadOptionsDataSource">
 
                         <!-- operations Column -->
-                        <ng-container matColumnDef="plugloadops">
+                        <ng-container style="column-width: 5rem;" matColumnDef="plugloadops">
                             <mat-header-cell *matHeaderCellDef> Operations and pratices </mat-header-cell>
                             <mat-cell *matCellDef="let option"> {{option.plugloadops}} </mat-cell>
                         </ng-container>
 
                         <!-- options Column -->
-                        <ng-container matColumnDef="options">
+                        <ng-container style= "text-align: center" matColumnDef="options">
                             <mat-header-cell *matHeaderCellDef> Yes/No/NA </mat-header-cell>
                             <mat-cell *matCellDef="let element">
                                 <mat-form-field floatLabel="never">
@@ -230,8 +230,8 @@
                             </mat-cell>
                         </ng-container>
 
-                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        <mat-header-row   *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
                     </mat-table>
                 </div>
 
