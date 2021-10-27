@@ -6,13 +6,16 @@
             <h2>R Value (Thermal resistance) - Outer Wall </h2>
             <p>Do you know the R value?</p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
+                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R
+                    value of the wall.</p>
             </div>
-            <mat-radio-group aria-label="Select an option" formControlName="outerwallr" (change)="onChangeOuterWallROption($event)">
+            <mat-radio-group aria-label="Select an option" formControlName="outerwallr"
+                (change)="onChangeOuterWallROption($event)">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                 <mat-radio-button value="2"> I want to select from predefined types (pictures available for reference)
                 </mat-radio-button><br>
-                <mat-radio-button value="3"> Calculate the R value by adding custom layers from prelisted materials(Advanced level)</mat-radio-button>
+                <mat-radio-button value="3"> Calculate the R value by adding custom layers from prelisted
+                    materials(Advanced level)</mat-radio-button>
             </mat-radio-group><br><br>
             <div formArrayName="outerWallArray" *ngIf="formgroup.controls.outerwallr.value !== ''">
                 <div *ngFor="let item of  formgroup.get('outerWallArray')['controls'];let i = index;">
@@ -36,7 +39,8 @@
 
                         <!-- Outerwall R Images -->
                         <div *ngIf="formgroup.controls.outerwallr.value == 2" class="container-fluid">
-                            <p>I want to select from predefined types.Please select most representative picture composition of your building outer wall.</p>
+                            <p>I want to select from predefined types.Please select most representative picture
+                                composition of your building outer wall.</p>
                             <div class="row">
 
                                 <mat-radio-group class="mat-radio-group-image" formControlName="rimages">
@@ -71,7 +75,8 @@
                                     </b>
                                     <mat-form-field appearance="outline">
                                         <mat-label>Select</mat-label>
-                                        <mat-select [(value)]="selectedCapa" #sel (selectionChange)="onOptionsSelected($event)">
+                                        <mat-select [(value)]="selectedCapa" #sel
+                                            (selectionChange)="onOptionsSelected($event)">
                                             <mat-option *ngFor="let element of elementsList" [value]="element">
                                                 {{element}}
                                             </mat-option>
@@ -79,7 +84,8 @@
                                     </mat-form-field>
                                 </div>
 
-                                <table style="margin-bottom: 20px;" mat-table matSort matTableResponsive [dataSource]="dataSource" class="table-advancedR">
+                                <table style="margin-bottom: 20px;" mat-table matSort matTableResponsive
+                                    [dataSource]="dataSource" class="table-advancedR">
                                     <ng-container matColumnDef="Layer">
                                         <th mat-header-cell *matHeaderCellDef> Layer</th>
                                         <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
@@ -118,9 +124,11 @@
                                 {{formgroup.get('outerWallArray')['controls'][0].controls.rimages.value.units}}</b>
                             <b *ngIf="formgroup.controls.outerwallr.value == 3">R Value :
                                 {{formgroup.get('outerWallArray')['controls'][0].controls.rValueAdvanced.value}}
+                                {{formgroup.get('outerWallArray')['controls'][0].controls.outerwallrUnits.value}}
+
                             </b>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -133,13 +141,16 @@
             <h2>R Value (Thermal resistance) - Roof </h2>
             <p>Do you know the R value?</p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
+                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R
+                    value of the wall.</p>
             </div>
-            <mat-radio-group aria-label="Select an option" formControlName="roofr" (change)="onChangeroofrOption($event)">
+            <mat-radio-group aria-label="Select an option" formControlName="roofr"
+                (change)="onChangeroofrOption($event)">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                 <mat-radio-button value="2"> I want to select from predefined types (pictures available for reference)
                 </mat-radio-button><br>
-                <mat-radio-button value="3">Calculate the R value by adding custom layers from prelisted materials (Advanced level)</mat-radio-button>
+                <mat-radio-button value="3">Calculate the R value by adding custom layers from prelisted materials
+                    (Advanced level)</mat-radio-button>
             </mat-radio-group><br><br>
 
             <div formArrayName="roofrArray" *ngIf="formgroup.controls.roofr.value !== ''">
@@ -164,23 +175,20 @@
 
                         <!-- Roof R images -->
                         <div *ngIf="formgroup.controls.roofr.value == 2" class="container-fluid">
-                            <p>I want to select from predefined types.Please select most representative picture composition of your building outer wall.</p>
+                            <p>I want to select from predefined types.Please select most representative picture
+                                composition of your building roof.</p>
 
                             <div class="row">
-
-
-                                <mat-radio-group class="mat-radio-group-image" formControlName="rimages">
-                                    <mat-radio-button *ngFor="let con of roofRData" [value]="con.rvalue">
+                                <mat-radio-group class="mat-radio-group-image" formControlName="roofrimages">
+                                    <mat-radio-button *ngFor="let con of roofRData" [value]="con">
                                         <img src="{{con.imagepath}}">
-                                        <p>R Value = {{con.rvalue}} {{con.units}}}</p>
+                                        <p>R Value = {{con.rvalue}} {{con.units}}</p>
                                     </mat-radio-button>
                                 </mat-radio-group>
-
-
                             </div>
                         </div>
 
-                        <!-- Outerwall R Advanced -->
+                        <!-- Roof R Advanced -->
                         <div *ngIf="formgroup.controls.roofr.value == 3">
 
                             <p>Step1: Select the layer number from the dropdown list.</p>
@@ -203,7 +211,8 @@
                                     </b>
                                     <mat-form-field appearance="outline">
                                         <mat-label>Select</mat-label>
-                                        <mat-select [(value)]="selectedMaterial" #sel (selectionChange)="onOptionsSelectedroof($event)">
+                                        <mat-select [(value)]="selectedMaterial" #sel
+                                            (selectionChange)="onOptionsSelectedroof($event)">
                                             <mat-option *ngFor="let element of elementsList" [value]="element">
                                                 {{element}}
                                             </mat-option>
@@ -211,7 +220,8 @@
                                     </mat-form-field>
                                 </div>
 
-                                <table mat-table matSort matTableResponsive [dataSource]="roofdataSource" class="mat-elevation-z8 table-advancedR">
+                                <table mat-table matSort matTableResponsive [dataSource]="roofdataSource"
+                                    class="mat-elevation-z8 table-advancedR">
                                     <ng-container matColumnDef="Layer">
                                         <th mat-header-cell *matHeaderCellDef> Layer</th>
                                         <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
@@ -238,6 +248,21 @@
                                 </table>
                             </div>
                         </div>
+
+                        <div>
+                           
+                            <b *ngIf="formgroup.controls.roofr.value == 1">R Value :
+                                {{formgroup.get('roofrArray')['controls'][0].controls.roofRKnown.value}}
+                                {{formgroup.get('roofrArray')['controls'][0].controls.roofrUnits.value}}</b>
+                            <b *ngIf="formgroup.controls.roofr.value == 2">R Value :
+                                {{formgroup.get('roofrArray')['controls'][0].controls.roofrimages.value.rvalue}}
+                                {{formgroup.get('roofrArray')['controls'][0].controls.roofrimages.value.units}}</b>
+                            <b *ngIf="formgroup.controls.roofr.value == 3">R Value :
+                                {{formgroup.get('roofrArray')['controls'][0].controls.rValueAdvanced.value}}
+                                {{formgroup.get('roofrArray')['controls'][0].controls.roofrUnits.value}}
+
+                            </b>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -251,9 +276,11 @@
 
             <p>Do you know the R value?</p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R value of the wall.</p>
+                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on R
+                    value of the window.</p>
             </div>
-            <mat-radio-group aria-label="Select an option" formControlName="windowr" (change)="onChangewindowrOption($event)">
+            <mat-radio-group aria-label="Select an option" formControlName="windowr"
+                (change)="onChangewindowrOption($event)">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                 <mat-radio-button value="2"> I want to select from predefined types (list available)
                 </mat-radio-button>
@@ -273,8 +300,8 @@
                                 <input matInput placeholder="Enter value" type="number" formControlName="windowRKnown"
                                     type="number">
                                 <mat-select placeholder="units" formControlName="windowrUnits">
-                                    <mat-option value="m2.°C/W">m<sup>2</sup>.°C/W</mat-option>
-                                    <mat-option value="ft2.°F.h/BTU">ft<sup>2</sup>.°F.h/BTU</mat-option>
+                                    <mat-option value="m².°C/W">m².°C/W</mat-option>
+                                    <mat-option value="ft².°F.h/BTU">ft².°F/BTU</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </span>
@@ -282,7 +309,15 @@
                 </div>
             </div>
 
-            <!-- <b>R Value in [m2 °K / W]: {{windowRValue}} </b> -->
+            <div>              
+                <b *ngIf="formgroup.controls.windowr.value == 1">R Value :
+                    {{formgroup.get('windowrArray')['controls'][0].controls.windowRKnown.value}}
+                    {{formgroup.get('windowrArray')['controls'][0].controls.windowrUnits.value}}</b>
+                 <b *ngIf="formgroup.controls.windowr.value == 2">R Value :
+                    {{formgroup.get('windowrArray')['controls'][0].controls.windowRCaluclated.value}}
+                    </b>    
+            </div>
+
         </fieldset>
 
 
@@ -293,7 +328,8 @@
 
             <p>Do you know the SHGC value?</p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on SHGC value of the window</p>
+                <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on SHGC
+                    value of the window</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="SHGC">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
@@ -322,7 +358,8 @@
             <h2>Window to Wall Ratio (WWR)</h2>
             <p>Do you know the Window to Wall Ratio</p>
             <div class="fields-note">
-                <p> <span class="notes-style"> Note:</span> You may select any of the options to provide details on WWR value of the window</p>
+                <p> <span class="notes-style"> Note:</span> You may select any of the options to provide details on WWR
+                    value of the window</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="wwr">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
@@ -332,10 +369,10 @@
             <span *ngIf="formgroup.controls.wwr.value == 1">
                 <p style="margin-top: 1em;">I know the WWR value of the windows for my building.</p>
                 <div style="display: flex;">
-                    <p style="margin-top: 1rem;">Please enter the WWR value here(value doesnot have units) : </p>
+                    <p style="margin-top: 1rem;">Please enter the WWR value (value doesnot have units) : </p>
                     <mat-form-field appearance="outline">
                         <mat-label>Enter value here</mat-label>
-                        <input matInput placeholder="Enter value" formControlName="wwrKnown" required>
+                        <input matInput placeholder="Enter value" type="number" formControlName="wwrKnown" required>
                     </mat-form-field>
                 </div>
             </span>
@@ -343,22 +380,25 @@
             <span *ngIf="formgroup.controls.wwr.value == 2">
                 <p style="margin-top: 1em;">I dont't know.Help me in selecting suitable window to wall ratio value for
                     my building.</p>
-                <div style="display: flex;">
+                <div >
                     <p style="margin-top: 1rem;">Please enter the WWR value in(%) by refering to pictures: </p>
                     <mat-form-field appearance="outline">
                         <mat-label>Enter value here</mat-label>
-                        <input matInput placeholder="Enter value" formControlName="wwrGuide" required>
-                    </mat-form-field>
+                        <input matInput placeholder="Enter value" type="number" formControlName="wwrGuide" required>
+                    </mat-form-field><br>
                     <div class="images-wwr">
-                        <img src="/assets/images/wwr/wwr1.jpg">
-                        <img src="/assets/images/wwr/wwr3.jpeg">
+                        <img height="100" src="/assets/images/wwr/wwr1.jpg">
+                        <img height="100" style="padding-left: 20px" src="/assets/images/wwr/wwr2.jpeg">
                     </div>
 
                 </div>
             </span>
             <div>
-                <b class="calculated-values">
-                    WWR :
+                <b *ngIf="formgroup.controls.wwr.value == 1" class="calculated-values">
+                    WWR : {{formgroup.controls.wwrKnown.value}}
+                </b>
+                <b *ngIf="formgroup.controls.wwr.value == 2" class="calculated-values">
+                    WWR : {{formgroup.controls.wwrGuide.value}}
                 </b>
             </div>
         </fieldset>
