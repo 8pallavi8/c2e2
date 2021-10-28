@@ -106,8 +106,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       SHGC: ['', Validators.compose([Validators.required])],
       SHGCknown: [0, Validators.compose([Validators.required])],
       wwr: [0, Validators.compose([Validators.required])],
-      wwrKnown: [0, Validators.compose([Validators.required])],
-      wwrGuide: [0, Validators.compose([Validators.required])],
+      wwrArray:this.fb.array([]),
+     
     })
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; });
     this.beetService.getSelectedProvince().subscribe(res => { this.selProvince = res; console.log(res); });
@@ -182,6 +182,21 @@ export class BuildingenvelopedetailsComponent implements OnInit {
         
       });
     }
+  }
+
+  onChangeWWROption(event: MatRadioChange) {
+    console.log(this.formgroup.get('wwrArray'));
+    (<FormArray>this.formgroup.get('wwrArray')).removeAt(0);
+
+    if (event.value == 1) {
+      (<FormArray>this.formgroup.get('wwrArray')).push(this.fb.group({
+        wwrKnown: ['', Validators.required]
+      }));
+    } else if (event.value == 2) {
+      (<FormArray>this.formgroup.get('wwrArray')).push(this.fb.group({
+        wwrGuide: ['', Validators.required],
+      }));
+    } 
   }
 
 

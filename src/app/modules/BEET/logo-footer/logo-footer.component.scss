@@ -1,22 +1,28 @@
 
 .block,
 li {
-  border: 1px solid;
   padding: 1em;
   width:100%
 }
 
-ul {
+.logos-list{
   display: flex;
   list-style: none;
 }
 
-@media (max-width: 767px) {
-    .ul {
-        display: flex;
+@media (max-width: 499px) {
+    .logos-list {
+        //display: flex;
         list-style: none;
         flex-direction: column;
     }
 }
+
+.last-logo{
+  right: 0;
+    top: 0;
+    width: 40%;
+}
+
 
    

@@ -26,7 +26,7 @@
                     </div>
                     <span *ngIf="formgroup.controls.powergenerationco2emmisions.value == 1">
                         <p style="margin-top: 1em;">I know the grid emission factor.</p>
-                        <p>Please enter grid emission factor[kg CO2/kWh] : </p>
+                        <p>Please enter grid emission factor[kg/kWh] : </p>
                         <mat-form-field appearance="outline">
                             <mat-label>Enter value here</mat-label>
                             <input matInput placeholder="Enter value" type="number" required formControlName="powergenerationco2emmisionsValue">
@@ -34,7 +34,9 @@
                     </span>
                 </div>
 
-                <b class="calculated-values">CO2 emissions:{{formgroup.controls.powergenerationco2emmisionsValue.value}}</b>
+                <b class="calculated-values">CO2 emissions:{{formgroup.controls.powergenerationco2emmisionsValue.value}}
+                    {{formgroup.controls.gridemissionsFactorUnits.value}}
+                </b>
 
                 <div class="container">
                     <p style="margin-top: 1em;">Do you know the fuel CO2 emission factor?</p>
@@ -46,24 +48,24 @@
                         </p>
                     </div>
                     <div>
-                        <mat-radio-group aria-label="Select an option" formControlName="onsiteco2emmisions">
+                        <mat-radio-group aria-label="Select an option" formControlName="fuelEmissionFactor">
                             <mat-radio-button  value="1">Yes, I know
                             </mat-radio-button><br>
                             <mat-radio-button (click)="postCalculateFuelEmissionFactor()" value="2">No, I don't know.
                             </mat-radio-button>
                         </mat-radio-group>
                     </div>
-                    <span *ngIf="formgroup.controls.onsiteco2emmisions.value == 1">
+                    <span *ngIf="formgroup.controls.fuelEmissionFactor.value == 1">
                         <p style="margin-top: 1em;">Choose any one from the available units</p>
 
                         <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
                             <mat-label>Enter value here</mat-label>
-                            <input matInput placeholder="Enter value" required formControlName="onsiteco2emmisionsValue">
+                            <input matInput placeholder="Enter value" required formControlName="fuelEmissionFactorValue">
                         </mat-form-field>
 
                         <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
                             <mat-label>Select CO2 emissions units</mat-label>
-                            <mat-select formControlName="units">
+                            <mat-select formControlName="fuelEmissionFactorUnit">
                                 <mat-option *ngFor="let unit of co2emissionsunits" [value]="unit">{{unit}}</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -73,7 +75,7 @@
 
                 </div>
 
-                <b class="calculated-values"> On site  CO2 emissions:{{formgroup.controls.onsiteco2emmisionsValue.value}}{{formgroup.controls.units.value}}</b>
+                <b class="calculated-values"> On site  CO2 emissions:{{formgroup.controls.fuelEmissionFactorValue.value}}{{formgroup.controls.fuelEmissionFactorUnit.value}}</b>
         </fieldset>
     </form>
 </div>

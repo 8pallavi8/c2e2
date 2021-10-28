@@ -7,6 +7,15 @@
     </mat-toolbar-row>
 </mat-toolbar>
 
+<div>
+<p>*1 Rated Power IEC 60076-1<br>
+    *2 Energy is not a mandatory field to calculate an equivalent efficient solution<br>
+    *3 In the case of not knowing current thersholds in the local/national market, please assume same price as of the existing transformer</p>
+
+</div>
+
+
+
 <div mat-dialog-content>
 
     <form [formGroup]="DialogTransformerInputs" novalidate (submit)="addToTable()">
@@ -72,14 +81,14 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="w-100 mt-4 col-md-12" appearance="outline">
+        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
             <mat-label>FireRegulation</mat-label>
             <mat-select matNativeControl id="FireRegulation" formControlName="FireRegulation">
                 <mat-option *ngFor="let Regulation of FireRegulation" [value]="Regulation">{{Regulation}}</mat-option>
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="w-100 mt-4 col-md-12" appearance="outline">
+        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
             <mat-label>HighestVoltageValues</mat-label>
             <mat-select matNativeControl id="HighestVoltageValues" formControlName="HighestVoltageValues">
                 <mat-option *ngFor="let voltage of data.highestVoltageValueslist" [value]="voltage">{{voltage}}

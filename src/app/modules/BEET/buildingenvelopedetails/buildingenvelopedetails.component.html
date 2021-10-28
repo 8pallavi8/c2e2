@@ -250,7 +250,7 @@
                         </div>
 
                         <div>
-                           
+
                             <b *ngIf="formgroup.controls.roofr.value == 1">R Value :
                                 {{formgroup.get('roofrArray')['controls'][0].controls.roofRKnown.value}}
                                 {{formgroup.get('roofrArray')['controls'][0].controls.roofrUnits.value}}</b>
@@ -309,13 +309,13 @@
                 </div>
             </div>
 
-            <div>              
+            <div>
                 <b *ngIf="formgroup.controls.windowr.value == 1">R Value :
                     {{formgroup.get('windowrArray')['controls'][0].controls.windowRKnown.value}}
                     {{formgroup.get('windowrArray')['controls'][0].controls.windowrUnits.value}}</b>
-                 <b *ngIf="formgroup.controls.windowr.value == 2">R Value :
+                <b *ngIf="formgroup.controls.windowr.value == 2">R Value :
                     {{formgroup.get('windowrArray')['controls'][0].controls.windowRCaluclated.value}}
-                    </b>    
+                </b>
             </div>
 
         </fieldset>
@@ -361,46 +361,65 @@
                 <p> <span class="notes-style"> Note:</span> You may select any of the options to provide details on WWR
                     value of the window</p>
             </div>
-            <mat-radio-group aria-label="Select an option" formControlName="wwr">
+            <mat-radio-group aria-label="Select an option" formControlName="wwr" (change)="onChangeWWROption($event)">
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                 <mat-radio-button value="2"> No, I don't know.</mat-radio-button>
             </mat-radio-group>
 
-            <span *ngIf="formgroup.controls.wwr.value == 1">
-                <p style="margin-top: 1em;">I know the WWR value of the windows for my building.</p>
-                <div style="display: flex;">
-                    <p style="margin-top: 1rem;">Please enter the WWR value (value doesnot have units) : </p>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Enter value here</mat-label>
-                        <input matInput placeholder="Enter value" type="number" formControlName="wwrKnown" required>
-                    </mat-form-field>
-                </div>
-            </span>
+            <div formArrayName="wwrArray" *ngIf="formgroup.controls.wwr.value !== ''">
+                <div *ngFor="let item of  formgroup.get('wwrArray')['controls'];let i = index;">
+                    <div [formGroupName]="i">
+                        <!-- wwr known -->
+                        <span *ngIf="formgroup.controls.wwr.value == 1">
+                            <p style="margin-top: 1em;">I know the WWR value of the windows for my building.</p>
+                            <div style="display: flex;">
+                                <p style="margin-top: 1rem;">Please enter the WWR value (value doesnot have units) :
+                                </p>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Enter value here</mat-label>
+                                    <input matInput placeholder="Enter value" type="number" formControlName="wwrKnown"
+                                        required>
+                                </mat-form-field>
+                            </div>
+                        </span>
 
-            <span *ngIf="formgroup.controls.wwr.value == 2">
-                <p style="margin-top: 1em;">I dont't know.Help me in selecting suitable window to wall ratio value for
-                    my building.</p>
-                <div >
-                    <p style="margin-top: 1rem;">Please enter the WWR value in(%) by refering to pictures: </p>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Enter value here</mat-label>
-                        <input matInput placeholder="Enter value" type="number" formControlName="wwrGuide" required>
-                    </mat-form-field><br>
-                    <div class="images-wwr">
-                        <img height="100" src="/assets/images/wwr/wwr1.jpg">
-                        <img height="100" style="padding-left: 20px" src="/assets/images/wwr/wwr2.jpeg">
+
+                        <!-- wwr Guide -->
+                        <span *ngIf="formgroup.controls.wwr.value == 2">
+                            <p style="margin-top: 1em;">I dont't know.Help me in selecting suitable window to wall ratio
+                                value for
+                                my building.</p>
+                            <div>
+                                <p style="margin-top: 1rem;">Please enter the WWR value in(%) by refering to pictures:
+                                </p>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Enter value here</mat-label>
+                                    <input matInput placeholder="Enter value" type="number" formControlName="wwrGuide"
+                                        required>
+                                </mat-form-field><br>
+                                <div class="images-wwr">
+                                    <img height="100" src="/assets/images/wwr/wwr1.jpg">
+                                    <img height="100" style="padding-left: 20px" src="/assets/images/wwr/wwr2.jpeg">
+                                </div>
+
+                            </div><br>
+                        </span>
+
+
+                        <div>
+                            <b *ngIf="formgroup.controls.wwr.value == 1" class="calculated-values">
+                                WWR : {{formgroup.get('wwrArray')['controls'][0].controls.wwrKnown.value}}
+                            </b>
+                            <b *ngIf="formgroup.controls.wwr.value == 2" class="calculated-values">
+                                WWR :  {{formgroup.get('wwrArray')['controls'][0].controls.wwrGuide.value}}
+                            
+                            </b>
+                        </div>
+
                     </div>
-
                 </div>
-            </span>
-            <div>
-                <b *ngIf="formgroup.controls.wwr.value == 1" class="calculated-values">
-                    WWR : {{formgroup.controls.wwrKnown.value}}
-                </b>
-                <b *ngIf="formgroup.controls.wwr.value == 2" class="calculated-values">
-                    WWR : {{formgroup.controls.wwrGuide.value}}
-                </b>
             </div>
+
         </fieldset>
     </form>
 </div>

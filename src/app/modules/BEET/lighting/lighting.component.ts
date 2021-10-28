@@ -31,16 +31,20 @@ export class LightingComponent implements OnInit {
   lightingOptions: Lighting[];
   lightingOptionsDataSource: MatTableDataSource<Lighting>
   LightningDetailsForm: FormGroup;
-  lightingPowerDensityValue:number;
+  /* lightingPowerDensityValue:number;
   totalLightingPowerUnit:string;
   totalLightingPowerValue:number;
-  lightingPowerDensityUnit:string;
+  lightingPowerDensityUnit:string; */
 
   constructor(private fb: FormBuilder, private beetService: beetService) { }
 
   ngOnInit(): void {
      this.LightningDetailsForm = this.fb.group({
-      //lightdetails: ['', Validators.required],
+      lightingPowerDensityValue: [, Validators.required],
+      totalLightingPowerUnit: ['', Validators.required],
+      totalLightingPowerValue: [, Validators.required],
+      lightingPowerDensityUnit: ['', Validators.required],
+      totalPower:[]
     });
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
     this.beetService.getGeneralDetails().subscribe(res => {
@@ -53,14 +57,12 @@ export class LightingComponent implements OnInit {
   }
 
   getStyleDisplay(index, div) {
-    console.log(index, div, index % div == 0);
+    //console.log(index, div, index % div == 0);
     return index % div == 0
   }
   getenableyearofinstallation(startindex, endindex, currentindex) {
     return currentindex >= startindex && currentindex <= endindex;
   }
-
- 
 
   postCalculateLightingPower(): void {
    var payload: any = {
@@ -71,13 +73,14 @@ export class LightingComponent implements OnInit {
    }
        console.log(this.lightingOptions);
      this.beetService.postCalculateLightingPower(payload).subscribe(res => {
-       this.totalLightingPowerValue=res.success.totallightingpower;
-       this.totalLightingPowerUnit=res.success.totallightingpowerunit;
-       this.lightingPowerDensityValue=res.success.lightingpowerdensity;
-       this.lightingPowerDensityUnit=res.success.lightingpowerdensityunit;
-       console.log( this.lightingPowerDensityValue)
+       console.log(res);
+       this.LightningDetailsForm.controls.totalLightingPowerValue.patchValue(res.success.totallightingpower);
+       this.LightningDetailsForm.controls.totalLightingPowerUnit.patchValue(res.success.totallightingpowerunit);
+       this.LightningDetailsForm.controls.lightingPowerDensityValue.patchValue(res.success.lightingpowerdensity.toFixed(2));
+       this.LightningDetailsForm.controls.lightingPowerDensityUnit.patchValue(res.success.lightingpowerdensityunit);
+       this.LightningDetailsForm.controls.totalPower.patchValue(res.success.totalpower);
      });
-     
+       
   }
 
 

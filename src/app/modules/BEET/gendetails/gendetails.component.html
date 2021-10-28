@@ -142,13 +142,13 @@
             </mat-form-field>
             <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>No. of floors</mat-label>
-                <input formControlName="Nooffloors" type="number" matInput required>
+                <input formControlName="noOfFloors" type="number" matInput required>
                 <!-- <mat-hint color="primary">Please enter No. of floors</mat-hint> -->
             </mat-form-field>
 
             <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>Occupancy hours per week</mat-label>
-                <input formControlName="Occupanyhoursperweek" type="number" matInput required>
+                <input formControlName="occupanyHoursPerWeek" type="number" matInput required>
                 <!-- <mat-hint color="primary">Please Occupancy hours per week</mat-hint> -->
             </mat-form-field>
 
@@ -167,7 +167,7 @@
             <span class="units-picker-component">
                 <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
                     <mat-label>Net occupied floor area</mat-label>
-                    <input formControlName="Netoccupiedfloorarea" type="number"
+                    <input formControlName="netOccupiedFloorArea" type="number"
                         matInput required (input)="calculateGross()">
                     <mat-select style="padding-left: 8px"  placeholder="units"
                         formControlName="netAreaUnits" style="width: 180px;" (selectionChange)="calculateGross()">
@@ -255,26 +255,26 @@
 
             <mat-form-field class="w-100 mt-1 col-md-6" appearance="outline">
                 <mat-label>Select Electricity cost units</mat-label>
-                <mat-select formControlName="electricityunits">
+                <mat-select formControlName="electricityUnits">
                     <mat-option *ngFor="let unit of eletricityunitslist" [value]="unit">{{unit}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field class="w-100 mt-1 col-md-6" appearance="outline">
                 <mat-label>Enter value here</mat-label>
-                <input type="number" matInput formControlName="Electricitycost" placeholder="Enter value" required>
+                <input type="number" matInput formControlName="electricityCost" placeholder="Enter value" required>
             </mat-form-field>
 
             <mat-form-field class="w-100 mt-1 col-md-6" appearance="outline">
                 <mat-label>Select Fuel cost units</mat-label>
-                <mat-select formControlName="fuelunits">
+                <mat-select formControlName="fuelUnits">
                     <mat-option *ngFor="let units of fuelunitslist" [value]="units">{{units}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field class="w-100 mt-1 col-md-6" appearance="outline">
                 <mat-label>Enter value here</mat-label>
-                <input matInput type="number" formControlName="Fuelcost" placeholder="Enter value" required>
+                <input matInput type="number" formControlName="fuelCost" placeholder="Enter value" required>
             </mat-form-field>
 
         </fieldset>

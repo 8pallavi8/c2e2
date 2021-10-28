@@ -61,18 +61,20 @@ export class GendetailsComponent implements OnInit {
       buildingSpaces: ['', Validators.compose([Validators.required])],
       yearOfConstruction: ['', Validators.compose([Validators.required])],
       buildingGrossArea: [0],
-      Netoccupiedfloorarea: ['', Validators.compose([Validators.required])],
-      Nooffloors: ['', Validators.compose([Validators.required])],
-      Occupanyhoursperweek: ['', Validators.compose([Validators.required])],
+      grossAreaUnits: ['', Validators.compose([Validators.required])],
+      netOccupiedFloorArea: ['', Validators.compose([Validators.required])],
+      netAreaUnits: ['', Validators.compose([Validators.required])],
+      noOfFloors: ['', Validators.compose([Validators.required])],
+      occupanyHoursPerWeek: ['', Validators.compose([Validators.required])],
       occupantDensity: ['', Validators.compose([Validators.required])],
       noOfPeopleOccupying: [0, Validators.compose([Validators.required])],
       occupantDensityUnits: ['', Validators.compose([Validators.required])],
-      Electricitycost: ['', Validators.compose([Validators.required])],
-      Fuelcost: ['', Validators.compose([Validators.required])],
-      fuelunits: ['', Validators.compose([Validators.required])],
-      grossAreaUnits: ['', Validators.compose([Validators.required])],
-      netAreaUnits: ['', Validators.compose([Validators.required])],
-      electricityunits: ['', Validators.compose([Validators.required])],
+      electricityCost: ['', Validators.compose([Validators.required])],
+      fuelCost: ['', Validators.compose([Validators.required])],
+      fuelUnits: ['', Validators.compose([Validators.required])],
+     
+     
+      electricityUnits: ['', Validators.compose([Validators.required])],
       //occupancyValue: [0, Validators.compose([Validators.required])],
       occupantDensityKnown: [0, Validators.compose([Validators.required])],
 
@@ -141,7 +143,7 @@ export class GendetailsComponent implements OnInit {
     console.log(this.genDetailsForm.controls.netAreaUnits.value);
     if(!this.isEnteredGross){
       this.genDetailsForm.controls.grossAreaUnits.patchValue(this.genDetailsForm.controls.netAreaUnits.value);
-      this.genDetailsForm.controls.buildingGrossArea.setValue((this.genDetailsForm.controls.Netoccupiedfloorarea.value * 1.1).toFixed(2));
+      this.genDetailsForm.controls.buildingGrossArea.setValue((this.genDetailsForm.controls.netOccupiedFloorArea.value * 1.1).toFixed(2));
       this.beetService.setBuildingGrossArea(this.genDetailsForm.controls.buildingGrossArea.value);
       this.beetService.setBuildingGrossAreaUnits(this.genDetailsForm.controls.grossAreaUnits.value);
     } 

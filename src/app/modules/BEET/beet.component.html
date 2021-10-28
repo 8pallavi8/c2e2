@@ -57,7 +57,7 @@
         be any feedback / queries / suitable or customized data integration requirements, please do reach out to us at
         the below mentioned contact.<br><br>
 
-        <b>Point of contact:</b><br> Rahul Raju Dusa <br> Senior Expert – Energy Efficiency<br> rradu@dtu.dk
+        <b>Point of contact:</b><br> Rahul Raju Dusa <br> Senior Expert – Energy Efficiency<br>rradu@dtu.dk
         <br>
     </p>
 </div>
@@ -103,9 +103,9 @@
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
-                    <!--[disabled]="buildingdetailsComponent?.formgroup.invalid"  -->
+                    <!--[disabled]="buildingdetailsComponent?.formgroup.invalid"  (click)="saveBuildingDetails()" -->
                     <button  mat-raised-button color="primary" matStepperNext
-                        (click)="saveBuildingDetails()">Next</button>
+                        >Next</button>
                 </div>
             </mat-step>
 
@@ -115,6 +115,7 @@
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
+                        <!--[disabled]="buildingdetailsComponent?.formgroup.invalid"  -->
                     <button mat-raised-button color="primary" matStepperNext>Next</button>
                 </div>
             </mat-step>
@@ -145,6 +146,7 @@
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
+                        <!--[disabled]="CO2EmissionsComponent?.formgroup.invalid"  (click)="saveBuildingDetails()" -->
                     <button mat-raised-button color="primary" matStepperNext>Next</button>
                 </div>
             </mat-step>
@@ -197,8 +199,9 @@
                         from equipment / appliance manufacturers and suppliers,
                         years of energy auditing experience, etc.<br> * Building is a 12' floor-to-floor, square
                         footprint
-                        <br> * Respective place weather data from<br>
-                        http://climate.onebuilding.org/WMO_Region_3_South_America/ARG_Argentina/index.html
+                        <br> * Respective place weather data from 
+                       <a href="http://climate.onebuilding.org/WMO_Region_3_South_America/ARG_Argentina/index.html"> 
+                        http://climate.onebuilding.org/WMO_Region_3_South_America/ARG_Argentina/index.html</a>
                         <br> * Envelope convective heat transfer is not considered<br> * Envelope solar gain is not
                         considered, except for windows<br> * The building is treated as a single thermal zone
                         <br> * Occupied hours first fill weekdays symmetrically around noon, and then fill weekends
@@ -240,8 +243,8 @@
 
                     <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
 
-                    <!-- <button mat-raised-button color="primary" (click)="showSummary()"
-        style="margin-right: inherit;">ShowSummary</button><br> -->
+                     <button mat-raised-button color="primary" (click)="showSummary()"
+        style="margin-right: inherit;">ShowSummary</button><br> 
 
                 </div>
             </mat-step>

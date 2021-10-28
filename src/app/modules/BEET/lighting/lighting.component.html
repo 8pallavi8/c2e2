@@ -78,8 +78,8 @@
             <button mat-raised-button color="primary" style="margin-top: 1rem;" (click)="postCalculateLightingPower()">Calculate</button>
         </div><br>
 
-        <b>Lighting power density :{{totalLightingPowerValue}}{{totalLightingPowerUnit}}</b><br>
-        <b>Total lighting power :{{ this.lightingPowerDensityValue}}{{lightingPowerDensityUnit}}</b>
+        <b>Lighting power density :{{this.LightningDetailsForm.controls.lightingPowerDensityValue.value}}{{this.LightningDetailsForm.controls.lightingPowerDensityUnit.value}}</b><br>
+        <b>Total lighting power :{{this.LightningDetailsForm.controls.totalLightingPowerValue.value}}{{this.LightningDetailsForm.controls.totalLightingPowerUnit.value}}</b>
 
 
     </div>
