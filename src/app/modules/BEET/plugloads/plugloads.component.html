@@ -18,174 +18,203 @@
                     </p>
                 </div>
                 <mat-radio-group aria-label="Select an option" formControlName="plugloads"
-                    (change)="onChangeAvailbePlugLoad($event)">
+                    (change)="onChangePlugLoadOption($event)" >
                     <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                     <mat-radio-button value="2">No, I don't know. Guide me to calculate.</mat-radio-button><br>
                     <mat-radio-button value="3">I will select from already
                         available values</mat-radio-button>
                 </mat-radio-group><br><br>
 
-                <!-- Plugload value known -->
-                <span *ngIf="formgroup.controls.plugloads.value == 1" class="units-picker-component">
-                    <p class="fields-note">You may choose to enter the values for any of the units mentioned
-                        below. Necessary units conversions will be made by
-                        the tool for respective calculations.</p>
-                    <b style="margin-top: 1em;">Plug Load value : </b>
-                    <mat-form-field class="w-100 mt-2 col-md-5" appearance="outline">
-                        <mat-label>Enter value here</mat-label>
-                        <input matInput placeholder="Enter value" formControlName="plugLoadValueKnown" type="number">
-                        <mat-select placeholder="units" [(ngModel)]=plugLoadUnits formControlName="plugLoadUnits">
-                            <mat-option value="watts per square meter">watts per square meter</mat-option>
-                            <mat-option value="watts per square foot">watts per square foot</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </span>
+                <div formArrayName="plugLoadArray" *ngIf="formgroup.controls.plugloads.value !== ''">
+                    <div *ngFor="let item of  formgroup.get('plugLoadArray')['controls'];let i = index;">
+                        <div [formGroupName]="i">
+                            <!-- Plugload value known -->
+                            <span *ngIf="formgroup.controls.plugloads.value == 1" class="units-picker-component">
+                                <p class="fields-note">You may choose to enter the values for any of the units mentioned
+                                    below. Necessary units conversions will be made by
+                                    the tool for respective calculations.</p>
+                                <b style="margin-top: 1em;">Plug Load value : </b>
+                                <mat-form-field class="w-100 mt-2 col-md-5" appearance="outline">
+                                    <mat-label>Enter value here</mat-label>
+                                    <input matInput placeholder="Enter value" formControlName="plugLoadValueKnown"
+                                        type="number">
+                                    <mat-select placeholder="units" formControlName="plugLoadUnits">
+                                        <mat-option value="watts per square meter">watts per square meter</mat-option>
+                                        <mat-option value="watts per square foot">watts per square foot</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </span>
 
-                <!-- plugload guide to calculate -->
-                <span *ngIf="formgroup.controls.plugloads.value == 2" class="container-fluid beet-container">
+                            <!-- plugload guide to calculate -->
+                            <span *ngIf="formgroup.controls.plugloads.value == 2"
+                                class="container-fluid beet-container">
+                                <div class="fields-note">
+                                    <p><span class="notes-style"> Note:</span> Note: Plug load refer to energy used by
+                                        equipment
+                                        that is plugged into an outlet. For example, in an office, key plug loads
+                                        include computer
+                                        and monitors, printers, and copiers. Equipment/Appliances include other
+                                        connected load such
+                                        as the prefilled examples in the table.
+                                        Do not include major lighting fixture details that have already been entered in
+                                        the lighting
+                                        section. Table lamps, plugged task lightings, etc. which were not covered in the
+                                        lighting
+                                        section may be entered here.
+                                        Do not include large HVAC system components here.
+                                    </p>
+                                </div>
+
+                                <table *ngIf="formgroup.controls.plugloads.value == 2" mat-table
+                                    formArrayName="plugloadsItems" [dataSource]="optbDataSource"
+                                    class="mat-elevation-z8" multiTemplateDataRows>
 
 
-                    <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> Note: Plug load refer to energy used by equipment
-                            that is plugged into an outlet. For example, in an office, key plug loads include computer
-                            and monitors, printers, and copiers. Equipment/Appliances include other connected load such
-                            as the prefilled examples in the table.
-                            Do not include major lighting fixture details that have already been entered in the lighting
-                            section. Table lamps, plugged task lightings, etc. which were not covered in the lighting
-                            section may be entered here.
-                            Do not include large HVAC system components here.
-                        </p>
+                                    <ng-container matColumnDef="space">
+                                        <th mat-header-cell *matHeaderCellDef> Space</th>
+                                        <td mat-cell *matCellDef="let element; let rowIndex = index"
+                                            [formGroupName]="rowIndex">
+                                            <ng-container *ngIf="element.space !='' ">
+                                                {{element.space}}
+                                            </ng-container>
+                                            <ng-container *ngIf="element.space =='' ">
+                                                <input matInput type="text" formControlName="space">
+                                            </ng-container>
+
+                                        </td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="plugloadappliance">
+                                        <th mat-header-cell *matHeaderCellDef> plugloadappliance</th>
+                                        <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                            <ng-container *ngIf="element.plugloadappliance !='' ">
+                                                {{element.plugloadappliance}}
+                                            </ng-container>
+                                            <ng-container *ngIf="element.plugloadappliance =='' ">
+                                                <input matInput type="text" formControlName="totalaream2">
+                                            </ng-container>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Yearofinstallation">
+                                        <th mat-header-cell *matHeaderCellDef> Yearofinstallation</th>
+                                        <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                            <input matInput type="text" formControlName="plugloadappliance">
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Average Power">
+                                        <th mat-header-cell *matHeaderCellDef> Average Power</th>
+                                        <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                            <input matInput type="number" formControlName="yearofinstallation">
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Connected stock of equipment">
+                                        <th mat-header-cell *matHeaderCellDef> Connected stock of equipment</th>
+                                        <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="avgpowerwatts">
+                                            <input matInput type="number" formControlName="stock">
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Average operating hours per day">
+                                        <th mat-header-cell *matHeaderCellDef> Average operating hours per day</th>
+                                        <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                            <input matInput type="number" formControlName="totalareaft2">
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayOptBColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayOptBColumns; "></tr>
+                                </table>
+
+                                <div>
+                                    <button mat-raised-button color="primary" style="margin-top: 1rem;"
+                                        (click)=" calculatePlugLoad()">Calculate</button>
+                                </div><br>
+
+
+                            </span>
+
+                            <!-- plugload available -->
+                            <span *ngIf="formgroup.controls.plugloads.value == 3"
+                                class="container-fluid beet-container">
+
+
+                                <div class="fields-note">
+                                    <p><span class="notes-style"> Note:</span> Note: Options available for selected
+                                        cases only.
+                                        Select the most suitable type and closest area to your building.
+                                        If the values in the options are far from your building values, please opt for
+                                        Option B.</p>
+                                </div>
+
+
+
+                                <table mat-table [dataSource]="optcDataSource" class="mat-elevation-z8">
+
+                                    <ng-container matColumnDef="select">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            Selected Element
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <mat-radio-button [value]="element"
+                                                (click)="selectedPlugload($event, element)">
+                                            </mat-radio-button>
+                                        </td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="buildingtype">
+                                        <th mat-header-cell *matHeaderCellDef> Building Type </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{element.buildingtype}}
+                                        </td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="avgpplwperft2">
+                                        <th mat-header-cell *matHeaderCellDef> Average PPL ft2</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{element.avgpplwperft2}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="avgpplwperm2">
+                                        <th mat-header-cell *matHeaderCellDef> Average PPL mt2 </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{element.avgpplwperm2}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="totalareaft2">
+                                        <th mat-header-cell *matHeaderCellDef> Total Area in ft2 </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{element.totalareaft2}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="totalaream2">
+                                        <th mat-header-cell *matHeaderCellDef> Total Area in mt2</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{element.totalaream2}}
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayOPTCColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayOPTCColumns;"></tr>
+                                </table>
+
+
+                            </span>
+
+                            <div><b>Plug Load value:
+                                    {{formgroup.controls.plugLoadValueKnown.value}}{{formgroup.controls.plugLoadUnits.value}}</b>
+                            </div>
+                        </div>
                     </div>
-
-                    <table mat-table [dataSource]="optbDataSource" class="mat-elevation-z8">
-
-                        
-                        <ng-container matColumnDef="space">
-                            <th mat-header-cell *matHeaderCellDef> Space</th>
-                            <td mat-cell *matCellDef="let element">
-                                <ng-container *ngIf="element.space !='' ">
-                                    {{element.space}}
-                                  </ng-container>
-                                  <ng-container *ngIf="element.space =='' ">
-                                    <input matInput type="text">
-                                  </ng-container>
-
-                            </td>
-                        </ng-container>
-
-
-                        <ng-container matColumnDef="plugloadappliance">
-                            <th mat-header-cell *matHeaderCellDef> plugloadappliance</th>
-                            <td mat-cell *matCellDef="let element">
-                                {{element.plugloadappliance}}
-                            </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Yearofinstallation">
-                            <th mat-header-cell *matHeaderCellDef> Yearofinstallation</th>
-                            <td mat-cell *matCellDef="let element">
-                                <input matInput type="text">
-                            </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Average Power">
-                            <th mat-header-cell *matHeaderCellDef> Average Power</th>
-                            <td mat-cell *matCellDef="let element">
-                                <input matInput type="text">
-                            </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Connected stock of equipment">
-                            <th mat-header-cell *matHeaderCellDef> Connected stock of equipment</th>
-                            <td mat-cell *matCellDef="let element">
-                                <input matInput type="text">
-                            </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Average operating hours per day">
-                            <th mat-header-cell *matHeaderCellDef> Average operating hours per day</th>
-                            <td mat-cell *matCellDef="let element">
-                                <input matInput type="text">
-                            </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayOptBColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayOptBColumns;"></tr>
-                    </table>
-
-
-                </span>
-
-                <!-- plugload available -->
-
-                <span *ngIf="formgroup.controls.plugloads.value == 3" class="container-fluid beet-container">
-
-
-                    <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span> Note: Options available for selected cases only.
-                            Select the most suitable type and closest area to your building.
-                            If the values in the options are far from your building values, please opt for Option B.</p>
-                    </div>
-
-
-
-                    <table mat-table [dataSource]="optcDataSource" class="mat-elevation-z8">
-
-                        <ng-container matColumnDef="select">
-                            <th mat-header-cell *matHeaderCellDef>
-                                Selected Element
-                            </th>
-                            <td mat-cell *matCellDef="let element">
-                                <mat-radio-button [value]="element" (click)="selectedR($event, element)">
-                                </mat-radio-button>
-                            </td>
-                        </ng-container>
-
-
-                        <ng-container matColumnDef="buildingtype">
-                            <th mat-header-cell *matHeaderCellDef> Building Type </th>
-                            <td mat-cell *matCellDef="let element">
-                                {{element.buildingtype}}
-                            </td>
-                        </ng-container>
-
-
-                        <ng-container matColumnDef="avgpplwperft2">
-                            <th mat-header-cell *matHeaderCellDef> Average PPL ft2</th>
-                            <td mat-cell *matCellDef="let element">
-                                {{element.avgpplwperft2}}
-                            </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="avgpplwperm2">
-                            <th mat-header-cell *matHeaderCellDef> Average PPL mt2 </th>
-                            <td mat-cell *matCellDef="let element">
-                                {{element.avgpplwperm2}}
-                            </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="totalareaft2">
-                            <th mat-header-cell *matHeaderCellDef> Total Area in ft2 </th>
-                            <td mat-cell *matCellDef="let element">
-                                {{element.totalareaft2}}
-                            </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="totalaream2">
-                            <th mat-header-cell *matHeaderCellDef> Total Area in mt2</th>
-                            <td mat-cell *matCellDef="let element">
-                                {{element.totalaream2}}
-                            </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayOPTCColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayOPTCColumns;"></tr>
-                    </table>
-
-
-                </span>
-<div><b>Plug Load value:</b></div>
-                 
+                </div>
             </div>
         </fieldset>
 
@@ -208,7 +237,7 @@
                         </ng-container>
 
                         <!-- options Column -->
-                        <ng-container style= "text-align: center" matColumnDef="options">
+                        <ng-container style="text-align: center" matColumnDef="options">
                             <mat-header-cell *matHeaderCellDef> Yes/No/NA </mat-header-cell>
                             <mat-cell *matCellDef="let element">
                                 <mat-form-field floatLabel="never">
@@ -230,8 +259,8 @@
                             </mat-cell>
                         </ng-container>
 
-                        <mat-header-row   *matHeaderRowDef="displayedColumns"></mat-header-row>
-                        <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                     </mat-table>
                 </div>
 

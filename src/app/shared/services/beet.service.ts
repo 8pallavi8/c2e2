@@ -131,7 +131,6 @@ export class beetService {
     }
     
 
-
     postCalculateOccupancyUnknown(payload: any): Observable<any>{
         return this.http.post(environment.baseUrl + ':9998/api/user/v1/calculateoccupancyunknown', payload);
     }
@@ -152,6 +151,13 @@ export class beetService {
     postCalculateLightingPower(payload: any): Observable<any>{
         return this.http.post(environment.baseUrl + ':9998/api/user/v1/calculatelightingpower', payload);
     }
+
+
+    postCalculatePlugLoad(payload: any): Observable<any>{
+        return this.http.post(environment.baseUrl + ':9998/api/user/v1/calculateplugloaddensity', payload);
+    }
+
+
 
 
 

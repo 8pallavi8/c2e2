@@ -120,6 +120,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   onChangeOuterWallROption(event: MatRadioChange) {
     console.log(this.formgroup.get('outerWallArray'));
     (<FormArray>this.formgroup.get('outerWallArray')).removeAt(0);
+    console.log("change : "+event.value);
 
     if (event.value == 1) {
       (<FormArray>this.formgroup.get('outerWallArray')).push(this.fb.group({

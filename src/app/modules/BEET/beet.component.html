@@ -70,7 +70,7 @@
 
             </div>
         </div>
-        <div class="container-fluid" style="display: flex;padding-top: 10px;">
+        <div class="container-fluid"  style="display: flex;padding-top: 10px;">
             <div class="row_inline">
                 <div class="col-3 col-md-3 d-flex" style="align-items: center;">
                     <img src="/assets/images/tools/building.png" width="100%" height="auto">
@@ -86,12 +86,12 @@
         </div>
     </div>
     <div class="container-fluid">
-        <mat-horizontal-stepper  class="stepper-class" labelPosition="bottom" #stepper>
+        <mat-horizontal-stepper  (selectionChange)="selectionStepperChange($event)" class="stepper-class" labelPosition="bottom" #stepper>
             <mat-step [stepControl]="genDetailsComponent?.genDetailsForm" label="General Details">
                 <app-gendetails></app-gendetails>
                 <div class="step-button">
                     <!--[disabled]="genDetailsComponent?.genDetailsForm.invalid"  -->
-                    <button  mat-raised-button color="primary" matStepperNext>Next</button>
+                    <button    mat-raised-button color="primary" matStepperNext>Next</button>
                 </div>
                 
                 
@@ -104,7 +104,7 @@
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="buildingdetailsComponent?.formgroup.invalid"  (click)="saveBuildingDetails()" -->
-                    <button  mat-raised-button color="primary" matStepperNext
+                    <button   mat-raised-button color="primary" matStepperNext
                         >Next</button>
                 </div>
             </mat-step>
@@ -116,7 +116,7 @@
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
                         <!--[disabled]="buildingdetailsComponent?.formgroup.invalid"  -->
-                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                    <button  mat-raised-button color="primary" matStepperNext>Next</button>
                 </div>
             </mat-step>
 
@@ -146,8 +146,8 @@
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
-                        <!--[disabled]="CO2EmissionsComponent?.formgroup.invalid"  (click)="saveBuildingDetails()" -->
-                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                        <!--[disabled]="CO2EmissionsComponent?.formgroup.invalid"   -->
+                    <button  mat-raised-button color="primary" matStepperNext>Next</button>
                 </div>
             </mat-step>
 
@@ -161,7 +161,7 @@
 
 
                 <div>
-                    <table mat-table matSort matTableResponsive [dataSource]="dataSource" class="mat-elevation-z8">
+                    <table mat-table matSort matTableResponsive [dataSource]="dataSource" >
 
                         <ng-container matColumnDef="Parameter">
                             <th mat-header-cell *matHeaderCellDef> Parameter</th>
@@ -243,15 +243,12 @@
 
                     <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
 
-                     <button mat-raised-button color="primary" (click)="showSummary()"
+                     <button mat-raised-button color="primary" (click)=" showSummary() "
         style="margin-right: inherit;">ShowSummary</button><br> 
 
                 </div>
             </mat-step>
         </mat-horizontal-stepper>
     </div><br>
-
-   
-   
 <app-logo-footer></app-logo-footer>
 </section>

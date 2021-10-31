@@ -22,7 +22,7 @@
                     (change)="onChangeHeatEffOption($event)">
                     <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                     <mat-radio-button value="2">No, I don't know</mat-radio-button><br>
-                    <mat-radio-button  value="3">The building does not use any
+                    <mat-radio-button value="3">The building does not use any
                         heating equipment</mat-radio-button>
                 </mat-radio-group><br><br>
 
@@ -30,49 +30,55 @@
                     <div *ngFor="let item of  formgroup.get('heatefficiencyArray')['controls'];let i = index;">
                         <div [formGroupName]="i">
                             <!-- Heat efficiency known -->
-                            <span *ngIf="formgroup.controls.heatefficiency.value == 1">
-
-                                <b style="margin-top: 1em;">Enter the heatingequipment efficiency value(%) :
+                            <span *ngIf="formgroup.controls.heatefficiency.value == 1" class="units-picker-component">
+                                <p>The value should be available on the equipment name plate or contact the supplier.For Heat pumps enter COP value.</p>
+                                <b style="margin-top: 1em;">Enter the heatingequipment efficiency value :
                                 </b>
                                 <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
                                     <mat-label>Enter value here</mat-label>
-                                
-                                        <input matInput placeholder="Enter value" formControlName="heatefficiencyKnown"
-                                    type="number">
+                                    <input matInput placeholder="Enter value" type="number"
+                                        formControlName="heatefficiencyKnown" type="number">
+                                    <mat-select placeholder="units" formControlName="heatEfficiencyUnits">
+                                        <mat-option value="%">%</mat-option>
+                                        <mat-option value="COP">COP</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </span>
 
 
                             <!--Heat efficiency Images -->
+                            <div *ngIf="formgroup.controls.heatefficiency.value == 2">
 
-
-                            <span *ngIf="formgroup.controls.heatefficiency.value == 2">
-                                <p style="margin-top: 1em;">Please select the most representative picture for your
-                                    heating equipment
-                                    type.<br>
-                                </p>
                                 <div>
-
-                                    <mat-radio-group class="mat-radio-group-image" formControlName="heatValueImages"
-                                        (change)="processHeatCoolEvent($event,'heating')">
-                                        <mat-radio-button *ngFor="let con of heatingData"
-                                            [value]="con.heatingequipmentname">
-                                            <img src="{{con.imgpath}}">
-                                            <p>{{con.heatingequipmentname}}</p>
-                                        </mat-radio-button>
-                                    </mat-radio-group>
+                                    <p style="margin-top: 1em;">Please select the most representative picture for your
+                                        heating equipment
+                                        type.<br>
+                                    </p>
+                                    <div>
+                                        <mat-radio-group class="mat-radio-group-image" formControlName="heatValueImages"
+                                            (change)="processHeatCoolEvent($event,'heating')">
+                                            <mat-radio-button *ngFor="let con of heatingData"
+                                                [value]="con.heatingequipmentname">
+                                                <img src="{{con.imgpath}}">
+                                                <p>{{con.heatingequipmentname}}</p>
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
                                 </div>
-                            </span>
+                            </div>
 
 
                             <div>
                                 <b *ngIf="formgroup.controls.heatefficiency.value == 1">Heating efficiency :
-                                    {{formgroup.get('heatefficiencyArray')['controls'][0].controls.heatefficiencyKnown.value}}%
+                                    {{formgroup.get('heatefficiencyArray')['controls'][0].controls.heatefficiencyKnown.value}}
+                                    {{formgroup.get('heatefficiencyArray')['controls'][0].controls.heatEfficiencyUnits.value}}
                                 </b>
                                 <b *ngIf="formgroup.controls.heatefficiency.value == 2">Heating efficiency :
-                                    {{heatingImageEffValue}}%
+
+                                    {{formgroup.get('heatefficiencyArray')['controls'][0].controls.heatefficiency.value}}
+                                    {{formgroup.get('heatefficiencyArray')['controls'][0].controls.heatEfficiencyUnits.value}}
                                 </b>
-                                <b *ngIf="formgroup.controls.heatefficiency.value == 3">R Value : No heating equipment
+                                <b *ngIf="formgroup.controls.heatefficiency.value == 3">No heating equipment
                                 </b>
                             </div>
 
@@ -95,10 +101,11 @@
                         You may find these values on the equipment name plate or design document or from supplier.
                     </p>
                 </div>
-                <mat-radio-group aria-label="Select an option" formControlName="airconditioning" (change)="onChangecoolingEffOption($event)">
+                <mat-radio-group aria-label="Select an option" formControlName="airconditioning"
+                    (change)="onChangecoolingEffOption($event)">
                     <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                     <mat-radio-button value="2">No, I don't know</mat-radio-button><br>
-                    <mat-radio-button  value="3">The building does not use any
+                    <mat-radio-button value="3">The building does not use any
                         cooling equipment</mat-radio-button>
                 </mat-radio-group><br><br>
 
@@ -107,47 +114,55 @@
                     <div *ngFor="let item of  formgroup.get('coolefficiencyArray')['controls'];let i = index;">
                         <div [formGroupName]="i">
                             <!-- cool efficiency known -->
-                            <span *ngIf="formgroup.controls.airconditioning.value == 1">
+                            <span *ngIf="formgroup.controls.airconditioning.value == 1" class="units-picker-component">
+                                <p>I have the efficiency/performance parameter for the air conditioning equipment of my
+                                    building.<br>
+                                    Please enter the value in below text box and select respective units.</p>
 
-                                <p> Please Enter the values in below respective text boxes:</p>
-            
-                                <b style="margin-top: 1em;">Energy Efficiency Ratio(EER)[Btu/h refrigeration effect/Watt input]:</b>
+
+                              <!--   <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
+                                    <mat-label>Select efficiency/performance paramater</mat-label>
+                                    <mat-select formControlName="acEfficiencyParameter">
+                                        <mat-option *ngFor="let unit of acEfficiencyParameterList" [value]="unit">
+                                            {{unit}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
+                                    <mat-label>Enter value here</mat-label>
+                                    <input matInput type="number" placeholder="Enter value" required
+                                        formControlName="acEfficiencyValue">
+                                </mat-form-field> -->
+
                                 <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
                                     <mat-label>Enter value here</mat-label>
-                                    <input matInput placeholder="Enter value" type="number" formControlName="aircoolingopta"
-                                        >
+                                    <input matInput placeholder="Enter value" 
+                                        formControlName="acEfficiencyValue" type="number">
+                                    <mat-select placeholder="units" formControlName="acEfficiencyParameter">
+                                        <mat-option *ngFor="let unit of acEfficiencyParameterList" [value]="unit">
+                                            {{unit}}</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
-                                <p style="align-items: center;"> OR</p>
-                                <b style="margin-top: 1em;">Coefficient of performance (COP)[kW refrigeration effect/kW]:</b>
-                                <mat-form-field class="w-100 mt-2 col-md-6" appearance="outline">
-                                    <mat-label>Enter value here</mat-label>
-                                    <input matInput placeholder="Enter value" type="number" formControlName="aircoolingoptb"
-                                        type="number">
-                                </mat-form-field>
-                                <p style="align-items: center;">OR</p>
-                                <b style="margin-top: 1em;">Specific Power Consumption(SPC)[kW /TR]:</b>
-                                <mat-form-field class="w-100 mt-2 col-md-6" appearance="outline">
-                                    <mat-label>Enter value here</mat-label>
-                                    <input matInput placeholder="Enter value" type="number" formControlName="aircoolingoptc"
-                                        type="number">
-                                </mat-form-field>
-            
-                                <p>Note:The value should be available on the equipment name plate or contact the supplier.</p>
-            
+
+                                <p>Note:The value should be available on the equipment name plate or contact the
+                                    supplier.</p>
+
                             </span>
 
                             <!--cool efficiency Images -->
 
                             <span *ngIf="formgroup.controls.airconditioning.value == 2">
 
-                                <p style="margin-top: 1em;">Please select the most representative picture for your cooling equipment
+                                <p style="margin-top: 1em;">Please select the most representative picture for your
+                                    cooling equipment
                                     type.<br>
                                 </p>
                                 <div class="row">
-            
+
                                     <mat-radio-group class="mat-radio-group-image" formControlName="coolImages"
                                         (change)="processHeatCoolEvent($event,'cooling')">
-                                        <mat-radio-button *ngFor="let con of coolingData" [value]="con.coolingequipmentname">
+                                        <mat-radio-button *ngFor="let con of coolingData"
+                                            [value]="con.coolingequipmentname">
                                             <img src="{{con.imgpath}}">
                                             <p>{{con.coolingequipmentname}}</p>
                                         </mat-radio-button>
@@ -156,12 +171,15 @@
                             </span>
                             <div>
                                 <b *ngIf="formgroup.controls.airconditioning.value == 1">Cooling efficiency :
-                                    {{formgroup.get('heatefficiencyArray')['controls'][0].controls.heatefficiencyKnown.value}}%
+                                    {{formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyValue.value}}
+                                    {{formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyParameter.value}}
+
                                 </b>
                                 <b *ngIf="formgroup.controls.airconditioning.value == 2">Cooling efficiency :
-                                    {{formgroup.get('heatefficiencyArray')['controls'][0].controls.coolImages.value.efficiency}}%
+                                    {{formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyValue.value}}
+                                    {{formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyUnits.value}}
                                 </b>
-                                <b *ngIf="formgroup.controls.airconditioning.value == 3">R Value : No heating equipment
+                                <b *ngIf="formgroup.controls.airconditioning.value == 3">No Cooling equipment
                                 </b>
                             </div>
 
@@ -209,6 +227,10 @@
                         </mat-select>
                     </mat-form-field>
                 </span>
+                <div>
+                    <b>Infiltration
+                        Rate:{{formgroup.controls.ventilationKnown.value}}{{formgroup.controls.ventilationUnits.value}}</b>
+                </div>
             </div>
         </fieldset>
 
@@ -242,7 +264,8 @@
                     </mat-form-field>
                 </span>
                 <div>
-                    <b>Infiltration Rate(Air changes per Hour):{{infiltration}}</b>
+                    <b>Infiltration
+                        Rate:{{formgroup.controls.infiltrationknown.value}}{{formgroup.controls.infiltrationUnits.value}}</b>
                 </div>
             </div>
 
