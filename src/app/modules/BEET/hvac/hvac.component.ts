@@ -114,7 +114,8 @@ export class HvacComponent implements OnInit {
     if (event.value == 1) {
       (<FormArray>this.formgroup.get('heatefficiencyArray')).push(this.fb.group({
         heatefficiencyKnown: ['', Validators.required],
-        heatEfficiencyUnits:['', Validators.required]
+        heatEfficiencyUnits:['', Validators.required],
+        heatValueImages: ['', Validators.required],
       }));
     } else if (event.value == 2) {
       (<FormArray>this.formgroup.get('heatefficiencyArray')).push(this.fb.group({

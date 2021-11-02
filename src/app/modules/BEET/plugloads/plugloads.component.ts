@@ -110,7 +110,7 @@ export class PlugloadsComponent implements OnInit {
         console.log(this.plugLoadItems);
       }
       (<FormArray>this.formgroup.get('plugLoadArray')).push(this.plugLoadItems);
-
+      
     } else if (event.value == 3) {
       (<FormArray>this.formgroup.get('plugLoadArray')).push(this.fb.group({
         plugLoadValueKnown: ['', Validators.required],
@@ -149,21 +149,24 @@ export class PlugloadsComponent implements OnInit {
       var plugLoadArray: PlugLoadGuideTable[] = [];
       console.log(this.formgroup.get('plugLoadArray')['controls'][0].controls);
       for (var plugloadgroup of this.formgroup.get('plugLoadArray')['controls'][0].controls) {
-        console.log(plugloadgroup);
-        var plugLoadGuide: PlugLoadGuideTable = {
-          space: plugloadgroup.controls.space.value,
-          plugloadappliance: plugloadgroup.controls.plugloadappliance.value,
-          yearofinstallation: plugloadgroup.controls.yearofinstallation.value,
-          avgpowerwatts: plugloadgroup.controls.avgpowerwatts.value,
-          stock: plugloadgroup.controls.stock.value,
-          avgoperatinghrs: plugloadgroup.controls.avgoperatinghrs.value
+        console.log(plugloadgroup.controls.yearofinstallation.value);
+          if(plugloadgroup.controls.plugloadappliance.value != '' && plugloadgroup.controls.space.value != '') {
+            var plugLoadGuide: PlugLoadGuideTable = {
+              space: plugloadgroup.controls.space.value,
+              plugloadappliance: plugloadgroup.controls.plugloadappliance.value,
+              yearofinstallation: plugloadgroup.controls.yearofinstallation.value,
+              avgpowerwatts: Number(plugloadgroup.controls.avgpowerwatts.value),
+              stock: Number(plugloadgroup.controls.stock.value),
+              avgoperatinghrs: Number(plugloadgroup.controls.avgoperatinghrs.value)
+            }
+            plugLoadArray.push(plugLoadGuide);
+            console.log("data"+plugLoadGuide.toString());
         }
-        plugLoadArray.push(plugLoadGuide);
       }
       var payload: any = {
-        "buildinggrossarea": this.grossAreaValue,
+        "buildinggrossarea": Number(this.grossAreaValue),
         "buildinggrossareaunit": this.grossAreaValueUnits,
-        "plugloaddensitydata": plugLoadGuide
+        "plugloaddensitydata": plugLoadArray
       }
       this.beetService.postCalculatePlugLoad(payload).subscribe(res => {
         console.log(res)

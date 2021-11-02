@@ -43,6 +43,17 @@
                                         <mat-option value="COP">COP</mat-option>
                                     </mat-select>
                                 </mat-form-field>
+                                <div>
+                                    <mat-radio-group class="mat-radio-group-image" formControlName="heatValueImages"
+                                        (change)="processHeatCoolEvent($event,'heating')">
+                                        <mat-radio-button *ngFor="let con of heatingData"
+                                            [value]="con.heatingequipmentname">
+                                            <img src="{{con.imgpath}}">
+                                            <p>{{con.heatingequipmentname}}</p>
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+
                             </span>
 
 

@@ -115,7 +115,7 @@
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
-                        <!--[disabled]="buildingdetailsComponent?.formgroup.invalid"  -->
+                        <!--[disabled]="lightingDetailsComponent?.formgroup.invalid"  -->
                     <button  mat-raised-button color="primary" matStepperNext>Next</button>
                 </div>
             </mat-step>
@@ -126,7 +126,8 @@
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
-                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                         <!--[disabled]="hvacDetailsComponent?.formgroup.invalid"  -->
+                    <button  mat-raised-button color="primary" matStepperNext>Next</button>
                 </div>
             </mat-step>
 
@@ -136,7 +137,8 @@
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
-                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                         <!--[disabled]="plugLoaDetailsComponent?.formgroup.invalid"  -->
+                    <button  mat-raised-button color="primary" matStepperNext>Next</button>
                 </div>
             </mat-step>
 
@@ -146,8 +148,8 @@
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
-                        <!--[disabled]="CO2EmissionsComponent?.formgroup.invalid"   -->
-                    <button  mat-raised-button color="primary" matStepperNext>Next</button>
+                        <!--[disabled]="co2EmissionsDetailsComponent?.formgroup.invalid"   -->
+                    <button   mat-raised-button color="primary" matStepperNext>Next</button>
                 </div>
             </mat-step>
 
@@ -243,7 +245,7 @@
 
                     <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
 
-                     <button mat-raised-button color="primary" (click)=" showSummary() "
+                     <button mat-raised-button color="primary" (click)=" postData() "
         style="margin-right: inherit;">ShowSummary</button><br> 
 
                 </div>

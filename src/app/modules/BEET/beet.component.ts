@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
@@ -114,7 +115,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
         Value: this.genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value
       },
       {
-        Parameter: 'Occupant density', Units: 'square meter per person',
+        Parameter: 'Occupant density', Units: this.genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value,
         Value: this.genDetailsComponent.genDetailsForm.controls.occupantDensity.value
       },
       {
@@ -155,7 +156,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource(this.summaryTable);
   }
 
-  saveGenDetails() {
+  postData() {
      console.log(this.genDetailsComponent.genDetailsForm);
      if (this.genDetailsComponent.genDetailsForm.valid) {
        var payload: any = {
@@ -168,28 +169,55 @@ export class BEETComponent implements OnInit, AfterViewInit {
          buildingtype: this.genDetailsComponent.genDetailsForm.controls.buildingType.value,
          buildingspaces: this.genDetailsComponent.genDetailsForm.controls.buildingSpaces.value,
          yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value.toString(),
+         nooffloors: this.genDetailsComponent.genDetailsForm.controls.noOfFloors.value ,
+         occupancyhrsperweek: this.genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value,
+         buildinggrossarea: this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value,
          buildinggrossareaunit: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
          netoccupiedarea: this.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value,
-         buildinggrossarea: this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value !== '' ? this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value : this.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value * 1.1,
-         nooffloors: this.genDetailsComponent.genDetailsForm.controls.Nooffloors.value,
-         occupancyhrsperweek: this.genDetailsComponent.genDetailsForm.controls.Occupanyhoursperweek.value,
-         occupancyknown: this.genDetailsComponent.genDetailsForm.controls.occupancyDensity.value == 2 ? true : false,
-         noofpeopleoccupying: this.genDetailsComponent.genDetailsForm.controls.noOfPeopleOccupying.value,
-        occupantdensity: this.genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value,
-        occupantdensityunit: this.genDetailsComponent.genDetailsForm.controls.OoccupantDensityUnits.value,
+         netoccupiedareaunit: this.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
+        occupantdensity: this.genDetailsComponent.genDetailsForm.controls.occupantDensity.value,
+        occupantdensityunit: this.genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value,
          electricitycost: this.genDetailsComponent.genDetailsForm.controls.electricityCost.value,
          electricitycostunit: this.genDetailsComponent.genDetailsForm.controls.electricityUnits.value,
-         fuelcost: this.genDetailsComponent.genDetailsForm.controls.Fuelcost.value,
+         fuelcost: this.genDetailsComponent.genDetailsForm.controls.fuelCost.value,
          fuelcostunit: this.genDetailsComponent.genDetailsForm.controls.fuelUnits.value,
+         rvaluewall: this.outerWallR.rUnits, Value: this.outerWallR.rValue,
+         rvaluewallunit: this.outerWallR.rValue ,
+         rvalueroof:  this.roofR.rUnits,
+         rvalueroofunit: this.roofR.rValue,
+         rvaluewindow :  this.windowR.rUnits,
+         rvaluewindowunit: this.windowR.rValue,
+         shgc: this.buildingdetailsComponent.formgroup.controls.SHGCknown.value,
+         //shgcunit:,
+         windowtowallratio :  '%',
+         windowtowallratiounit: this.wwrValue ,
+         totallightingpower:this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerValue.value ,
+         totallightingpowerunit: this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerUnit.value,
+         lightingdensity: this.lightingDetailsComponent.LightningDetailsForm.controls.lightingPowerDensityValue.value,
+         lightingdensityunit: this.lightingDetailsComponent.LightningDetailsForm.controls.lightingPowerDensityUnit.value,
+         totalpower:  this.lightingDetailsComponent.formgroup.controls.totalPower.value,
+
+
+         heatingequipment: this.wwrValue ,
+         heatingefficiency:this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerValue.value ,
+         heatingefficiencyunit: this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerUnit.value,
+         coolingequipment: this.lightingDetailsComponent.LightningDetailsForm.controls.lightingPowerDensityValue.value,
+         coolingefficiency: this.lightingDetailsComponent.LightningDetailsForm.controls.lightingPowerDensityUnit.value,
+         coolingefficiencyunit:  this.lightingDetailsComponent.formgroup.controls.totalPower.value,
+         ventilationrate: this.lightingDetailsComponent.LightningDetailsForm.controls.lightingPowerDensityValue.value,
+         ventilationrateunit: this.lightingDetailsComponent.LightningDetailsForm.controls.lightingPowerDensityUnit.value,
+         infiltrationrate:  this.lightingDetailsComponent.formgroup.controls.totalPower.value,
+         infiltrationrateunit:  this.lightingDetailsComponent.formgroup.controls.totalPower.value,
+
        }
-       this.beetService.postGeneralData(payload).subscribe(res => {
+       /* this.beetService.postGeneralData(payload).subscribe(res => {
          if (res.status == 'success') {
            console.log(res.success);
            this.isGeneralDetailsUpdated = true;
            this.userId = res.success;
            sessionStorage.setItem('userId', this.userId);
          }
-       });
+       }); */
      }
    } 
 
