@@ -4,13 +4,9 @@
 
 
     <div class="container-fluid beet-container">
-
-
         <div class="fields-note">
             <p><span class="notes-style"> Note:</span> Please be ready with type, number, power rating (wattage) details of the lighting fixtures</p>
         </div>
-
-
         <div class="example-table-container">
             <table mat-table [dataSource]="lightingOptionsDataSource" multiTemplateDataRows>
 
@@ -72,8 +68,6 @@
                 <tr mat-row class="mat-row-class" *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
         </div>
-
-
         <div>
             <button mat-raised-button color="primary" style="margin-top: 1rem;" (click)="postCalculateLightingPower()">Calculate</button>
         </div><br>

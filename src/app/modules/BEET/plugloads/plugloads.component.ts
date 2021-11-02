@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Form, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatTableDataSource } from '@angular/material/table';
@@ -80,8 +80,7 @@ export class PlugloadsComponent implements OnInit {
     this.formgroup = this.fb.group({
       plugloads: ['', Validators.compose([Validators.required])],
       plugLoadArray: this.fb.array([]),
-    }
-    );
+    });
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
     this.beetService.getGeneralDetails().subscribe(res => {
       this.plugLoadPredefined = res.success.plugloadoptctable;
@@ -104,13 +103,23 @@ export class PlugloadsComponent implements OnInit {
         plugLoadUnits: ['', Validators.required],
       }));
     } else if (event.value == 2) {
-
       for (var plugloadguide of this.plugLoadGuide) {
+        plugloadguide.stock = 0;
         this.plugLoadItems.push(this.createItem(plugloadguide));
-        console.log(this.plugLoadItems);
+        //console.log(this.plugLoadItems);
       }
+
+      this.plugLoadItems.controls.forEach((element, index) => {
+        console.log(element, index);
+        if ((<FormGroup>element).controls.space.value !== '') {
+          (<FormGroup>element).controls.space.disable();
+        }
+        if ((<FormGroup>element).controls.plugloadappliance.value !== '') {
+          (<FormGroup>element).controls.plugloadappliance.disable();
+        }
+      });
       (<FormArray>this.formgroup.get('plugLoadArray')).push(this.plugLoadItems);
-      
+
     } else if (event.value == 3) {
       (<FormArray>this.formgroup.get('plugLoadArray')).push(this.fb.group({
         plugLoadValueKnown: ['', Validators.required],
@@ -123,11 +132,11 @@ export class PlugloadsComponent implements OnInit {
   createItem(plugloadguide): FormGroup {
     console.log(plugloadguide);
     return this.fb.group({
-      space: [{ value: plugloadguide.space, disabled: true }],
-      plugloadappliance: [{ value: plugloadguide.plugloadappliance, disabled: true }],
+      space: [plugloadguide.space],
+      plugloadappliance: [plugloadguide.plugloadappliance],
       yearofinstallation: [plugloadguide.yearofinstallation],
       avgpowerwatts: [plugloadguide.avgpowerwatts],
-      stock: [plugloadguide.stock],
+      stock: [plugloadguide.stock, Validators.required],
       avgoperatinghrs: [plugloadguide.avgoperatinghrs]
     });
   }
@@ -147,20 +156,17 @@ export class PlugloadsComponent implements OnInit {
   calculatePlugLoad(): void {
     if (this.formgroup.valid) {
       var plugLoadArray: PlugLoadGuideTable[] = [];
-      console.log(this.formgroup.get('plugLoadArray')['controls'][0].controls);
       for (var plugloadgroup of this.formgroup.get('plugLoadArray')['controls'][0].controls) {
-        console.log(plugloadgroup.controls.yearofinstallation.value);
-          if(plugloadgroup.controls.plugloadappliance.value != '' && plugloadgroup.controls.space.value != '') {
-            var plugLoadGuide: PlugLoadGuideTable = {
-              space: plugloadgroup.controls.space.value,
-              plugloadappliance: plugloadgroup.controls.plugloadappliance.value,
-              yearofinstallation: plugloadgroup.controls.yearofinstallation.value,
-              avgpowerwatts: Number(plugloadgroup.controls.avgpowerwatts.value),
-              stock: Number(plugloadgroup.controls.stock.value),
-              avgoperatinghrs: Number(plugloadgroup.controls.avgoperatinghrs.value)
-            }
-            plugLoadArray.push(plugLoadGuide);
-            console.log("data"+plugLoadGuide.toString());
+        if (plugloadgroup.controls.plugloadappliance.value != '' && plugloadgroup.controls.space.value != '') {
+          var plugLoadGuide: PlugLoadGuideTable = {
+            space: plugloadgroup.controls.space.value,
+            plugloadappliance: plugloadgroup.controls.plugloadappliance.value,
+            yearofinstallation: plugloadgroup.controls.yearofinstallation.value,
+            avgpowerwatts: Number(plugloadgroup.controls.avgpowerwatts.value),
+            stock: Number(plugloadgroup.controls.stock.value),
+            avgoperatinghrs: Number(plugloadgroup.controls.avgoperatinghrs.value)
+          }
+          plugLoadArray.push(plugLoadGuide);
         }
       }
       var payload: any = {
@@ -175,7 +181,6 @@ export class PlugloadsComponent implements OnInit {
       this.submitted = true;
     }
     console.log(this.formgroup, this.formgroup.valid)
-
   }
 
 

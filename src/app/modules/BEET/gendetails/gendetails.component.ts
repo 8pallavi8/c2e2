@@ -72,8 +72,6 @@ export class GendetailsComponent implements OnInit {
       electricityCost: ['', Validators.compose([Validators.required])],
       fuelCost: ['', Validators.compose([Validators.required])],
       fuelUnits: ['', Validators.compose([Validators.required])],
-     
-     
       electricityUnits: ['', Validators.compose([Validators.required])],
       //occupancyValue: [0, Validators.compose([Validators.required])],
       occupantDensityKnown: [0, Validators.compose([Validators.required])],

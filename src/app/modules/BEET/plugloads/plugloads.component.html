@@ -50,72 +50,73 @@
                             Table lamps, plugged task lightings, etc. which were not covered in the lighting section may be entered here. Do not include large HVAC system components here.
                             </p>
                         </div>
+                        <div class="example-table-container">
+                            <table *ngIf="formgroup.controls.plugloads.value == 2" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Space</th>
+                                        <th>Plug Load Appliances</th>
+                                        <th>Year of Installation</th>
+                                        <th>Avg Power Watts</th>
+                                        <th>Stock</th>
+                                        <th>Avg Operating Hrs</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                        <table *ngIf="formgroup.controls.plugloads.value == 2" class="table">
-                            <thead>
-                                <tr>
-                                    <th>Space</th>
-                                    <th>Plug Load Appliances</th>
-                                    <th>Year of Installation</th>
-                                    <th>Avg Power Watts</th>
-                                    <th>Stock</th>
-                                    <th>Avg Operating Hrs</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <tr *ngFor="let plugload of  formgroup.get('plugLoadArray')['controls'][0].controls; let i=index" [formGroupName]="i">
-                                    <td>
-                                        <div class="form-group" style="width: 250px;">
-                                            <input type="text" class="form-control" formControlName="space">
-                                            <small class="text-danger pl-1" *ngIf="formgroup.get('plugLoadArray')['controls'][0].controls[i].controls.space.hasError('required') && submitted">
-                                                        space is required
-                                                    </small>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group" style="width: 250px;">
-                                            <input type="text" class="form-control" formControlName="plugloadappliance">
-                                            <small class="text-danger pl-1" *ngIf="formgroup.get('plugLoadArray')['controls'][0].controls[i].controls.plugloadappliance.hasError('required') && submitted">
-                                                        plug load appliance is required
-                                                    </small>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" formControlName="yearofinstallation">
-                                            <small class="text-danger pl-1" *ngIf="formgroup.get('plugLoadArray')['controls'][0].controls[i].controls.yearofinstallation.hasError('required') && submitted">
-                                                        year is required
-                                                    </small>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" formControlName="avgpowerwatts">
-                                            <small class="text-danger pl-1" *ngIf="formgroup.get('plugLoadArray')['controls'][0].controls[i].controls.avgpowerwatts.hasError('required') && submitted">
-                                                        Avg Power is required
-                                                    </small>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" formControlName="stock">
-                                            <small class="text-danger pl-1" *ngIf="formgroup.get('plugLoadArray')['controls'][0].controls[i].controls.stock.hasError('required') && submitted">
-                                                        Stock is required
-                                                    </small>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" formControlName="avgoperatinghrs">
-                                            <small class="text-danger pl-1" *ngIf="formgroup.get('plugLoadArray')['controls'][0].controls[i].controls.avgoperatinghrs.hasError('required') && submitted">
-                                                        Avg Operating Hrs are required
-                                                    </small>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    <tr *ngFor="let plugload of  formgroup.get('plugLoadArray')['controls'][0].controls; let i=index" [formGroupName]="i">
+                                        <td>
+                                            <div class="form-group" style="width: 250px;">
+                                                <input type="text" class="form-control" formControlName="space">
+                                                <small class="text-danger pl-1" *ngIf="formgroup.get('plugLoadArray')['controls'][0].controls[i].controls.space.hasError('required') && submitted">
+                                                            space is required
+                                                        </small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group" style="width: 250px;">
+                                                <input type="text" class="form-control" formControlName="plugloadappliance">
+                                                <small class="text-danger pl-1" *ngIf="formgroup.get('plugLoadArray')['controls'][0].controls[i].controls.plugloadappliance.hasError('required') && submitted">
+                                                            plug load appliance is required
+                                                        </small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" formControlName="yearofinstallation">
+                                                <small class="text-danger pl-1" *ngIf="formgroup.get('plugLoadArray')['controls'][0].controls[i].controls.yearofinstallation.hasError('required') && submitted">
+                                                            year is required
+                                                        </small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" formControlName="avgpowerwatts">
+                                                <small class="text-danger pl-1" *ngIf="formgroup.get('plugLoadArray')['controls'][0].controls[i].controls.avgpowerwatts.hasError('required') && submitted">
+                                                            Avg Power is required
+                                                        </small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" formControlName="stock">
+                                                <small class="text-danger pl-1" *ngIf="formgroup.get('plugLoadArray')['controls'][0].controls[i].controls.stock.hasError('required') && submitted">
+                                                            Stock is required
+                                                        </small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" formControlName="avgoperatinghrs">
+                                                <small class="text-danger pl-1" *ngIf="formgroup.get('plugLoadArray')['controls'][0].controls[i].controls.avgoperatinghrs.hasError('required') && submitted">
+                                                            Avg Operating Hrs are required
+                                                        </small>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <!-- 
                         <table formArrayName="plugLoadItems" *ngIf="formgroup.controls.plugloads.value == 2" mat-table [dataSource]="optbDataSource" class="mat-elevation-z8" multiTemplateDataRows>
                             <ng-container matColumnDef="space">
