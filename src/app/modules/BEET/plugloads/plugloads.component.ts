@@ -70,6 +70,7 @@ export class PlugloadsComponent implements OnInit {
   grossAreaValueUnits: string;
   plugLoadItems: FormArray = this.fb.array([]);
   plugLoadForms: FormGroup;
+  plugLoadSimpleGroupForm:FormGroup;
 
 
   constructor(private fb: FormBuilder, public dialog: MatDialog, private inputDialog: InputdialogService,
@@ -79,6 +80,8 @@ export class PlugloadsComponent implements OnInit {
   ngOnInit(): void {
     this.formgroup = this.fb.group({
       plugloads: ['', Validators.compose([Validators.required])],
+      plugLoadValueKnown: ['', Validators.required],
+      plugLoadUnits: ['', Validators.required],
       plugLoadArray: this.fb.array([]),
     });
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
@@ -94,40 +97,34 @@ export class PlugloadsComponent implements OnInit {
     });
   }
 
-
+  
   onChangePlugLoadOption(event: MatRadioChange) {
-    (<FormArray>this.formgroup.get('plugLoadArray')).removeAt(0);
-    if (event.value == 1) {
-      (<FormArray>this.formgroup.get('plugLoadArray')).push(this.fb.group({
-        plugLoadValueKnown: ['', Validators.required],
-        plugLoadUnits: ['', Validators.required],
-      }));
-    } else if (event.value == 2) {
+    //(<FormArray>this.formgroup.get('plugLoadArray')).removeAt(0);
+   if (event.value == 2) {
+
+
+
+      
       for (var plugloadguide of this.plugLoadGuide) {
         plugloadguide.stock = 0;
-        this.plugLoadItems.push(this.createItem(plugloadguide));
+        (<FormArray>this.formgroup.get('plugLoadArray')).push(this.createItem(plugloadguide));
         //console.log(this.plugLoadItems);
       }
 
-      this.plugLoadItems.controls.forEach((element, index) => {
-        console.log(element, index);
+      (<FormArray>this.formgroup.get('plugLoadArray')).controls.forEach((element, index) => {
+        //console.log(element, index);
         if ((<FormGroup>element).controls.space.value !== '') {
           (<FormGroup>element).controls.space.disable();
         }
         if ((<FormGroup>element).controls.plugloadappliance.value !== '') {
           (<FormGroup>element).controls.plugloadappliance.disable();
         }
-      });
-      (<FormArray>this.formgroup.get('plugLoadArray')).push(this.plugLoadItems);
+      }); 
+      //(<FormArray>this.formgroup.get('plugLoadArray')).push(this.plugLoadItems);
 
-    } else if (event.value == 3) {
-      (<FormArray>this.formgroup.get('plugLoadArray')).push(this.fb.group({
-        plugLoadValueKnown: ['', Validators.required],
-        plugLoadUnits: ['', Validators.required],
-      }));
     }
 
-    console.log(this.formgroup.get('plugLoadArray')['controls'][0].controls[0].controls.avgoperatinghrs.value);
+    //console.log(this.formgroup.get('plugLoadArray')['controls'][0].controls[0].controls.avgoperatinghrs.value);
   }
   createItem(plugloadguide): FormGroup {
     console.log(plugloadguide);
@@ -143,43 +140,45 @@ export class PlugloadsComponent implements OnInit {
   onChangeAvailbePlugLoad(event) {
     if (event.value == 3) {
       console.log(event);
-
     }
   }
 
   selectedPlugload($event: any, row: PlugLoadAvailableTable) {
+    //(<FormGroup> (<FormArray>this.formgroup.get('plugLoadArray')).at(0)).controls.plugLoadValueKnown.patchValue(row.avgpplwperm2)
     this.formgroup.controls.plugLoadValueKnown.patchValue(row.avgpplwperm2);
+    this.formgroup.controls.plugLoadUnits.setValue('watts per square meter');
     console.log("clicked", $event);
     console.log(row);
   }
 
   calculatePlugLoad(): void {
-    if (this.formgroup.valid) {
+ 
       var plugLoadArray: PlugLoadGuideTable[] = [];
-      for (var plugloadgroup of this.formgroup.get('plugLoadArray')['controls'][0].controls) {
-        if (plugloadgroup.controls.plugloadappliance.value != '' && plugloadgroup.controls.space.value != '') {
+      (<FormArray>this.formgroup.get('plugLoadArray')).controls.forEach((element, index) => {
+        if ((<FormGroup>element).controls.plugloadappliance.value != '' && ((<FormGroup>element).controls.space.value != '')) {
           var plugLoadGuide: PlugLoadGuideTable = {
-            space: plugloadgroup.controls.space.value,
-            plugloadappliance: plugloadgroup.controls.plugloadappliance.value,
-            yearofinstallation: plugloadgroup.controls.yearofinstallation.value,
-            avgpowerwatts: Number(plugloadgroup.controls.avgpowerwatts.value),
-            stock: Number(plugloadgroup.controls.stock.value),
-            avgoperatinghrs: Number(plugloadgroup.controls.avgoperatinghrs.value)
+            space: (<FormGroup>element).controls.space.value,
+            plugloadappliance: (<FormGroup>element).controls.plugloadappliance.value,
+            yearofinstallation: (<FormGroup>element).controls.yearofinstallation.value,
+            avgpowerwatts: Number((<FormGroup>element).controls.avgpowerwatts.value),
+            stock: Number((<FormGroup>element).controls.stock.value),
+            avgoperatinghrs: Number((<FormGroup>element).controls.avgoperatinghrs.value)
           }
           plugLoadArray.push(plugLoadGuide);
         }
-      }
+      }); 
       var payload: any = {
         "buildinggrossarea": Number(this.grossAreaValue),
         "buildinggrossareaunit": this.grossAreaValueUnits,
         "plugloaddensitydata": plugLoadArray
       }
       this.beetService.postCalculatePlugLoad(payload).subscribe(res => {
+       this.formgroup.controls.plugLoadValueKnown.patchValue(res.success.pluloaddensity);
+        this.formgroup.controls.plugLoadUnits.patchValue(res.success.pluloaddensityunit);
+
         console.log(res)
       });
-    } else {
-      this.submitted = true;
-    }
+  
     console.log(this.formgroup, this.formgroup.valid)
   }
 
