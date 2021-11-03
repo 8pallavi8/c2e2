@@ -117,6 +117,11 @@ export class BEETComponent implements OnInit, AfterViewInit {
   onSaveBuildingEnvDetails(){
     localStorage.setItem('buildingEnvDetails', JSON.stringify(this.buildingdetailsComponent.formgroup.value))
   }
+
+  onSaveLightingDetails(){
+    localStorage.setItem('lightingDetails', JSON.stringify(this.lightingDetailsComponent.LightningDetailsForm.value))
+    localStorage.setItem('lightingOptions', JSON.stringify(this.lightingDetailsComponent.lightingOptions));
+  }
   
   showSummary() {
     console.log("UserName:", this.genDetailsComponent.genDetailsForm.controls.UserName.value);

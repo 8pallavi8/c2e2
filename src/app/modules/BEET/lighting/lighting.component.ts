@@ -47,13 +47,23 @@ export class LightingComponent implements OnInit {
       totalPower:[]
     });
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
-    this.beetService.getGeneralDetails().subscribe(res => {
-      this.lightingOptions = res.success.lighting;
-      console.log(this.lightingOptions);
-      this.lightingOptionsDataSource = new MatTableDataSource(this.lightingOptions);
-    });
     this.beetService.getBuildingGrossArea().subscribe(res => { this.grossAreaValue = res;console.log(res)});
     this.beetService.getBuildingGrossAreaUnits().subscribe(res => { this.grossAreaValueUnits = res;});
+
+    if(localStorage.getItem('lightingOptions') !== null){
+      this.lightingOptions = JSON.parse(localStorage.getItem('lightingOptions'));
+      this.lightingOptionsDataSource = new MatTableDataSource(this.lightingOptions);
+    } else{
+      this.beetService.getGeneralDetails().subscribe(res => {
+        this.lightingOptions = res.success.lighting;
+        console.log(this.lightingOptions);
+        this.lightingOptionsDataSource = new MatTableDataSource(this.lightingOptions);
+      });
+    }
+
+    if(localStorage.getItem('lightingDetails') !== null){
+      this.LightningDetailsForm.patchValue(JSON.parse(localStorage.getItem('lightingDetails')));
+    }
   }
 
   getStyleDisplay(index, div) {

@@ -86,6 +86,8 @@ export class GendetailsComponent implements OnInit {
       if (generalDetails !== undefined || generalDetails !== null) {
         console.log(generalDetails);
         this.genDetailsForm.patchValue(generalDetails);
+        this.beetService.setSelectedCountry(generalDetails.country);
+        this.getGeneralData(generalDetails.country);
       }
     }
   }
@@ -115,7 +117,11 @@ export class GendetailsComponent implements OnInit {
   onChangeCountry(selectedCountry) {
     this.beetService.setSelectedCountry(selectedCountry.value);
     this.selectedCountryCode = selectedCountry.value;
-    this.beetService.getGeneralData(selectedCountry.value.toString()).subscribe(res => {
+    this.getGeneralData(selectedCountry.value.toString());
+  }
+
+  getGeneralData(country: string){
+    this.beetService.getGeneralData(country).subscribe(res => {
       this.locationDetails = res.success.locationdata;
       this.buildingDetails = res.success.buildingdata;
       console.log("General details " + res.success.buildingdata);
