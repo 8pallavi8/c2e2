@@ -61,6 +61,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
   isGeneralDetailsUpdated: boolean;
   heatingEfficiencyFinal:number;
   generalDetails: GeneralDetails;
+  summaryTable: { Parameter: string; Units: any; Value: any; }[];
   constructor(private beetService: beetService, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -111,78 +112,70 @@ export class BEETComponent implements OnInit, AfterViewInit {
     this.beetService.saveSummary(this.summary);
   }
   
-
-
   showSummary() {
-    //console.log("UserName:", this.genDetailsComponent.genDetailsForm.controls.UserName.value);
-    // this.summaryTable = [
-    //   { Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.userName.value },
-    //   { Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.projectName.value },
-    //   { Parameter: 'Country', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.country.value },
-    //   { Parameter: 'Province', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.province.value },
-    //   { Parameter: 'Location', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.location.value },
-    //   { Parameter: 'Building type', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.buildingType.value },
-    //   { Parameter: 'Building age', Units: 'Years', Value: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value },
-    //   {
-    //     Parameter: 'Building gross area', Units: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
-    //     Value: this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value
-    //   },
-    //   {
-    //     Parameter: 'Building net occupiable area', Units: this.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
-    //     Value: this.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value
-    //   },
-    //   { Parameter: 'No. of floors', Units: 'number', Value: this.genDetailsComponent.genDetailsForm.controls.noOfFloors.value },
-    //   {
-    //     Parameter: 'Occupancy hours per week', Units: 'hours per week',
-    //     Value: this.genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value
-    //   },
-    //   {
-    //     Parameter: 'Occupant density', Units: this.genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value,
-    //     Value: this.genDetailsComponent.genDetailsForm.controls.occupantDensity.value
-    //   },
-    //   {
-    //     Parameter: 'Electricty cost', Units: this.genDetailsComponent.genDetailsForm.controls.electricityUnits.value,
-    //     Value: this.genDetailsComponent.genDetailsForm.controls.electricityCost.value
-    //   },
-    //   {
-    //     Parameter: 'Fuel cost', Units: this.genDetailsComponent.genDetailsForm.controls.fuelUnits.value,
-    //     Value: this.genDetailsComponent.genDetailsForm.controls.fuelCost.value
-    //   },
-    //   { Parameter: 'Thermal Resistance (R value) wall', Units: this.outerWallR.rUnits, Value: this.outerWallR.rValue },
-    //   { Parameter: 'Thermal Resistance (R value) roof', Units: this.roofR.rUnits, Value: this.roofR.rValue },
-    //   { Parameter: 'Thermal Resistance (R value) window', Units: this.windowR.rUnits, Value: this.windowR.rValue },
-    //   { Parameter: 'Solar Heat Gain Coefficient (SHGC) window', Units: '', Value: this.buildingdetailsComponent.formgroup.controls.SHGCknown.value },
-    //   { Parameter: 'Window to wall ratio', Units: '%', Value: this.wwrValue },
-    //   { Parameter: 'Total lighting power', Units: this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerUnit.value,
-    //     Value: this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerValue.value},
-    //   { Parameter: 'Lighting density', Units: this.lightingDetailsComponent.LightningDetailsForm.controls.lightingPowerDensityUnit.value,
-    //     Value: this.lightingDetailsComponent.LightningDetailsForm.controls.lightingPowerDensityValue.value},
-    //   {Parameter: 'Heating efficiency', Units: '%',Value: this.heatingEfficiencyValue.efficiencyValue},
-    //   {Parameter: 'Air conditioning efficiency/performance', Units: this.coolingEquipValues.coolingUnits,
-    //     Value: this.coolingEquipValues.coolingEfficiency },
-    //     {Parameter: 'Ventilation rate', Units: this.hvacDetailsComponent.formgroup.controls.ventilationUnits.value,
-    //     Value: this.hvacDetailsComponent.formgroup.controls.ventilationKnown.value},
-    //     {Parameter: 'Infiltration rate', Units: this.hvacDetailsComponent.formgroup.controls.infiltrationUnits.value,
-    //     Value: this.hvacDetailsComponent.formgroup.controls.infiltrationknown.value},
-    //     /* {Parameter: 'Plug load density', Units: this.plugLoaDetailsComponent.formgroup.controls.infiltrationUnits.value,
-    //     Value: this.plugLoaDetailsComponent.formgroup.controls.infiltrationknown.value}, */
-
-
-    //   {Parameter: 'Power generation CO2 emissions / Grid emissions factor', Units: this.co2EmissionsDetailsComponent.formgroup.controls.gridemissionsFactorUnits.value,
-    //     Value: this.co2EmissionsDetailsComponent.formgroup.controls.powergenerationco2emmisionsValue.value},
-    //   {Parameter: 'On site CO2 emissions', Units: this.co2EmissionsDetailsComponent.formgroup.controls.fuelEmissionFactorUnit.value,
-    //     Value: this.co2EmissionsDetailsComponent.formgroup.controls.fuelEmissionFactorValue.value},
-
-
-    // ];
-    // this.dataSource = new MatTableDataSource(this.summaryTable);
+    console.log("UserName:", this.genDetailsComponent.genDetailsForm.controls.UserName.value);
+    this.summaryTable = [
+       { Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.userName.value },
+       { Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.projectName.value },
+       { Parameter: 'Country', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.country.value },
+       { Parameter: 'Province', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.province.value },
+       { Parameter: 'Location', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.location.value },
+       { Parameter: 'Building type', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.buildingType.value },
+       { Parameter: 'Building age', Units: 'Years', Value: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value },
+       {
+         Parameter: 'Building gross area', Units: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
+         Value: this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value
+       },
+       {
+         Parameter: 'Building net occupiable area', Units: this.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
+         Value: this.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value
+       },
+       { Parameter: 'No. of floors', Units: 'number', Value: this.genDetailsComponent.genDetailsForm.controls.noOfFloors.value },
+       {
+         Parameter: 'Occupancy hours per week', Units: 'hours per week',
+         Value: this.genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value
+       },
+      {
+         Parameter: 'Occupant density', Units: this.genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value,
+         Value: this.genDetailsComponent.genDetailsForm.controls.occupantDensity.value
+       },
+       {
+         Parameter: 'Electricty cost', Units: this.genDetailsComponent.genDetailsForm.controls.electricityUnits.value,
+         Value: this.genDetailsComponent.genDetailsForm.controls.electricityCost.value
+       },
+       {
+         Parameter: 'Fuel cost', Units: this.genDetailsComponent.genDetailsForm.controls.fuelUnits.value,
+         Value: this.genDetailsComponent.genDetailsForm.controls.fuelCost.value
+       },
+       { Parameter: 'Thermal Resistance (R value) wall', Units: this.outerWallR.rUnits, Value: this.outerWallR.rValue },
+       { Parameter: 'Thermal Resistance (R value) roof', Units: this.roofR.rUnits, Value: this.roofR.rValue },
+       { Parameter: 'Thermal Resistance (R value) window', Units: this.windowR.rUnits, Value: this.windowR.rValue },
+       { Parameter: 'Solar Heat Gain Coefficient (SHGC) window', Units: '', Value: this.buildingdetailsComponent.formgroup.controls.SHGCknown.value },
+       { Parameter: 'Window to wall ratio', Units: '%', Value: this.wwrValue },
+       { Parameter: 'Total lighting power', Units: this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerUnit.value,
+         Value: this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerValue.value},
+       { Parameter: 'Lighting density', Units: this.lightingDetailsComponent.LightningDetailsForm.controls.lightingPowerDensityUnit.value,
+         Value: this.lightingDetailsComponent.LightningDetailsForm.controls.lightingPowerDensityValue.value},
+       {Parameter: 'Heating efficiency', Units: '%',Value: this.heatingEfficiencyValue.efficiencyValue},
+       {Parameter: 'Air conditioning efficiency/performance', Units: this.coolingEquipValues.coolingUnits,
+         Value: this.coolingEquipValues.coolingEfficiency },
+         {Parameter: 'Ventilation rate', Units: this.hvacDetailsComponent.formgroup.controls.ventilationUnits.value,
+         Value: this.hvacDetailsComponent.formgroup.controls.ventilationKnown.value},
+         {Parameter: 'Infiltration rate', Units: this.hvacDetailsComponent.formgroup.controls.infiltrationUnits.value,
+         Value: this.hvacDetailsComponent.formgroup.controls.infiltrationknown.value},
+          {Parameter: 'Plug load density', Units: this.plugLoaDetailsComponent.formgroup.controls.plugLoadUnits.value,
+         Value: this.plugLoaDetailsComponent.formgroup.controls.plugLoadValueKnown.value}, 
+       {Parameter: 'Power generation CO2 emissions / Grid emissions factor', Units: this.co2EmissionsDetailsComponent.formgroup.controls.gridemissionsFactorUnits.value,
+         Value: this.co2EmissionsDetailsComponent.formgroup.controls.powergenerationco2emmisionsValue.value},
+       {Parameter: 'On site CO2 emissions', Units: this.co2EmissionsDetailsComponent.formgroup.controls.fuelEmissionFactorUnit.value,
+         Value: this.co2EmissionsDetailsComponent.formgroup.controls.fuelEmissionFactorValue.value},
+     ];
+     this.dataSource = new MatTableDataSource(this.summaryTable);
   }
 
   postData() {
-     console.log(this.genDetailsComponent.genDetailsForm);
      if (this.genDetailsComponent.genDetailsForm.valid) {
        var payload: any = {
-         //userid: this.userId,
          username: this.genDetailsComponent.genDetailsForm.controls.userName.value,
          projectname: this.genDetailsComponent.genDetailsForm.controls.projectName.value,
          country: this.genDetailsComponent.genDetailsForm.controls.country.value,
@@ -210,7 +203,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
          rvaluewindow :  this.windowR.rUnits,
          rvaluewindowunit: this.windowR.rValue,
          shgc: this.buildingdetailsComponent.formgroup.controls.SHGCknown.value,
-         //shgcunit:,
          windowtowallratio :  '%',
          windowtowallratiounit: this.wwrValue ,
          totallightingpower:this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerValue.value ,
@@ -304,22 +296,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
       this.coolingEquipValues.coolingUnits = this.hvacDetailsComponent?.formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyUnits.value;
       //this.coolingEquipValues.coolingUnits = this.hvacDetailsComponent?.formgroup.get('coolefficiencyArray')['controls'][0].controls.rimages.value.units;
     }
-  }
-
-
-  SavePlugLoadDetails(){
-
-    if (this.plugLoaDetailsComponent?.formgroup.controls.plugloads.value == 1) {
-      this.outerWallR.rValue = this.buildingdetailsComponent?.formgroup.get('plugLoadArray')['controls'][0].controls.plugLoadValueKnown.value;
-      this.outerWallR.rUnits = this.buildingdetailsComponent?.formgroup.get('plugLoadArray')['controls'][0].controls.plugLoadUnits.value;
-    } else if (this.plugLoaDetailsComponent?.formgroup.controls.plugloads.value == 2) {
-      //this.outerWallR.rValue = this.buildingdetailsComponent?.formgroup.get('plugLoadArray')['controls'][0].controls.rimages.value.rvalue;
-      //this.outerWallR.rUnits = this.buildingdetailsComponent?.formgroup.get('plugLoadArray')['controls'][0].controls.rimages.value.units;
-    } else if (this.plugLoaDetailsComponent?.formgroup.controls.plugloads.value == 3) {
-      this.outerWallR.rValue = this.buildingdetailsComponent?.formgroup.get('plugLoadArray')['controls'][0].controls.plugLoadValueKnown.value;
-      this.outerWallR.rUnits = this.buildingdetailsComponent?.formgroup.get('plugLoadArray')['controls'][0].controls.plugLoadUnits.units
-    }
-
   }
 
 }
