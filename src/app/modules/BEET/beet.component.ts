@@ -83,32 +83,38 @@ export class BEETComponent implements OnInit, AfterViewInit {
   }
 
   onSaveGenDetails(){
-    this.generalDetails = {
-     username: this.genDetailsComponent.genDetailsForm.controls.userName.value,
-     projectname: this.genDetailsComponent.genDetailsForm.controls.projectName.value,
-     country: this.genDetailsComponent.genDetailsForm.controls.country.value,
-     province: this.genDetailsComponent.genDetailsForm.controls.province.value,
-     location: this.genDetailsComponent.genDetailsForm.controls.location.value,
-     buildingtype: this.genDetailsComponent.genDetailsForm.controls.buildingType.value,
-     buildingspaces: this.genDetailsComponent.genDetailsForm.controls.buildingSpaces.value,
-     yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value,
-     buildinggrossarea: this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value,
-     buildinggrossareaunit: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
-     netoccupiedarea: this.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value,
-     netoccupiedareaunit: this.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
-     nooffloors:this.genDetailsComponent.genDetailsForm.controls.noOfFloors.value,
-     occupancyhrsperweek: this.genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value,
-     occupantdensity: this.genDetailsComponent.genDetailsForm.controls.occupantDensity.value,
-     occupantdensityunit: this.genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value,
-     electricitycost: this.genDetailsComponent.genDetailsForm.controls.electricityCost.value,
-     electricitycostunit: this.genDetailsComponent.genDetailsForm.controls.electricityUnits.value,
-     fuelcost: this.genDetailsComponent.genDetailsForm.controls.fuelCost.value,
-     fuelcostunit:this.genDetailsComponent.genDetailsForm.controls.fuelUnits.value,
-    }
-    this.summary = {
-      generaldetails: this.generalDetails
-    }
-    this.beetService.saveSummary(this.summary);
+
+    // this.generalDetails = {
+    //  username: this.genDetailsComponent.genDetailsForm.controls.userName.value,
+    //  projectname: this.genDetailsComponent.genDetailsForm.controls.projectName.value,
+    //  country: this.genDetailsComponent.genDetailsForm.controls.country.value,
+    //  province: this.genDetailsComponent.genDetailsForm.controls.province.value,
+    //  location: this.genDetailsComponent.genDetailsForm.controls.location.value,
+    //  buildingtype: this.genDetailsComponent.genDetailsForm.controls.buildingType.value,
+    //  buildingspaces: this.genDetailsComponent.genDetailsForm.controls.buildingSpaces.value,
+    //  yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value,
+    //  buildinggrossarea: this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value,
+    //  buildinggrossareaunit: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
+    //  netoccupiedarea: this.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value,
+    //  netoccupiedareaunit: this.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
+    //  nooffloors:this.genDetailsComponent.genDetailsForm.controls.noOfFloors.value,
+    //  occupancyhrsperweek: this.genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value,
+    //  occupantdensity: this.genDetailsComponent.genDetailsForm.controls.occupantDensity.value,
+    //  occupantdensityunit: this.genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value,
+    //  electricitycost: this.genDetailsComponent.genDetailsForm.controls.electricityCost.value,
+    //  electricitycostunit: this.genDetailsComponent.genDetailsForm.controls.electricityUnits.value,
+    //  fuelcost: this.genDetailsComponent.genDetailsForm.controls.fuelCost.value,
+    //  fuelcostunit:this.genDetailsComponent.genDetailsForm.controls.fuelUnits.value,
+    // }
+    // this.summary = {
+    //   generaldetails: this.generalDetails
+    // }
+    // this.beetService.saveSummary(this.summary);
+     localStorage.setItem('generalDetails', JSON.stringify(this.genDetailsComponent.genDetailsForm.value))
+  }
+
+  onSaveBuildingEnvDetails(){
+    localStorage.setItem('buildingEnvDetails', JSON.stringify(this.buildingdetailsComponent.formgroup.value))
   }
   
 

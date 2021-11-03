@@ -81,6 +81,13 @@ export class GendetailsComponent implements OnInit {
     this.getcountryList();
     //this.genDetailsForm.valueChanges.subscribe(res => this.calculateGross());
     //console.log("code:" + this.countrylist);
+    if (localStorage.getItem('generalDetails') !== null) {
+      var generalDetails = JSON.parse(localStorage.getItem('generalDetails'));
+      if (generalDetails !== undefined || generalDetails !== null) {
+        console.log(generalDetails);
+        this.genDetailsForm.patchValue(generalDetails);
+      }
+    }
   }
 
   ngAfterViewInit() {
