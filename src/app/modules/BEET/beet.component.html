@@ -62,7 +62,7 @@
                 <app-gendetails></app-gendetails>
                 <div class="step-button">
                     <!--[disabled]="genDetailsComponent?.genDetailsForm.invalid"  -->
-                    <button mat-raised-button color="primary" matStepperNext (click)="onSaveGenDetails()">Next</button>
+                    <button [disabled]="genDetailsComponent?.genDetailsForm.invalid" mat-raised-button color="primary" matStepperNext (click)="onSaveGenDetails()">Next</button>
                 </div>
             </mat-step>
 
@@ -71,7 +71,7 @@
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious style="margin-right: inherit;">Back</button>
                     <!--[disabled]="buildingdetailsComponent?.formgroup.invalid"  (click)="saveBuildingDetails()" -->
-                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                    <button mat-raised-button color="primary" matStepperNext (click)="onSaveBuildingEnvDetails()">Next</button>
                 </div>
             </mat-step>
 

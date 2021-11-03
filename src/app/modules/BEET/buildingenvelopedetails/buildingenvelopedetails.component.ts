@@ -14,7 +14,6 @@ import { InputdialogService } from 'src/app/shared/services/inputdialog.service'
 import { WindowRdialogComponent } from 'src/app/shared/window-rdialog/window-rdialog.component';
 
 
-
 export interface BuildingLayerValues {
   Layer: number;
   Capadelelementoconstructivo: string;
@@ -26,6 +25,11 @@ export interface ImageRValues {
   imagepath: string;
   rvalue: number;
   units: string;
+}
+
+export interface OutputR {
+  rvalue: number;
+  runit: string;
 }
 
 
@@ -100,14 +104,17 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       outerwallr: ['', Validators.compose([Validators.required])],
       outerWallArray: this.fb.array([]),
       roofr: ['', Validators.compose([Validators.required])],
+      rvalueroof: ['', Validators.required],
+      rvalueroofunit: ['', Validators.required],
+      rvaluewindow: ['', Validators.required],
+      rvaluewindowunit: ['', Validators.required],
       roofrArray: this.fb.array([]),
       windowr: ['', Validators.compose([Validators.required])],
       windowrArray: this.fb.array([]),
       SHGC: ['', Validators.compose([Validators.required])],
       SHGCknown: [0, Validators.compose([Validators.required])],
       wwr: [0, Validators.compose([Validators.required])],
-      wwrArray:this.fb.array([]),
-     
+      wwrArray: this.fb.array([]),
     })
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; });
     this.beetService.getSelectedProvince().subscribe(res => { this.selProvince = res; console.log(res); });
@@ -115,23 +122,39 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       this.outerRData = res.success.rvaluewall;
       this.roofRData = res.success.rvalueroof;
     });
+    if (localStorage.getItem('buildingEnvDetails') !== null) {
+      var buildingEnvDetails = JSON.parse(localStorage.getItem('buildingEnvDetails'));
+      if (buildingEnvDetails !== undefined || buildingEnvDetails !== null) {
+        console.log(buildingEnvDetails);
+        this.createOuterWallForm(buildingEnvDetails.outerwallr);
+        this.createRoofRForm(buildingEnvDetails.roofr);
+        this.createWindowRForm(buildingEnvDetails.windowr);
+        this.createWWRForm(buildingEnvDetails.wwr);
+        this.formgroup.patchValue(buildingEnvDetails);
+        console.log(this.formgroup);
+      }
+    }
   }
 
   onChangeOuterWallROption(event: MatRadioChange) {
     console.log(this.formgroup.get('outerWallArray'));
     (<FormArray>this.formgroup.get('outerWallArray')).removeAt(0);
-    console.log("change : "+event.value);
+    console.log("change : " + event.value);
+    this.createOuterWallForm(event.value);
+    console.log(this.formgroup);
+  }
 
-    if (event.value == 1) {
+  createOuterWallForm(value: number) {
+    if (value == 1) {
       (<FormArray>this.formgroup.get('outerWallArray')).push(this.fb.group({
         outerwallRKnown: ['', Validators.required],
         outerwallrUnits: ['', Validators.required],
       }));
-    } else if (event.value == 2) {
+    } else if (value == 2) {
       (<FormArray>this.formgroup.get('outerWallArray')).push(this.fb.group({
         rimages: ['', Validators.required],
       }));
-    } else if (event.value == 3) {
+    } else if (value == 3) {
       (<FormArray>this.formgroup.get('outerWallArray')).push(this.fb.group({
         rValueAdvanced: ['', Validators.required],
         outerwallrUnits: ['m²K/W', Validators.required],
@@ -139,20 +162,24 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     }
   }
 
+
   onChangeroofrOption(event: MatRadioChange) {
     console.log(this.formgroup.get('roofrArray'));
     (<FormArray>this.formgroup.get('roofrArray')).removeAt(0)
+    this.createRoofRForm(event.value);
+  }
 
-    if (event.value == 1) {
+  createRoofRForm(value: number) {
+    if (value == 1) {
       (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
         roofRKnown: ['', Validators.required],
         roofrUnits: ['', Validators.required],
       }));
-    } else if (event.value == 2) {
+    } else if (value == 2) {
       (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
         roofrimages: ['', Validators.required],
       }));
-    } else if (event.value == 3) {
+    } else if (value == 3) {
       (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
         rValueAdvanced: ['', Validators.required],
         roofrUnits: ['', Validators.required],
@@ -162,16 +189,9 @@ export class BuildingenvelopedetailsComponent implements OnInit {
 
   onChangewindowrOption(event: MatRadioChange) {
     console.log(this.formgroup.get('windowrArray'));
-    (<FormArray>this.formgroup.get('windowrArray')).removeAt(0)
-    if (event.value == 1) {
-      (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
-        windowRKnown: ['', Validators.required],
-        windowrUnits: ['', Validators.required],
-      }));
-    } else if (event.value == 2) {
-      (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
-        windowRCaluclated: [this.windowRValue, Validators.required],
-      }));
+    (<FormArray>this.formgroup.get('windowrArray')).removeAt(0);
+    this.createWindowRForm(event.value);
+    if (event.value == 2) {
       const dialogref = this.dialog.open(WindowRdialogComponent, {
         width: '60%',
         autoFocus: false,
@@ -179,25 +199,40 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       });
       dialogref.afterClosed().subscribe(result => {
         this.windowRValue = result;
-      ( <FormGroup> (<FormArray>this.formgroup.get('windowrArray')).at(0)).controls.windowRCaluclated.patchValue(result);
-        
+        (<FormGroup>(<FormArray>this.formgroup.get('windowrArray')).at(0)).controls.windowRCaluclated.patchValue(result);
       });
+    }
+  }
+
+  createWindowRForm(value: number) {
+    if (value == 1) {
+      (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
+        windowRKnown: ['', Validators.required],
+        windowrUnits: ['', Validators.required],
+      }));
+    } else if (value == 2) {
+      (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
+        windowRCaluclated: [this.windowRValue, Validators.required],
+      }));
     }
   }
 
   onChangeWWROption(event: MatRadioChange) {
     console.log(this.formgroup.get('wwrArray'));
     (<FormArray>this.formgroup.get('wwrArray')).removeAt(0);
+    this.createWWRForm(event.value);
+  }
 
-    if (event.value == 1) {
+  createWWRForm(value: number) {
+    if (value == 1) {
       (<FormArray>this.formgroup.get('wwrArray')).push(this.fb.group({
         wwrKnown: ['', Validators.required]
       }));
-    } else if (event.value == 2) {
+    } else if (value == 2) {
       (<FormArray>this.formgroup.get('wwrArray')).push(this.fb.group({
         wwrGuide: ['', Validators.required],
       }));
-    } 
+    }
   }
 
 
