@@ -31,7 +31,8 @@
                         <div [formGroupName]="i">
                             <!-- Heat efficiency known -->
                             <span *ngIf="formgroup.controls.heatefficiency.value == 1" class="units-picker-component">
-                                <p>The value should be available on the equipment name plate or contact the supplier.For Heat pumps enter COP value.</p>
+                                <p>The value should be available on the equipment name plate or contact the supplier.For
+                                    Heat pumps enter COP value.</p>
                                 <b style="margin-top: 1em;">Enter the heatingequipment efficiency value :
                                 </b>
                                 <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
@@ -129,31 +130,27 @@
                                 <p>I have the efficiency/performance parameter for the air conditioning equipment of my
                                     building.<br>
                                     Please enter the value in below text box and select respective units.</p>
-
-
-                              <!--   <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
-                                    <mat-label>Select efficiency/performance paramater</mat-label>
-                                    <mat-select formControlName="acEfficiencyParameter">
-                                        <mat-option *ngFor="let unit of acEfficiencyParameterList" [value]="unit">
-                                            {{unit}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-
-                                <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
-                                    <mat-label>Enter value here</mat-label>
-                                    <input matInput type="number" placeholder="Enter value" required
-                                        formControlName="acEfficiencyValue">
-                                </mat-form-field> -->
-
-                                <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                                    <mat-label>Enter value here</mat-label>
-                                    <input matInput placeholder="Enter value" 
-                                        formControlName="acEfficiencyValue" type="number">
-                                    <mat-select placeholder="units" formControlName="acEfficiencyParameter">
-                                        <mat-option *ngFor="let unit of acEfficiencyParameterList" [value]="unit">
-                                            {{unit}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                                
+                                    <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                                        <mat-label>Enter value here</mat-label>
+                                        <input matInput placeholder="Enter value" formControlName="acEfficiencyValue"
+                                            type="number">
+                                        <mat-select placeholder="units" formControlName="acEfficiencyParameter">
+                                            <mat-option *ngFor="let unit of acEfficiencyParameterList" [value]="unit">
+                                                {{unit}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                
+                                <div>
+                                    <mat-radio-group class="mat-radio-group-image" formControlName="coolImages"
+                                        (change)="processHeatCoolEvent($event,'cooling')">
+                                        <mat-radio-button *ngFor="let con of coolingData"
+                                            [value]="con.coolingequipmentname">
+                                            <img src="{{con.imgpath}}">
+                                            <p>{{con.coolingequipmentname}}</p>
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
 
                                 <p>Note:The value should be available on the equipment name plate or contact the
                                     supplier.</p>
@@ -228,7 +225,7 @@
                     <b style="margin-top: 1em;">Ventilation Rate : </b>
                     <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
                         <mat-label>Enter value here</mat-label>
-                        <input matInput placeholder="Enter value" type="number" formControlName="ventilationKnown"
+                        <input matInput placeholder="Enter value" type="number" formControlName="ventilationValue"
                             type="number">
                         <mat-select placeholder="units" formControlName="ventilationUnits">
                             <mat-option value="cubic meter per minute per person">cubic meter per minute per person
@@ -240,7 +237,7 @@
                 </span>
                 <div>
                     <b>Infiltration
-                        Rate:{{formgroup.controls.ventilationKnown.value}}{{formgroup.controls.ventilationUnits.value}}</b>
+                        Rate:{{formgroup.controls.ventilationValue.value}}{{formgroup.controls.ventilationUnits.value}}</b>
                 </div>
             </div>
         </fieldset>
@@ -271,12 +268,12 @@
                         Hour(ACH)</p>
                     <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
                         <mat-label>Enter value here</mat-label>
-                        <input matInput placeholder="Enter value" required formControlName="infiltrationknown">
+                        <input matInput placeholder="Enter value" required formControlName="infiltrationValue">
                     </mat-form-field>
                 </span>
                 <div>
                     <b>Infiltration
-                        Rate:{{formgroup.controls.infiltrationknown.value}}{{formgroup.controls.infiltrationUnits.value}}</b>
+                        Rate:{{formgroup.controls.infiltrationValue.value}}{{formgroup.controls.infiltrationUnits.value}}</b>
                 </div>
             </div>
 
@@ -334,7 +331,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Enter value</mat-label>
                         <input matInput formControlName="avgIndoorAirTemp">
-                        <mat-select [(value)]="units">
+                        <mat-select [(value)]="units" formControlName="avgIndoorAirTempUnit">
                             <mat-option value="centigrade">ºC</mat-option>
                             <mat-option value="farenheit">ºF</mat-option>
                         </mat-select>
@@ -344,7 +341,7 @@
                 <p>Inverter / VFD / Speed controller for HVAC compressors installed? </p>
 
                 <mat-form-field>
-                    <mat-select placeholder="select" formControlName="HvacCompressorInstalled">
+                    <mat-select placeholder="select" formControlName="hvacCompressorInstalled">
                         <mat-option *ngFor="let option of options" [value]="option.value">
                             {{option.value}}
                         </mat-option>
@@ -354,7 +351,7 @@
                 <p>Inverter / VFD / Speed controller for HVAC fans and blowers installed?</p>
 
                 <mat-form-field>
-                    <mat-select placeholder="select" formControlName="HvacFansandBlowersInstalled">
+                    <mat-select placeholder="select" formControlName="hvacFansandBlowersInstalled">
                         <mat-option *ngFor="let option of options" [value]="option.value">
                             {{option.value}}
                         </mat-option>

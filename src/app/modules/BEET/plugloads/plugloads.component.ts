@@ -3,18 +3,8 @@ import { Form, FormArray, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { MatDialog } from '@angular/material/dialog';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatTableDataSource } from '@angular/material/table';
-import { PlugloadavailablevaldialogComponent } from 'src/app/shared/plugloadavailablevaldialog/plugloadavailablevaldialog.component';
-import { PlugloadinputdialogComponent } from 'src/app/shared/plugloadinputdialog/plugloadinputdialog.component';
 import { beetService } from 'src/app/shared/services/beet.service';
-import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
-import { isObjectLiteralElement } from 'typescript';
-
-export interface OPTIONS {
-  operations: string;
-  options: string;
-  quantity: number;
-}
 
 export interface PlugLoadAvailableTable {
   select?: number;
@@ -52,6 +42,9 @@ export class PlugloadsComponent implements OnInit {
   formgroup: FormGroup;
   displayedColumns = ['plugloadops', 'options', 'quantity'];
   selectionOptions = ['Yes', 'No', 'NA'];
+  plugloadOptionsDataSource: MatTableDataSource<PlugLoadOptionsTable>;
+  plugloadoptions: PlugLoadOptionsTable[];
+
   plugloadvalue: number;
   plugLoadUnits: string = 'watts per square meter';
   dialogref: any;
@@ -64,8 +57,8 @@ export class PlugloadsComponent implements OnInit {
   displayOptBColumns = ["space", "plugloadappliance", "Yearofinstallation", "Average Power", "Connected stock of equipment", "Average operating hours per day"];
   optcDataSource: MatTableDataSource<PlugLoadAvailableTable>;
   optbDataSource: MatTableDataSource<PlugLoadGuideTable>;
-  plugloadOptionsDataSource: MatTableDataSource<PlugLoadOptionsTable>;
-  plugloadoptions: PlugLoadOptionsTable[];
+  
+  
   grossAreaValue: number;
   grossAreaValueUnits: string;
   plugLoadItems: FormArray = this.fb.array([]);
@@ -78,54 +71,84 @@ export class PlugloadsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log("tests ");
     this.formgroup = this.fb.group({
       plugloads: ['', Validators.compose([Validators.required])],
       plugLoadValueKnown: ['', Validators.required],
       plugLoadUnits: ['', Validators.required],
       plugLoadArray: this.fb.array([]),
-    });
-    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
-    this.beetService.getGeneralDetails().subscribe(res => {
-      this.plugLoadPredefined = res.success.plugloadoptctable;
-      this.plugLoadGuide = res.success.plugloadoptbtable;
-      this.plugloadoptions = res.success.plugloadoperations;
-      this.beetService.getBuildingGrossArea().subscribe(res => { this.grossAreaValue = res; });
-      this.beetService.getBuildingGrossAreaUnits().subscribe(res => { this.grossAreaValueUnits = res; });
-      this.plugloadOptionsDataSource = new MatTableDataSource(this.plugloadoptions);
-      this.optbDataSource = new MatTableDataSource(this.plugLoadGuide);
-      this.optcDataSource = new MatTableDataSource(this.plugLoadPredefined);
-    });
-  }
-
-  
-  onChangePlugLoadOption(event: MatRadioChange) {
-    //(<FormArray>this.formgroup.get('plugLoadArray')).removeAt(0);
-   if (event.value == 2) {
-
-
-
+      plugLoadOptionsArray: this.fb.array([]),
       
-      for (var plugloadguide of this.plugLoadGuide) {
-        plugloadguide.stock = 0;
-        (<FormArray>this.formgroup.get('plugLoadArray')).push(this.createItem(plugloadguide));
-        //console.log(this.plugLoadItems);
-      }
+    });
+    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; });
 
-      (<FormArray>this.formgroup.get('plugLoadArray')).controls.forEach((element, index) => {
-        //console.log(element, index);
-        if ((<FormGroup>element).controls.space.value !== '') {
-          (<FormGroup>element).controls.space.disable();
-        }
-        if ((<FormGroup>element).controls.plugloadappliance.value !== '') {
-          (<FormGroup>element).controls.plugloadappliance.disable();
-        }
-      }); 
-      //(<FormArray>this.formgroup.get('plugLoadArray')).push(this.plugLoadItems);
+    console.log("PLUG LOAD OPTIONS "+sessionStorage.getItem('plugloadDetails') )
 
+    if(sessionStorage.getItem('plugloadDetails') !== null){
+      var plugloadDetails = JSON.parse(sessionStorage.getItem('plugloadDetails'));
+      var plugloadoptionsTemp = plugloadDetails.plugLoadArray;
+      //console.log(plugloadoptionsTemp);
+      //this.plugloadOptionsDataSource = new MatTableDataSource(plugloadoptionsTemp);
+      this.changeFormFieldValues(plugloadoptionsTemp);
+    } else{
+      this.beetService.getGeneralDetails().subscribe(res => {
+        this.beetService.getBuildingGrossArea().subscribe(res => { this.grossAreaValue = res; });
+        this.beetService.getBuildingGrossAreaUnits().subscribe(res => { this.grossAreaValueUnits = res; });
+        this.plugLoadPredefined = res.success.plugloadoptctable;
+        this.plugLoadGuide = res.success.plugloadoptbtable; 
+        this.optbDataSource = new MatTableDataSource(this.plugLoadGuide);
+        this.optcDataSource = new MatTableDataSource(this.plugLoadPredefined);
+        this.plugloadoptions = res.success.plugloadoperations;
+        for (var plugloadoption of this.plugloadoptions) {
+          (<FormArray>this.formgroup.get('plugLoadOptionsArray')).push(this.createOptions(plugloadoption));
+        }
+        this.plugloadOptionsDataSource = new MatTableDataSource(this.plugloadoptions); 
+      });
     }
 
-    //console.log(this.formgroup.get('plugLoadArray')['controls'][0].controls[0].controls.avgoperatinghrs.value);
+
+    if (sessionStorage.getItem('plugloadDetails') !== null) {
+      var plugloadDetails = JSON.parse(sessionStorage.getItem('plugloadDetails'));
+      if (plugloadDetails !== undefined || plugloadDetails !== null) {
+        this.formgroup.patchValue(plugloadDetails);
+      }
+    }
   }
+
+  createOptions(plugloadoptions){
+    return this.fb.group({
+      operation: [plugloadoptions.plugloadops],
+      operationresponse: [plugloadoptions.options],
+      quantity: [plugloadoptions.quantity],
+    })
+
+  }
+  
+  onChangePlugLoadOption(event: MatRadioChange) {
+   if (event.value == 2) {
+    this.changeFormFieldValues(this.plugLoadGuide);
+   }
+  }
+  changeFormFieldValues(plugLoadGuideTemp){
+    for (var plugloadguide of plugLoadGuideTemp ) {
+      plugloadguide.stock = 0;
+      (<FormArray>this.formgroup.get('plugLoadArray')).push(this.createItem(plugloadguide));
+      //console.log(this.plugLoadItems);
+    }
+    (<FormArray>this.formgroup.get('plugLoadArray')).controls.forEach((element, index) => {
+      //console.log(element, index);
+      if ((<FormGroup>element).controls.space.value !== '') {
+        (<FormGroup>element).controls.space.disable();
+      }
+      if ((<FormGroup>element).controls.plugloadappliance.value !== '') {
+        (<FormGroup>element).controls.plugloadappliance.disable();
+      }
+    }); 
+
+  }
+
+
+
   createItem(plugloadguide): FormGroup {
     console.log(plugloadguide);
     return this.fb.group({
@@ -137,6 +160,10 @@ export class PlugloadsComponent implements OnInit {
       avgoperatinghrs: [plugloadguide.avgoperatinghrs]
     });
   }
+
+
+
+
   onChangeAvailbePlugLoad(event) {
     if (event.value == 3) {
       console.log(event);
@@ -144,7 +171,6 @@ export class PlugloadsComponent implements OnInit {
   }
 
   selectedPlugload($event: any, row: PlugLoadAvailableTable) {
-    //(<FormGroup> (<FormArray>this.formgroup.get('plugLoadArray')).at(0)).controls.plugLoadValueKnown.patchValue(row.avgpplwperm2)
     this.formgroup.controls.plugLoadValueKnown.patchValue(row.avgpplwperm2);
     this.formgroup.controls.plugLoadUnits.setValue('watts per square meter');
     console.log("clicked", $event);
@@ -180,8 +206,5 @@ export class PlugloadsComponent implements OnInit {
       });
   
     console.log(this.formgroup, this.formgroup.valid)
-  }
-
-
-
+  } 
 }

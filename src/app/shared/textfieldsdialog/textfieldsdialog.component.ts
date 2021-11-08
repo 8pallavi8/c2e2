@@ -32,9 +32,4 @@ export class textfieldsdialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-  /* 
-  enteredPlugLoad() {
-    this.dialogRef.close(this.ventilationcubicmt ? this.ventilationcubicmt  : this.ventilationcubicft);
-  } */
 }

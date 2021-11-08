@@ -50,8 +50,8 @@ export class LightingComponent implements OnInit {
     this.beetService.getBuildingGrossArea().subscribe(res => { this.grossAreaValue = res;console.log(res)});
     this.beetService.getBuildingGrossAreaUnits().subscribe(res => { this.grossAreaValueUnits = res;});
 
-    if(localStorage.getItem('lightingOptions') !== null){
-      this.lightingOptions = JSON.parse(localStorage.getItem('lightingOptions'));
+    if(sessionStorage.getItem('lightingOptions') !== null){
+      this.lightingOptions = JSON.parse(sessionStorage.getItem('lightingOptions'));
       this.lightingOptionsDataSource = new MatTableDataSource(this.lightingOptions);
     } else{
       this.beetService.getGeneralDetails().subscribe(res => {
@@ -61,8 +61,8 @@ export class LightingComponent implements OnInit {
       });
     }
 
-    if(localStorage.getItem('lightingDetails') !== null){
-      this.LightningDetailsForm.patchValue(JSON.parse(localStorage.getItem('lightingDetails')));
+    if(sessionStorage.getItem('lightingDetails') !== null){
+      this.LightningDetailsForm.patchValue(JSON.parse(sessionStorage.getItem('lightingDetails')));
     }
   }
 

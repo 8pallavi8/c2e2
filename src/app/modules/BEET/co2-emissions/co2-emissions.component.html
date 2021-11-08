@@ -29,12 +29,12 @@
                         <p>Please enter grid emission factor[kg/kWh] : </p>
                         <mat-form-field appearance="outline">
                             <mat-label>Enter value here</mat-label>
-                            <input matInput placeholder="Enter value" type="number" required formControlName="powergenerationco2emmisionsValue">
+                            <input matInput placeholder="Enter value" type="number" required formControlName="gridemissionsFactor">
                         </mat-form-field>
                     </span>
                 </div>
 
-                <b class="calculated-values">CO2 emissions:{{formgroup.controls.powergenerationco2emmisionsValue.value}}
+                <b class="calculated-values">CO2 emissions:{{formgroup.controls.gridemissionsFactor.value}}
                     {{formgroup.controls.gridemissionsFactorUnits.value}}
                 </b>
 

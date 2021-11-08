@@ -8,7 +8,6 @@ import { OuterwallAdvLevelAirComponent } from 'src/app/shared/outerwall-adv-leve
 import { OuterwallAdvLevelbrickComponent } from 'src/app/shared/outerwall-adv-levelbrick/outerwall-adv-levelbrick.component';
 import { OuterwallRadvancedleveldialogComponent } from 'src/app/shared/outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
 import { RoofradvancedComponent } from 'src/app/shared/roofradvanced/roofradvanced.component';
-import { RvalueImagedialogComponent } from 'src/app/shared/rvalue-imagedialog/rvalue-imagedialog.component';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
 import { WindowRdialogComponent } from 'src/app/shared/window-rdialog/window-rdialog.component';
@@ -122,8 +121,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       this.outerRData = res.success.rvaluewall;
       this.roofRData = res.success.rvalueroof;
     });
-    if (localStorage.getItem('buildingEnvDetails') !== null) {
-      var buildingEnvDetails = JSON.parse(localStorage.getItem('buildingEnvDetails'));
+    if (sessionStorage.getItem('buildingEnvDetails') !== null) {
+      var buildingEnvDetails = JSON.parse(sessionStorage.getItem('buildingEnvDetails'));
       if (buildingEnvDetails !== undefined || buildingEnvDetails !== null) {
         console.log(buildingEnvDetails);
         this.createOuterWallForm(buildingEnvDetails.outerwallr);
@@ -198,8 +197,10 @@ export class BuildingenvelopedetailsComponent implements OnInit {
         maxHeight: '90vh',
       });
       dialogref.afterClosed().subscribe(result => {
-        this.windowRValue = result;
-        (<FormGroup>(<FormArray>this.formgroup.get('windowrArray')).at(0)).controls.windowRCaluclated.patchValue(result);
+        //this.windowRValue = result;
+        
+        (<FormGroup>(<FormArray>this.formgroup.get('windowrArray')).at(0)).controls.windowRCaluclated.patchValue(result.rvalue);
+        (<FormGroup>(<FormArray>this.formgroup.get('windowrArray')).at(0)).controls.windowRCaluclatedUnits.patchValue(result.rvalueunit);
       });
     }
   }
@@ -213,12 +214,13 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     } else if (value == 2) {
       (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
         windowRCaluclated: [this.windowRValue, Validators.required],
+        windowRCaluclatedUnits: [this.windowRValue, Validators.required],
+
       }));
     }
   }
 
   onChangeWWROption(event: MatRadioChange) {
-    console.log(this.formgroup.get('wwrArray'));
     (<FormArray>this.formgroup.get('wwrArray')).removeAt(0);
     this.createWWRForm(event.value);
   }
@@ -384,5 +386,4 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       this.formgroup.controls.SHGCknown.patchValue(res.success);
     });
   }
-
 }

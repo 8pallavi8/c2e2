@@ -13,13 +13,12 @@ import { ConfirmationDialogService } from './services/confirmation-dialog.servic
 import { ConfirmationDialogComponent } from './deleteconfirmationdialog/deleteconfirmationdialog.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { DialogComponent } from './dialog/dialog.component';
-import { PlugloadinputdialogComponent } from './plugloadinputdialog/plugloadinputdialog.component';
+
 import { PlugloadavailablevaldialogComponent } from './plugloadavailablevaldialog/plugloadavailablevaldialog.component';
 import {textfieldsdialogComponent } from './textfieldsdialog/textfieldsdialog.component';
 import { WindowRdialogComponent } from './window-rdialog/window-rdialog.component';
 import { OuterwallRadvancedleveldialogComponent } from './outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
 import { RouterModule } from '@angular/router';
-import { RvalueImagedialogComponent } from './rvalue-imagedialog/rvalue-imagedialog.component';
 import { RoofradvancedComponent } from './roofradvanced/roofradvanced.component';
 import { HeaderTwoComponent } from './header-two/header-two.component';
 import { FooterTwoComponent } from './footer-two/footer-two.component';
@@ -35,12 +34,10 @@ import { FooterTwoComponent } from './footer-two/footer-two.component';
     BarChartComponent,
     DialogComponent,
     ConfirmationDialogComponent,
-    PlugloadinputdialogComponent,
     PlugloadavailablevaldialogComponent,
     textfieldsdialogComponent,
     WindowRdialogComponent,
     OuterwallRadvancedleveldialogComponent,
-    RvalueImagedialogComponent,
     RoofradvancedComponent,
     FooterTwoComponent,
   ],
@@ -68,12 +65,10 @@ import { FooterTwoComponent } from './footer-two/footer-two.component';
     MatDialogModule,
     ConfirmationDialogComponent,
     DialogComponent,
-    PlugloadinputdialogComponent,
     PlugloadavailablevaldialogComponent,
     textfieldsdialogComponent,
     WindowRdialogComponent,
     OuterwallRadvancedleveldialogComponent,
-    RvalueImagedialogComponent,
     RoofradvancedComponent,
     HeaderTwoComponent,
     FooterTwoComponent

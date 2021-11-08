@@ -73,18 +73,12 @@ export class GendetailsComponent implements OnInit {
       fuelCost: ['', Validators.compose([Validators.required])],
       fuelUnits: ['', Validators.compose([Validators.required])],
       electricityUnits: ['', Validators.compose([Validators.required])],
-      //occupancyValue: [0, Validators.compose([Validators.required])],
       occupantDensityKnown: [0, Validators.compose([Validators.required])],
-
-
     });;
     this.getcountryList();
-    //this.genDetailsForm.valueChanges.subscribe(res => this.calculateGross());
-    //console.log("code:" + this.countrylist);
-    if (localStorage.getItem('generalDetails') !== null) {
-      var generalDetails = JSON.parse(localStorage.getItem('generalDetails'));
+    if (sessionStorage.getItem('generalDetails') !== null) {
+      var generalDetails = JSON.parse(sessionStorage.getItem('generalDetails'));
       if (generalDetails !== undefined || generalDetails !== null) {
-        console.log(generalDetails);
         this.genDetailsForm.patchValue(generalDetails);
         this.beetService.setSelectedCountry(generalDetails.country);
         this.getGeneralData(generalDetails.country);

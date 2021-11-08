@@ -23,11 +23,11 @@ export class CO2EmissionsComponent implements OnInit {
   ngOnInit(): void {
     this.formgroup = this.fb.group({
       powergenerationco2emmisions: [0, Validators.compose([Validators.required])],
+      gridemissionsFactor:['', Validators.compose([Validators.required])],
       gridemissionsFactorUnits: ["kg/kWh", Validators.compose([Validators.required])],
       fuelEmissionFactor: [0, Validators.compose([Validators.required])],
       fuelEmissionFactorValue: [0, Validators.compose([Validators.required])],
-      fuelEmissionFactorUnit: ['', Validators.compose([Validators.required])],
-      powergenerationco2emmisionsValue:['', Validators.compose([Validators.required])]
+      fuelEmissionFactorUnit: ['', Validators.compose([Validators.required])]
     });
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res;});
     this.beetService.getGeneralDetails().subscribe(res => {
@@ -35,10 +35,20 @@ export class CO2EmissionsComponent implements OnInit {
       this.co2emissionsunits = res.success.co2emissionsunits;
       this.defaultPowerGridEmissionFactor = res.success.defaultgridemissionfactor;
     });
+    if (sessionStorage.getItem('co2EmissionDetails') !== null) {
+      var co2EmissionDetails = JSON.parse(sessionStorage.getItem('co2EmissionDetails'));
+      if (co2EmissionDetails !== undefined || co2EmissionDetails !== null) {
+        console.log("co2"+co2EmissionDetails);
+        this.formgroup.patchValue(co2EmissionDetails); 
+        console.log(this.formgroup);
+      }
+    }
   }
 
+
+  
   defaultEmissionFactor() {
-    this.formgroup.controls.powergenerationco2emmisionsValue.patchValue(this.defaultPowerGridEmissionFactor);
+    this.formgroup.controls.gridemissionsFactor.patchValue(this.defaultPowerGridEmissionFactor);
   }
 
 

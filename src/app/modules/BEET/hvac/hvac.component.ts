@@ -39,17 +39,16 @@ export class HvacComponent implements OnInit {
   defaultInfiltrationRate: number;
   heatingImageEffValue: Number;
   coolingImageEffValue: Number;
-  coolingImageEffUnits:string;
-  
+  coolingImageEffUnits: string;
+
   options = [{ value: 'Yes' }, { value: 'No' }, { value: 'N/A' }];
-  acEfficiencyParameterList:string[]=['EER','COP','SPC'];
+  acEfficiencyParameterList: string[] = ['EER', 'COP', 'SPC'];
+  plugloadoptions: any;
 
   constructor(private fb: FormBuilder, public dialog: MatDialog,
     private confirmationDialog: ConfirmationDialogService,
     private inputDialog: InputdialogService,
     private beetService: beetService) { }
-
- 
 
   ngOnInit(): void {
     this.formgroup = this.fb.group({
@@ -58,74 +57,87 @@ export class HvacComponent implements OnInit {
       coolefficiencyArray: this.fb.array([]),
       airconditioning: ['', Validators.compose([Validators.required])],
       ventilation: ['0', Validators.compose([Validators.required])],
-      ventilationKnown: ['0', Validators.compose([Validators.required])],
+      ventilationValue: ['0', Validators.compose([Validators.required])],
       ventilationUnits: ['', Validators.compose([Validators.required])],
       infiltration: [0, Validators.compose([Validators.required])],
-      infiltrationknown: ['', Validators.compose([Validators.required])],
+      infiltrationValue: ['', Validators.compose([Validators.required])],
       infiltrationUnits: ['Air changes per Hour', Validators.compose([Validators.required])],
       economizer: ['', Validators.compose([Validators.required])],
       avgIndoorAirTemp: ['', Validators.compose([Validators.required])],
-      HvacCompressorInstalled: ['', Validators.compose([Validators.required])],
-      HvacFansandBlowersInstalled: ['', Validators.compose([Validators.required])]
+      avgIndoorAirTempUnit: ['', Validators.compose([Validators.required])],
+      hvacCompressorInstalled: ['', Validators.compose([Validators.required])],
+      hvacFansandBlowersInstalled: ['', Validators.compose([Validators.required])]
     }
     )
-
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
     this.beetService.getSelectedbuildingType().subscribe(res => { this.selBuildingCode = res; });
     this.beetService.getSelectedbuildingSpaces().subscribe(res => { this.selBuildingSpaces = res; });
-
     this.beetService.getGeneralDetails().subscribe(res => {
       this.heatingData = res.success.heatingequipment;
       this.coolingData = res.success.coolingequipment;
       this.defaultInfiltrationRate = res.success.defaultinfiltration;
-
     });
-
+    if (sessionStorage.getItem('hvacDetails') !== null) {
+      var hvacDetails = JSON.parse(sessionStorage.getItem('hvacDetails'));
+      if (hvacDetails !== undefined || hvacDetails !== null) {
+        console.log(hvacDetails);
+        this.createCoolingEfficiencyForm(hvacDetails.airconditioning);
+        this.createHeatingEfficiencyForm(hvacDetails.heatefficiency);
+        this.formgroup.patchValue(hvacDetails);
+        console.log(this.formgroup);
+      }
+    }
   }
 
-
   onChangecoolingEffOption(event: MatRadioChange) {
-    console.log(this.formgroup.get('coolefficiencyArray'));
-    (<FormArray>this.formgroup.get('coolefficiencyArray')).removeAt(0);
+    (<FormArray>this.formgroup.get('coolefficiencyArray')).removeAt(0)
+    this.createCoolingEfficiencyForm(event.value);
+  }
 
-    if (event.value == 1) {
+  createCoolingEfficiencyForm(value: number) {
+    if (value == 1) {
       (<FormArray>this.formgroup.get('coolefficiencyArray')).push(this.fb.group({
-        acEfficiencyValue:['', Validators.required],
-        acEfficiencyParameter:['', Validators.required]
+        acEfficiencyValue: ['', Validators.required],
+        acEfficiencyParameter: ['', Validators.required],
+        coolImages: ['', Validators.required],
+        coolingEquipmentName: ['', Validators.required]
       }));
-    } else if (event.value == 2) {
+    } else if (value == 2) {
       (<FormArray>this.formgroup.get('coolefficiencyArray')).push(this.fb.group({
-         coolImages: ['', Validators.required],
-         acEfficiencyValue:['', Validators.required],
-         acEfficiencyUnits:['', Validators.required]
-
-
+        coolImages: ['', Validators.required],
+        acEfficiencyValue: ['', Validators.required],
+        acEfficiencyUnits: ['', Validators.required],
+        coolingEquipmentName: ['', Validators.required]
       }));
     }
-    else if (event.value == 3) {
+    else if (value == 3) {
       this.openConfirmationDialogac()
     }
   }
 
   onChangeHeatEffOption(event: MatRadioChange) {
-    console.log(this.formgroup.get('heatefficiencyArray'));
-    (<FormArray>this.formgroup.get('heatefficiencyArray')).removeAt(0);
+    (<FormArray>this.formgroup.get('heatefficiencyArray')).removeAt(0)
+    this.createHeatingEfficiencyForm(event.value);
+  }
 
-    if (event.value == 1) {
+
+  createHeatingEfficiencyForm(value: number) {
+    if (value == 1) {
       (<FormArray>this.formgroup.get('heatefficiencyArray')).push(this.fb.group({
         heatefficiencyKnown: ['', Validators.required],
-        heatEfficiencyUnits:['', Validators.required],
+        heatEfficiencyUnits: ['', Validators.required],
         heatValueImages: ['', Validators.required],
+        heatEquipmentName: ['', Validators.required]
       }));
-    } else if (event.value == 2) {
+    } else if (value == 2) {
       (<FormArray>this.formgroup.get('heatefficiencyArray')).push(this.fb.group({
         heatValueImages: ['', Validators.required],
         heatefficiency: ['', Validators.required],
-        heatEfficiencyUnits:['', Validators.required]
+        heatEfficiencyUnits: ['', Validators.required],
+        heatEquipmentName: ['', Validators.required]
       }));
     }
-
-    else if (event.value == 3) {
+    else if (value == 3) {
       this.openConfirmationDialog()
     }
   }
@@ -143,8 +155,13 @@ export class HvacComponent implements OnInit {
   }
 
   processHeatCoolEvent(event, type) {
-    this.postCalculateEquipEfficiency(type, event.value);
-   
+    if (type == 'heating' && this.formgroup.controls.heatefficiency.value == 1) {
+      (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatEquipmentName.patchValue(event.value);
+    } else if (type == 'cooling' && this.formgroup.controls.airconditioning.value == 1) {
+      (<FormGroup>(<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.coolingEquipmentName.patchValue(event.value);
+    } else {
+      this.postCalculateEquipEfficiency(type, event.value);
+    }
   }
 
 
@@ -157,15 +174,16 @@ export class HvacComponent implements OnInit {
     console.log(payload);
     this.beetService.postCalculateEquipEfficiency(payload).subscribe(res => {
       if (type == 'heating') {
-        ( <FormGroup> (<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatefficiency.patchValue(res.success.efficiency);
-        ( <FormGroup> (<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatEfficiencyUnits.patchValue(res.success.efficiencyunit);
-
-        console.log(this.formgroup.get('heatefficiencyArray'));
-      } else 
-      if (type == 'cooling'){
-        ( <FormGroup> (<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.acEfficiencyValue.patchValue(res.success.efficiency);
-        ( <FormGroup> (<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.acEfficiencyUnits.patchValue(res.success.efficiencyunit);
-      }
+        (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatefficiency.patchValue(res.success.efficiency);
+        (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatEfficiencyUnits.patchValue(res.success.efficiencyunit);
+        (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatEquipmentName.patchValue(equipname);
+        
+      } else
+        if (type == 'cooling') {
+          (<FormGroup>(<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.acEfficiencyValue.patchValue(res.success.efficiency);
+          (<FormGroup>(<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.acEfficiencyUnits.patchValue(res.success.efficiencyunit);
+          (<FormGroup>(<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.coolingEquipmentName.patchValue(equipname);
+        }
     })
   }
 
@@ -178,14 +196,14 @@ export class HvacComponent implements OnInit {
     console.log(payload);
     this.beetService.postCalculateVentilationRate(payload).subscribe(res => {
       console.log(res.success);
-      this.formgroup.controls.ventilationKnown.patchValue(res.success.ventilationrate);
+      this.formgroup.controls.ventilationValue.patchValue(res.success.ventilationrate);
       this.formgroup.controls.ventilationUnits.patchValue(res.success.ventilationrateunit);
-      
+
     })
   }
 
   defaultInfiltration() {
-    this.formgroup.controls.infiltrationknown.patchValue(this.defaultInfiltrationRate);
+    this.formgroup.controls.infiltrationValue.patchValue(this.defaultInfiltrationRate);
   }
 
 }

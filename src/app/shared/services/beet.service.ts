@@ -156,6 +156,10 @@ export class beetService {
         return this.http.post(environment.baseUrl + ':9998/api/user/v1/calculateplugloaddensity', payload);
     }
 
+    postDataGenerateReport(payload: any): Observable<any> {
+        return this.http.post(environment.baseUrl + ':9998/api/user/v1/postdatageneratereport', payload);
+    }
+
 
 
 
