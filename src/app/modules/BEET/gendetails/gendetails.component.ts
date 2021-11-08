@@ -42,6 +42,7 @@ export class GendetailsComponent implements OnInit {
   locationDetails: LocationDetails[] = [];
   buildingDetails: BuildingDetails[] = [];
   selectedCountryCode: CountryTable;
+  countryname: string;
   isEnteredGross: boolean = false;
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
@@ -105,11 +106,21 @@ export class GendetailsComponent implements OnInit {
   getcountryList(): void {
     this.beetService.getCountries().subscribe(res => {
       this.countrylist = res.success.countrydetails;
+      this.countryname= res.success.countrydetails.country;
+      console.log("code"+this.countryname)
     });
   }
 
   onChangeCountry(selectedCountry) {
     this.beetService.setSelectedCountry(selectedCountry.value);
+    let target = selectedCountry.source.selected._element.nativeElement;
+    let selectedData = {
+      fieldId: target.getAttribute('data-id'),
+      valueId: selectedCountry.value,
+      value: target.innerText.trim()
+    };
+    sessionStorage.setItem('selectedCountryName',selectedData.value);
+    //console.log("Country Code : "+selectedData.value);
     this.selectedCountryCode = selectedCountry.value;
     this.getGeneralData(selectedCountry.value.toString());
   }

@@ -47,6 +47,7 @@ export interface Efficiency {
   styleUrls: ['./beet.component.scss']
 })
 export class BEETComponent implements OnInit, AfterViewInit {
+  countryname: string;
   plugloadoptions:PlugLoadOptionsTable[]=[];
   summary: Summary;
   inputTableDataSource: any;
@@ -76,7 +77,8 @@ export class BEETComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (sessionStorage.getItem('userId') !== null) {
       this.userId = sessionStorage.getItem('userId');
-    }
+    } 
+    
   }
 
   ngAfterViewInit() {
@@ -141,7 +143,10 @@ export class BEETComponent implements OnInit, AfterViewInit {
     sessionStorage.setItem('plugloadOptions', JSON.stringify(this.plugLoaDetailsComponent.plugloadoptions))
   }
 
+  getCountryName(){
+   
 
+  }
 
   onCo2EmissionsDetails() {
     sessionStorage.setItem('co2EmissionDetails', JSON.stringify(this.co2EmissionsDetailsComponent.formgroup.value))
@@ -150,10 +155,11 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   showSummary() {
     //console.log("UserName:", this.genDetailsComponent.genDetailsForm.controls.UserName.value);
+    var selectedcountryname = sessionStorage.getItem('selectedCountryName');
     this.summaryTable = [
       { Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.userName.value },
       { Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.projectName.value },
-      { Parameter: 'Country', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.country.value },
+      { Parameter: 'Country', Units: null, Value: selectedcountryname},
       { Parameter: 'Province', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.province.value },
       { Parameter: 'Location', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.location.value },
       { Parameter: 'Building type', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.buildingType.value },
@@ -212,7 +218,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
       },
       {
         Parameter: 'Plug load density', Units: this.plugLoaDetailsComponent.formgroup.controls.plugLoadUnits.value,
-        Value: this.plugLoaDetailsComponent.formgroup.controls.plugLoadValueKnown
+        Value: this.plugLoaDetailsComponent.formgroup.controls.plugLoadValueKnown.value
       },
       {
         Parameter: 'Power generation CO2 emissions / Grid emissions factor', Units: this.co2EmissionsDetailsComponent.formgroup.controls.gridemissionsFactorUnits.value,
@@ -228,6 +234,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
    }
 
    postDataGenerateReport(){
+    var selectedcountryname = sessionStorage.getItem('selectedCountryName');
     if (this.genDetailsComponent.genDetailsForm.valid) {
       (<FormArray> this.plugLoaDetailsComponent.formgroup.get('plugLoadOptionsArray')).controls.forEach((element, index) => {
         var optionsplugload: any = {
@@ -240,7 +247,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
       var payload: any = {
         username: this.genDetailsComponent.genDetailsForm.controls.userName.value,
         projectname: this.genDetailsComponent.genDetailsForm.controls.projectName.value,
-        country: this.genDetailsComponent.genDetailsForm.controls.country.value,
+        country: selectedcountryname,
         province: this.genDetailsComponent.genDetailsForm.controls.province.value,
         location: this.genDetailsComponent.genDetailsForm.controls.location.value,
         buildingtype: this.genDetailsComponent.genDetailsForm.controls.buildingType.value,

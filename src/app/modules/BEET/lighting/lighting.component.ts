@@ -21,7 +21,7 @@ export interface Lighting {
   styleUrls: ['./lighting.component.scss']
 })
 export class LightingComponent implements OnInit {
-  formgroup: FormGroup;
+ 
   selCountryCode: string;
   grossAreaValue:number;
   grossAreaValueUnits:string;

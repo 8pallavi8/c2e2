@@ -103,7 +103,7 @@
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="buildingdetailsComponent?.formgroup.invalid"  (click)="saveBuildingDetails()" -->
-                    <button mat-raised-button color="primary" matStepperNext
+                    <button [disabled]="buildingdetailsComponent?.formgroup.invalid" mat-raised-button color="primary" matStepperNext
                         (click)="onSaveBuildingEnvDetails()">Next</button>
                 </div>
             </mat-step>
@@ -115,7 +115,7 @@
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="lightingDetailsComponent?.formgroup.invalid"  -->
-                    <button mat-raised-button color="primary" matStepperNext
+                    <button  mat-raised-button color="primary" matStepperNext
                         (click)="onSaveLightingDetails()">Next</button>
                 </div>
             </mat-step>
@@ -127,7 +127,7 @@
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="hvacDetailsComponent?.formgroup.invalid"  -->
-                    <button mat-raised-button color="primary"  (click)="onHvacDetails()" matStepperNext>Next</button>
+                    <button [disabled]="hvacDetailsComponent?.formgroup.invalid" mat-raised-button color="primary"  (click)="onHvacDetails()" matStepperNext>Next</button>
                 </div>
             </mat-step>
 
@@ -138,7 +138,7 @@
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="plugLoaDetailsComponent?.formgroup.invalid"  -->
-                    <button mat-raised-button color="primary" matStepperNext (click)="onPlugLoadDetails()">Next</button>
+                    <button [disabled]="plugLoaDetailsComponent?.formgroup.invalid" mat-raised-button color="primary" matStepperNext (click)="onPlugLoadDetails()">Next</button>
                 </div>
             </mat-step>
 
@@ -150,8 +150,8 @@
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="co2EmissionsDetailsComponent?.formgroup.invalid"   -->
-                    <button mat-raised-button color="primary" matStepperNext (click)="onCo2EmissionsDetails()"
-                        (click)="showSummary()">Next</button>
+                    <button [disabled]="co2EmissionsDetailsComponent?.formgroup.invalid" mat-raised-button color="primary" matStepperNext (click)="onCo2EmissionsDetails()"
+                        (click)="showSummary()" (click)="getCountryName()">Next</button>
                 </div>
             </mat-step>
 

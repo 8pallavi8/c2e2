@@ -103,24 +103,23 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       outerwallr: ['', Validators.compose([Validators.required])],
       outerWallArray: this.fb.array([]),
       roofr: ['', Validators.compose([Validators.required])],
-      rvalueroof: ['', Validators.required],
-      rvalueroofunit: ['', Validators.required],
-      rvaluewindow: ['', Validators.required],
-      rvaluewindowunit: ['', Validators.required],
       roofrArray: this.fb.array([]),
       windowr: ['', Validators.compose([Validators.required])],
       windowrArray: this.fb.array([]),
       SHGC: ['', Validators.compose([Validators.required])],
       SHGCknown: [0, Validators.compose([Validators.required])],
-      wwr: [0, Validators.compose([Validators.required])],
+      wwr: [, Validators.compose([Validators.required])],
       wwrArray: this.fb.array([]),
     })
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; });
     this.beetService.getSelectedProvince().subscribe(res => { this.selProvince = res; console.log(res); });
+
     this.beetService.getGeneralDetails().subscribe(res => {
       this.outerRData = res.success.rvaluewall;
       this.roofRData = res.success.rvalueroof;
     });
+
+
     if (sessionStorage.getItem('buildingEnvDetails') !== null) {
       var buildingEnvDetails = JSON.parse(sessionStorage.getItem('buildingEnvDetails'));
       if (buildingEnvDetails !== undefined || buildingEnvDetails !== null) {

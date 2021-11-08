@@ -161,9 +161,6 @@ export class PlugloadsComponent implements OnInit {
     });
   }
 
-
-
-
   onChangeAvailbePlugLoad(event) {
     if (event.value == 3) {
       console.log(event);
@@ -172,9 +169,9 @@ export class PlugloadsComponent implements OnInit {
 
   selectedPlugload($event: any, row: PlugLoadAvailableTable) {
     this.formgroup.controls.plugLoadValueKnown.patchValue(row.avgpplwperm2);
+    console.log("patch"+ this.formgroup.controls.plugLoadValueKnown.value)
     this.formgroup.controls.plugLoadUnits.setValue('watts per square meter');
-    console.log("clicked", $event);
-    console.log(row);
+    console.log(row.avgpplwperm2);
   }
 
   calculatePlugLoad(): void {
