@@ -111,6 +111,11 @@ export class HvacComponent implements OnInit {
       }));
     }
     else if (value == 3) {
+      (<FormArray>this.formgroup.get('coolefficiencyArray')).push(this.fb.group({
+        acEfficiencyValue: ['', Validators.required],
+        acEfficiencyUnits: ['', Validators.required],
+        coolingEquipmentName: ['', Validators.required]
+      }));
       this.openConfirmationDialogac()
     }
   }
@@ -138,6 +143,11 @@ export class HvacComponent implements OnInit {
       }));
     }
     else if (value == 3) {
+      (<FormArray>this.formgroup.get('heatefficiencyArray')).push(this.fb.group({
+        heatefficiency: ['', Validators.required],
+        heatEfficiencyUnits: ['', Validators.required],
+        heatEquipmentName: ['', Validators.required]
+      }));
       this.openConfirmationDialog()
     }
   }
@@ -146,12 +156,20 @@ export class HvacComponent implements OnInit {
   public openConfirmationDialog() {
     this.confirmationDialog.confirm('Confirm', 'You have selected No Heating Equipment In The Building', 'OK', null)
       .catch(() => console.log('User dismissed the dialog'));
+      (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatefficiency.patchValue(0);
+        (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatEfficiencyUnits.patchValue('');
+        (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatEquipmentName.patchValue("No Heating Equipment");
+
   }
 
 
   public openConfirmationDialogac() {
     this.confirmationDialog.confirm('Confirm', 'You have selected No Cooling Equipment In The Building', 'OK', null)
       .catch(() => console.log('User dismissed the dialog'));
+      (<FormGroup>(<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.acEfficiencyValue.patchValue(0);
+      (<FormGroup>(<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.acEfficiencyUnits.patchValue('');
+      (<FormGroup>(<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.coolingEquipmentName.patchValue("No Cooling Equipment");
+
   }
 
   processHeatCoolEvent(event, type) {
@@ -177,7 +195,7 @@ export class HvacComponent implements OnInit {
         (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatefficiency.patchValue(res.success.efficiency);
         (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatEfficiencyUnits.patchValue(res.success.efficiencyunit);
         (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatEquipmentName.patchValue(equipname);
-        
+
       } else
         if (type == 'cooling') {
           (<FormGroup>(<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.acEfficiencyValue.patchValue(res.success.efficiency);
