@@ -48,7 +48,7 @@ export interface Efficiency {
 })
 export class BEETComponent implements OnInit, AfterViewInit {
   countryname: string;
-  plugloadoptions:PlugLoadOptionsTable[]=[];
+  plugloadoptions: PlugLoadOptionsTable[] = [];
   summary: Summary;
   inputTableDataSource: any;
   heatingEfficiencyValue: Efficiency = {};
@@ -77,8 +77,8 @@ export class BEETComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (sessionStorage.getItem('userId') !== null) {
       this.userId = sessionStorage.getItem('userId');
-    } 
-    
+    }
+
   }
 
   ngAfterViewInit() {
@@ -143,8 +143,8 @@ export class BEETComponent implements OnInit, AfterViewInit {
     sessionStorage.setItem('plugloadOptions', JSON.stringify(this.plugLoaDetailsComponent.plugloadoptions))
   }
 
-  getCountryName(){
-   
+  getCountryName() {
+
 
   }
 
@@ -159,7 +159,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
     this.summaryTable = [
       { Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.userName.value },
       { Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.projectName.value },
-      { Parameter: 'Country', Units: null, Value: selectedcountryname},
+      { Parameter: 'Country', Units: null, Value: selectedcountryname },
       { Parameter: 'Province', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.province.value },
       { Parameter: 'Location', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.location.value },
       { Parameter: 'Building type', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.buildingType.value },
@@ -202,8 +202,10 @@ export class BEETComponent implements OnInit, AfterViewInit {
         Parameter: 'Lighting density', Units: this.lightingDetailsComponent.LightningDetailsForm.controls.lightingPowerDensityUnit.value,
         Value: this.lightingDetailsComponent.LightningDetailsForm.controls.lightingPowerDensityValue.value
       },
-      { Parameter: 'Heating efficiency', Units: this.heatingEfficiencyValue.efficiencyUnits, 
-      Value: this.heatingEfficiencyValue.efficiencyValue },
+      {
+        Parameter: 'Heating efficiency', Units: this.heatingEfficiencyValue.efficiencyUnits,
+        Value: this.heatingEfficiencyValue.efficiencyValue
+      },
       {
         Parameter: 'Air conditioning efficiency/performance', Units: this.coolingEfficiencyValue.efficiencyUnits,
         Value: this.coolingEfficiencyValue.efficiencyValue
@@ -230,17 +232,17 @@ export class BEETComponent implements OnInit, AfterViewInit {
       },
     ];
     this.dataSource = new MatTableDataSource(this.summaryTable);
-  
-   }
 
-   postDataGenerateReport(){
+  }
+
+  postDataGenerateReport() {
     var selectedcountryname = sessionStorage.getItem('selectedCountryName');
     if (this.genDetailsComponent.genDetailsForm.valid) {
-      (<FormArray> this.plugLoaDetailsComponent.formgroup.get('plugLoadOptionsArray')).controls.forEach((element, index) => {
+      (<FormArray>this.plugLoaDetailsComponent.formgroup.get('plugLoadOptionsArray')).controls.forEach((element, index) => {
         var optionsplugload: any = {
-          operation:  (<FormGroup>element).controls.operation.value,
-          operationresponse:(<FormGroup>element).controls.operationresponse.value,
-          quantity:(<FormGroup>element).controls.quantity.value,
+          operation: (<FormGroup>element).controls.operation.value,
+          operationresponse: (<FormGroup>element).controls.operationresponse.value,
+          quantity: (<FormGroup>element).controls.quantity.value,
         }
         this.plugloadoptions.push(optionsplugload);
       });
@@ -265,13 +267,13 @@ export class BEETComponent implements OnInit, AfterViewInit {
         electricitycostunit: this.genDetailsComponent.genDetailsForm.controls.electricityUnits.value,
         fuelcost: this.genDetailsComponent.genDetailsForm.controls.fuelCost.value,
         fuelcostunit: this.genDetailsComponent.genDetailsForm.controls.fuelUnits.value,
-        rvaluewall:  this.outerWallR.rValue,
+        rvaluewall: this.outerWallR.rValue,
         rvaluewallunit: this.outerWallR.rUnits,
         rvalueroof: this.roofR.rValue,
         rvalueroofunit: this.roofR.rUnits,
         rvaluewindow: this.windowR.rValue,
         rvaluewindowunit: this.windowR.rUnits,
-        shgc: this.buildingdetailsComponent.formgroup.controls.SHGCknown.value,
+        shgc: Number(this.buildingdetailsComponent.formgroup.controls.SHGCknown.value),
         windowtowallratio: this.wwrValue,
         windowtowallratiounit: '%',
         totallightingpower: this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerValue.value,
@@ -287,16 +289,16 @@ export class BEETComponent implements OnInit, AfterViewInit {
         coolingefficiencyunit: this.coolingEfficiencyValue.efficiencyUnits,
         ventilationrate: this.hvacDetailsComponent.formgroup.controls.ventilationValue.value,
         ventilationrateunit: this.hvacDetailsComponent.formgroup.controls.ventilationUnits.value,
-        infiltrationrate: this.hvacDetailsComponent.formgroup.controls.infiltrationValue.value,
+        infiltrationrate: Number(this.hvacDetailsComponent.formgroup.controls.infiltrationValue.value),
         infiltrationrateunit: this.hvacDetailsComponent.formgroup.controls.infiltrationUnits.value,
         economizer: this.hvacDetailsComponent.formgroup.controls.economizer.value,
-        avgindoortemperature:Number(this.hvacDetailsComponent.formgroup.controls.avgIndoorAirTemp.value),
+        avgindoortemperature: Number(this.hvacDetailsComponent.formgroup.controls.avgIndoorAirTemp.value),
         avgindoortemperatureunit: this.hvacDetailsComponent.formgroup.controls.avgIndoorAirTempUnit.value,
-        controllerhvaccompressors:this.hvacDetailsComponent.formgroup.controls.hvacCompressorInstalled.value,
-        controllerhvacfans:this.hvacDetailsComponent.formgroup.controls.hvacFansandBlowersInstalled.value,
+        controllerhvaccompressors: this.hvacDetailsComponent.formgroup.controls.hvacCompressorInstalled.value,
+        controllerhvacfans: this.hvacDetailsComponent.formgroup.controls.hvacFansandBlowersInstalled.value,
         plugloaddensity: this.plugLoaDetailsComponent.formgroup.controls.plugloadvalue,
-        plugloaddensityunit:this.plugLoaDetailsComponent.formgroup.controls.plugLoadUnits.value,
-        plugloadoperations:this.plugloadoptions,
+        plugloaddensityunit: this.plugLoaDetailsComponent.formgroup.controls.plugLoadUnits.value,
+        plugloadoperations: this.plugloadoptions,
         gridemissionsfactor: this.co2EmissionsDetailsComponent.formgroup.controls.gridemissionsFactor.value,
         gridemissionsfactorunit: this.co2EmissionsDetailsComponent.formgroup.controls.gridemissionsFactorUnits.value,
         onsiteemissions: this.co2EmissionsDetailsComponent.formgroup.controls.fuelEmissionFactorValue.value,
@@ -304,15 +306,15 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
       }
       console.log(payload);
-       this.beetService.postDataGenerateReport(payload).subscribe(res => {
-console.log(res);
-       /*  if (res.status == 'success') {
-          console.log(res.success);
-          this.isGeneralDetailsUpdated = true;
-          this.userId = res.success;
-          sessionStorage.setItem('userId', this.userId);
-        } */
-      }); 
+      this.beetService.postDataGenerateReport(payload).subscribe(res => {
+        console.log(res);
+        /*  if (res.status == 'success') {
+           console.log(res.success);
+           this.isGeneralDetailsUpdated = true;
+           this.userId = res.success;
+           sessionStorage.setItem('userId', this.userId);
+         } */
+      });
     }
   }
 
@@ -367,6 +369,10 @@ console.log(res);
       this.heatingEfficiencyValue.efficiencyValue = this.hvacDetailsComponent?.formgroup.get('heatefficiencyArray')['controls'][0].controls.heatefficiency.value;
       this.heatingEfficiencyValue.efficiencyUnits = this.hvacDetailsComponent?.formgroup.get('heatefficiencyArray')['controls'][0].controls.heatEfficiencyUnits.value;
       this.heatingEfficiencyValue.equipName = this.hvacDetailsComponent?.formgroup.get('heatefficiencyArray')['controls'][0].controls.heatEquipmentName.value;
+    } else if (this.hvacDetailsComponent?.formgroup.controls.heatefficiency.value == 3) {
+      this.heatingEfficiencyValue.efficiencyValue = this.hvacDetailsComponent?.formgroup.get('heatefficiencyArray')['controls'][0].controls.heatefficiency.value;
+      this.heatingEfficiencyValue.efficiencyUnits = this.hvacDetailsComponent?.formgroup.get('heatefficiencyArray')['controls'][0].controls.heatEfficiencyUnits.value;
+      this.heatingEfficiencyValue.equipName = this.hvacDetailsComponent?.formgroup.get('heatefficiencyArray')['controls'][0].controls.heatEquipmentName.value;
     }
 
     if (this.hvacDetailsComponent?.formgroup.controls.airconditioning.value == 1) {
@@ -374,6 +380,11 @@ console.log(res);
       this.coolingEfficiencyValue.efficiencyUnits = this.hvacDetailsComponent?.formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyParameter.value;
       this.coolingEfficiencyValue.equipName = this.hvacDetailsComponent?.formgroup.get('coolefficiencyArray')['controls'][0].controls.coolingEquipmentName.value;
     } else if (this.hvacDetailsComponent?.formgroup.controls.airconditioning.value == 2) {
+      this.coolingEfficiencyValue.efficiencyValue = this.hvacDetailsComponent?.formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyValue.value;
+      this.coolingEfficiencyValue.efficiencyUnits = this.hvacDetailsComponent?.formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyUnits.value;
+      this.coolingEfficiencyValue.equipName = this.hvacDetailsComponent?.formgroup.get('coolefficiencyArray')['controls'][0].controls.coolingEquipmentName.value;
+    }
+    else if (this.hvacDetailsComponent?.formgroup.controls.airconditioning.value == 3) {
       this.coolingEfficiencyValue.efficiencyValue = this.hvacDetailsComponent?.formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyValue.value;
       this.coolingEfficiencyValue.efficiencyUnits = this.hvacDetailsComponent?.formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyUnits.value;
       this.coolingEfficiencyValue.equipName = this.hvacDetailsComponent?.formgroup.get('coolefficiencyArray')['controls'][0].controls.coolingEquipmentName.value;
