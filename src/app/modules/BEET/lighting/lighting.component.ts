@@ -53,7 +53,8 @@ export class LightingComponent implements OnInit {
     if(sessionStorage.getItem('lightingOptions') !== null){
       this.lightingOptions = JSON.parse(sessionStorage.getItem('lightingOptions'));
       this.lightingOptionsDataSource = new MatTableDataSource(this.lightingOptions);
-    } else{
+    } 
+    else{
       this.beetService.getGeneralDetails().subscribe(res => {
         this.lightingOptions = res.success.lighting;
         console.log(this.lightingOptions);
