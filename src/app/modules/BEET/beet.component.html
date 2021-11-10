@@ -38,7 +38,7 @@
         technicians and any individual with basic know-how on buildings and energy efficiency.
     </p>
 
-    <b>Disclaimer</b>
+    <b>Disclaimer:</b>
     <p>The objective of the tool is to provide an indicative and holistic outcome on the building energy efficiency
         based on the user's input data. The tool does not replace the simulations and assessments from a full fledged
         tools and licensed software
@@ -86,7 +86,7 @@
         </div>
     </div>
     <div class="container-fluid">
-        <mat-horizontal-stepper (selectionChange)="selectionStepperChange($event)" class="stepper-class"
+        <mat-horizontal-stepper linear (selectionChange)="selectionStepperChange($event)" class="stepper-class"
             labelPosition="bottom" #stepper>
             <mat-step [stepControl]="genDetailsComponent?.genDetailsForm" label="General Details">
                 <app-gendetails></app-gendetails>

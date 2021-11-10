@@ -29,9 +29,14 @@ export class beetService {
 
     setGeneralDetails(genralDetails: any) {
         this.generalDetail.next(genralDetails);
+        sessionStorage.setItem('beetInitialData', JSON.stringify(genralDetails));
     }
 
     public getGeneralDetails(): ReplaySubject<any> {
+        if(sessionStorage.getItem('beetInitialData') != undefined){
+            var generalDetailsTemp = JSON.parse(sessionStorage.getItem('beetInitialData'));
+            this.generalDetail.next(generalDetailsTemp);
+        }
         return this.generalDetail;
     }
 

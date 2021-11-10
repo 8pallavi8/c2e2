@@ -118,8 +118,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       this.outerRData = res.success.rvaluewall;
       this.roofRData = res.success.rvalueroof;
     });
-
-
     if (sessionStorage.getItem('buildingEnvDetails') !== null) {
       var buildingEnvDetails = JSON.parse(sessionStorage.getItem('buildingEnvDetails'));
       if (buildingEnvDetails !== undefined || buildingEnvDetails !== null) {

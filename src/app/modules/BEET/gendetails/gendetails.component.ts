@@ -14,7 +14,6 @@ export interface CountryTable {
   countrycode?: string;
 }
 
-
 @Component({
   selector: 'app-gendetails',
   templateUrl: './gendetails.component.html',
@@ -22,7 +21,6 @@ export interface CountryTable {
 
 })
 export class GendetailsComponent implements OnInit {
-
   genDetailsForm: FormGroup;
   inputTableDataSource: any;
   inputDisplayedColumns: string[] = ['option', 'select']
@@ -42,7 +40,6 @@ export class GendetailsComponent implements OnInit {
   locationDetails: LocationDetails[] = [];
   buildingDetails: BuildingDetails[] = [];
   selectedCountryCode: CountryTable;
-  countryname: string;
   isEnteredGross: boolean = false;
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
@@ -79,10 +76,19 @@ export class GendetailsComponent implements OnInit {
     this.getcountryList();
     if (sessionStorage.getItem('generalDetails') !== null) {
       var generalDetails = JSON.parse(sessionStorage.getItem('generalDetails'));
+      console.log(generalDetails);
       if (generalDetails !== undefined || generalDetails !== null) {
-        this.genDetailsForm.patchValue(generalDetails);
-        this.beetService.setSelectedCountry(generalDetails.country);
-        this.getGeneralData(generalDetails.country);
+        let res = this.beetService.getGeneralDetails().subscribe(res => {
+          this.locationDetails = res.success.locationdata;
+          this.buildingDetails = res.success.buildingdata;
+          this.eletricityunitslist = res.success.energycostunits.electricitycostunits;
+          this.fuelunitslist = res.success.energycostunits.fuelcostunits;
+          this.locationlist = this.locationDetails.find(ele => ele.province == generalDetails.province).locations;
+          this.spacesList = this.buildingDetails.find(ele => ele.buildingtype == generalDetails.buildingType).buildingspaces;
+          this.genDetailsForm.patchValue(generalDetails);
+          this.beetService.setSelectedCountry(generalDetails.country);
+        });
+        //this.getGeneralData(generalDetails.country);
       }
     }
   }
@@ -106,8 +112,6 @@ export class GendetailsComponent implements OnInit {
   getcountryList(): void {
     this.beetService.getCountries().subscribe(res => {
       this.countrylist = res.success.countrydetails;
-      this.countryname= res.success.countrydetails.country;
-      console.log("code"+this.countryname)
     });
   }
 
@@ -120,7 +124,6 @@ export class GendetailsComponent implements OnInit {
       value: target.innerText.trim()
     };
     sessionStorage.setItem('selectedCountryName',selectedData.value);
-    //console.log("Country Code : "+selectedData.value);
     this.selectedCountryCode = selectedCountry.value;
     this.getGeneralData(selectedCountry.value.toString());
   }
@@ -129,7 +132,6 @@ export class GendetailsComponent implements OnInit {
     this.beetService.getGeneralData(country).subscribe(res => {
       this.locationDetails = res.success.locationdata;
       this.buildingDetails = res.success.buildingdata;
-      console.log("General details " + res.success.buildingdata);
       this.eletricityunitslist = res.success.energycostunits.electricitycostunits;
       this.fuelunitslist = res.success.energycostunits.fuelcostunits;
       this.beetService.setGeneralDetails(res);
@@ -141,6 +143,7 @@ export class GendetailsComponent implements OnInit {
     this.beetService.setSelectedProvince(event.value);
     console.log(event.value);
     this.locationlist = this.locationDetails.find(ele => ele.province == event.value).locations;
+    
   }
 
   onChangeBuildingType(event) {
@@ -148,7 +151,6 @@ export class GendetailsComponent implements OnInit {
     console.log(event.value);
     this.spacesList = this.buildingDetails.find(ele => ele.buildingtype == event.value).buildingspaces;
   }
-
 
   onChangeBuildingSpaces(event) {
     this.beetService.setSelectedbuildingSpaces(event.value);
@@ -167,7 +169,6 @@ export class GendetailsComponent implements OnInit {
 
 
   applyFilter(event: any){
-
     console.log(event.target.value)
     this.beetService.setBuildingGrossArea(event.target.value);
   }
@@ -186,33 +187,6 @@ export class GendetailsComponent implements OnInit {
    
   }
 
-  // postCalculateOccupancyPeople(): void {
-  //   var payload: any = {
-  //     noofpeople: this.genDetailsForm.controls.noOfPeopleOccupying.value,
-  //     buildinggrossarea: this.genDetailsForm.controls.buildingGrossArea.value,
-  //     buildinggrossareaunit: this.genDetailsForm.controls.grossAreaUnits.value
-  //   }
-  //   console.log(payload);
-  //   this.beetService.postCalculateOccupancyPeople(payload).subscribe(res => {
-  //     console.log(res.success);
-  //     if (res.status == 'success') {
-  //       this.genDetailsForm.controls['occupantDensityKnown'].patchValue(res.success.occupantdensity.toFixed(2));
-  //       this.genDetailsForm.controls['occupantDensityUnits'].patchValue(res.success.occupantdensityunit);
-  //     }
-  //   });
-  // }
-
-  // postCalculateOccupancyUnknown(): void {
-  //   var payload: any = {
-  //     "countrycode": this.selectedCountryCode,
-  //     "buildingtype": this.genDetailsForm.controls.buildingType.value,
-  //     "buildingspaces": this.genDetailsForm.controls.buildingSpaces.value
-  //   }
-  //   this.beetService.postCalculateOccupancyUnknown(payload).subscribe(res => {
-  //     this.genDetailsForm.controls['occupantDensityKnown'].setValue(res.success.occupantdensity.toFixed(2));
-  //     this.genDetailsForm.controls['occupantDensityUnits'].setValue(res.success.occupantdensityunit);
-  //   });
-  // }
 
   onChangeOccupancy() {
     this.genDetailsForm.controls['occupantDensityKnown'].reset();
