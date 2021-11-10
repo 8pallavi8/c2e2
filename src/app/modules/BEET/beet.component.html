@@ -62,6 +62,7 @@
     </p>
 </div>
 <section class="calculator-tools">
+
     <div class="tools-header">
         <div class="top-logo container-fluid">
             <div class="row-logo">
@@ -78,13 +79,14 @@
                 <div class="col-9 col-md-9 d-flex">
                     <div class="title-container">
                         <h2 style="color:#35495e">Building Energy Efficiency Tool(BEET)</h2>
-                        <!-- <p>Building Energy Efficiency Tool</p> -->
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+
+
     <div class="container-fluid">
         <mat-horizontal-stepper linear (selectionChange)="selectionStepperChange($event)" class="stepper-class"
             labelPosition="bottom" #stepper>
@@ -103,8 +105,8 @@
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="buildingdetailsComponent?.formgroup.invalid"  (click)="saveBuildingDetails()" -->
-                    <button [disabled]="buildingdetailsComponent?.formgroup.invalid" mat-raised-button color="primary" matStepperNext
-                        (click)="onSaveBuildingEnvDetails()">Next</button>
+                    <button [disabled]="buildingdetailsComponent?.formgroup.invalid" mat-raised-button color="primary"
+                        matStepperNext (click)="onSaveBuildingEnvDetails()">Next</button>
                 </div>
             </mat-step>
 
@@ -115,7 +117,7 @@
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="lightingDetailsComponent?.formgroup.invalid"  -->
-                    <button  mat-raised-button color="primary" matStepperNext
+                    <button mat-raised-button color="primary" matStepperNext
                         (click)="onSaveLightingDetails()">Next</button>
                 </div>
             </mat-step>
@@ -127,7 +129,8 @@
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="hvacDetailsComponent?.formgroup.invalid"  -->
-                    <button [disabled]="hvacDetailsComponent?.formgroup.invalid" mat-raised-button color="primary"  (click)="onHvacDetails()" matStepperNext>Next</button>
+                    <button [disabled]="hvacDetailsComponent?.formgroup.invalid" mat-raised-button color="primary"
+                        (click)="onHvacDetails()" matStepperNext>Next</button>
                 </div>
             </mat-step>
 
@@ -138,7 +141,8 @@
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="plugLoaDetailsComponent?.formgroup.invalid"  -->
-                    <button [disabled]="plugLoaDetailsComponent?.formgroup.invalid" mat-raised-button color="primary" matStepperNext (click)="onPlugLoadDetails()">Next</button>
+                    <button [disabled]="plugLoaDetailsComponent?.formgroup.invalid" mat-raised-button color="primary"
+                        matStepperNext (click)="onPlugLoadDetails()">Next</button>
                 </div>
             </mat-step>
 
@@ -150,8 +154,9 @@
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="co2EmissionsDetailsComponent?.formgroup.invalid"   -->
-                    <button [disabled]="co2EmissionsDetailsComponent?.formgroup.invalid" mat-raised-button color="primary" matStepperNext (click)="onCo2EmissionsDetails()"
-                        (click)="showSummary()" (click)="getCountryName()">Next</button>
+                    <button [disabled]="co2EmissionsDetailsComponent?.formgroup.invalid" mat-raised-button
+                        color="primary" matStepperNext (click)="onCo2EmissionsDetails()" (click)="showSummary()"
+                        (click)="getCountryName()">Next</button>
                 </div>
             </mat-step>
 
@@ -253,6 +258,10 @@
                 </div>
             </mat-step>
         </mat-horizontal-stepper>
-    </div><br>
+    </div>
+    <br>
+
+
+
     <app-logo-footer></app-logo-footer>
 </section>
