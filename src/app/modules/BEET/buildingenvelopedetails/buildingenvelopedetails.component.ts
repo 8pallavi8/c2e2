@@ -11,6 +11,7 @@ import { RoofradvancedComponent } from 'src/app/shared/roofradvanced/roofradvanc
 import { beetService } from 'src/app/shared/services/beet.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
 import { WindowRdialogComponent } from 'src/app/shared/window-rdialog/window-rdialog.component';
+import { BEETComponent } from '../beet.component';
 
 
 export interface BuildingLayerValues {
@@ -56,7 +57,8 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   selectedMaterial: string;
   SHGC: number;
   selCountryCode: string;
-  selProvince: string;
+  beetComponent : BEETComponent;
+
   layersList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   elementsList = ["Camara de aire", "Ladrillo comun-picture options", "Select more from list of materials"]
   displayedColumns: string[] = ['Layer', 'Capadelelementoconstructivo', 'Espesordecadacapa', 'Resistenciatermica'];
@@ -112,7 +114,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       wwrArray: this.fb.array([]),
     })
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; });
-    this.beetService.getSelectedProvince().subscribe(res => { this.selProvince = res; console.log(res); });
+    this.beetComponent = this.beetService.getBEETParentComponent();
 
     this.beetService.getGeneralDetails().subscribe(res => {
       this.outerRData = res.success.rvaluewall;
@@ -376,7 +378,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   postCalculateshgc(): void {
     var payload: any = {
       "countrycode": this.selCountryCode,
-      "province": this.selProvince
+      "province": this.beetComponent.genDetailsComponent.genDetailsForm.controls.province.value
     }
     console.log(payload);
     this.beetService.postCalculateshgc(payload).subscribe(res => {

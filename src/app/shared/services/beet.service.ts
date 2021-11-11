@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { BehaviorSubject, Observable, ReplaySubject } from "rxjs";
+import { BEETComponent } from "src/app/modules/BEET/beet.component";
 import { environment } from "src/environments/environment";
 import { Summary } from "../models/beet-models";
 
@@ -9,6 +10,8 @@ import { Summary } from "../models/beet-models";
     providedIn: 'root'
 })
 export class beetService {
+
+   
 
     private selectedCountry = new ReplaySubject<string>(1);
 
@@ -24,9 +27,17 @@ export class beetService {
 
     private buildingGrossAreaUnits = new ReplaySubject<string>(1);
 
+    private beetComponent : BEETComponent ;
+
     constructor(private fb: FormBuilder, private http: HttpClient) {
     }
 
+    setBEETParentComponent(beetComponent : BEETComponent ) {
+      this.beetComponent = beetComponent;
+    }
+    getBEETParentComponent() : BEETComponent {
+        return this.beetComponent;
+    }
     setGeneralDetails(genralDetails: any) {
         this.generalDetail.next(genralDetails);
         sessionStorage.setItem('beetInitialData', JSON.stringify(genralDetails));
@@ -51,47 +62,6 @@ export class beetService {
     public getSelectedCountry(): ReplaySubject<string> {
         return this.selectedCountry
     }
-
-
-    setSelectedProvince(province: string) {
-        sessionStorage.setItem('selectedProvince', JSON.stringify(province));
-        this.selectedProvince.next(province);
-    }
-    public getSelectedProvince(): ReplaySubject<string> {
-        return this.selectedProvince
-    }
-
-
-    setSelectedbuildingType(buidlingType: string) {
-        sessionStorage.setItem('selectedbuildingType', JSON.stringify(buidlingType));
-        this.selectedBuildingType.next(buidlingType);
-    }
-    public getSelectedbuildingType(): ReplaySubject<string> {
-        return this.selectedBuildingType
-    }
-
-
-    setSelectedbuildingSpaces(buidlingSpaces: string[]) {
-        this.selectedBuildingSpaces.next(buidlingSpaces);
-    }
-    public getSelectedbuildingSpaces(): ReplaySubject<string[]> {
-        return this.selectedBuildingSpaces
-    }
-
-    setBuildingGrossArea(grossarea: number) {
-        this.buildingGrossArea.next(grossarea);
-    }
-    public getBuildingGrossArea(): ReplaySubject<number> {
-        return this.buildingGrossArea
-    }
-
-    setBuildingGrossAreaUnits(grossareaunits: string) {
-        this.buildingGrossAreaUnits.next(grossareaunits);
-    }
-    public getBuildingGrossAreaUnits(): ReplaySubject<string> {
-        return this.buildingGrossAreaUnits
-    }
-
 
 
     getCountries(): Observable<any> {

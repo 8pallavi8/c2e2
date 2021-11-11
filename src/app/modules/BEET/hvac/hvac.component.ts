@@ -6,6 +6,7 @@ import { debounceTime } from 'rxjs/operators';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
+import { BEETComponent } from '../beet.component';
 
 
 export interface HeatingEquip {
@@ -32,18 +33,16 @@ export class HvacComponent implements OnInit {
   infiltration: number;
   ventilationvalue: number;
   selCountryCode: string;
-  selBuildingCode: string;
-  selBuildingSpaces: string[];
   heatingData: HeatingEquip;
   coolingData: CoolingEquip;
   defaultInfiltrationRate: number;
   heatingImageEffValue: Number;
   coolingImageEffValue: Number;
   coolingImageEffUnits: string;
-
   options = [{ value: 'Yes' }, { value: 'No' }, { value: 'N/A' }];
   acEfficiencyParameterList: string[] = ['EER', 'COP', 'SPC'];
   plugloadoptions: any;
+  beetComponent : BEETComponent;
 
   constructor(private fb: FormBuilder, public dialog: MatDialog,
     private confirmationDialog: ConfirmationDialogService,
@@ -70,8 +69,7 @@ export class HvacComponent implements OnInit {
     }
     )
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
-    this.beetService.getSelectedbuildingType().subscribe(res => { this.selBuildingCode = res; });
-    this.beetService.getSelectedbuildingSpaces().subscribe(res => { this.selBuildingSpaces = res; });
+    this.beetComponent = this.beetService.getBEETParentComponent();
     this.beetService.getGeneralDetails().subscribe(res => {
       this.heatingData = res.success.heatingequipment;
       this.coolingData = res.success.coolingequipment;
@@ -112,9 +110,9 @@ export class HvacComponent implements OnInit {
     }
     else if (value == 3) {
       (<FormArray>this.formgroup.get('coolefficiencyArray')).push(this.fb.group({
-        acEfficiencyValue: ['', Validators.required],
-        acEfficiencyUnits: ['', Validators.required],
-        coolingEquipmentName: ['', Validators.required]
+        acEfficiencyValue: ['0', Validators.required],
+        acEfficiencyUnits: ['null', Validators.required],
+        coolingEquipmentName: ['No Cooling Equipment', Validators.required]
       }));
       this.openConfirmationDialogac()
     }
@@ -144,11 +142,12 @@ export class HvacComponent implements OnInit {
     }
     else if (value == 3) {
       (<FormArray>this.formgroup.get('heatefficiencyArray')).push(this.fb.group({
-        heatefficiency: ['', Validators.required],
-        heatEfficiencyUnits: ['', Validators.required],
-        heatEquipmentName: ['', Validators.required]
+        heatefficiency: ['0', Validators.required],
+        heatEfficiencyUnits: ['null', Validators.required],
+        heatEquipmentName: ['No Heating Equipment', Validators.required]
       }));
       this.openConfirmationDialog()
+      
     }
   }
 
@@ -157,7 +156,7 @@ export class HvacComponent implements OnInit {
     this.confirmationDialog.confirm('Confirm', 'You have selected No Heating Equipment In The Building', 'OK', null)
       .catch(() => console.log('User dismissed the dialog'));
       (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatefficiency.patchValue(0);
-        (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatEfficiencyUnits.patchValue('');
+        (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatEfficiencyUnits.patchValue('null');
         (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatEquipmentName.patchValue("No Heating Equipment");
 
   }
@@ -167,9 +166,8 @@ export class HvacComponent implements OnInit {
     this.confirmationDialog.confirm('Confirm', 'You have selected No Cooling Equipment In The Building', 'OK', null)
       .catch(() => console.log('User dismissed the dialog'));
       (<FormGroup>(<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.acEfficiencyValue.patchValue(0);
-      (<FormGroup>(<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.acEfficiencyUnits.patchValue('');
+      (<FormGroup>(<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.acEfficiencyUnits.patchValue('null');
       (<FormGroup>(<FormArray>this.formgroup.get('coolefficiencyArray')).at(0)).controls.coolingEquipmentName.patchValue("No Cooling Equipment");
-
   }
 
   processHeatCoolEvent(event, type) {
@@ -181,7 +179,6 @@ export class HvacComponent implements OnInit {
       this.postCalculateEquipEfficiency(type, event.value);
     }
   }
-
 
   postCalculateEquipEfficiency(type, equipname): void {
     var payload: any = {
@@ -208,12 +205,11 @@ export class HvacComponent implements OnInit {
   postCalculateVentilationRate(): void {
     var payload: any = {
       "countrycode": this.selCountryCode,
-      "buildingtype": this.selBuildingCode,
-      "buildingspaces": this.selBuildingSpaces
+      "buildingtype": this.beetComponent.genDetailsComponent.genDetailsForm.controls.buildingType.value,
+      "buildingspaces": this.beetComponent.genDetailsComponent.genDetailsForm.controls.buildingSpaces.value
     }
     console.log(payload);
     this.beetService.postCalculateVentilationRate(payload).subscribe(res => {
-      console.log(res.success);
       this.formgroup.controls.ventilationValue.patchValue(res.success.ventilationrate);
       this.formgroup.controls.ventilationUnits.patchValue(res.success.ventilationrateunit);
 

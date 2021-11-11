@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { beetService } from 'src/app/shared/services/beet.service';
+import { BEETComponent } from '../beet.component';
 
 
 export interface Lighting {
@@ -31,10 +32,8 @@ export class LightingComponent implements OnInit {
   lightingOptions: Lighting[];
   lightingOptionsDataSource: MatTableDataSource<Lighting>
   LightningDetailsForm: FormGroup;
-  /* lightingPowerDensityValue:number;
-  totalLightingPowerUnit:string;
-  totalLightingPowerValue:number;
-  lightingPowerDensityUnit:string; */
+  beetComponent:BEETComponent;
+ 
 
   constructor(private fb: FormBuilder, private beetService: beetService) { }
 
@@ -47,8 +46,8 @@ export class LightingComponent implements OnInit {
       totalPower:[]
     });
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
-    this.beetService.getBuildingGrossArea().subscribe(res => { this.grossAreaValue = res;console.log(res)});
-    this.beetService.getBuildingGrossAreaUnits().subscribe(res => { this.grossAreaValueUnits = res;});
+    this.beetComponent= this.beetService.getBEETParentComponent();
+
 
     if(sessionStorage.getItem('lightingOptions') !== null){
       this.lightingOptions = JSON.parse(sessionStorage.getItem('lightingOptions'));
@@ -57,7 +56,6 @@ export class LightingComponent implements OnInit {
     else{
       this.beetService.getGeneralDetails().subscribe(res => {
         this.lightingOptions = res.success.lighting;
-        console.log(this.lightingOptions);
         this.lightingOptionsDataSource = new MatTableDataSource(this.lightingOptions);
       });
     }
@@ -78,8 +76,8 @@ export class LightingComponent implements OnInit {
   postCalculateLightingPower(): void {
    var payload: any = {
        "countrycode": this.selCountryCode,
-       "buildinggrossarea": Number(this.grossAreaValue),
-       "buildinggrossareaunit":this.grossAreaValueUnits,
+       "buildinggrossarea": Number(this.beetComponent.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value),
+       "buildinggrossareaunit":this.beetComponent.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
        "lightingdata":this.lightingOptions
    }
        console.log(this.lightingOptions);

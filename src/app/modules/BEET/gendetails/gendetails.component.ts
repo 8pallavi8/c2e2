@@ -140,43 +140,22 @@ export class GendetailsComponent implements OnInit {
 
 
   onChangeProvince(event) {
-    this.beetService.setSelectedProvince(event.value);
-    console.log(event.value);
     this.locationlist = this.locationDetails.find(ele => ele.province == event.value).locations;
     
   }
 
   onChangeBuildingType(event) {
-    this.beetService.setSelectedbuildingType(event.value);
-    console.log(event.value);
     this.spacesList = this.buildingDetails.find(ele => ele.buildingtype == event.value).buildingspaces;
   }
 
-  onChangeBuildingSpaces(event) {
-    this.beetService.setSelectedbuildingSpaces(event.value);
-  }
-
-
+ 
   calculateGross() {
-    console.log(this.genDetailsForm.controls.netAreaUnits.value);
     if(!this.isEnteredGross){
       this.genDetailsForm.controls.grossAreaUnits.patchValue(this.genDetailsForm.controls.netAreaUnits.value);
       this.genDetailsForm.controls.buildingGrossArea.setValue((this.genDetailsForm.controls.netOccupiedFloorArea.value * 1.1).toFixed(2));
-      this.beetService.setBuildingGrossArea(this.genDetailsForm.controls.buildingGrossArea.value);
-      this.beetService.setBuildingGrossAreaUnits(this.genDetailsForm.controls.grossAreaUnits.value);
     } 
   }
 
-
-  applyFilter(event: any){
-    console.log(event.target.value)
-    this.beetService.setBuildingGrossArea(event.target.value);
-  }
-
-  
-  setGrossUnits(event){
-    this.beetService.setBuildingGrossAreaUnits(event.value);
-  }
 
   resetGross(event) {
     if(event.target.value == ''){

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatTableDataSource } from '@angular/material/table';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { InputdialogService } from 'src/app/shared/services/inputdialog.service';
+import { BEETComponent } from '../beet.component';
+import { GendetailsComponent } from '../gendetails/gendetails.component';
 
 export interface PlugLoadAvailableTable {
   select?: number;
@@ -30,7 +32,6 @@ export interface PlugLoadOptionsTable {
   quantity?: number;
 }
 
-
 @Component({
   selector: 'app-plugloads',
   templateUrl: './plugloads.component.html',
@@ -38,6 +39,7 @@ export interface PlugLoadOptionsTable {
 })
 
 export class PlugloadsComponent implements OnInit {
+
   formgroup: FormGroup;
   displayedColumns = ['plugloadops', 'options', 'quantity'];
   selectionOptions = ['Yes', 'No', 'NA'];
@@ -59,7 +61,7 @@ export class PlugloadsComponent implements OnInit {
   grossAreaValueUnits: string;
   plugLoadItems: FormArray = this.fb.array([]);
   plugLoadSimpleGroupForm: FormGroup;
-
+  beetComponent : BEETComponent;
   constructor(private fb: FormBuilder, public dialog: MatDialog, private beetService: beetService) { }
 
   ngOnInit(): void {
@@ -71,19 +73,16 @@ export class PlugloadsComponent implements OnInit {
       plugLoadOptionsArray: this.fb.array([]),
     });
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; });
-
-    console.log("PLUG LOAD OPTIONS " + sessionStorage.getItem('plugloadDetails'))
-
+    this.beetComponent = this.beetService.getBEETParentComponent();
+  
     if (sessionStorage.getItem('plugloadDetails') !== null) {
+            
       var plugloadDetails = JSON.parse(sessionStorage.getItem('plugloadDetails'));
       var plugloadoptionsTemp = plugloadDetails.plugLoadArray;
-      //console.log(plugloadoptionsTemp);
-      //this.plugloadOptionsDataSource = new MatTableDataSource(plugloadoptionsTemp);
       this.changeFormFieldValues(plugloadoptionsTemp);
-    } else {
+    }
+
       this.beetService.getGeneralDetails().subscribe(res => {
-        this.beetService.getBuildingGrossArea().subscribe(res => { this.grossAreaValue = res; });
-        this.beetService.getBuildingGrossAreaUnits().subscribe(res => { this.grossAreaValueUnits = res; });
         this.plugLoadPredefined = res.success.plugloadoptctable;
         this.plugLoadGuide = res.success.plugloadoptbtable;
         this.optbDataSource = new MatTableDataSource(this.plugLoadGuide);
@@ -94,7 +93,7 @@ export class PlugloadsComponent implements OnInit {
         }
         this.plugloadOptionsDataSource = new MatTableDataSource(this.plugloadoptions);
       });
-    }
+ 
     if (sessionStorage.getItem('plugloadDetails') !== null) {
       var plugloadDetails = JSON.parse(sessionStorage.getItem('plugloadDetails'));
       if (plugloadDetails !== undefined || plugloadDetails !== null) {
@@ -117,31 +116,20 @@ export class PlugloadsComponent implements OnInit {
     }
   }
   changeFormFieldValues(plugLoadGuideTemp) {
-    if((<FormArray>this.formgroup.get('plugLoadArray')).length == 0 ){
+    if ((<FormArray>this.formgroup.get('plugLoadArray')).length == 0) {
       for (var plugloadguide of plugLoadGuideTemp) {
         plugloadguide.stock = 0;
         (<FormArray>this.formgroup.get('plugLoadArray')).push(this.createItem(plugloadguide));
-        //console.log(this.plugLoadItems);
       }
     }
-   
-   /*  (<FormArray>this.formgroup.get('plugLoadArray')).controls.forEach((element, index) => {
-      //console.log(element, index);
-      if ((<FormGroup>element).controls.space.value !== '') {
-        (<FormGroup>element).controls.space.disable();
-      }
-      if ((<FormGroup>element).controls.plugloadappliance.value !== '') {
-        (<FormGroup>element).controls.plugloadappliance.disable();
-      }
-    }); */
   }
 
 
   createItem(plugloadguide): FormGroup {
     console.log(plugloadguide);
     return this.fb.group({
-      space: [{value: plugloadguide.space, disabled: plugloadguide.space !=''}],
-      plugloadappliance: [{value: plugloadguide.plugloadappliance, disabled: plugloadguide.plugloadappliance !=''} ],
+      space: [{ value: plugloadguide.space, disabled: plugloadguide.space != '' }],
+      plugloadappliance: [{ value: plugloadguide.plugloadappliance, disabled: plugloadguide.plugloadappliance != '' }],
       yearofinstallation: [plugloadguide.yearofinstallation],
       avgpowerwatts: [plugloadguide.avgpowerwatts],
       stock: [plugloadguide.stock, Validators.required],
@@ -161,9 +149,7 @@ export class PlugloadsComponent implements OnInit {
   }
 
   calculatePlugLoad(): void {
-
-    
-
+    console.log("Calculate :: "+this.beetComponent.genDetailsComponent.genDetailsForm.value);
     var plugLoadArray: PlugLoadGuideTable[] = [];
     (<FormArray>this.formgroup.get('plugLoadArray')).controls.forEach((element, index) => {
       if ((<FormGroup>element).controls.plugloadappliance.value != '' && ((<FormGroup>element).controls.space.value != '')) {
@@ -179,15 +165,13 @@ export class PlugloadsComponent implements OnInit {
       }
     });
     var payload: any = {
-      "buildinggrossarea": Number(this.grossAreaValue),
-      "buildinggrossareaunit": this.grossAreaValueUnits,
+      "buildinggrossarea": Number(this.beetComponent.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value),
+      "buildinggrossareaunit": this.beetComponent.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
       "plugloaddensitydata": plugLoadArray
     }
     this.beetService.postCalculatePlugLoad(payload).subscribe(res => {
       this.formgroup.controls.plugLoadValueKnown.patchValue(res.success.pluloaddensity);
       this.formgroup.controls.plugLoadUnits.patchValue(res.success.pluloaddensityunit);
     });
-
-    console.log(this.formgroup, this.formgroup.valid)
   }
 }

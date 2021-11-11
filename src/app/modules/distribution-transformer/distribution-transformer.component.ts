@@ -165,11 +165,9 @@ export class DisTransformerComponent implements OnInit {
 
 
     this.toolService.sendDisTransformerDetails(transReq).subscribe(res => {
-      console.log(res);
       if (res.status == 'success') {
         var finalOutValues: FinalTable[] = [];
         res.success.finalvalues.forEach(ele => {
-          console.log(ele);
           finalOutValues.push(ele);
         });
 

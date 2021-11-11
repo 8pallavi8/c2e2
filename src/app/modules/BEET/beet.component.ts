@@ -71,13 +71,25 @@ export class BEETComponent implements OnInit, AfterViewInit {
   heatingEfficiencyFinal: number;
   generalDetails: GeneralDetails;
   summaryTable: { Parameter: string; Units: any; Value: any; }[];
+  displayedColumnsinputvalues=["parameter","baselinevalue","efficientvalue"];
+  displayedColumnsintermediatevalues=["parameter","baselinevalue","efficientvalue"];
+  displayedColumnsoutputvalues=["parameter","baselinevalue","efficientvalue"];
+  displayedColumnsmonthlyresults=["rowtype","month","peakkwbaseline","kwhbaseline","thermsbaseline","ngcubicmeterbaseline","peakkwees","kwhees","thermsees","ngcubicmeterees"];
+  displayedColumnseconomizersavings=["parameter","baselinevalue","efficientvalue"];
+  displayedColumnsinputsforgraph=["parameter","baselinevalue","efficientvalue"];
+
+  
+
+
+
+
   constructor(private beetService: beetService, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     if (sessionStorage.getItem('userId') !== null) {
       this.userId = sessionStorage.getItem('userId');
     }
-
+    this.beetService.setBEETParentComponent(this);
   }
 
   ngAfterViewInit() {
@@ -89,7 +101,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
     if (event.selectedIndex == 6) {
       this.saveBuildingDetails();
       this.saveHVACDetails();
-      this.onSaveLightingDetails()
+      this.onSaveLightingDetails();
       this.showSummary();
     }
   }
@@ -153,7 +165,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
       },
       {
         Parameter: 'Occupant density', Units: this.genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value,
-        Value: this.genDetailsComponent.genDetailsForm.controls.occupantDensity.value
+        Value: this.genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value
       },
       {
         Parameter: 'Electricty cost', Units: this.genDetailsComponent.genDetailsForm.controls.electricityUnits.value,
@@ -212,6 +224,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
   postDataGenerateReport() {
     var selectedcountryname = sessionStorage.getItem('selectedCountryName');
     if (this.genDetailsComponent.genDetailsForm.valid) {
+      this.plugloadoptions = [];
       (<FormArray>this.plugLoaDetailsComponent.formgroup.get('plugLoadOptionsArray')).controls.forEach((element, index) => {
         var optionsplugload: any = {
           operation: (<FormGroup>element).controls.operation.value,
@@ -235,7 +248,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
         buildinggrossareaunit: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
         netoccupiedarea: this.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value,
         netoccupiedareaunit: this.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
-        occupantdensity: Number(this.genDetailsComponent.genDetailsForm.controls.occupantDensity.value),
+        occupantdensity: Number(this.genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value),
         occupantdensityunit: this.genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value,
         electricitycost: this.genDetailsComponent.genDetailsForm.controls.electricityCost.value,
         electricitycostunit: this.genDetailsComponent.genDetailsForm.controls.electricityUnits.value,
@@ -270,7 +283,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
         avgindoortemperatureunit: this.hvacDetailsComponent.formgroup.controls.avgIndoorAirTempUnit.value,
         controllerhvaccompressors: this.hvacDetailsComponent.formgroup.controls.hvacCompressorInstalled.value,
         controllerhvacfans: this.hvacDetailsComponent.formgroup.controls.hvacFansandBlowersInstalled.value,
-        plugloaddensity: this.plugLoaDetailsComponent.formgroup.controls.plugloadvalue,
+        plugloaddensity: this.plugLoaDetailsComponent.formgroup.controls.plugLoadValueKnown.value,
         plugloaddensityunit: this.plugLoaDetailsComponent.formgroup.controls.plugLoadUnits.value,
         plugloadoperations: this.plugloadoptions,
         gridemissionsfactor: this.co2EmissionsDetailsComponent.formgroup.controls.gridemissionsFactor.value,
