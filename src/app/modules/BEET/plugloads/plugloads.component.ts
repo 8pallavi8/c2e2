@@ -39,7 +39,6 @@ export interface PlugLoadOptionsTable {
 })
 
 export class PlugloadsComponent implements OnInit {
-
   formgroup: FormGroup;
   displayedColumns = ['plugloadops', 'options', 'quantity'];
   selectionOptions = ['Yes', 'No', 'NA'];
@@ -61,7 +60,7 @@ export class PlugloadsComponent implements OnInit {
   grossAreaValueUnits: string;
   plugLoadItems: FormArray = this.fb.array([]);
   plugLoadSimpleGroupForm: FormGroup;
-  beetComponent : BEETComponent;
+  beetComponent: BEETComponent;
   constructor(private fb: FormBuilder, public dialog: MatDialog, private beetService: beetService) { }
 
   ngOnInit(): void {
@@ -74,32 +73,34 @@ export class PlugloadsComponent implements OnInit {
     });
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; });
     this.beetComponent = this.beetService.getBEETParentComponent();
-  
-    if (sessionStorage.getItem('plugloadDetails') !== null) {
-            
-      var plugloadDetails = JSON.parse(sessionStorage.getItem('plugloadDetails'));
-      var plugloadoptionsTemp = plugloadDetails.plugLoadArray;
-      this.changeFormFieldValues(plugloadoptionsTemp);
-    }
-
-      this.beetService.getGeneralDetails().subscribe(res => {
-        this.plugLoadPredefined = res.success.plugloadoptctable;
-        this.plugLoadGuide = res.success.plugloadoptbtable;
-        this.optbDataSource = new MatTableDataSource(this.plugLoadGuide);
-        this.optcDataSource = new MatTableDataSource(this.plugLoadPredefined);
-        this.plugloadoptions = res.success.plugloadoperations;
+    this.beetService.getGeneralDetails().subscribe(res => {
+      this.plugLoadPredefined = res.success.plugloadoptctable;
+      this.plugLoadGuide = res.success.plugloadoptbtable;
+      this.optbDataSource = new MatTableDataSource(this.plugLoadGuide);
+      this.optcDataSource = new MatTableDataSource(this.plugLoadPredefined);
+      this.plugloadoptions = res.success.plugloadoperations;
+      if((<FormArray>this.formgroup.get('plugLoadOptionsArray')).length == 0 ){
         for (var plugloadoption of this.plugloadoptions) {
           (<FormArray>this.formgroup.get('plugLoadOptionsArray')).push(this.createOptions(plugloadoption));
-        }
-        this.plugloadOptionsDataSource = new MatTableDataSource(this.plugloadoptions);
-      });
- 
+        } 
+      }
+       
+      this.plugloadOptionsDataSource = new MatTableDataSource(this.plugloadoptions);
+    });
+
     if (sessionStorage.getItem('plugloadDetails') !== null) {
       var plugloadDetails = JSON.parse(sessionStorage.getItem('plugloadDetails'));
+      var plugloadArrayTemp = plugloadDetails.plugLoadArray;
+    
+
       if (plugloadDetails !== undefined || plugloadDetails !== null) {
         this.formgroup.patchValue(plugloadDetails);
       }
+     
+      this.changeFormFieldValues(plugloadArrayTemp);
+      
     }
+   
   }
 
   createOptions(plugloadoptions) {
@@ -126,7 +127,6 @@ export class PlugloadsComponent implements OnInit {
 
 
   createItem(plugloadguide): FormGroup {
-    console.log(plugloadguide);
     return this.fb.group({
       space: [{ value: plugloadguide.space, disabled: plugloadguide.space != '' }],
       plugloadappliance: [{ value: plugloadguide.plugloadappliance, disabled: plugloadguide.plugloadappliance != '' }],
@@ -139,7 +139,6 @@ export class PlugloadsComponent implements OnInit {
 
   onChangeAvailbePlugLoad(event) {
     if (event.value == 3) {
-      console.log(event);
     }
   }
 
@@ -149,7 +148,6 @@ export class PlugloadsComponent implements OnInit {
   }
 
   calculatePlugLoad(): void {
-    console.log("Calculate :: "+this.beetComponent.genDetailsComponent.genDetailsForm.value);
     var plugLoadArray: PlugLoadGuideTable[] = [];
     (<FormArray>this.formgroup.get('plugLoadArray')).controls.forEach((element, index) => {
       if ((<FormGroup>element).controls.plugloadappliance.value != '' && ((<FormGroup>element).controls.space.value != '')) {

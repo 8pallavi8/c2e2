@@ -17,6 +17,12 @@ export interface PlugLoadOptionsTable {
   options?: string;
   quantity?: number;
 }
+export interface CalculatedTables{
+  parameter: string;
+  baselinevalue: number;
+  energyefficienctvalue: number;
+}
+
 
 export interface Rvalue {
   rValue?: number;
@@ -47,6 +53,19 @@ export interface Efficiency {
   styleUrls: ['./beet.component.scss']
 })
 export class BEETComponent implements OnInit, AfterViewInit {
+  showTables:boolean = false;
+  inputvaluestable: CalculatedTables[];
+  inputvaluestableDataSource: MatTableDataSource<CalculatedTables>
+  intermediatevaluestable: CalculatedTables[];
+  intermediatevaluestabletableDataSource: MatTableDataSource<CalculatedTables>
+  outputvaluestable: CalculatedTables[];
+  outputvaluestableDataSource: MatTableDataSource<CalculatedTables>
+  monthresultstable: CalculatedTables[];
+  monthresultstabletableDataSource: MatTableDataSource<CalculatedTables>
+  economizersavingstable: CalculatedTables[];
+  economizersavingstableDataSource: MatTableDataSource<CalculatedTables>
+  inputsforgraphtable: CalculatedTables[];
+  inputsforgraphtableDataSource: MatTableDataSource<CalculatedTables>
   plugloadoptions: PlugLoadOptionsTable[] = [];
   summary: Summary;
   inputTableDataSource: any;
@@ -74,15 +93,11 @@ export class BEETComponent implements OnInit, AfterViewInit {
   displayedColumnsinputvalues=["parameter","baselinevalue","efficientvalue"];
   displayedColumnsintermediatevalues=["parameter","baselinevalue","efficientvalue"];
   displayedColumnsoutputvalues=["parameter","baselinevalue","efficientvalue"];
-  displayedColumnsmonthlyresults=["rowtype","month","peakkwbaseline","kwhbaseline","thermsbaseline","ngcubicmeterbaseline","peakkwees","kwhees","thermsees","ngcubicmeterees"];
+  displayedColumnsmonthlyresults=["month","peakkwbaseline","kwhbaseline","thermsbaseline","ngcubicmeterbaseline","peakkwees","kwhees","thermsees","ngcubicmeterees"];
   displayedColumnseconomizersavings=["parameter","baselinevalue","efficientvalue"];
   displayedColumnsinputsforgraph=["parameter","baselinevalue","efficientvalue"];
 
   
-
-
-
-
   constructor(private beetService: beetService, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -126,12 +141,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   onPlugLoadDetails() {
     sessionStorage.setItem('plugloadDetails', JSON.stringify(this.plugLoaDetailsComponent.formgroup.getRawValue()))
-    sessionStorage.setItem('plugloadOptions', JSON.stringify(this.plugLoaDetailsComponent.plugloadoptions))
-  }
-
-  getCountryName() {
-
-
+    
   }
 
   onCo2EmissionsDetails() {
@@ -140,7 +150,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
 
   showSummary() {
-    //console.log("UserName:", this.genDetailsComponent.genDetailsForm.controls.UserName.value);
     var selectedcountryname = sessionStorage.getItem('selectedCountryName');
     this.summaryTable = [
       { Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.userName.value },
@@ -222,17 +231,22 @@ export class BEETComponent implements OnInit, AfterViewInit {
   }
 
   postDataGenerateReport() {
+    this.showTables=true;
     var selectedcountryname = sessionStorage.getItem('selectedCountryName');
     if (this.genDetailsComponent.genDetailsForm.valid) {
+
       this.plugloadoptions = [];
+    
       (<FormArray>this.plugLoaDetailsComponent.formgroup.get('plugLoadOptionsArray')).controls.forEach((element, index) => {
         var optionsplugload: any = {
           operation: (<FormGroup>element).controls.operation.value,
           operationresponse: (<FormGroup>element).controls.operationresponse.value,
           quantity: (<FormGroup>element).controls.quantity.value,
         }
+
         this.plugloadoptions.push(optionsplugload);
       });
+ 
       var payload: any = {
         username: this.genDetailsComponent.genDetailsForm.controls.userName.value,
         projectname: this.genDetailsComponent.genDetailsForm.controls.projectName.value,
@@ -290,11 +304,23 @@ export class BEETComponent implements OnInit, AfterViewInit {
         gridemissionsfactorunit: this.co2EmissionsDetailsComponent.formgroup.controls.gridemissionsFactorUnits.value,
         onsiteemissions: this.co2EmissionsDetailsComponent.formgroup.controls.fuelEmissionFactorValue.value,
         onsiteemissionsunit: this.co2EmissionsDetailsComponent.formgroup.controls.fuelEmissionFactorUnit.value,
-
       }
       console.log(payload);
       this.beetService.postDataGenerateReport(payload).subscribe(res => {
-        console.log(res);
+        console.log(res.success)
+        this.inputvaluestable= res.success.inputvaluestable;
+        this.inputvaluestableDataSource = new MatTableDataSource(this.inputvaluestable);
+        this.intermediatevaluestable= res.success.intermediatevaluestable;
+        this.intermediatevaluestabletableDataSource = new MatTableDataSource(this.intermediatevaluestable);
+        this.outputvaluestable= res.success.outputvaluestable;
+        this.outputvaluestableDataSource = new MatTableDataSource(this.outputvaluestable);
+        this.monthresultstable= res.success.monthresultstable;
+        this.monthresultstabletableDataSource = new MatTableDataSource(this.monthresultstable);
+        this.economizersavingstable= res.success.intermediatevaluestable;
+        this.economizersavingstableDataSource = new MatTableDataSource(this.economizersavingstable);
+        this.inputsforgraphtable= res.success.outputvaluestable;
+        this.inputsforgraphtableDataSource = new MatTableDataSource(this.inputsforgraphtable);
+
         /*  if (res.status == 'success') {
            console.log(res.success);
            this.isGeneralDetailsUpdated = true;
