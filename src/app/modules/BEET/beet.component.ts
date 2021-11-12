@@ -112,13 +112,13 @@ export class BEETComponent implements OnInit, AfterViewInit {
   }
 
   selectionStepperChange(event) {
-    console.log(event.selectedIndex)
-    if (event.selectedIndex == 6) {
       this.saveBuildingDetails();
       this.saveHVACDetails();
       this.onSaveLightingDetails();
       this.showSummary();
-    }
+      this.onSaveGenDetails();
+      this. onPlugLoadDetails();
+      this.onSaveLightingDetails();
   }
 
   onSaveGenDetails() {
