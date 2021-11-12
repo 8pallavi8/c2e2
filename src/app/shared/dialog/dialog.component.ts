@@ -26,7 +26,6 @@ export class DialogComponent implements OnInit {
     }
   }
   onNoClick(): void {
-    console.log(this.selectedValues);
     this.dialogRef.close(this.selectedValues);
   }
 

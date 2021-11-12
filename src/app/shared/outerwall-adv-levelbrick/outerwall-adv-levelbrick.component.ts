@@ -33,7 +33,6 @@ export class OuterwallAdvLevelbrickComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<OuterwallAdvLevelbrickComponent>,private beetService: beetService) { }
   ngOnInit(): void {
     this.beetService.getGeneralDetails().subscribe(res => { 
-      console.log("building Envelop "+JSON.stringify(res.success.buildingdata));
       this.rvaluewalladvancedData=res.success.rvaluewalladvanced;
       this.dataSource = this.rvaluewalladvancedData;
     });
@@ -41,7 +40,6 @@ export class OuterwallAdvLevelbrickComponent implements OnInit {
  
   selectedR($event: any, row:materialElement){
     console.info("clicked", $event);
-    console.log(row.rvalue);
     this.dialogRef.close(row.rvalue); 
   }
 

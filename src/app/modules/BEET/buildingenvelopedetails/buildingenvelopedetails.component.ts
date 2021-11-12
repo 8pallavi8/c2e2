@@ -123,23 +123,19 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     if (sessionStorage.getItem('buildingEnvDetails') !== null) {
       var buildingEnvDetails = JSON.parse(sessionStorage.getItem('buildingEnvDetails'));
       if (buildingEnvDetails !== undefined || buildingEnvDetails !== null) {
-        console.log(buildingEnvDetails);
+    
         this.createOuterWallForm(buildingEnvDetails.outerwallr);
         this.createRoofRForm(buildingEnvDetails.roofr);
         this.createWindowRForm(buildingEnvDetails.windowr);
         this.createWWRForm(buildingEnvDetails.wwr);
         this.formgroup.patchValue(buildingEnvDetails);
-        console.log(this.formgroup);
       }
     }
   }
 
   onChangeOuterWallROption(event: MatRadioChange) {
-    console.log(this.formgroup.get('outerWallArray'));
     (<FormArray>this.formgroup.get('outerWallArray')).removeAt(0);
-    console.log("change : " + event.value);
     this.createOuterWallForm(event.value);
-    console.log(this.formgroup);
   }
 
   createOuterWallForm(value: number) {
@@ -162,7 +158,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
 
 
   onChangeroofrOption(event: MatRadioChange) {
-    console.log(this.formgroup.get('roofrArray'));
     (<FormArray>this.formgroup.get('roofrArray')).removeAt(0)
     this.createRoofRForm(event.value);
   }
@@ -186,7 +181,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   }
 
   onChangewindowrOption(event: MatRadioChange) {
-    console.log(this.formgroup.get('windowrArray'));
     (<FormArray>this.formgroup.get('windowrArray')).removeAt(0);
     this.createWindowRForm(event.value);
     if (event.value == 2) {
@@ -238,7 +232,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
 
 
   onOptionsSelected(event) {
-    console.log(event.value);
     if (event.value == 'Camara de aire') {
       this.openCamaraDie(0);
     }
@@ -257,7 +250,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      console.log(result.thickness, result.rvalue);
       if (typeofroof == 0) {
         this.addOuterWallLayerValues(result.thickness, result.rvalue);
       } else {
@@ -288,7 +280,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      console.log("adv" + result);
       if (typeofroof == 0) {
         this.addOuterWallLayerValues(result.thickness, result.rvalue);
       } else {
@@ -300,7 +291,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
 
   public addOuterWallLayerValues(thickness, Rvalue) {
     let layerInput: BuildingLayerValues;
-    console.log("callingLayer ");
     layerInput =
     {
       Layer: this.selectedLayerValue,
@@ -332,7 +322,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   }
 
   onOptionsSelectedroof(event) {
-    console.log(event.value);
     if (event.value == 'Camara de aire') {
       this.openCamaraDie(1);
     }
@@ -351,7 +340,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       maxHeight: '100vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      console.log(result);
       if (result != undefined) {
         this.addRoofLayerValues('', result);
       }
@@ -360,8 +348,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
 
   public addRoofLayerValues(thickness, Rvalue) {
     let layerInput: BuildingLayerValues;
-    console.log("callingLayer ");
-    //this.selectedLayerValue
     layerInput =
     {
       Layer: this.selectedRoofLayerValue,
@@ -380,7 +366,6 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       "countrycode": this.selCountryCode,
       "province": this.beetComponent.genDetailsComponent.genDetailsForm.controls.province.value
     }
-    console.log(payload);
     this.beetService.postCalculateshgc(payload).subscribe(res => {
       this.formgroup.controls.SHGCknown.patchValue(res.success);
     });

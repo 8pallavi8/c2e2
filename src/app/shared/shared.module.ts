@@ -13,8 +13,6 @@ import { ConfirmationDialogService } from './services/confirmation-dialog.servic
 import { ConfirmationDialogComponent } from './deleteconfirmationdialog/deleteconfirmationdialog.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { DialogComponent } from './dialog/dialog.component';
-
-import { PlugloadavailablevaldialogComponent } from './plugloadavailablevaldialog/plugloadavailablevaldialog.component';
 import {textfieldsdialogComponent } from './textfieldsdialog/textfieldsdialog.component';
 import { WindowRdialogComponent } from './window-rdialog/window-rdialog.component';
 import { OuterwallRadvancedleveldialogComponent } from './outerwall-radvancedleveldialog/outerwall-radvancedleveldialog.component';
@@ -34,7 +32,6 @@ import { FooterTwoComponent } from './footer-two/footer-two.component';
     BarChartComponent,
     DialogComponent,
     ConfirmationDialogComponent,
-    PlugloadavailablevaldialogComponent,
     textfieldsdialogComponent,
     WindowRdialogComponent,
     OuterwallRadvancedleveldialogComponent,
@@ -65,7 +62,6 @@ import { FooterTwoComponent } from './footer-two/footer-two.component';
     MatDialogModule,
     ConfirmationDialogComponent,
     DialogComponent,
-    PlugloadavailablevaldialogComponent,
     textfieldsdialogComponent,
     WindowRdialogComponent,
     OuterwallRadvancedleveldialogComponent,

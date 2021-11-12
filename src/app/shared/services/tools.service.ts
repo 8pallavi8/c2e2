@@ -15,7 +15,6 @@ export class ToolsService {
    
     }
     sendDisTransformerDetails(transReq): Observable<any> {
-        console.log(environment.baseUrl)
         return this.http.post( environment.baseUrl+':9999/api/v1/tool1' , transReq)
     }
     getTool1Inputs(): Observable<any> { 

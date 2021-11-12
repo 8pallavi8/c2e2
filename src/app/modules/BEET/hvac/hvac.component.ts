@@ -68,7 +68,7 @@ export class HvacComponent implements OnInit {
       hvacFansandBlowersInstalled: ['', Validators.compose([Validators.required])]
     }
     )
-    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
+    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res;});
     this.beetComponent = this.beetService.getBEETParentComponent();
     this.beetService.getGeneralDetails().subscribe(res => {
       this.heatingData = res.success.heatingequipment;
@@ -78,11 +78,9 @@ export class HvacComponent implements OnInit {
     if (sessionStorage.getItem('hvacDetails') !== null) {
       var hvacDetails = JSON.parse(sessionStorage.getItem('hvacDetails'));
       if (hvacDetails !== undefined || hvacDetails !== null) {
-        console.log(hvacDetails);
         this.createCoolingEfficiencyForm(hvacDetails.airconditioning);
         this.createHeatingEfficiencyForm(hvacDetails.heatefficiency);
         this.formgroup.patchValue(hvacDetails);
-        console.log(this.formgroup);
       }
     }
   }
@@ -186,7 +184,6 @@ export class HvacComponent implements OnInit {
       "equipmenttype": type,
       "equipmentname": equipname
     }
-    console.log(payload);
     this.beetService.postCalculateEquipEfficiency(payload).subscribe(res => {
       if (type == 'heating') {
         (<FormGroup>(<FormArray>this.formgroup.get('heatefficiencyArray')).at(0)).controls.heatefficiency.patchValue(res.success.efficiency);
@@ -208,7 +205,6 @@ export class HvacComponent implements OnInit {
       "buildingtype": this.beetComponent.genDetailsComponent.genDetailsForm.controls.buildingType.value,
       "buildingspaces": this.beetComponent.genDetailsComponent.genDetailsForm.controls.buildingSpaces.value
     }
-    console.log(payload);
     this.beetService.postCalculateVentilationRate(payload).subscribe(res => {
       this.formgroup.controls.ventilationValue.patchValue(res.success.ventilationrate);
       this.formgroup.controls.ventilationUnits.patchValue(res.success.ventilationrateunit);

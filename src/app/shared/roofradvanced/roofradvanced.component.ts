@@ -30,7 +30,6 @@ export class RoofradvancedComponent implements OnInit {
 
   ngOnInit(): void {
     this.beetService.getGeneralDetails().subscribe(res => { 
-      console.log("building Envelop "+JSON.stringify(res.success.buildingdata));
       this.rValueRoofAdvancedData=res.success.rvalueroofadvanced;
       this.dataSource = this.rValueRoofAdvancedData;
     });
@@ -38,7 +37,6 @@ export class RoofradvancedComponent implements OnInit {
 
   selectedR($event: any, row:RvalueRoofAdvanced){
     console.info("clicked", $event);
-    console.log(row.rwinter);
     this.dialogRef.close(row.rwinter); 
   }
 

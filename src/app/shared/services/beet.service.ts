@@ -11,7 +11,7 @@ import { Summary } from "../models/beet-models";
 })
 export class beetService {
 
-   
+
 
     private selectedCountry = new ReplaySubject<string>(1);
 
@@ -27,15 +27,15 @@ export class beetService {
 
     private buildingGrossAreaUnits = new ReplaySubject<string>(1);
 
-    private beetComponent : BEETComponent ;
+    private beetComponent: BEETComponent;
 
     constructor(private fb: FormBuilder, private http: HttpClient) {
     }
 
-    setBEETParentComponent(beetComponent : BEETComponent ) {
-      this.beetComponent = beetComponent;
+    setBEETParentComponent(beetComponent: BEETComponent) {
+        this.beetComponent = beetComponent;
     }
-    getBEETParentComponent() : BEETComponent {
+    getBEETParentComponent(): BEETComponent {
         return this.beetComponent;
     }
     setGeneralDetails(genralDetails: any) {
@@ -44,7 +44,7 @@ export class beetService {
     }
 
     public getGeneralDetails(): ReplaySubject<any> {
-        if(sessionStorage.getItem('beetInitialData') != undefined){
+        if (sessionStorage.getItem('beetInitialData') != undefined) {
             var generalDetailsTemp = JSON.parse(sessionStorage.getItem('beetInitialData'));
             this.generalDetail.next(generalDetailsTemp);
         }
@@ -71,13 +71,13 @@ export class beetService {
     getGeneralData(countyryCode: string): Observable<any> {
         let params = new HttpParams();
         params = params.append('countrycode', countyryCode);
-        console.log(countyryCode)
+
         return this.http.get(environment.baseUrl + ':9998/api/user/v1/getgeneraldata', { params: params });
     }
 
 
     postGeneralData(payload: any): Observable<any> {
-        console.log(payload);
+
         return this.http.post(environment.baseUrl + ':9998/api/user/v1/postgeneraldata', payload);
     }
 

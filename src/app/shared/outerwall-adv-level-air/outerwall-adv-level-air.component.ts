@@ -18,7 +18,7 @@ export class OuterwallAdvLevelAirComponent implements OnInit {
 
   ngOnInit(): void {
     this.OuterWallFG = this.createForm();
-    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
+    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res;});
     this.beetService.getGeneralDetails().subscribe(res => {
       this.surfaceemittance = res.success.airtabledropdown.surfaceemittance;
     });
@@ -41,7 +41,6 @@ export class OuterwallAdvLevelAirComponent implements OnInit {
       "thickness": this.OuterWallFG.controls.airLayerThickness.value
     }
     this.beetService.postcalculateRAir(payload).subscribe(res =>{
-      console.log(res.success);
       this.dialogRef.close(res.success);
     })
   }

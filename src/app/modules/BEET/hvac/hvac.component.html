@@ -330,7 +330,7 @@
                     <p class="fieldname-align">Average indoor air temperature (set-point):</p>
                     <mat-form-field appearance="outline">
                         <mat-label>Enter value</mat-label>
-                        <input matInput formControlName="avgIndoorAirTemp">
+                        <input matInput placeholder="Enter value" type="number" formControlName="avgIndoorAirTemp">
                         <mat-select [(value)]="units" formControlName="avgIndoorAirTempUnit">
                             <mat-option value="centigrade">ºC</mat-option>
                             <mat-option value="farenheit">ºF</mat-option>

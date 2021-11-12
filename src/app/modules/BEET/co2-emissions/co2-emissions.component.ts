@@ -31,16 +31,13 @@ export class CO2EmissionsComponent implements OnInit {
     });
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res;});
     this.beetService.getGeneralDetails().subscribe(res => {
-      console.log(res.success.co2emissionsunits);
       this.co2emissionsunits = res.success.co2emissionsunits;
       this.defaultPowerGridEmissionFactor = res.success.defaultgridemissionfactor;
     });
     if (sessionStorage.getItem('co2EmissionDetails') !== null) {
       var co2EmissionDetails = JSON.parse(sessionStorage.getItem('co2EmissionDetails'));
       if (co2EmissionDetails !== undefined || co2EmissionDetails !== null) {
-        console.log("co2"+co2EmissionDetails);
         this.formgroup.patchValue(co2EmissionDetails); 
-        console.log(this.formgroup);
       }
     }
   }

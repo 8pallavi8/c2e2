@@ -6,8 +6,8 @@
 
 td.mat-cell,
 th.mat-header-cell {
-    border-style: groove;
-    text-align: center;
+    border-style: double;
+    //text-align: center;
     padding-left: 24px !important;
 }
 
@@ -16,7 +16,7 @@ th.mat-header-cell {
 }
 
 table {
-    width: 50%;
+    width: 70%;
     margin-top: 1rem;
     background: transparent;
 }

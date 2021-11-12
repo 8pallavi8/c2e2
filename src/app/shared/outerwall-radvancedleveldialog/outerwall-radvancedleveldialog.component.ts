@@ -43,7 +43,6 @@ export class OuterwallRadvancedleveldialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.beetService.getGeneralDetails().subscribe(res => { 
-      //console.log("building Envelop "+JSON.stringify(res.success.buildingdata));
       this.rvalueadvancedmaterialData=res.success.advancedmaterialtable;
 
     });
@@ -58,9 +57,8 @@ export class OuterwallRadvancedleveldialogComponent implements OnInit {
   }
 
   onChangeMaterial(event){
-    console.log(event.value);
+  
    let tempData = this.rvalueadvancedmaterialData.find(ele => ele.mainmaterial == event.value);
-   console.log(tempData.otherdata);
    this.selectedTable = tempData;
    this.dataSource = new MatTableDataSource(tempData.otherdata);
   }
@@ -68,9 +66,6 @@ export class OuterwallRadvancedleveldialogComponent implements OnInit {
 
   selectedR(event: any, row:OtherData){
     this.openThicknessDialog();
-    console.log("clicked", event);
-    console.log(row);
-    console.log(row.thermcalconductivityfrom);
     this.thermalConductivitySelected=row;
     //this.dialogRef.close(row.thermcalconductivityfrom); 
   }
@@ -83,18 +78,15 @@ export class OuterwallRadvancedleveldialogComponent implements OnInit {
     });
     dialogref.afterClosed().subscribe(result => {
       this.enteredThickness=result;
-      console.log("valueeeee"+this.enteredThickness);
     });
   }
 
   postcalculateAdvancedMaterial(): void {
-    console.log(this.thermalConductivitySelected)
     var payload: any = {
       "thermalconductivity": this.thermalConductivitySelected.thermcalconductivityfrom,
       "thickness": Number(this.enteredThickness)
     }
     this.beetService.postcalculateAdvancedMaterial(payload).subscribe(res =>{
-      console.log(res);
       this.dialogRef.close(res.success);
     })
   }

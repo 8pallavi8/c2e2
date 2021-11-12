@@ -19,12 +19,6 @@ export class PieChartComponent implements OnInit {
 
 
   constructor() { 
-    /* console.log(this.pieArray);
-    
-    this.pieArray.array.forEach(ele => {
-      this.pieChartLabels.push(ele.label);
-      this.pieChartLabels.push(ele.value);
-    }); */
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }

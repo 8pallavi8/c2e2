@@ -105,11 +105,10 @@ export class DisTransformerComponent implements OnInit {
 
   ngOnInit(): void {
     this.toolService.getTool1Inputs().subscribe(res => {
-      console.log(res.Countries);
+ 
       this.countrylist = res.Countries;
       this.highestVoltageValueslist = res.HighestVoltageValues;
       this.dualVoltWindings = res.DualVoltWindings;
-      console.log(this.highestVoltageValueslist);
     })
 
     this.DisTransformerInputs = this.fb.group({
@@ -131,7 +130,6 @@ export class DisTransformerComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result !== undefined) {
         this.inputValues = this.inputValues.filter(x => x.Requestnumber != result.Requestnumber)
         this.inputValues.push(result);
@@ -149,7 +147,6 @@ export class DisTransformerComponent implements OnInit {
   }
 
   deleteTransformer(confirm, obj): void {
-    console.log(confirm);
     if (confirm) {
       this.inputValues = this.inputValues.filter(i => i.Requestnumber !== obj.Requestnumber)
       this.inputTableDataSource = this.inputValues;
@@ -198,7 +195,7 @@ export class DisTransformerComponent implements OnInit {
         }
 
         this.barChartData.push()
-        console.log(this.dataSource, this.pieLabels, this.pieData);
+       
         this.showForms = false;
       }
 

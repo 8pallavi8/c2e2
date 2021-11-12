@@ -45,7 +45,7 @@ export class LightingComponent implements OnInit {
       lightingPowerDensityUnit: ['', Validators.required],
       totalPower:[]
     });
-    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res; console.log(this.selCountryCode); });
+    this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res;});
     this.beetComponent= this.beetService.getBEETParentComponent();
 
 
@@ -66,7 +66,6 @@ export class LightingComponent implements OnInit {
   }
 
   getStyleDisplay(index, div) {
-    //console.log(index, div, index % div == 0);
     return index % div == 0
   }
   getenableyearofinstallation(startindex, endindex, currentindex) {
@@ -80,9 +79,8 @@ export class LightingComponent implements OnInit {
        "buildinggrossareaunit":this.beetComponent.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
        "lightingdata":this.lightingOptions
    }
-       console.log(this.lightingOptions);
      this.beetService.postCalculateLightingPower(payload).subscribe(res => {
-       console.log(res);
+   
        this.LightningDetailsForm.controls.totalLightingPowerValue.patchValue(res.success.totallightingpower);
        this.LightningDetailsForm.controls.totalLightingPowerUnit.patchValue(res.success.totallightingpowerunit);
        this.LightningDetailsForm.controls.lightingPowerDensityValue.patchValue(res.success.lightingpowerdensity.toFixed(2));

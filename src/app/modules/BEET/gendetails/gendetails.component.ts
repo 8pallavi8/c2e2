@@ -76,7 +76,6 @@ export class GendetailsComponent implements OnInit {
     this.getcountryList();
     if (sessionStorage.getItem('generalDetails') !== null) {
       var generalDetails = JSON.parse(sessionStorage.getItem('generalDetails'));
-      console.log(generalDetails);
       if (generalDetails !== undefined || generalDetails !== null) {
         let res = this.beetService.getGeneralDetails().subscribe(res => {
           this.locationDetails = res.success.locationdata;
@@ -177,7 +176,6 @@ export class GendetailsComponent implements OnInit {
         buildinggrossareaunit: this.genDetailsForm.controls.grossAreaUnits.value
       }
       this.beetService.postCalculateOccupancyPeople(payload).subscribe(res => {
-        console.log(res.success);
         if (res.status == 'success') {
           this.genDetailsForm.controls['occupantDensityKnown'].patchValue(res.success.occupantdensity.toFixed(2));
           this.genDetailsForm.controls['occupantDensityUnits'].patchValue(res.success.occupantdensityunit);

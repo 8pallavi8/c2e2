@@ -155,13 +155,15 @@
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="co2EmissionsDetailsComponent?.formgroup.invalid"   -->
                     <button [disabled]="co2EmissionsDetailsComponent?.formgroup.invalid" mat-raised-button
-                        color="primary" matStepperNext (click)="onCo2EmissionsDetails()" (click)="showSummary()"
-                        (click)="getCountryName()">Next</button>
+                        color="primary" matStepperNext (click)="onCo2EmissionsDetails()"
+                        (click)="showSummary()">Next</button>
                 </div>
             </mat-step>
 
             <mat-step>
+
                 <ng-template matStepLabel>Input Data Summary and Report</ng-template>
+
 
                 <div>
                     <b>User-Input Data Summary:</b>
@@ -169,7 +171,8 @@
                         available
                         options
                         <br> c.Are default valuesby the tool resultingfrom the users selection of available options.
-                    </p><br>
+                    </p>
+                    <br>
 
 
                     <div>
@@ -275,214 +278,215 @@
                     <button mat-raised-button color="primary" (click)="postDataGenerateReport() "
                         style="margin-right: inherit;">Generate Report</button><br>
 
+                </div><br><br>
+
+                <div *ngIf="showTables">
+
+                    <mat-tab-group #tabGroup >
+
+                        <mat-tab label="Input Values ">
+
+                            <div class="Calculated-tables">
+
+                                <table [dataSource]="inputvaluestableDataSource" mat-table class="Report-table">
+
+                                    <ng-container matColumnDef="parameter">
+                                        <th mat-header-cell *matHeaderCellDef>parameter</th>
+                                        <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="baselinevalue">
+                                        <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
+                                        <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="efficientvalue">
+                                        <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
+                                        <td mat-cell *matCellDef="let row">{{row.energyefficienctvalue}}</td>
+                                    </ng-container>
+
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsinputvalues"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsinputvalues;"></tr>
+                                </table>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab label="Intermediate Calculations">
+                            <div class="Calculated-tables">
+                                <table [dataSource]="intermediatevaluestabletableDataSource" mat-table
+                                    class="Report-table">
+
+                                    <ng-container matColumnDef="parameter">
+                                        <th mat-header-cell *matHeaderCellDef>parameter</th>
+                                        <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="baselinevalue">
+                                        <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
+                                        <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="efficientvalue">
+                                        <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
+                                        <td mat-cell *matCellDef="let row">{{row.energyefficienctvalue}}</td>
+                                    </ng-container>
+
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsintermediatevalues"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsintermediatevalues;"></tr>
+                                </table>
+                            </div>
+                        </mat-tab>
+
+
+                        <mat-tab label="Output Values">
+                            <div class="Calculated-tables">
+                                <table [dataSource]="outputvaluestableDataSource" mat-table class="Report-table">
+
+                                    <ng-container matColumnDef="parameter">
+                                        <th mat-header-cell *matHeaderCellDef>parameter</th>
+                                        <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="baselinevalue">
+                                        <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
+                                        <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="efficientvalue">
+                                        <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
+                                        <td mat-cell *matCellDef="let row">{{row.energyefficienctvalue}}</td>
+                                    </ng-container>
+
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsoutputvalues"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsoutputvalues;"></tr>
+                                </table>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab label="Monthly Results">
+                            <div class="Calculated-tables">
+                                <table [dataSource]="monthresultstabletableDataSource" mat-table class="Report-table">
+
+
+                                    <ng-container matColumnDef="month">
+                                        <th mat-header-cell *matHeaderCellDef>month</th>
+                                        <td mat-cell *matCellDef="let row">{{row.month}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="peakkwbaseline">
+                                        <th mat-header-cell *matHeaderCellDef>peakkwbaseline</th>
+                                        <td mat-cell *matCellDef="let row">{{row.peakkwbaseline}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="kwhbaseline">
+                                        <th mat-header-cell *matHeaderCellDef>kwhbaseline</th>
+                                        <td mat-cell *matCellDef="let row">{{row.kwhbaseline}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="thermsbaseline">
+                                        <th mat-header-cell *matHeaderCellDef>thermsbaseline</th>
+                                        <td mat-cell *matCellDef="let row">{{row.thermsbaseline}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="ngcubicmeterbaseline">
+                                        <th mat-header-cell *matHeaderCellDef>ngcubicmeterbaseline</th>
+                                        <td mat-cell *matCellDef="let row">{{row.ngcubicmeterbaseline}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="peakkwees">
+                                        <th mat-header-cell *matHeaderCellDef>peakkwees</th>
+                                        <td mat-cell *matCellDef="let row">{{row.peakkwees}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="kwhees">
+                                        <th mat-header-cell *matHeaderCellDef>kwhees</th>
+                                        <td mat-cell *matCellDef="let row">{{row.kwhees}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="thermsees">
+                                        <th mat-header-cell *matHeaderCellDef>thermsees</th>
+                                        <td mat-cell *matCellDef="let row">{{row.thermsees}}</td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="ngcubicmeterees">
+                                        <th mat-header-cell *matHeaderCellDef>ngcubicmeterees</th>
+                                        <td mat-cell *matCellDef="let row">{{row.ngcubicmeterees}}</td>
+                                    </ng-container>
+
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsmonthlyresults"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsmonthlyresults;"></tr>
+                                </table>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab label="Economizer Savings">
+                            <div class="Calculated-tables">
+                                <table [dataSource]="economizersavingstableDataSource" mat-table class="Report-table">
+
+                                    <ng-container matColumnDef="parameter">
+                                        <th mat-header-cell *matHeaderCellDef>parameter</th>
+                                        <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="baselinevalue">
+                                        <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
+                                        <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="efficientvalue">
+                                        <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
+                                        <td mat-cell *matCellDef="let row">{{row.energyefficienctvalue}}</td>
+                                    </ng-container>
+
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnseconomizersavings"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnseconomizersavings;"></tr>
+                                </table>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab label="Inputs for Graph  ">
+                            <div class="Calculated-tables">
+                                <table [dataSource]="inputsforgraphtableDataSource" mat-table class="Report-table">
+
+                                    <ng-container matColumnDef="parameter">
+                                        <th mat-header-cell *matHeaderCellDef>parameter</th>
+                                        <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="baselinevalue">
+                                        <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
+                                        <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="efficientvalue">
+                                        <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
+                                        <td mat-cell *matCellDef="let row">{{row.energyefficienctvalue}}</td>
+                                    </ng-container>
+
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsinputsforgraph"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsinputsforgraph;"></tr>
+                                </table>
+                            </div>
+                        </mat-tab>
+
+                    </mat-tab-group>
                 </div>
+
             </mat-step>
         </mat-horizontal-stepper>
     </div>
 
 
 
-    <mat-tab-group #tabGroup>
-
-        <mat-tab label="Input Values ">
-
-            <div class="Calculated-tables">
-
-                <table mat-table class="Report-table">
-
-                    <ng-container matColumnDef="parameter">
-                        <th mat-header-cell *matHeaderCellDef>parameter</th>
-                        <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="baselinevalue">
-                        <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
-                        <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="efficientvalue">
-                        <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
-                        <td mat-cell *matCellDef="let row">{{row.efficientvalue}}</td>
-                    </ng-container>
 
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumnsinputvalues"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumnsinputvalues;"></tr>
-                </table>
-            </div>
-        </mat-tab>
-
-        <mat-tab label="Intermediate Calculations">
-            <div class="Calculated-tables">
-            <table mat-table class="Report-table">
-
-                <ng-container matColumnDef="parameter">
-                    <th mat-header-cell *matHeaderCellDef>parameter</th>
-                    <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="baselinevalue">
-                    <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
-                    <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="efficientvalue">
-                    <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
-                    <td mat-cell *matCellDef="let row">{{row.efficientvalue}}</td>
-                </ng-container>
-
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumnsintermediatevalues"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumnsintermediatevalues;"></tr>
-            </table>
-            </div>
-        </mat-tab>
-
-
-        <mat-tab label="Output Values">
-            <div class="Calculated-tables">
-            <table mat-table class="Report-table">
-
-                <ng-container matColumnDef="parameter">
-                    <th mat-header-cell *matHeaderCellDef>parameter</th>
-                    <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="baselinevalue">
-                    <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
-                    <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="efficientvalue">
-                    <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
-                    <td mat-cell *matCellDef="let row">{{row.efficientvalue}}</td>
-                </ng-container>
-
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumnsoutputvalues"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumnsoutputvalues;"></tr>
-            </table>
-            </div>
-        </mat-tab>
-
-        <mat-tab label="Monthly Results">
-            <div class="Calculated-tables">
-            <table mat-table class="Report-table">
-
-                <ng-container matColumnDef="rowtype">
-                    <th mat-header-cell *matHeaderCellDef>rowtype</th>
-                    <td mat-cell *matCellDef="let row">{{row.rowtype}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="month">
-                    <th mat-header-cell *matHeaderCellDef>month</th>
-                    <td mat-cell *matCellDef="let row">{{row.month}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="peakkwbaseline">
-                    <th mat-header-cell *matHeaderCellDef>peakkwbaseline</th>
-                    <td mat-cell *matCellDef="let row">{{row.peakkwbaseline}}</td>
-                </ng-container>
-                <ng-container matColumnDef="kwhbaseline">
-                    <th mat-header-cell *matHeaderCellDef>kwhbaseline</th>
-                    <td mat-cell *matCellDef="let row">{{row.kwhbaseline}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="thermsbaseline">
-                    <th mat-header-cell *matHeaderCellDef>thermsbaseline</th>
-                    <td mat-cell *matCellDef="let row">{{row.thermsbaseline}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="ngcubicmeterbaseline">
-                    <th mat-header-cell *matHeaderCellDef>ngcubicmeterbaseline</th>
-                    <td mat-cell *matCellDef="let row">{{row.ngcubicmeterbaseline}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="peakkwees">
-                    <th mat-header-cell *matHeaderCellDef>peakkwees</th>
-                    <td mat-cell *matCellDef="let row">{{row.peakkwees}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="kwhees">
-                    <th mat-header-cell *matHeaderCellDef>kwhees</th>
-                    <td mat-cell *matCellDef="let row">{{row.kwhees}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="thermsees">
-                    <th mat-header-cell *matHeaderCellDef>thermsees</th>
-                    <td mat-cell *matCellDef="let row">{{row.thermsees}}</td>
-                </ng-container>
-
-
-                <ng-container matColumnDef="ngcubicmeterees">
-                    <th mat-header-cell *matHeaderCellDef>ngcubicmeterees</th>
-                    <td mat-cell *matCellDef="let row">{{row.ngcubicmeterees}}</td>
-                </ng-container>
-
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumnsmonthlyresults"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumnsmonthlyresults;"></tr>
-            </table>
-            </div>
-        </mat-tab>
-
-        <mat-tab label="Economizer Savings">
-            <div class="Calculated-tables">
-            <table mat-table class="Report-table">
-
-                <ng-container matColumnDef="parameter">
-                    <th mat-header-cell *matHeaderCellDef>parameter</th>
-                    <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="baselinevalue">
-                    <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
-                    <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="efficientvalue">
-                    <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
-                    <td mat-cell *matCellDef="let row">{{row.efficientvalue}}</td>
-                </ng-container>
-
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumnseconomizersavings"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumnseconomizersavings;"></tr>
-            </table>
-            </div>
-        </mat-tab>
-
-        <mat-tab label="Inputs for Graph  ">
-            <div class="Calculated-tables">
-            <table mat-table class="Report-table">
-
-                <ng-container matColumnDef="parameter">
-                    <th mat-header-cell *matHeaderCellDef>parameter</th>
-                    <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="baselinevalue">
-                    <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
-                    <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="efficientvalue">
-                    <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
-                    <td mat-cell *matCellDef="let row">{{row.efficientvalue}}</td>
-                </ng-container>
-
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumnsinputsforgraph"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumnsinputsforgraph;"></tr>
-            </table>
-            </div>
-        </mat-tab>
-
-    </mat-tab-group>
-    
     <br>
-
-
 
     <app-logo-footer></app-logo-footer>
 </section>

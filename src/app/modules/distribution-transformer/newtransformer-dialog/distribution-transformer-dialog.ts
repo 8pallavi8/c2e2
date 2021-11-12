@@ -80,7 +80,6 @@ export class DialogOverviewExampleDialog implements OnInit {
       else {
         newrequestnumber = this.data.requestCount + 1;
       }
-      console.log("submit");
       this.inputValue = {
         Requestnumber: newrequestnumber,
         Power: this.DialogTransformerInputs.controls.Power.value,
