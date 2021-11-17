@@ -44,7 +44,6 @@ table {
     float: right;
 }
 
-
 /* .calculator-tools {
     padding: 20px;
     background: #c5e9e7;
@@ -78,20 +77,25 @@ table {
     background: #fff;
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-    background-color: white;
-    border-radius: 5px;
+::ng-deep .mat-form-field-label-wrapper {
+    top: -2.0em;
+    font-size: 15px;
 }
 
 ::ng-deep .mat-form-field-appearance-outline.mat-form-field-should-float {
     .mat-form-field-label {
+        padding-bottom: -3rem;
         transform: none;
         width: initial;
-        opacity: 0;
+        //opacity: 0;
     }
     .mat-form-field-outline-gap {
         border-top-color: initial !important;
     }
+} 
+
+::ng-deep .mat-form-field-label {
+    padding-top: 7px;
 }
 
 ::ng-deep .mat-form-field-label {
@@ -100,18 +104,6 @@ table {
 
 ::ng-deep .mat-form-field-flex>.mat-form-field-infix {
     padding: 0.4em 0px !important;
-}
-
-::ng-deep .mat-form-field-label-wrapper {
-    top: -1.5em;
-}
-
-// ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-//     transform: translateY(-1.1em) scale(.75);
-//     width: 133.33333%;
-// }
-::ng-deep .mat-form-field-label {
-    padding-top: 7px;
 }
 
 ::ng-deep .mat-raised-button {
@@ -125,15 +117,9 @@ table {
 
 .mat-expansion-panel-header-title h2 {
     font-size: 16px !important;
-}
+} 
 
-.climate-button {
-    margin-left: 20px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    margin-top: 50px;
-    line-height: 20px;
-}
+
 
 .field-button-calculate {
     display: flex;
@@ -183,13 +169,128 @@ table {
     padding: 0px !important
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+ ::ng-deep .mat-form-field-appearance-fill .mat-form-field-fill {
     background-color: white;
     border-radius: 5px;
+} 
+
+.Assumptions-accordion{
+    background: transparent;
 }
+
 
 .Calculated-tables{
     display: flex;
     flex-direction: column;
     min-width: 300px;
   }
+
+
+ /*   .custom-input{
+    border:1px solid #01465f!important;
+    border-radius : 5px;
+    padding : 10px 15px 10px 15px !important;
+    background-color: white;
+  }
+
+  ::ng-deep .mat-input-underline.mat-form-field-underline {
+    background: transparent !important;
+  }
+ 
+  ::ng-deep  .mat-input-ripple.mat-form-field-ripple{
+     background-color: transparent !important; 
+  }
+  
+  ::ng-deep  .mat-form-field-appearance-outline .mat-form-field-underline {
+    background-color: transparent !important;
+  }
+
+  ::ng-deep  .mat-form-field.mat-focused .mat-form-field-underline {
+    display: none;
+  }
+  
+  ::ng-deep  .custom-input::-webkit-input-placeholder {
+      padding : 50px!important;
+  }
+} */
+
+.social-links{
+    display: flex;
+    padding: 0;
+}
+
+.social-item{
+    list-style: none;
+    margin-right: 1.25rem;
+}
+.social-link-item{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1.25rem;
+    display: inline-block;
+    text-indent: -9999px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: opacity 220ms ease-in-out;
+} 
+
+.social-twitter{
+    background-image: url(../../../assets/images/icon-twitter-blue.svg);
+}
+
+.social-facebook{
+    background-image: url(../../../assets/images/icon-facebook-blue.svg);
+}
+
+.social-linkedin{
+    background-image: url(../../../assets/images/icon-linkedin-blue.svg);
+}
+
+
+@media (min-width: 992px){
+.c-hero:not(.c-hero--small) {
+    margin-top: -16px;
+    min-height: 40vh;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    background-image:url(../../../assets/images/Hero-Building.jpg); 
+    //background-position: center top 
+}
+}
+
+.c-hero {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding-left: 3rem;
+}
+
+.c-hero__headline {
+    padding-left: 2em;
+    font-size: 28px;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 1.375rem;
+}
+
+@media (min-width: 992px){
+.c-hero__headline {
+    max-width: 62.5%;
+    font-size: 36px;
+    font-size: 2.25rem;
+}
+}
+
+@media (min-width: 992px){
+.c-hero__content {
+    padding: 3.5rem 0 2rem;
+}
+}

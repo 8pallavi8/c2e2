@@ -1,54 +1,6 @@
 <div class="container-fluid">
     <form [formGroup]="genDetailsForm" class="form mt-4">
-        <!-- <button class="accordion">
-            <h1>Location Details</h1>
-        </button>
-        <div class="panel">
-            <p>Please select and share building location details
-            </p>
-            <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> It is important to select Provice first and then Location before clicking and loading the climate data. If exact location is not available, please select the nearest / most suitable location (or)
-                    reach out to us.
-                </p>
-            </div>
 
-            <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                <mat-label>User Name</mat-label>
-                <input matInput formControlName="userName" required>
-            </mat-form-field>
-
-            <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                <mat-label>Project name</mat-label>
-                <input matInput formControlName="projectName" required>
-            </mat-form-field>
-
-            <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                <mat-label>Select country</mat-label>
-                <mat-select id="Country" (selectionChange)="onChangeCountry($event)" formControlName="country" required>
-                    <mat-option *ngFor="let con of countrylist" [value]="con.countrycode">{{con.country}}</mat-option>
-                </mat-select>
-
-            </mat-form-field>
-
-
-            <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                <mat-label>Select Province</mat-label>
-                <mat-select matNativeControl id="Province" formControlName="province" required (selectionChange)="onChangeProvince($event)">
-                    <mat-option *ngFor="let location of locationDetails" [value]="location.province">
-                        {{location.province}}</mat-option>
-                </mat-select>
-
-            </mat-form-field>
-
-
-            <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                <mat-label>Select Location</mat-label>
-                <mat-select matNativeControl id="Location" formControlName="location" required>
-                    <mat-option *ngFor="let loc of locationlist" [value]="loc">{{loc}}</mat-option>
-                </mat-select>
-
-            </mat-form-field>
-        </div> -->
         <fieldset>
             <legend>Location Details</legend>
             <h2>Location Details</h2>
@@ -60,41 +12,39 @@
                 </p>
             </div>
 
-            <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline" floatLabel="never">
-                <mat-label>User Name</mat-label>
-                <input matInput formControlName="userName" required>
+           
+            <!--  <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline" floatLabel="never">
+                <mat-label>User Name</mat-label> 
+                <input  matInput formControlName="userName" required>
             </mat-form-field>
 
-            <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
+            <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline" floatLabel="auto" >
                 <mat-label>Project name</mat-label>
-                <input matInput formControlName="projectName" required>
-            </mat-form-field>
+                <input  matInput formControlName="projectName" required>
+            </mat-form-field>   -->
 
             <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                <mat-label>Select country</mat-label>
-                <mat-select id="Country" (selectionChange)="onChangeCountry($event)" formControlName="country" required>
-                    <mat-option *ngFor="let con of countrylist" [attr.data-id]="con.country" [value]="con.countrycode">{{con.country}}</mat-option>
+                <mat-label>Country</mat-label>
+                <mat-select  id="Country" (selectionChange)="onChangeCountry($event)" formControlName="country" required>
+                    <mat-option   *ngFor="let con of countrylist" [attr.data-id]="con.country" placeholder="Select Country" [value]="con.countrycode">{{con.country}}</mat-option>
                 </mat-select>
-                <!-- <mat-hint color="primary">Select country</mat-hint> -->
             </mat-form-field>
 
 
             <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>Select Province</mat-label>
-                <mat-select matNativeControl id="Province" formControlName="province" required (selectionChange)="onChangeProvince($event)">
+                <mat-select  matNativeControl id="Province" formControlName="province" required (selectionChange)="onChangeProvince($event)">
                     <mat-option *ngFor="let location of locationDetails" [value]="location.province">
                         {{location.province}}</mat-option>
                 </mat-select>
-                <!-- <mat-hint color="primary">Select Province</mat-hint> -->
             </mat-form-field>
 
 
             <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>Select Location</mat-label>
-                <mat-select matNativeControl id="Location" formControlName="location" required>
+                <mat-select  matNativeControl id="Location" formControlName="location" required>
                     <mat-option *ngFor="let loc of locationlist" [value]="loc">{{loc}}</mat-option>
                 </mat-select>
-                <!-- <mat-hint color="primary">Select Location</mat-hint> -->
             </mat-form-field>
         </fieldset>
         <fieldset>
@@ -107,23 +57,23 @@
                     building type.
                 </p>
             </div>
-            <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+            <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>Select Building Type</mat-label>
                 <mat-select matNativeControl id="Buidling" formControlName="buildingType" required (selectionChange)="onChangeBuildingType($event)">
                     <mat-option *ngFor="let building of buildingDetails" [value]="building.buildingtype">
                         {{building.buildingtype}}
                     </mat-option>
                 </mat-select>
-                <!-- <mat-hint color="primary">Select Building Type</mat-hint> -->
+            
             </mat-form-field>
 
-            <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+            <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>Select Building Spaces</mat-label>
                 <mat-select matNativeControl id="BuidlingSpaces" formControlName="buildingSpaces" multiple required>
                     <mat-option *ngFor="let space of spacesList" [value]="space">{{space}}
                     </mat-option>
                 </mat-select>
-                <!-- <mat-hint color="primary">Select Building Spaces</mat-hint> -->
+               
             </mat-form-field>
         </fieldset>
         <fieldset>
@@ -135,39 +85,41 @@
             </div>
 
 
-            <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
+         <!--    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>Year of construction</mat-label>
-                <input matInput formControlName="yearOfConstruction" type="number" required>
-                <!-- <mat-hint color="primary">Please enter year of construction</mat-hint> -->
-            </mat-form-field>
+                <input  matInput formControlName="yearOfConstruction" type="number" required>  
+            </mat-form-field>  -->
+ 
+
+
             <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>No. of floors</mat-label>
-                <input formControlName="noOfFloors" type="number" matInput required>
-                <!-- <mat-hint color="primary">Please enter No. of floors</mat-hint> -->
+                <input  formControlName="noOfFloors" type="number" matInput required>
+                
             </mat-form-field>
 
             <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                 <mat-label>Occupancy hours per week</mat-label>
-                <input formControlName="occupanyHoursPerWeek" type="number" matInput required>
-                <!-- <mat-hint color="primary">Please Occupancy hours per week</mat-hint> -->
+                <input  formControlName="occupanyHoursPerWeek" type="number" matInput required>
+              
             </mat-form-field>
 
-            <span class="units-picker-component">
+            <!-- <span class="units-picker-component">
                 <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
                     <mat-label>Building gross area</mat-label>
-                    <input formControlName="buildingGrossArea" matInput type="number" (keyup)="resetGross($event)" >
+                    <input  formControlName="buildingGrossArea" matInput type="number" (keyup)="resetGross($event)" >
                     <mat-select  placeholder="units" formControlName="grossAreaUnits"
                         style="width: 180px;"  >
                         <mat-option value="square feet">Square Feet</mat-option>
                         <mat-option value="square meter">Square Meter</mat-option>
                     </mat-select>
                 </mat-form-field>
-            </span>
+            </span> -->
 
             <span class="units-picker-component">
-                <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+                <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
                     <mat-label>Net occupied floor area</mat-label>
-                    <input formControlName="netOccupiedFloorArea" type="number"
+                    <input  formControlName="netOccupiedFloorArea" type="number"
                         matInput required (input)="calculateGross()">
                     <mat-select style="padding-left: 8px"  placeholder="units"
                         formControlName="netAreaUnits" style="width: 180px;" (selectionChange)="calculateGross()">
@@ -206,7 +158,7 @@
                 <b style="margin-top: 1.5rem;">Number of people occupying the building :</b>
                 <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
                     <mat-label>Enter value here</mat-label>
-                    <input matInput placeholder="Enter value" formControlName="noOfPeopleOccupying" type="number">
+                    <input  matInput placeholder="Enter value" formControlName="noOfPeopleOccupying" type="number">
                 </mat-form-field>
                 <div>
                     <button mat-raised-button color="primary" style="margin-top: 1rem;" (click)="onChangeOccupancy()">Calculate Occupant Density</button>
@@ -223,7 +175,7 @@
                 <span class="units-picker-component">
                     <mat-form-field class="w-100 mt-2 col-md-6" appearance="outline">
                         <mat-label>Enter value here</mat-label>
-                        <input matInput placeholder="Enter value" type="number" formControlName="occupantDensityKnown"
+                        <input  matInput placeholder="Enter value" type="number" formControlName="occupantDensityKnown"
                             type="number">
                         <mat-select [(value)]="occupancyUnits" placeholder="Select Units"
                             formControlName="occupantDensityUnits">
@@ -237,7 +189,7 @@
 
             <div>
                 <b class="calculated-values">
-                    Occupant density: {{genDetailsForm.controls.occupantDensityKnown.value}}
+                    Occupant density: {{genDetailsForm.controls.occupantDensityKnown.value | number:'1.2-2'}}
                     {{genDetailsForm.controls.occupantDensityUnits.value}}
                 </b>
             </div>
@@ -253,31 +205,30 @@
                 </p>
             </div>
 
-            <mat-form-field class="w-100 mt-1 col-md-6" appearance="outline">
+            <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
                 <mat-label>Select Electricity cost units</mat-label>
                 <mat-select formControlName="electricityUnits">
                     <mat-option *ngFor="let unit of eletricityunitslist" [value]="unit">{{unit}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="w-100 mt-1 col-md-6" appearance="outline">
+            <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
                 <mat-label>Enter value here</mat-label>
-                <input type="number" matInput formControlName="electricityCost" placeholder="Enter value" required>
-            </mat-form-field>
+                <input  type="number" matInput formControlName="electricityCost" placeholder="Enter value" required>
+            </mat-form-field><br>
 
-            <mat-form-field class="w-100 mt-1 col-md-6" appearance="outline">
+            <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
                 <mat-label>Select Fuel cost units</mat-label>
                 <mat-select formControlName="fuelUnits">
                     <mat-option *ngFor="let units of fuelunitslist" [value]="units">{{units}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="w-100 mt-1 col-md-6" appearance="outline">
+            <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
                 <mat-label>Enter value here</mat-label>
-                <input matInput type="number" formControlName="fuelCost" placeholder="Enter value" required>
+                <input  matInput type="number" formControlName="fuelCost" placeholder="Enter value" required>
             </mat-form-field>
 
         </fieldset>
     </form>
 </div>
-

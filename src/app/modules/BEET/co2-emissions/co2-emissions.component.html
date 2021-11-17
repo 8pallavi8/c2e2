@@ -9,74 +9,79 @@
         <fieldset>
             <legend>Power generation CO2 emissions </legend>
             <h2>Power generation CO2 emissions</h2>
-                <div class="container">
-                    <p>Do you know the local grid emission factor ?</p>
-                    <div class="fields-note mt-0">
-                        <p><span class="notes-style"> Note:</span> Applicable for electricity import from the grid
-                        </p>
-                    </div>
+            <div class="container">
+                <p>Do you know the local grid emission factor ?</p>
+                <div class="fields-note mt-0">
+                    <p><span class="notes-style"> Note:</span> Applicable for electricity import from the grid
+                    </p>
+                </div>
 
-                    <div>
-                        <mat-radio-group aria-label="Select an option" formControlName="powergenerationco2emmisions">
-                            <mat-radio-button value="1">Yes, I know
-                            </mat-radio-button><br>
-                            <mat-radio-button  value="2" (click)="defaultEmissionFactor()">No, I don't
-                                know.</mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                    <span *ngIf="formgroup.controls.powergenerationco2emmisions.value == 1">
-                        <p style="margin-top: 1em;">I know the grid emission factor.</p>
-                        <p>Please enter grid emission factor[kg/kWh] : </p>
+                <div>
+                    <mat-radio-group aria-label="Select an option" formControlName="powergenerationco2emmisions">
+                        <mat-radio-button value="1">Yes, I know
+                        </mat-radio-button><br>
+                        <mat-radio-button value="2" (click)="defaultEmissionFactor()">No, I don't
+                            know.</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <span *ngIf="formgroup.controls.powergenerationco2emmisions.value == 1">
+                    <div style="display: flex;">
+                        <p style="padding-top: 10px;">Please enter grid emission factor : </p>
                         <mat-form-field appearance="outline">
-                            <mat-label>Enter value here</mat-label>
-                            <input matInput placeholder="Enter value" type="number" required formControlName="gridemissionsFactor">
+                            <!-- <mat-label>Value</mat-label> -->
+                            <input class="custom-input" matInput type="number" required
+                                formControlName="gridemissionsFactor">
                         </mat-form-field>
-                    </span>
-                </div>
-
-                <b class="calculated-values">CO2 emissions:{{formgroup.controls.gridemissionsFactor.value}}
-                    {{formgroup.controls.gridemissionsFactorUnits.value}}
-                </b>
-
-                <div class="container">
-                    <p style="margin-top: 1em;">Do you know the fuel CO2 emission factor?</p>
-                    <div class="fields-note">
-                        <p><span class="notes-style"> Note:</span>You may select any of the options to provide details
-                            of On-site CO2 emissions (especially if you are using fuel based heating equipment or- power
-                            generators, etc. )
-                            Natural Gas equivalent CO2 emissions values will be used for the assessment
-                        </p>
                     </div>
-                    <div>
-                        <mat-radio-group aria-label="Select an option" formControlName="fuelEmissionFactor">
-                            <mat-radio-button  value="1">Yes, I know
-                            </mat-radio-button><br>
-                            <mat-radio-button (click)="postCalculateFuelEmissionFactor()" value="2">No, I don't know.
-                            </mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                    <span *ngIf="formgroup.controls.fuelEmissionFactor.value == 1">
-                        <p style="margin-top: 1em;">Choose any one from the available units</p>
+                </span>
+            </div>
 
-                        <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
-                            <mat-label>Enter value here</mat-label>
-                            <input matInput placeholder="Enter value" required formControlName="fuelEmissionFactorValue">
-                           
-                        </mat-form-field>
+            <b class="calculated-values">CO2 emissions:{{formgroup.controls.gridemissionsFactor.value| number:'1.2-2'}}
+                {{formgroup.controls.gridemissionsFactorUnits.value}}
+            </b>
 
-                        <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
-                            <mat-label>Select CO2 emissions units</mat-label>
-                            <mat-select formControlName="fuelEmissionFactorUnit">
-                                <mat-option *ngFor="let unit of co2emissionsunits" [value]="unit">{{unit}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        
-                    </span>
-
+            <div class="container">
+                <p style="margin-top: 1em;">Do you know the fuel CO2 emission factor?</p>
+                <div class="fields-note">
+                    <p><span class="notes-style"> Note:</span>You may select any of the options to provide details
+                        of On-site CO2 emissions (especially if you are using fuel based heating equipment or- power
+                        generators, etc. )
+                        Natural Gas equivalent CO2 emissions values will be used for the assessment
+                    </p>
                 </div>
+                <div>
+                    <mat-radio-group aria-label="Select an option" formControlName="fuelEmissionFactor">
+                        <mat-radio-button value="1">Yes, I know
+                        </mat-radio-button><br>
+                        <mat-radio-button (click)="postCalculateFuelEmissionFactor()" value="2">No, I don't know.
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <span *ngIf="formgroup.controls.fuelEmissionFactor.value == 1">
+                    <p style="margin-top: 1em;">Please enter value and choose any one from the available units</p>
 
-                <b class="calculated-values"> On site  CO2 emissions:{{formgroup.controls.fuelEmissionFactorValue.value}}{{formgroup.controls.fuelEmissionFactorUnit.value}}</b>
+                    <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
+                        <!-- <mat-label>Enter value here</mat-label> -->
+                        <input class="custom-input" matInput placeholder="Enter value" required
+                            formControlName="fuelEmissionFactorValue">
+
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
+                        <mat-label>Select CO2 emissions units</mat-label>
+                        <mat-select formControlName="fuelEmissionFactorUnit">
+                            <mat-option *ngFor="let unit of co2emissionsunits" [value]="unit">{{unit}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+
+                </span>
+
+            </div>
+
+            <b class="calculated-values"> On site CO2 emissions:{{formgroup.controls.fuelEmissionFactorValue.value|
+                number:'1.2-2'}}
+                {{formgroup.controls.fuelEmissionFactorUnit.value}}</b>
         </fieldset>
     </form>
 </div>

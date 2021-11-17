@@ -173,7 +173,7 @@ p {
     margin: 0;
 }
 
-::ng-deep .mat-form-field-appearance-outline.mat-form-field-should-float {
+ ::ng-deep .mat-form-field-appearance-outline.mat-form-field-should-float {
     .mat-form-field-label {
         transform: none;
         width: initial;
@@ -182,4 +182,9 @@ p {
     .mat-form-field-outline-gap {
         border-top-color: initial !important;
     }
-}
+} 
+
+
+::ng-deep  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background:white;
+  }

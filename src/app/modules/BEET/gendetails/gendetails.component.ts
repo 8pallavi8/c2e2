@@ -50,14 +50,14 @@ export class GendetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.genDetailsForm = this.fb.group({
-      userName: ['', Validators.compose([Validators.required])],
-      projectName: ['', Validators.compose([Validators.required])],
+      //userName: ['', Validators.compose([Validators.required])],
+      //projectName: ['', Validators.compose([Validators.required])],
       country: ['', Validators.compose([Validators.required])],
       province: ['', Validators.compose([Validators.required])],
       location: ['', Validators.compose([Validators.required])],
       buildingType: ['', Validators.compose([Validators.required])],
       buildingSpaces: ['', Validators.compose([Validators.required])],
-      yearOfConstruction: ['', Validators.compose([Validators.required])],
+      //yearOfConstruction: ['', Validators.compose([Validators.required])],
       buildingGrossArea: [0],
       grossAreaUnits: ['', Validators.compose([Validators.required])],
       netOccupiedFloorArea: ['', Validators.compose([Validators.required])],
@@ -177,7 +177,7 @@ export class GendetailsComponent implements OnInit {
       }
       this.beetService.postCalculateOccupancyPeople(payload).subscribe(res => {
         if (res.status == 'success') {
-          this.genDetailsForm.controls['occupantDensityKnown'].patchValue(res.success.occupantdensity.toFixed(2));
+          this.genDetailsForm.controls['occupantDensityKnown'].patchValue(res.success.occupantdensity);
           this.genDetailsForm.controls['occupantDensityUnits'].patchValue(res.success.occupantdensityunit);
         }
       });
@@ -189,7 +189,7 @@ export class GendetailsComponent implements OnInit {
         "buildingspaces": this.genDetailsForm.controls.buildingSpaces.value
       }
       this.beetService.postCalculateOccupancyUnknown(payload).subscribe(res => {
-        this.genDetailsForm.controls['occupantDensityKnown'].setValue(res.success.occupantdensity.toFixed(2));
+        this.genDetailsForm.controls['occupantDensityKnown'].setValue(res.success.occupantdensity);
         this.genDetailsForm.controls['occupantDensityUnits'].setValue(res.success.occupantdensityunit);
       });
     }

@@ -17,3 +17,19 @@
 ::ng-deep .table thead th {
     text-align: center;
 }
+
+.mat-radio-group-image {
+    .mat-radio-button {
+        max-width: 300px;
+        img {
+            width: 100%;
+            height: auto;
+        }
+        p {
+            font-weight: 600;
+            text-align: center;
+            padding-top: 20px;
+            font-size: 18px;
+        }
+    }
+}

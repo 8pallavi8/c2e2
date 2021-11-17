@@ -1,5 +1,5 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { GeneralDetails, Summary } from 'src/app/shared/models/beet-models';
@@ -95,7 +95,8 @@ export class BEETComponent implements OnInit, AfterViewInit {
   displayedColumnsoutputvalues=["parameter","baselinevalue","efficientvalue"];
   displayedColumnsmonthlyresults=["month","peakkwbaseline","kwhbaseline","thermsbaseline","ngcubicmeterbaseline","peakkwees","kwhees","thermsees","ngcubicmeterees"];
   displayedColumnseconomizersavings=["parameter","baselinevalue","efficientvalue"];
-  displayedColumnsinputsforgraph=["parameter","baselinevalue","efficientvalue"];
+  displayedColumnsinputsforgraph=["parameter","parameterfield","baselinevalue","efficientvalue"];
+  showText: boolean = false;
 
   
   constructor(private beetService: beetService, private cd: ChangeDetectorRef) { }
@@ -109,7 +110,9 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.cd.detectChanges();
+   
   }
+
 
   selectionStepperChange(event) {
       this.saveBuildingDetails();
@@ -152,17 +155,17 @@ export class BEETComponent implements OnInit, AfterViewInit {
   showSummary() {
     var selectedcountryname = sessionStorage.getItem('selectedCountryName');
     this.summaryTable = [
-      { Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.userName.value },
-      { Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.projectName.value },
+      //{ Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.userName.value },
+      //{ Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.projectName.value },
       { Parameter: 'Country', Units: null, Value: selectedcountryname },
       { Parameter: 'Province', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.province.value },
       { Parameter: 'Location', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.location.value },
       { Parameter: 'Building type', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.buildingType.value },
-      { Parameter: 'Building age', Units: 'Years', Value: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value },
-      {
+      //{ Parameter: 'Building age', Units: 'Years', Value: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value },
+      /* {
         Parameter: 'Building gross area', Units: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
         Value: this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value
-      },
+      }, */
       {
         Parameter: 'Building net occupiable area', Units: this.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
         Value: this.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value
@@ -174,15 +177,15 @@ export class BEETComponent implements OnInit, AfterViewInit {
       },
       {
         Parameter: 'Occupant density', Units: this.genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value,
-        Value: this.genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value
+        Value: this.genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value.toFixed(2)
       },
       {
         Parameter: 'Electricty cost', Units: this.genDetailsComponent.genDetailsForm.controls.electricityUnits.value,
-        Value: this.genDetailsComponent.genDetailsForm.controls.electricityCost.value
+        Value: this.genDetailsComponent.genDetailsForm.controls.electricityCost.value.toFixed(2)
       },
       {
         Parameter: 'Fuel cost', Units: this.genDetailsComponent.genDetailsForm.controls.fuelUnits.value,
-        Value: this.genDetailsComponent.genDetailsForm.controls.fuelCost.value
+        Value: this.genDetailsComponent.genDetailsForm.controls.fuelCost.value.toFixed(2)
       },
       { Parameter: 'Thermal Resistance (R value) wall', Units: this.outerWallR.rUnits, Value: this.outerWallR.rValue },
       { Parameter: 'Thermal Resistance (R value) roof', Units: this.roofR.rUnits, Value: this.roofR.rValue },
@@ -248,18 +251,18 @@ export class BEETComponent implements OnInit, AfterViewInit {
       });
  
       var payload: any = {
-        username: this.genDetailsComponent.genDetailsForm.controls.userName.value,
-        projectname: this.genDetailsComponent.genDetailsForm.controls.projectName.value,
+        //username: this.genDetailsComponent.genDetailsForm.controls.userName.value,
+        //projectname: this.genDetailsComponent.genDetailsForm.controls.projectName.value,
         country: selectedcountryname,
         province: this.genDetailsComponent.genDetailsForm.controls.province.value,
         location: this.genDetailsComponent.genDetailsForm.controls.location.value,
         buildingtype: this.genDetailsComponent.genDetailsForm.controls.buildingType.value,
         buildingspaces: this.genDetailsComponent.genDetailsForm.controls.buildingSpaces.value,
-        yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value.toString(),
+       // yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value.toString(),
         nooffloors: this.genDetailsComponent.genDetailsForm.controls.noOfFloors.value,
         occupancyhrsperweek: this.genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value,
-        buildinggrossarea: Number(this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value),
-        buildinggrossareaunit: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
+        //buildinggrossarea: Number(this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value),
+        //buildinggrossareaunit: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
         netoccupiedarea: this.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value,
         netoccupiedareaunit: this.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
         occupantdensity: Number(this.genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value),
@@ -268,11 +271,11 @@ export class BEETComponent implements OnInit, AfterViewInit {
         electricitycostunit: this.genDetailsComponent.genDetailsForm.controls.electricityUnits.value,
         fuelcost: this.genDetailsComponent.genDetailsForm.controls.fuelCost.value,
         fuelcostunit: this.genDetailsComponent.genDetailsForm.controls.fuelUnits.value,
-        rvaluewall: this.outerWallR.rValue,
+        rvaluewall: Number(this.outerWallR.rValue),
         rvaluewallunit: this.outerWallR.rUnits,
-        rvalueroof: this.roofR.rValue,
+        rvalueroof: Number(this.roofR.rValue),
         rvalueroofunit: this.roofR.rUnits,
-        rvaluewindow: this.windowR.rValue,
+        rvaluewindow: Number(this.windowR.rValue),
         rvaluewindowunit: this.windowR.rUnits,
         shgc: Number(this.buildingdetailsComponent.formgroup.controls.SHGCknown.value),
         windowtowallratio: this.wwrValue,
@@ -318,7 +321,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
         this.monthresultstabletableDataSource = new MatTableDataSource(this.monthresultstable);
         this.economizersavingstable= res.success.intermediatevaluestable;
         this.economizersavingstableDataSource = new MatTableDataSource(this.economizersavingstable);
-        this.inputsforgraphtable= res.success.outputvaluestable;
+        this.inputsforgraphtable= res.success.inputsforgraphtable;
         this.inputsforgraphtableDataSource = new MatTableDataSource(this.inputsforgraphtable);
 
         /*  if (res.status == 'success') {
@@ -334,33 +337,33 @@ export class BEETComponent implements OnInit, AfterViewInit {
   saveBuildingDetails() {
     console.log(this.buildingdetailsComponent?.formgroup);
     if (this.buildingdetailsComponent?.formgroup.controls.outerwallr.value == 1) {
-      this.outerWallR.rValue = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.outerwallRKnown.value;
+      this.outerWallR.rValue = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.outerwallRKnown.value.toFixed(2);
       this.outerWallR.rUnits = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.outerwallrUnits.value;
     } else if (this.buildingdetailsComponent?.formgroup.controls.outerwallr.value == 2) {
-      this.outerWallR.rValue = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.rimages.value.rvalue;
+      this.outerWallR.rValue = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.rimages.value.rvalue.toFixed(2);
       this.outerWallR.rUnits = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.rimages.value.units;
     } else if (this.buildingdetailsComponent?.formgroup.controls.outerwallr.value == 3) {
-      this.outerWallR.rValue = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.rValueAdvanced.value;
+      this.outerWallR.rValue = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.rValueAdvanced.value.toFixed(2);
       this.outerWallR.rUnits = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.outerwallrUnits.units
     }
 
 
     if (this.buildingdetailsComponent?.formgroup.controls.roofr.value == 1) {
-      this.roofR.rValue = this.buildingdetailsComponent?.formgroup.get('roofrArray')['controls'][0].controls.roofRKnown.value;
+      this.roofR.rValue = this.buildingdetailsComponent?.formgroup.get('roofrArray')['controls'][0].controls.roofRKnown.value.toFixed(2);
       this.roofR.rUnits = this.buildingdetailsComponent?.formgroup.get('roofrArray')['controls'][0].controls.roofrUnits.value;
     } else if (this.buildingdetailsComponent?.formgroup.controls.roofr.value == 2) {
-      this.roofR.rValue = this.buildingdetailsComponent?.formgroup.get('roofrArray')['controls'][0].controls.roofrimages.value.rvalue;
+      this.roofR.rValue = this.buildingdetailsComponent?.formgroup.get('roofrArray')['controls'][0].controls.roofrimages.value.rvalue.toFixed(2);
       this.roofR.rUnits = this.buildingdetailsComponent?.formgroup.get('roofrArray')['controls'][0].controls.roofrimages.value.units;
     } else if (this.buildingdetailsComponent?.formgroup.controls.roofr.value == 3) {
-      this.roofR.rValue = this.buildingdetailsComponent?.formgroup.get('roofrArray')['controls'][0].controls.rValueAdvanced.value;
+      this.roofR.rValue = this.buildingdetailsComponent?.formgroup.get('roofrArray')['controls'][0].controls.rValueAdvanced.value.toFixed(2);
       this.roofR.rUnits = this.buildingdetailsComponent?.formgroup.get('roofrArray')['controls'][0].controls.outerwallrUnits.units
     }
 
     if (this.buildingdetailsComponent?.formgroup.controls.windowr.value == 1) {
-      this.windowR.rValue = this.buildingdetailsComponent?.formgroup.get('windowrArray')['controls'][0].controls.windowRKnown.value;
+      this.windowR.rValue = this.buildingdetailsComponent?.formgroup.get('windowrArray')['controls'][0].controls.windowRKnown.value.toFixed(2);
       this.windowR.rUnits = this.buildingdetailsComponent?.formgroup.get('windowrArray')['controls'][0].controls.windowrUnits.value;
     } else if (this.buildingdetailsComponent?.formgroup.controls.windowr.value == 2) {
-      this.windowR.rValue = this.buildingdetailsComponent?.formgroup.get('windowrArray')['controls'][0].controls.windowRCaluclated.value;
+      this.windowR.rValue = this.buildingdetailsComponent?.formgroup.get('windowrArray')['controls'][0].controls.windowRCaluclated.value.toFixed(2);
       this.windowR.rUnits = this.buildingdetailsComponent?.formgroup.get('windowrArray')['controls'][0].controls.windowRCaluclatedUnits.value;
     }
 
@@ -370,7 +373,9 @@ export class BEETComponent implements OnInit, AfterViewInit {
       this.wwrValue = this.buildingdetailsComponent?.formgroup.get('wwrArray')['controls'][0].controls.wwrGuide.value;
     }
   }
-
+  showHiddenText(){
+    this.showText = !this.showText;
+  }
 
   saveHVACDetails() {
     if (this.hvacDetailsComponent?.formgroup.controls.heatefficiency.value == 1) {
