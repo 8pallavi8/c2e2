@@ -82,10 +82,11 @@ export class GendetailsComponent implements OnInit {
           this.buildingDetails = res.success.buildingdata;
           this.eletricityunitslist = res.success.energycostunits.electricitycostunits;
           this.fuelunitslist = res.success.energycostunits.fuelcostunits;
-          this.locationlist = this.locationDetails.find(ele => ele.province == generalDetails.province).locations;
-          this.spacesList = this.buildingDetails.find(ele => ele.buildingtype == generalDetails.buildingType).buildingspaces;
           this.genDetailsForm.patchValue(generalDetails);
           this.beetService.setSelectedCountry(generalDetails.country);
+          this.locationlist = this.locationDetails.find(ele => ele.province == generalDetails.province).locations;
+          this.spacesList = this.buildingDetails.find(ele => ele.buildingtype == generalDetails.buildingType).buildingspaces;
+         
         });
         //this.getGeneralData(generalDetails.country);
       }

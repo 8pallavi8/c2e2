@@ -9,6 +9,10 @@ header {
     transition: top ease-in-out .3s;
 }
 
+.container-fluid{
+    padding: 0 30px;
+}
+
 .navbar-brand {
     max-width: 120px;
 }
@@ -26,9 +30,9 @@ header {
 .nav-heading {
     color: rgb(46, 112, 161);
     font-weight: 900;
-    font-size: 22px;
-    padding: 0px 0px 10px 0px;
-    letter-spacing: 1px;
+    font-size: 37px;
+    padding: 0px 0px 25px 0px;
+    letter-spacing: 1.5px;
 }
 
 .navbar-toggler-icon i {
@@ -67,7 +71,7 @@ header {
 
 .search-link {
     position: absolute;
-    right: 10%;
+    right: 2%;
     cursor: pointer;
     height: 3rem;
     width: 3rem;

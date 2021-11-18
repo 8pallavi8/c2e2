@@ -1,105 +1,129 @@
 <header class="p-article__header text-dark c-hero c-hero--background-image">
     <div class="c-hero__content">
         <div class="o-container">
-            <h1 class="c-hero__headline">Buildings Energy Efficiency Calculator</h1>
+            <h1 class="c-hero__headline text-center">Buildings Energy Efficiency Calculator</h1>
         </div>
     </div>
 </header>
 
 
 
-<div class="container" style="margin-top: 1rem;display: flex;gap:8rem">
-    <div class="Home-text">
-        <p>Welcome to the self assessment Building Energy Efficiency Tool (BEET). This tool was created under the
-            framework
-            of the Euroclima+ program by the Copenhagen Centre of Energy Efficiency (C2E2), an Energy Efficiency hub
-            institutionally part of the UNEP
-            DTU Partnership.<br><br> The Energy Sustainable Municipal Buildings project is funded by Euroclima +, the
-            flagship cooperation program of the European Union for environmental sustainability and climate change in
-            Latin
-            America. In Argentina, the
-            French Development Agency (AFD) is in charge of the implementation. The National University of La Plata
-            (UNLP)
-            is the entity responsible and leader of the project for its execution. The Red Argentina de Municipios
-            frente al
-            Cambio Climático (RAMCC)
-            and the Copenhagen Center for Energy Efficiency (C2E2) are the strategic partners for the realization of the
-            project.
-            <br><br>
+<div class="container" style="margin-top: 1rem;">
+    <div class="row">
+        <div class="Home-text col-md-8">
+            <p>Welcome to the self assessment Building Energy Efficiency Tool (BEET). This tool was created under the
+                framework
+                of the Euroclima+ program by the Copenhagen Centre of Energy Efficiency (C2E2), an Energy Efficiency hub
+                institutionally part of the UNEP
+                DTU Partnership.<br><br> The Energy Sustainable Municipal Buildings project is funded by Euroclima +,
+                the
+                flagship cooperation program of the European Union for environmental sustainability and climate change
+                in
+                Latin
+                America. In Argentina, the
+                French Development Agency (AFD) is in charge of the implementation. The National University of La Plata
+                (UNLP)
+                is the entity responsible and leader of the project for its execution. The Red Argentina de Municipios
+                frente al
+                Cambio Climático (RAMCC)
+                and the Copenhagen Center for Energy Efficiency (C2E2) are the strategic partners for the realization of
+                the
+                project.
+                <br><br>
 
-            <b>About BEET</b><br> This self assessment Building Energy Efficiency Tool (BEET) is designed to provide
-            individual users a preliminary rapid assessment platform where they can assess their building energy
-            performance. The overall objective of
-            BEET is three fold:<br> a. Support the development of a rapid assessment of the energy performance of
-            individual
-            buildings;
-            <br> b. Create a comparative evaluation between the baseline energy performance with energy efficiency (EE)
-            standards.
-            <br> c. Share recommendations of potential EE measures across building components and systems.
-            <br> The tool is intended to cater to the needs of municipalities and relevant stakeholders. The tool may be
-            used for overall understanding of impact on overall building energy consumption profile with respect to
-            various
-            system and component level
-            parameters. The target users may be energy managers, analysts, maintenance and operation professionals,
-            technicians and any individual with basic know-how on buildings and energy efficiency.
-        </p>
+                <b>About BEET</b><br> This self assessment Building Energy Efficiency Tool (BEET) is designed to provide
+                individual users a preliminary rapid assessment platform where they can assess their building energy
+                performance. The overall objective of
+                BEET is three fold:<br> a. Support the development of a rapid assessment of the energy performance of
+                individual
+                buildings;
+                <br> b. Create a comparative evaluation between the baseline energy performance with energy efficiency
+                (EE)
+                standards.
+                <br> c. Share recommendations of potential EE measures across building components and systems.
+                <br> The tool is intended to cater to the needs of municipalities and relevant stakeholders. The tool
+                may be
+                used for overall understanding of impact on overall building energy consumption profile with respect to
+                various
+                system and component level
+                parameters. The target users may be energy managers, analysts, maintenance and operation professionals,
+                technicians and any individual with basic know-how on buildings and energy efficiency.
+            </p>
+            <div>
+                <button class="Disclaimer-text info" (click)="showHiddenDisclaimer()">
+                    Disclaimer
+                </button> 
+                <div *ngIf="showdisclaimer">
+                    <i style="font-size: smaller;">The objective of the tool is to provide an indicative and holistic
+                        outcome on
+                        the
+                        building energy efficiency
+                        based on the user's input data. The tool does not replace the simulations and assessments from a
+                        full
+                        fledged
+                        tools and licensed software
+                        available in the market. The output results hence is recommended to be used for reference
+                        purpose
+                        only
+                        and
+                        may
+                        not be used for detailed or investment grade design and implementation activities.The tool is
+                        built
+                        based
+                        on technical literature
+                        data, available global and local standards, tool developers' knowledge and experience in the
+                        sector.
+                        Care
+                        has
+                        been taken to deliver the most possibly suitable platform. However, due to the challenges in
+                        availability of
+                        country specific data with
+                        respect to climate files, building envelope standards, equipment and appliances, energy
+                        efficiency
+                        applications,
+                        operations, technology and related resources, etc. we understand that there may be certain
+                        differences
+                        with
+                        other similar available
+                        online and licensed tools. All the assumptions have been listed in the Assumptions page.The
+                        information
+                        shared in this form will be used to asses the building performance and potential savings through
+                        energy
+                        efficient measures.
+                    </i><br><br>
+                </div>
+            </div><br>
 
-        <b style="font-size: smaller;text-decoration: underline; font-style: italic;">Disclaimer:</b><br>
-        <i style="font-size: smaller;">The objective of the tool is to provide an indicative and holistic outcome on the
-            building energy efficiency
-            based on the user's input data. The tool does not replace the simulations and assessments from a full
-            fledged
-            tools and licensed software
-            available in the market. The output results hence is recommended to be used for reference purpose only and
-            may
-            not be used for detailed or investment grade design and implementation activities. <br> The tool is built
-            based
-            on technical literature
-            data, available global and local standards, tool developers' knowledge and experience in the sector. Care
-            has
-            been taken to deliver the most possibly suitable platform. However, due to the challenges in availability of
-            country specific data with
-            respect to climate files, building envelope standards, equipment and appliances, energy efficiency
-            applications,
-            operations, technology and related resources, etc. we understand that there may be certain differences with
-            other similar available
-            online and licensed tools. All the assumptions have been listed in the Assumptions page.<br> The information
-            shared in this form will be used to asses the building performance and potential savings through energy
-            efficient measures. Should there
-            be any feedback / queries / suitable or customized data integration requirements, please do reach out to us
-            at
-            the below mentioned contact. </i><br><br>
 
-        <b style="font-size: smaller;text-decoration: underline; font-style: italic;">Point of contact:</b><br>
-        <i style="font-size: smaller;font-style: italic;">
-            Rahul Raju Dusa <br>
-            Senior Expert – Energy Efficiency <br>
-            rradu@dtu.dk
-        </i>
-        <br>
+            <p> Should there be any feedback / queries / suitable or customized data integration requirements, please do
+                reach out to
+                us at the below mentioned contact.</p>
+            <p>Point of contact:<br>
+                Rahul Raju Dusa <br>
+                Senior Expert – Energy Efficiency <br>
+                rradu@dtu.dk
+            </p>
+
+        </div>
+
+        <div class="col-md-4">
+            <h3>Share this</h3>
+            <ul class="social-links">
+                <li class="social-item"><a class="social-link-item social-twitter"
+                        href="https://twitter.com/intent/tweet" target="_blank" title="Tweet"
+                        onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;">Twitter</a>
+                </li>
+                <li class="social-item"><a class="social-link-item social-facebook"
+                        href="https://www.facebook.com/sharer/sharer.php" title="Share on Facebook" target="_blank"
+                        onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&amp;t=' + encodeURIComponent(document.URL)); return false;">Facebook</a>
+                </li>
+                <li class="social-item"><a class="social-link-item social-linkedin"
+                        href="http://www.linkedin.com/shareArticle" target="_blank" title="Share on LinkedIn"
+                        onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&amp;url=' + encodeURIComponent(document.URL) + '&amp;title=' +  encodeURIComponent(document.title)); return false;">LinkdIn</a>
+                </li>
+            </ul>
+        </div>
     </div>
-
-    <div style="    padding-right: 7rem;">
-        <h3>Share this</h3>
-        <ul class="social-links">
-            <li class="social-item"><a class="social-link-item social-twitter" href="https://twitter.com/intent/tweet"
-                    target="_blank" title="Tweet"
-                    onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;">Twitter</a>
-            </li>
-            <li class="social-item"><a class="social-link-item social-facebook"
-                    href="https://www.facebook.com/sharer/sharer.php" title="Share on Facebook" target="_blank"
-                    onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&amp;t=' + encodeURIComponent(document.URL)); return false;">Facebook</a>
-            </li>
-            <li class="social-item"><a class="social-link-item social-linkedin"
-                    href="http://www.linkedin.com/shareArticle" target="_blank" title="Share on LinkedIn"
-                    onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&amp;url=' + encodeURIComponent(document.URL) + '&amp;title=' +  encodeURIComponent(document.title)); return false;">LinkdIn</a>
-            </li>
-        </ul>
-
-
-
-    </div>
-
 </div>
 
 
@@ -203,6 +227,8 @@
             </mat-step>
 
             <mat-step>
+
+
 
                 <ng-template matStepLabel>Input Data Summary and Report</ng-template>
                 <div>
@@ -591,7 +617,26 @@
             </mat-step>
         </mat-horizontal-stepper>
     </div>
-
     <br>
     <app-logo-footer></app-logo-footer>
 </section>
+
+
+<ng-template class="" #errMsg let-modal>
+
+    <div class="modal-header">
+        <h4 class="modal-title">Error Messages</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div *ngFor="let msg of errFieldMessages">
+            <p class="text-danger">{{msg}}</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+
+</ng-template>

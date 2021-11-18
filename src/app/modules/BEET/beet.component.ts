@@ -2,7 +2,8 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { GeneralDetails, Summary } from 'src/app/shared/models/beet-models';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ErrorMessage, errorMessages, GeneralDetails, Summary } from 'src/app/shared/models/beet-models';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { BuildingenvelopedetailsComponent } from './buildingenvelopedetails/buildingenvelopedetails.component';
 import { CO2EmissionsComponent } from './co2-emissions/co2-emissions.component';
@@ -17,7 +18,7 @@ export interface PlugLoadOptionsTable {
   options?: string;
   quantity?: number;
 }
-export interface CalculatedTables{
+export interface CalculatedTables {
   parameter: string;
   baselinevalue: number;
   energyefficienctvalue: number;
@@ -53,7 +54,11 @@ export interface Efficiency {
   styleUrls: ['./beet.component.scss']
 })
 export class BEETComponent implements OnInit, AfterViewInit {
-  showTables:boolean = false;
+  errorMessages: ErrorMessage[] = errorMessages;
+  errFieldMessages: string[] = [];
+  showdisclaimer: boolean = false;
+  showTables: boolean = false;
+  showText: boolean = false;
   inputvaluestable: CalculatedTables[];
   inputvaluestableDataSource: MatTableDataSource<CalculatedTables>
   intermediatevaluestable: CalculatedTables[];
@@ -90,16 +95,17 @@ export class BEETComponent implements OnInit, AfterViewInit {
   heatingEfficiencyFinal: number;
   generalDetails: GeneralDetails;
   summaryTable: { Parameter: string; Units: any; Value: any; }[];
-  displayedColumnsinputvalues=["parameter","baselinevalue","efficientvalue"];
-  displayedColumnsintermediatevalues=["parameter","baselinevalue","efficientvalue"];
-  displayedColumnsoutputvalues=["parameter","baselinevalue","efficientvalue"];
-  displayedColumnsmonthlyresults=["month","peakkwbaseline","kwhbaseline","thermsbaseline","ngcubicmeterbaseline","peakkwees","kwhees","thermsees","ngcubicmeterees"];
-  displayedColumnseconomizersavings=["parameter","baselinevalue","efficientvalue"];
-  displayedColumnsinputsforgraph=["parameter","parameterfield","baselinevalue","efficientvalue"];
-  showText: boolean = false;
-
+  displayedColumnsinputvalues = ["parameter", "baselinevalue", "efficientvalue"];
+  displayedColumnsintermediatevalues = ["parameter", "baselinevalue", "efficientvalue"];
+  displayedColumnsoutputvalues = ["parameter", "baselinevalue", "efficientvalue"];
+  displayedColumnsmonthlyresults = ["month", "peakkwbaseline", "kwhbaseline", "thermsbaseline", "ngcubicmeterbaseline", "peakkwees", "kwhees", "thermsees", "ngcubicmeterees"];
+  displayedColumnseconomizersavings = ["parameter", "baselinevalue", "efficientvalue"];
+  displayedColumnsinputsforgraph = ["parameter", "parameterfield", "baselinevalue", "efficientvalue"];
   
-  constructor(private beetService: beetService, private cd: ChangeDetectorRef) { }
+  @ViewChild('errMsg') errMsg: ElementRef;
+
+
+  constructor(private beetService: beetService, private cd: ChangeDetectorRef, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     if (sessionStorage.getItem('userId') !== null) {
@@ -110,18 +116,18 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.cd.detectChanges();
-   
+
   }
 
 
   selectionStepperChange(event) {
-      this.saveBuildingDetails();
-      this.saveHVACDetails();
-      this.onSaveLightingDetails();
-      this.showSummary();
-      this.onSaveGenDetails();
-      this. onPlugLoadDetails();
-      this.onSaveLightingDetails();
+    this.saveBuildingDetails();
+    this.saveHVACDetails();
+    this.onSaveLightingDetails();
+    this.showSummary();
+    this.onSaveGenDetails();
+    this.onPlugLoadDetails();
+    this.onSaveLightingDetails();
   }
 
   onSaveGenDetails() {
@@ -144,7 +150,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   onPlugLoadDetails() {
     sessionStorage.setItem('plugloadDetails', JSON.stringify(this.plugLoaDetailsComponent.formgroup.getRawValue()))
-    
+
   }
 
   onCo2EmissionsDetails() {
@@ -177,15 +183,15 @@ export class BEETComponent implements OnInit, AfterViewInit {
       },
       {
         Parameter: 'Occupant density', Units: this.genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value,
-        Value: this.genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value.toFixed(2)
+        Value: this.genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value
       },
       {
         Parameter: 'Electricty cost', Units: this.genDetailsComponent.genDetailsForm.controls.electricityUnits.value,
-        Value: this.genDetailsComponent.genDetailsForm.controls.electricityCost.value.toFixed(2)
+        Value: this.genDetailsComponent.genDetailsForm.controls.electricityCost.value
       },
       {
         Parameter: 'Fuel cost', Units: this.genDetailsComponent.genDetailsForm.controls.fuelUnits.value,
-        Value: this.genDetailsComponent.genDetailsForm.controls.fuelCost.value.toFixed(2)
+        Value: this.genDetailsComponent.genDetailsForm.controls.fuelCost.value
       },
       { Parameter: 'Thermal Resistance (R value) wall', Units: this.outerWallR.rUnits, Value: this.outerWallR.rValue },
       { Parameter: 'Thermal Resistance (R value) roof', Units: this.roofR.rUnits, Value: this.roofR.rValue },
@@ -233,13 +239,36 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   }
 
+
+
   postDataGenerateReport() {
-    this.showTables=true;
+
+   /*  Object.keys(this.genDetailsComponent.genDetailsForm.controls).forEach(field => {
+      const control = this.genDetailsComponent.genDetailsForm.get(field);
+      if (this.genDetailsComponent.genDetailsForm.get(field).invalid) {
+        console.log(field + " is invalid");
+        this.errorMessages.forEach(ele => {
+          if(ele.key == field){
+            this.errFieldMessages.push(ele.errMessage);
+          }
+        });
+      }
+      console.log(field);
+    });
+    console.log(this.errFieldMessages.length);
+    if (this.errFieldMessages.length > 0) {
+      this.modalService.open(this.errMsg, {
+        backdropClass: 'light-green-backdrop',
+        size: 'md', scrollable: true
+      });
+    } */
+
+    this.showTables = true;
     var selectedcountryname = sessionStorage.getItem('selectedCountryName');
     if (this.genDetailsComponent.genDetailsForm.valid) {
 
       this.plugloadoptions = [];
-    
+
       (<FormArray>this.plugLoaDetailsComponent.formgroup.get('plugLoadOptionsArray')).controls.forEach((element, index) => {
         var optionsplugload: any = {
           operation: (<FormGroup>element).controls.operation.value,
@@ -249,7 +278,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
         this.plugloadoptions.push(optionsplugload);
       });
- 
+
       var payload: any = {
         //username: this.genDetailsComponent.genDetailsForm.controls.userName.value,
         //projectname: this.genDetailsComponent.genDetailsForm.controls.projectName.value,
@@ -258,11 +287,11 @@ export class BEETComponent implements OnInit, AfterViewInit {
         location: this.genDetailsComponent.genDetailsForm.controls.location.value,
         buildingtype: this.genDetailsComponent.genDetailsForm.controls.buildingType.value,
         buildingspaces: this.genDetailsComponent.genDetailsForm.controls.buildingSpaces.value,
-       // yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value.toString(),
+        // yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value.toString(),
         nooffloors: this.genDetailsComponent.genDetailsForm.controls.noOfFloors.value,
         occupancyhrsperweek: this.genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value,
-        //buildinggrossarea: Number(this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value),
-        //buildinggrossareaunit: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
+        buildinggrossarea: Number(this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value),
+        buildinggrossareaunit: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
         netoccupiedarea: this.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value,
         netoccupiedareaunit: this.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
         occupantdensity: Number(this.genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value),
@@ -311,17 +340,17 @@ export class BEETComponent implements OnInit, AfterViewInit {
       console.log(payload);
       this.beetService.postDataGenerateReport(payload).subscribe(res => {
         console.log(res.success)
-        this.inputvaluestable= res.success.inputvaluestable;
+        this.inputvaluestable = res.success.inputvaluestable;
         this.inputvaluestableDataSource = new MatTableDataSource(this.inputvaluestable);
-        this.intermediatevaluestable= res.success.intermediatevaluestable;
+        this.intermediatevaluestable = res.success.intermediatevaluestable;
         this.intermediatevaluestabletableDataSource = new MatTableDataSource(this.intermediatevaluestable);
-        this.outputvaluestable= res.success.outputvaluestable;
+        this.outputvaluestable = res.success.outputvaluestable;
         this.outputvaluestableDataSource = new MatTableDataSource(this.outputvaluestable);
-        this.monthresultstable= res.success.monthresultstable;
+        this.monthresultstable = res.success.monthresultstable;
         this.monthresultstabletableDataSource = new MatTableDataSource(this.monthresultstable);
-        this.economizersavingstable= res.success.intermediatevaluestable;
+        this.economizersavingstable = res.success.intermediatevaluestable;
         this.economizersavingstableDataSource = new MatTableDataSource(this.economizersavingstable);
-        this.inputsforgraphtable= res.success.inputsforgraphtable;
+        this.inputsforgraphtable = res.success.inputsforgraphtable;
         this.inputsforgraphtableDataSource = new MatTableDataSource(this.inputsforgraphtable);
 
         /*  if (res.status == 'success') {
@@ -373,8 +402,12 @@ export class BEETComponent implements OnInit, AfterViewInit {
       this.wwrValue = this.buildingdetailsComponent?.formgroup.get('wwrArray')['controls'][0].controls.wwrGuide.value;
     }
   }
-  showHiddenText(){
+  showHiddenText() {
     this.showText = !this.showText;
+  }
+
+  showHiddenDisclaimer() {
+    this.showdisclaimer = !this.showdisclaimer;
   }
 
   saveHVACDetails() {

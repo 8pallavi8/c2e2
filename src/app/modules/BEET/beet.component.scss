@@ -248,7 +248,6 @@ table {
 }
 
 
-@media (min-width: 992px){
 .c-hero:not(.c-hero--small) {
     margin-top: -16px;
     min-height: 40vh;
@@ -259,9 +258,11 @@ table {
     -ms-flex-pack: distribute;
     justify-content: space-around;
     background-image:url(../../../assets/images/Hero-Building.jpg); 
-    //background-position: center top 
+    background-position: center ; 
 }
-}
+
+
+
 
 .c-hero {
     background-size: cover;
@@ -283,7 +284,7 @@ table {
 
 @media (min-width: 992px){
 .c-hero__headline {
-    max-width: 62.5%;
+    //max-width: 62.5%;
     font-size: 36px;
     font-size: 2.25rem;
 }
@@ -294,3 +295,23 @@ table {
     padding: 3.5rem 0 2rem;
 }
 }
+
+.Home-text{
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Disclaimer-text{
+    background:none;
+    //border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
+    font-size: x-small;
+    //text-decoration: underline;
+     font-style: italic;
+     font-weight: bold;
+}
+
+.Disclaimer-text:hover {background: #eee;}
+

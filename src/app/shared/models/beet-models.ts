@@ -29,3 +29,15 @@ export interface GeneralDetails {
     fuelcost?: number;
     fuelcostunit?: string;
 }
+
+
+export interface ErrorMessage{
+  key?: string;
+  errMessage?: string;
+}
+
+export const errorMessages:ErrorMessage[] = [
+  {key: 'country', errMessage: 'Please select a country'},
+  {key: 'province', errMessage: 'Please select a province'},
+  {key: 'location', errMessage: 'Please select a location'},
+]

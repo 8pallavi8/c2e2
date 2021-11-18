@@ -16,12 +16,23 @@ li {
         list-style: none;
         flex-direction: column;
     }
+    .logo-AFD{
+      width: 150px; 
+    }
 }
 
 .last-logo{
+  display: flex;
+  flex-direction: column;
   right: 0;
     top: 0;
     width: 40%;
+}
+
+.logo-AFD{
+  height:50px;    
+  width: 250px;
+  margin-top: 30px;
 }
 
 
