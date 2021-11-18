@@ -1,15 +1,8 @@
 .footer-row1 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    div {
-        max-width: 300px;
-        p {
-            text-align: left;
-        }
-    }
+    padding: 0 80px;
 }
+
+
 
 .footer-row2 {
     display: flex;
@@ -39,15 +32,6 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .footer-row1 {
-        justify-content: center;
-        div {
-            max-width: 300px;
-            p {
-                text-align: center;
-            }
-        }
-    }
     .footer-row2 {
         justify-content: center;
         div {
@@ -56,5 +40,13 @@
                 text-align: center;
             }
         }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .footer-row1{
+        padding:0 20px;
+        text-align: center;
+
     }
 }
