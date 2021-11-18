@@ -36,8 +36,8 @@
                                 <b style="margin-top: 1em;">Enter the heatingequipment efficiency value :
                                 </b>
                                 <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                                    <mat-label>Enter value here</mat-label>
-                                    <input matInput placeholder="Enter value" type="number"
+                        
+                                    <input matInput placeholder="Enter heating equipment efficiency value" type="number"
                                         formControlName="heatefficiencyKnown" type="number">
                                     <mat-select placeholder="units" formControlName="heatEfficiencyUnits">
                                         <mat-option value="%">%</mat-option>
@@ -132,8 +132,7 @@
                                     Please enter the value in below text box and select respective units.</p>
                                 
                                     <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                                        <mat-label>Enter value here</mat-label>
-                                        <input matInput placeholder="Enter value" formControlName="acEfficiencyValue"
+                                        <input matInput placeholder="Enter cooling equipment efficiency value" formControlName="acEfficiencyValue"
                                             type="number">
                                         <mat-select placeholder="units" formControlName="acEfficiencyParameter">
                                             <mat-option *ngFor="let unit of acEfficiencyParameterList" [value]="unit">
@@ -220,12 +219,10 @@
 
                 <span *ngIf="formgroup.controls.ventilation.value == 1" class="units-picker-component">
                     <p class="fields-note">You may choose to enter the values for any of the units mentioned
-                        below. Necessary units conversions will be made by
-                        the tool for respective calculations.</p>
+                        below. Necessary units conversions will be made by the tool for respective calculations.</p>
                     <b style="margin-top: 1em;">Ventilation Rate : </b>
                     <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                        <mat-label>Enter value here</mat-label>
-                        <input matInput placeholder="Enter value" type="number" formControlName="ventilationValue"
+                        <input matInput placeholder="Enter ventilation value" type="number" formControlName="ventilationValue"
                             type="number">
                         <mat-select placeholder="units" formControlName="ventilationUnits">
                             <mat-option value="cubic meter per minute per person">cubic meter per minute per person
@@ -266,8 +263,7 @@
                     <p style="margin-top: 1em;">Please enter the Infiltration Rate value in Air Changes per
                         Hour(ACH)</p>
                     <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
-                        <mat-label>Enter value here</mat-label>
-                        <input matInput placeholder="Enter value" required formControlName="infiltrationValue">
+                        <input matInput placeholder="Enter infiltration value" required formControlName="infiltrationValue">
                     </mat-form-field>
                 </span>
                 <div>
@@ -297,8 +293,8 @@
                             needs?</p>
                     </span>
                     <span>
-                        <mat-form-field>
-                            <mat-select placeholder="select" formControlName="economizer">
+                        <mat-form-field appearance="outline">
+                            <mat-select placeholder="select any option" formControlName="economizer">
                                 <mat-option *ngFor="let option of options" [value]="option.value">
                                     {{option.value}}
                                 </mat-option>
@@ -324,12 +320,12 @@
                         N/A: Not applicable
                     </p>
                 </div>
+
                 <span class="units-picker-component">
                     <p class="fieldname-align">Average indoor air temperature (set-point):</p>
                     <mat-form-field appearance="outline">
-                        <mat-label>Enter value</mat-label>
                         <input matInput placeholder="Enter value" type="number" formControlName="avgIndoorAirTemp">
-                        <mat-select [(value)]="units" formControlName="avgIndoorAirTempUnit">
+                        <mat-select [(value)]="units" placeholder="units" formControlName="avgIndoorAirTempUnit">
                             <mat-option value="centigrade">ºC</mat-option>
                             <mat-option value="farenheit">ºF</mat-option>
                         </mat-select>
@@ -338,8 +334,8 @@
 
                 <p>Inverter / VFD / Speed controller for HVAC compressors installed? </p>
 
-                <mat-form-field>
-                    <mat-select placeholder="select" formControlName="hvacCompressorInstalled">
+                <mat-form-field appearance="outline">
+                    <mat-select placeholder="select any option" formControlName="hvacCompressorInstalled">
                         <mat-option *ngFor="let option of options" [value]="option.value">
                             {{option.value}}
                         </mat-option>
@@ -348,8 +344,8 @@
 
                 <p>Inverter / VFD / Speed controller for HVAC fans and blowers installed?</p>
 
-                <mat-form-field>
-                    <mat-select placeholder="select" formControlName="hvacFansandBlowersInstalled">
+                <mat-form-field appearance="outline">
+                    <mat-select placeholder="select any option" formControlName="hvacFansandBlowersInstalled">
                         <mat-option *ngFor="let option of options" [value]="option.value">
                             {{option.value}}
                         </mat-option>

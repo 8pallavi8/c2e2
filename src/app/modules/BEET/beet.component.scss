@@ -96,11 +96,9 @@ table {
 
 ::ng-deep .mat-form-field-label {
     padding-top: 7px;
-}
-
-::ng-deep .mat-form-field-label {
     font-size: 0.8em!important;
 }
+
 
 ::ng-deep .mat-form-field-flex>.mat-form-field-infix {
     padding: 0.4em 0px !important;
@@ -315,3 +313,28 @@ table {
 
 .Disclaimer-text:hover {background: #eee;}
 
+
+.field-group{
+    display: flex;
+    flex-direction: column;
+  }
+
+.field-title-beet{
+    padding-left: 5px;
+    font-weight: bold;
+}
+
+.field-align{
+    display: flex;
+}
+
+@media (max-width: 600px){
+    .field-align {
+        flex-direction: column;
+
+    }
+    }
+
+    .heading-style{
+        font-weight: bold;
+    }

@@ -24,8 +24,8 @@
                                 the tool for respective calculations.</p>
                             <b style="margin-top: 1em;">Outer Wall R value : </b>
                             <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                                <mat-label>Enter value here</mat-label>
-                                <input matInput placeholder="Enter value" type="number"
+                                <!-- <mat-label>Enter value here</mat-label> -->
+                                <input matInput placeholder="Enter R value" type="number"
                                     formControlName="outerwallRKnown" type="number">
                                 <mat-select placeholder="units" formControlName="outerwallrUnits">
                                     <mat-option value="m².°C/W">m<sup>2</sup>.°C/W</mat-option>
@@ -60,7 +60,7 @@
                                 <div>
                                     <b style="margin-top: 20px;padding-left: 2rem">Layer Number : </b>
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Select </mat-label>
+                                        <mat-label>Please select layer number</mat-label>
                                         <mat-select [(value)]="selectedLayerValue">
                                             <mat-option *ngFor="let layer of layersList" [value]="layer">{{layer}}
                                             </mat-option>
@@ -151,8 +151,7 @@
                                 the tool for respective calculations.</p>
                             <b style="margin-top: 1em;">Roof R value : </b>
                             <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                                <mat-label>Enter value here</mat-label>
-                                <input matInput placeholder="Enter value" type="number" formControlName="roofRKnown"
+                                <input matInput placeholder="Enter R value" type="number" formControlName="roofRKnown"
                                     type="number">
                                 <mat-select placeholder="units" formControlName="roofrUnits">
                                     <mat-option value="m².°C/W">m<sup>2</sup>.°C/W</mat-option>
@@ -187,7 +186,7 @@
                                 <div>
                                     <b style="margin-top: 20px;padding-left: 2rem">Layer Number : </b>
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Select </mat-label>
+                                        <mat-label>Please select layer number </mat-label>
                                         <mat-select [(value)]="selectedRoofLayerValue">
                                             <mat-option *ngFor="let layer of layersList" [value]="layer">{{layer}}
                                             </mat-option>
@@ -278,8 +277,7 @@
                                 the tool for respective calculations.</p>
                             <b style="margin-top: 1em;">Window R value : </b>
                             <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                                <mat-label>Enter value here</mat-label>
-                                <input matInput placeholder="Enter value" formControlName="windowRKnown"
+                                <input matInput placeholder="Enter R value" formControlName="windowRKnown"
                                     type="number">
                                 <mat-select placeholder="units" formControlName="windowrUnits">
                                     <mat-option value="m².°C/W">m².°C/W</mat-option>
@@ -313,7 +311,7 @@
             <div class="fields-note">
                 <p><span class="notes-style"> Note:</span> You may select any of the options to provide details on SHGC value of the window</p>
             </div>
-            <mat-radio-group aria-label="Select an option" formControlName="SHGC">
+            <mat-radio-group aria-label="Select an option" formControlName="SHGC" >
                 <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
                 <mat-radio-button (click)="postCalculateshgc()" value="2"> No, I don't know.</mat-radio-button>
             </mat-radio-group>
@@ -321,10 +319,9 @@
             <span *ngIf="formgroup.controls.SHGC.value == 1">
                 <p style="margin-top: 1em;">I know the SHGC value of the windows for my building.</p>
                 <div style="display: flex;">
-                    <p style="margin-top: 1rem;">Please enter the SHGC value here(value doesnot have units) : </p>
+                    <p style="margin-top: 1rem;">Please enter the SHGC value here:</p>
                     <mat-form-field appearance="outline">
-                        <mat-label>Enter value here</mat-label>
-                        <input matInput placeholder="Enter value" required formControlName="SHGCknown">
+                        <input matInput  required formControlName="SHGCknown" placeholder="Enter SHGC value">
                     </mat-form-field>
                 </div>
             </span><br>
@@ -354,11 +351,10 @@
                         <span *ngIf="formgroup.controls.wwr.value == 1">
                             <p style="margin-top: 1em;">I know the WWR value of the windows for my building.</p>
                             <div style="display: flex;">
-                                <p style="margin-top: 1rem;">Please enter the WWR value (value doesnot have units) :
+                                <p style="margin-top: 1rem;">Please enter the WWR value:
                                 </p>
                                 <mat-form-field appearance="outline">
-                                    <mat-label>Enter value here</mat-label>
-                                    <input matInput placeholder="Enter value" type="number" formControlName="wwrKnown"
+                                    <input matInput placeholder="Enter WWR value" type="number" formControlName="wwrKnown"
                                         required>
                                 </mat-form-field>
                             </div>
@@ -374,7 +370,6 @@
                                 <p style="margin-top: 1rem;">Please enter the WWR value in(%) by refering to pictures:
                                 </p>
                                 <mat-form-field appearance="outline">
-                                    <mat-label>Enter value here</mat-label>
                                     <input matInput placeholder="Enter value" type="number" formControlName="wwrGuide"
                                         required>
                                 </mat-form-field><br>
