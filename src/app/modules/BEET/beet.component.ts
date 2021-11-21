@@ -1,4 +1,3 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
@@ -116,7 +115,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.cd.detectChanges();
-
   }
 
 
@@ -150,13 +148,11 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   onPlugLoadDetails() {
     sessionStorage.setItem('plugloadDetails', JSON.stringify(this.plugLoaDetailsComponent.formgroup.getRawValue()))
-
   }
 
   onCo2EmissionsDetails() {
     sessionStorage.setItem('co2EmissionDetails', JSON.stringify(this.co2EmissionsDetailsComponent.formgroup.value))
   }
-
 
   showSummary() {
     var selectedcountryname = sessionStorage.getItem('selectedCountryName');
@@ -242,7 +238,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
 
   postDataGenerateReport() {
-
    /*  Object.keys(this.genDetailsComponent.genDetailsForm.controls).forEach(field => {
       const control = this.genDetailsComponent.genDetailsForm.get(field);
       if (this.genDetailsComponent.genDetailsForm.get(field).invalid) {
@@ -266,16 +261,13 @@ export class BEETComponent implements OnInit, AfterViewInit {
     this.showTables = true;
     var selectedcountryname = sessionStorage.getItem('selectedCountryName');
     if (this.genDetailsComponent.genDetailsForm.valid) {
-
       this.plugloadoptions = [];
-
       (<FormArray>this.plugLoaDetailsComponent.formgroup.get('plugLoadOptionsArray')).controls.forEach((element, index) => {
         var optionsplugload: any = {
           operation: (<FormGroup>element).controls.operation.value,
           operationresponse: (<FormGroup>element).controls.operationresponse.value,
           quantity: (<FormGroup>element).controls.quantity.value,
         }
-
         this.plugloadoptions.push(optionsplugload);
       });
 

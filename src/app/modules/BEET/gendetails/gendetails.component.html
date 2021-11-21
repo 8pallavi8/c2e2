@@ -29,7 +29,7 @@
                     <mat-label class="field-title-beet">Country</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select id="Country" (selectionChange)="onChangeCountry($event)" formControlName="country"
-                            required  placeholder="Select Country">
+                            required placeholder="Select Country">
                             <mat-option *ngFor="let con of countrylist" [attr.data-id]="con.country"
                                 placeholder="Select Country" [value]="con.countrycode">{{con.country}}</mat-option>
                         </mat-select>
@@ -40,7 +40,7 @@
                     <mat-label class="field-title-beet">Province</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select matNativeControl id="Province" formControlName="province" required
-                            (selectionChange)="onChangeProvince($event)"  placeholder="Select Province">
+                            (selectionChange)="onChangeProvince($event)" placeholder="Select Province">
                             <mat-option *ngFor="let location of locationDetails" [value]="location.province">
                                 {{location.province}}</mat-option>
                         </mat-select>
@@ -50,7 +50,8 @@
                 <div class="field-group w-100 col-md-4">
                     <mat-label class="field-title-beet">Location</mat-label>
                     <mat-form-field appearance="outline">
-                        <mat-select matNativeControl id="Location" formControlName="location" required  placeholder="Select Location">
+                        <mat-select matNativeControl id="Location" formControlName="location" required
+                            placeholder="Select Location">
                             <mat-option *ngFor="let loc of locationlist" [value]="loc">{{loc}}</mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -75,7 +76,7 @@
                     <mat-label class="field-title-beet">Building Type</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select matNativeControl id="Buidling" formControlName="buildingType" required
-                            (selectionChange)="onChangeBuildingType($event)"  placeholder="Select Building Type">
+                            (selectionChange)="onChangeBuildingType($event)" placeholder="Select Building Type">
                             <mat-option *ngFor="let building of buildingDetails" [value]="building.buildingtype">
                                 {{building.buildingtype}}</mat-option>
                         </mat-select>
@@ -87,7 +88,7 @@
                     <mat-label class="field-title-beet">Building Spaces</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select matNativeControl id="BuidlingSpaces" formControlName="buildingSpaces" multiple
-                            required  placeholder="Select building Spaces">
+                            required placeholder="Select building Spaces">
                             <mat-option *ngFor="let space of spacesList" [value]="space">{{space}}
                             </mat-option>
                         </mat-select>
@@ -98,7 +99,7 @@
         </fieldset>
         <fieldset>
             <legend>Building age, area, no. of floors, occupancy hours</legend>
-            <h2 class="heading-style">Building age, area, no. of floors, occupancy hours</h2>
+            <h2 class="heading-style">Building preliminary functional details</h2>
             <div class="fields-note">
                 <p><span class="notes-style"> Note:</span> You may select the units in which you may want to enter the
                     building area value using drop down button.
@@ -116,13 +117,15 @@
                 <div class="field-group w-100 col-md-4">
                     <mat-label class="field-title-beet">No. of floors</mat-label>
                     <mat-form-field appearance="outline">
-                        <input formControlName="noOfFloors" type="number" matInput required  placeholder="Please enter number of floors">
+                        <input formControlName="noOfFloors" type="number" matInput required
+                            placeholder="Please enter number of floors">
                     </mat-form-field>
                 </div>
                 <div class="field-group w-100 col-md-4">
                     <mat-label class="field-title-beet">Occupancy hours per week</mat-label>
                     <mat-form-field appearance="outline">
-                        <input formControlName="occupanyHoursPerWeek" type="number" matInput required placeholder="Please enter occupancy hours per week">
+                        <input formControlName="occupanyHoursPerWeek" type="number" matInput required
+                            placeholder="Please enter occupancy hours per week">
                     </mat-form-field>
                 </div>
                 <!-- <span class="units-picker-component">
@@ -136,20 +139,23 @@
                     </mat-select>
                 </mat-form-field>
             </span> -->
+
+
                 <div class="field-group w-100 col-md-4">
-                    <span class="units-picker-component">
+                    <div class="units-picker-component">
                         <mat-label class="field-title-beet">Net occupied floor area</mat-label>
-                        <mat-form-field appearance="outline">
+                        <mat-form-field class="netarea-field" appearance="outline">
                             <input formControlName="netOccupiedFloorArea" type="number" matInput required
-                                (input)="calculateGross()">
-                            <mat-select style="padding-left: 8px" placeholder="units" formControlName="netAreaUnits"
-                                style="width: 180px;" (selectionChange)="calculateGross()">
+                                (input)="calculateGross()" placeholder="Please enter net occupied floor area">
+                            <mat-select style="padding-left: 8px ;width: 180px;" placeholder="units" formControlName="netAreaUnits"
+                                (selectionChange)="calculateGross()">
                                 <mat-option value="square feet">Square Feet</mat-option>
                                 <mat-option value="square meter">Square Meter</mat-option>
                             </mat-select>
                         </mat-form-field>
-                    </span>
+                    </div>
                 </div>
+
             </div>
 
         </fieldset>
@@ -183,7 +189,7 @@
                             working hours.</p> -->
                 <b style="margin-top: 1.5rem;">Number of people occupying the building :</b>
                 <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                    
+
                     <input matInput placeholder="Enter value" formControlName="noOfPeopleOccupying" type="number">
                 </mat-form-field>
                 <div>
@@ -238,14 +244,15 @@
                 <div class="field-group w-100 col-md-4">
                     <mat-label class="field-title-beet">Electricity cost units</mat-label>
                     <mat-form-field appearance="outline">
-                        <mat-select formControlName="electricityUnits"  placeholder="Select Fuel cost units">
-                            <mat-option *ngFor="let unit of eletricityunitslist" [value]="unit" placeholder="Select Electricity cost units">{{unit}}</mat-option>
+                        <mat-select formControlName="electricityUnits" placeholder="Select Fuel cost units">
+                            <mat-option *ngFor="let unit of eletricityunitslist" [value]="unit"
+                                placeholder="Select Electricity cost units">{{unit}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
 
                 <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">Electricity cost  value</mat-label>
+                    <mat-label class="field-title-beet">Electricity cost value</mat-label>
                     <mat-form-field appearance="outline">
                         <input type="number" matInput formControlName="electricityCost" placeholder="Enter value"
                             required>
@@ -258,7 +265,7 @@
                     <mat-label class="field-title-beet">Fuel cost units</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select formControlName="fuelUnits" placeholder="Select Fuel cost units">
-                            <mat-option *ngFor="let units of fuelunitslist" [value]="units" >{{units}}</mat-option>
+                            <mat-option *ngFor="let units of fuelunitslist" [value]="units">{{units}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>

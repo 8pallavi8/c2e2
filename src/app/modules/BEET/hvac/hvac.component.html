@@ -9,10 +9,10 @@
         <!-- Heating efficiency  -->
 
         <fieldset>
-            <legend>Heating efficiency</legend>
+            <legend>Heating</legend>
             <h2>Heating efficiency</h2>
             <div >
-                <p>Do you know the heating equipment efficiency of your building?</p>
+                <p class="question-text">Do you know the heating equipment efficiency of your building?</p>
                 <div class="fields-note">
                     <p><span class="notes-style"> Note:</span> You may select any of the options.
                         You may find these values on the equipment name plate or design document or from supplier
@@ -21,7 +21,7 @@
                 <mat-radio-group aria-label="Select an option" formControlName="heatefficiency"
                     (change)="onChangeHeatEffOption($event)">
                     <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                    <mat-radio-button value="2">No, I don't know</mat-radio-button><br>
+                    <mat-radio-button value="2">No, I don't know. (default values will be assumed for calculations) </mat-radio-button><br>
                     <mat-radio-button value="3">The building does not use any
                         heating equipment</mat-radio-button>
                 </mat-radio-group><br><br>
@@ -107,7 +107,7 @@
             <h2>Air-Conditioning (Cooling)</h2>
 
             <div >
-                <p>Do you know the cooling equipment performance parameters of your building? </p>
+                <p class="question-text">Do you know the cooling equipment performance parameters of your building? </p>
                 <div class="fields-note">
                     <p><span class="notes-style"> Note:</span> You may select any of the options.
                         You may find these values on the equipment name plate or design document or from supplier.
@@ -116,7 +116,7 @@
                 <mat-radio-group aria-label="Select an option" formControlName="airconditioning"
                     (change)="onChangecoolingEffOption($event)">
                     <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                    <mat-radio-button value="2">No, I don't know</mat-radio-button><br>
+                    <mat-radio-button value="2">No, I don't know. (default values will be assumed for calculations) </mat-radio-button><br>
                     <mat-radio-button value="3">The building does not use any
                         cooling equipment</mat-radio-button>
                 </mat-radio-group><br><br>
@@ -204,7 +204,7 @@
             <h2>Ventilation</h2>
 
             <div>
-                <p>Do you know the ventilation rate value for your building?</p>
+                <p class="question-text">Do you know the ventilation rate value for your building?</p>
 
                 <div class="fields-note">
                     <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
@@ -245,17 +245,16 @@
             <h2>Infiltration rate </h2>
 
             <div>
-                <p>Do you know the infiltration rate value for your building?</p>
+                <p class="question-text">Do you know the infiltration rate value for your building?</p>
                 <div class="fields-note">
-                    <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
-                        on R value of the wall.</p>
+                    <p><span class="notes-style"> Note:</span> You may select any of the options to provide building infiltration rate.</p>
                 </div>
 
                 <div>
                     <mat-radio-group aria-label="Select an option" formControlName="infiltration">
                         <mat-radio-button value="1">Yes, I know
                         </mat-radio-button><br>
-                        <mat-radio-button (click)="defaultInfiltration()" value="2">No, I don't know.
+                        <mat-radio-button (click)="defaultInfiltration()" value="2">No, I don't know. (default values will be assumed for calculations).
                         </mat-radio-button>
                     </mat-radio-group>
                 </div>
@@ -289,7 +288,7 @@
                 </div>
                 <div>
                     <span>
-                        <p>Do you have and actively manage the economizer / free cooling to cater to your cooling
+                        <p class="question-text">Do you have and actively manage the economizer / free cooling to cater to your cooling
                             needs?</p>
                     </span>
                     <span>
@@ -322,7 +321,7 @@
                 </div>
 
                 <span class="units-picker-component">
-                    <p class="fieldname-align">Average indoor air temperature (set-point):</p>
+                    <p class="fieldname-align question-text">Average indoor air temperature (set-point):</p>
                     <mat-form-field appearance="outline">
                         <input matInput placeholder="Enter value" type="number" formControlName="avgIndoorAirTemp">
                         <mat-select [(value)]="units" placeholder="units" formControlName="avgIndoorAirTempUnit">
@@ -332,7 +331,7 @@
                     </mat-form-field>
                 </span>
 
-                <p>Inverter / VFD / Speed controller for HVAC compressors installed? </p>
+                <p class="question-text">Inverter / VFD / Speed controller for HVAC compressors installed? </p>
 
                 <mat-form-field appearance="outline">
                     <mat-select placeholder="select any option" formControlName="hvacCompressorInstalled">
@@ -342,7 +341,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <p>Inverter / VFD / Speed controller for HVAC fans and blowers installed?</p>
+                <p class="question-text">Inverter / VFD / Speed controller for HVAC fans and blowers installed?</p>
 
                 <mat-form-field appearance="outline">
                     <mat-select placeholder="select any option" formControlName="hvacFansandBlowersInstalled">

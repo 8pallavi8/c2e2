@@ -68,3 +68,12 @@
 .footer-text-two{
    color: #778899 ;
 }
+.bg-img{
+    background-image: url('../../../assets/images/earth_dot.png');
+  background-repeat: no-repeat;
+  //background-position: 50%;
+  height: 220px;
+    background-size: cover;
+    opacity: 0.4;
+    transform: rotate(10deg);
+}

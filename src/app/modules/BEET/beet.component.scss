@@ -295,8 +295,10 @@ table {
 }
 
 .Home-text{
-    font-size: 16px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 1rem;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
 }
 
 .Disclaimer-text{
@@ -337,4 +339,8 @@ table {
 
     .heading-style{
         font-weight: bold;
+    }
+
+    .mat-form-field{
+        display: block;
     }

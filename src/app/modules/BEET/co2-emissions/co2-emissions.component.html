@@ -7,18 +7,18 @@
     <form [formGroup]="formgroup" class="form">
 
         <fieldset>
-            <legend>Power generation CO2 emissions </legend>
-            <h2>Power generation CO2 emissions</h2>
+            <legend>Power generation CO<sub>2</sub> emissions </legend>
+            <h2>Power generation CO<sub>2</sub> emissions</h2>
             <div>
-                <p>Do you know the local grid emission factor ?</p>
+                <p class="question-text">Do you know the local grid emission factor ?</p>
                 <div class="fields-note mt-0">
-                    <p><span class="notes-style"> Note:</span> Applicable for electricity import from the grid
+                    <p><span class="notes-style"> Note:</span> Applicable for electricity import from the grid.
                     </p>
                 </div>
 
                 <div>
                     <mat-radio-group aria-label="Select an option" formControlName="powergenerationco2emmisions">
-                        <mat-radio-button value="1">Yes, I know
+                        <mat-radio-button value="1">Yes, I know.
                         </mat-radio-button><br>
                         <mat-radio-button value="2" (click)="defaultEmissionFactor()">No, I don't
                             know.</mat-radio-button>
@@ -35,24 +35,32 @@
                 </span>
             </div>
 
-            <b class="calculated-values">CO2 emissions:{{formgroup.controls.gridemissionsFactor.value| number:'1.2-2'}}
+            <b class="calculated-values">CO<sub>2</sub> emissions:{{formgroup.controls.gridemissionsFactor.value|
+                number:'1.2-2'}}
                 {{formgroup.controls.gridemissionsFactorUnits.value}}
             </b>
+        </fieldset>
 
+
+        <fieldset>
+            <legend>On site CO<sub>2</sub> emissions </legend>
+            <h2>On site CO<sub>2</sub> emissions</h2>
             <div>
-                <p style="margin-top: 1em;">Do you know the fuel CO2 emission factor?</p>
+                <p style="margin-top: 1em;" class="question-text">Do you know the fuel CO<sub>2</sub> emission factor?
+                </p>
                 <div class="fields-note">
                     <p><span class="notes-style"> Note:</span>You may select any of the options to provide details
-                        of On-site CO2 emissions (especially if you are using fuel based heating equipment or- power
-                        generators, etc. )
-                        Natural Gas equivalent CO2 emissions values will be used for the assessment
+                        of On-site CO<sub>2</sub> emissions (especially if you are using fuel based heating equipment or
+                        power
+                        generators, etc.).Natural Gas equivalent CO<sub>2</sub> emissions values will be used for the
+                        assessment.
                     </p>
                 </div>
                 <div>
                     <mat-radio-group aria-label="Select an option" formControlName="fuelEmissionFactor">
-                        <mat-radio-button value="1">Yes, I know
+                        <mat-radio-button value="1">A.Yes, I know.
                         </mat-radio-button><br>
-                        <mat-radio-button (click)="postCalculateFuelEmissionFactor()" value="2">No, I don't know.
+                        <mat-radio-button (click)="postCalculateFuelEmissionFactor()" value="2">B. No, I don't know.
                         </mat-radio-button>
                     </mat-radio-group>
                 </div>
@@ -66,15 +74,15 @@
 
                         <div class="field-group w-100 col-md-4">
                             <mat-label class="field-title-beet">Enter fuel emission factor value</mat-label>
-                            <mat-form-field  appearance="outline">
+                            <mat-form-field appearance="outline">
                                 <input class="custom-input" matInput placeholder="Enter value" required
                                     formControlName="fuelEmissionFactorValue">
                             </mat-form-field>
                         </div>
 
                         <div class="field-group w-100 col-md-4">
-                            <mat-label class="field-title-beet">Select CO2 emissions units</mat-label>
-                            <mat-form-field  appearance="outline">
+                            <mat-label class="field-title-beet">Select CO<sub>2</sub> emissions units</mat-label>
+                            <mat-form-field appearance="outline">
                                 <mat-select formControlName="fuelEmissionFactorUnit">
                                     <mat-option *ngFor="let unit of co2emissionsunits" [value]="unit">{{unit}}
                                     </mat-option>
@@ -86,9 +94,11 @@
 
             </div>
 
-            <b class="calculated-values"> On site CO2 emissions:{{formgroup.controls.fuelEmissionFactorValue.value|
+            <b class="calculated-values"> On site CO<sub>2</sub>
+                emissions:{{formgroup.controls.fuelEmissionFactorValue.value|
                 number:'1.2-2'}}
                 {{formgroup.controls.fuelEmissionFactorUnit.value}}</b>
+
         </fieldset>
     </form>
 </div>

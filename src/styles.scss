@@ -35,10 +35,10 @@ body {
     background: transparent;
 }
 
-.units-picker-component .mat-form-field-infix {
+ .units-picker-component .mat-form-field-infix {
     display: inherit;
 }
-
+ 
 .fields-note {
     font-style: italic;
 }
@@ -200,4 +200,8 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.question-text{
+    font-weight: bold;
 }

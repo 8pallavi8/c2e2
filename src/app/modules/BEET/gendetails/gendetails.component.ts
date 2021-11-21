@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatRadioChange } from '@angular/material/radio';
 import { BuildingDetails, LocationDetails } from 'src/app/shared/models/models';
@@ -59,7 +59,7 @@ export class GendetailsComponent implements OnInit {
       buildingSpaces: ['', Validators.compose([Validators.required])],
       //yearOfConstruction: ['', Validators.compose([Validators.required])],
       buildingGrossArea: [0],
-      grossAreaUnits: ['', Validators.compose([Validators.required])],
+      grossAreaUnits: [''],
       netOccupiedFloorArea: ['', Validators.compose([Validators.required])],
       netAreaUnits: ['', Validators.compose([Validators.required])],
       noOfFloors: ['', Validators.compose([Validators.required])],

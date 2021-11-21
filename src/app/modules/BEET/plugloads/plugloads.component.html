@@ -11,7 +11,7 @@
             <h2>Plug loads (equipment/appliances inside occupied conditioned area) </h2>
 
             <div >
-                <p>Do you know the plug load density for your building ?</p>
+                <p class="question-text">Do you know the plug load density for your building ?</p>
                 <div class="fields-note">
                     <p><span class="notes-style"> Note:</span>You may select any of the options. Option C available for
                         selected cases only.
@@ -32,7 +32,7 @@
                                 <p class="fields-note">You may choose to enter the values for any of the units mentioned
                                     below. Necessary units conversions will be made by
                                     the tool for respective calculations.</p>
-                                <b style="margin-top: 1em;">Plug Load Density value : </b>
+                                <b style="margin-top: 1em;">Plug load density:</b>
                                 <mat-form-field class="w-100 mt-2 col-md-5" appearance="outline">
                                     <input matInput placeholder="Enter plug load density value" formControlName="plugLoadValueKnown"
                                         type="number">
@@ -47,7 +47,7 @@
                             <span *ngIf="formgroup.controls.plugloads.value == 2"
                                 class="container-fluid beet-container">
                                 <div class="fields-note">
-                                    <p><span class="notes-style"> Note:</span> Note: Plug load refer to energy used by
+                                    <p><span class="notes-style"> Note:</span> Plug load refer to energy used by
                                         equipment that is plugged into an outlet. For example, in an office, key plug
                                         loads include computer and
                                         monitors, printers, and copiers. Equipment/Appliances include other connected
@@ -93,7 +93,7 @@
                                                         </small>
                                                     </div>
                                                 </td>
-                                                <td>
+                                                 <td>
                                                     <div class="form-group">
                                                         <input type="text" class="form-control"
                                                             formControlName="yearofinstallation">
@@ -102,7 +102,7 @@
                                                             year is required
                                                         </small>
                                                     </div>
-                                                </td>
+                                                </td> 
                                                 <td>
                                                     <div class="form-group">
                                                         <input type="text" class="form-control"
@@ -275,14 +275,14 @@
                             </span>
                             <div>
                                 <b *ngIf="formgroup.controls.plugloads.value == 1">Plugload Density :
-                                    {{formgroup.controls.plugLoadValueKnown.value}}
+                                    {{formgroup.controls.plugLoadValueKnown.value| number:'1.2-2'}}
                                     {{formgroup.controls.plugLoadUnits.value}}</b>
                                 <b *ngIf="formgroup.controls.plugloads.value == 2">Plugload Density :
-                                    {{formgroup.controls.plugLoadValueKnown.value}}
+                                    {{formgroup.controls.plugLoadValueKnown.value| number:'1.2-2'}}
                                     {{formgroup.controls.plugLoadUnits.value}}
                                 </b>
                                 <b *ngIf="formgroup.controls.plugloads.value == 3">Plugload Density :
-                                    {{formgroup.controls.plugLoadValueKnown.value}}
+                                    {{formgroup.controls.plugLoadValueKnown.value| number:'1.2-2'}}
                                     {{formgroup.controls.plugLoadUnits.value}}
                                 </b>
                             </div>
