@@ -15,12 +15,12 @@
 
             <legend>Location Details</legend>
             <h2 class="heading-style">Location Details</h2>
-            <p>Please select and share building location details
+            <p>Please enter location details.
             </p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> It is important to select Provice first and then Location
-                    before clicking . If exact location is not available, please select the
-                    nearest / most suitable location (or) reach out to us.
+                <p><span class="notes-style"> Note:</span> Select Province first and then Location.
+                    If exact location is not available, please select the nearest / most suitable location (or) reach
+                    out to us.
                 </p>
             </div>
             <div class="field-align">
@@ -29,7 +29,7 @@
                     <mat-label class="field-title-beet">Country</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select id="Country" (selectionChange)="onChangeCountry($event)" formControlName="country"
-                            required placeholder="Select Country">
+                            required placeholder="Select country">
                             <mat-option *ngFor="let con of countrylist" [attr.data-id]="con.country"
                                 placeholder="Select Country" [value]="con.countrycode">{{con.country}}</mat-option>
                         </mat-select>
@@ -40,7 +40,7 @@
                     <mat-label class="field-title-beet">Province</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select matNativeControl id="Province" formControlName="province" required
-                            (selectionChange)="onChangeProvince($event)" placeholder="Select Province">
+                            (selectionChange)="onChangeProvince($event)" placeholder="Select province">
                             <mat-option *ngFor="let location of locationDetails" [value]="location.province">
                                 {{location.province}}</mat-option>
                         </mat-select>
@@ -51,7 +51,7 @@
                     <mat-label class="field-title-beet">Location</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select matNativeControl id="Location" formControlName="location" required
-                            placeholder="Select Location">
+                            placeholder="Select location within the province">
                             <mat-option *ngFor="let loc of locationlist" [value]="loc">{{loc}}</mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -62,21 +62,22 @@
         <fieldset>
             <legend>Type of building</legend>
             <h2 class="heading-style">Type of building</h2>
-            <p>Please select the main building type.
+            <p>Please select building type and its areas.
             </p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> Please select the building type from drop down list and
-                    then click the button to select building spaces. If your building type is not available in the list,
-                    please select the most representative building type.
+                <p><span class="notes-style"> Note:</span> Please first select the building type and applicable building
+                    spaces from drop down list.
+                    If your building type is not available in the list, please select the most representative building
+                    type.
                 </p>
             </div>
 
             <div class="field-align">
-                <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">Building Type</mat-label>
+                <div class="field-group w-100 col-md-5">
+                    <mat-label class="field-title-beet">Building type</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select matNativeControl id="Buidling" formControlName="buildingType" required
-                            (selectionChange)="onChangeBuildingType($event)" placeholder="Select Building Type">
+                            (selectionChange)="onChangeBuildingType($event)" placeholder="Select building type">
                             <mat-option *ngFor="let building of buildingDetails" [value]="building.buildingtype">
                                 {{building.buildingtype}}</mat-option>
                         </mat-select>
@@ -84,11 +85,11 @@
                 </div>
 
 
-                <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">Building Spaces</mat-label>
+                <div class="field-group w-100 col-md-5">
+                    <mat-label class="field-title-beet">Building spaces</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select matNativeControl id="BuidlingSpaces" formControlName="buildingSpaces" multiple
-                            required placeholder="Select building Spaces">
+                            required placeholder="Select spaces within the building (multiple selections allowed)">
                             <mat-option *ngFor="let space of spacesList" [value]="space">{{space}}
                             </mat-option>
                         </mat-select>
@@ -97,12 +98,15 @@
             </div>
 
         </fieldset>
+
         <fieldset>
             <legend>Building age, area, no. of floors, occupancy hours</legend>
             <h2 class="heading-style">Building preliminary functional details</h2>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> You may select the units in which you may want to enter the
-                    building area value using drop down button.
+                <p><span class="notes-style"> Note:</span> Please enter details on number of floors, occupancy hours and
+                    built up area.
+                    You may select units in which you may want to enter for the building area value using the drop down
+                    button.
                 </p>
             </div>
 
@@ -115,17 +119,23 @@
 
             <div class="field-align">
                 <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">No. of floors</mat-label>
+                    <mat-label class="field-title-beet">Number of floors</mat-label>
                     <mat-form-field appearance="outline">
                         <input formControlName="noOfFloors" type="number" matInput required
-                            placeholder="Please enter number of floors">
+                            placeholder="Enter the number of floors in the building">
+                        <mat-error *ngIf="genDetailsForm.controls['noOfFloors'].hasError('pattern')">
+                            Negative numbers and decimal numbers are not allowed.
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="field-group w-100 col-md-4">
                     <mat-label class="field-title-beet">Occupancy hours per week</mat-label>
                     <mat-form-field appearance="outline">
                         <input formControlName="occupanyHoursPerWeek" type="number" matInput required
-                            placeholder="Please enter occupancy hours per week">
+                            placeholder="Enter occupancy hours per week">
+                        <mat-error *ngIf="genDetailsForm.controls['occupanyHoursPerWeek'].hasError('max')">
+                            Occupancy hours should not exceed 168hrs.
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <!-- <span class="units-picker-component">
@@ -139,16 +149,17 @@
                     </mat-select>
                 </mat-form-field>
             </span> -->
-
-
-                <div class="field-group w-100 col-md-4">
+            </div>
+            <div class="field-align">
+                <div class="field-group w-100 col-md-8">
                     <div class="units-picker-component">
-                        <mat-label class="field-title-beet">Net occupied floor area</mat-label>
+                        <mat-label class="field-title-beet">Total built up area</mat-label>
                         <mat-form-field class="netarea-field" appearance="outline">
                             <input formControlName="netOccupiedFloorArea" type="number" matInput required
-                                (input)="calculateGross()" placeholder="Please enter net occupied floor area">
-                            <mat-select style="padding-left: 8px ;width: 180px;" placeholder="units" formControlName="netAreaUnits"
-                                (selectionChange)="calculateGross()">
+                                (input)="calculateGross()"
+                                placeholder="Enter built up area (i.e. carpet area + thickness of outer walls + balcony - parking area)">
+                            <mat-select style="padding-left: 8px ;width: 180px;" placeholder="units"
+                                formControlName="netAreaUnits" (selectionChange)="calculateGross()">
                                 <mat-option value="square feet">Square Feet</mat-option>
                                 <mat-option value="square meter">Square Meter</mat-option>
                             </mat-select>
@@ -162,7 +173,6 @@
         <fieldset>
             <legend>Occupancy - People </legend>
             <h2 class="heading-style">Occupancy - People </h2>
-
             <p>Please share occupancy details for the building.
             </p>
 
@@ -175,26 +185,33 @@
             <div>
                 <mat-radio-group aria-label="Select an option" formControlName="occupantDensity"
                     (change)="onChangeOccupancy()">
-                    <mat-radio-button value="1">I only know the number of people occupying the building during normal
+                    A. <mat-radio-button value="1">I only know the number of people occupying the building during normal
                         working hours.</mat-radio-button><br>
-                    <mat-radio-button value="2"> I know the occupant density of the building.
+                    B. <mat-radio-button value="2"> I know the occupant density of the building.
                     </mat-radio-button><br>
-                    <mat-radio-button value="3">I do not know the value.
+                    C. <mat-radio-button value="3">I do not know the value.
                     </mat-radio-button>
                 </mat-radio-group>
             </div>
 
-            <div class="field-button-calculate" *ngIf="genDetailsForm.controls.occupantDensity.value==1">
+            <div *ngIf="genDetailsForm.controls.occupantDensity.value==1">
                 <!-- <p style="margin-top: 1em;">I know the number of people occupying the building during normal
                             working hours.</p> -->
-                <b style="margin-top: 1.5rem;">Number of people occupying the building :</b>
-                <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
 
-                    <input matInput placeholder="Enter value" formControlName="noOfPeopleOccupying" type="number">
-                </mat-form-field>
+                <div class="field-button-calculate">
+                    <b style="margin-top: 1.5rem;">Number of people occupying the building</b>
+                    <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                        <input matInput placeholder="Enter number of people" formControlName="noOfPeopleOccupying"
+                            type="number" (keyup)="onChangeOccupancy()" #peopleOccupying>
+                        <mat-error *ngIf="genDetailsForm.controls['noOfPeopleOccupying'].hasError('pattern')">
+                            Negative numbers and decimal numbers are not allowed.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <p>Example for number of people input : 50 or 100 or 125 or 1020,etc.</p>
                 <div>
-                    <button mat-raised-button color="primary" style="margin-top: 1rem;"
-                        (click)="onChangeOccupancy()">Calculate Occupant Density</button>
+                    <!-- <button mat-raised-button color="primary" style="margin-top: 1rem;"
+                        (click)="onChangeOccupancy()">Calculate Occupant Density</button> -->
                 </div>
             </div>
 
@@ -235,7 +252,8 @@
             </p>
             <div class="fields-note">
                 <p><span class="notes-style"> Note:</span> Fuel considered as Natural Gas. If any other forms of fuel is
-                    being used, please reach out to us.
+                    being used,
+                    please reach out to us. Select the units from the drop down list.
                 </p>
             </div>
 
@@ -244,9 +262,9 @@
                 <div class="field-group w-100 col-md-4">
                     <mat-label class="field-title-beet">Electricity cost units</mat-label>
                     <mat-form-field appearance="outline">
-                        <mat-select formControlName="electricityUnits" placeholder="Select Fuel cost units">
+                        <mat-select formControlName="electricityUnits" placeholder="Select units">
                             <mat-option *ngFor="let unit of eletricityunitslist" [value]="unit"
-                                placeholder="Select Electricity cost units">{{unit}}</mat-option>
+                                placeholder="Select units">{{unit}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -264,7 +282,7 @@
                 <div class="field-group w-100 col-md-4">
                     <mat-label class="field-title-beet">Fuel cost units</mat-label>
                     <mat-form-field appearance="outline">
-                        <mat-select formControlName="fuelUnits" placeholder="Select Fuel cost units">
+                        <mat-select formControlName="fuelUnits" placeholder="Select units">
                             <mat-option *ngFor="let units of fuelunitslist" [value]="units">{{units}}</mat-option>
                         </mat-select>
                     </mat-form-field>

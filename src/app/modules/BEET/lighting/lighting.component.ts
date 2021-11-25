@@ -49,7 +49,7 @@ export class LightingComponent implements OnInit {
     this.beetComponent= this.beetService.getBEETParentComponent();
 
 
-    if(sessionStorage.getItem('lightingOptions') !== null){
+    if(sessionStorage.getItem('lightingOptions') !== 'undefined'){
       this.lightingOptions = JSON.parse(sessionStorage.getItem('lightingOptions'));
       this.lightingOptionsDataSource = new MatTableDataSource(this.lightingOptions);
     } 

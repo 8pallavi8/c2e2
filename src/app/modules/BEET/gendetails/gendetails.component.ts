@@ -1,8 +1,10 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatRadioChange } from '@angular/material/radio';
+import { fromEvent } from 'rxjs';
+import { debounceTime, max } from 'rxjs/operators';
 import { BuildingDetails, LocationDetails } from 'src/app/shared/models/models';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
@@ -41,6 +43,10 @@ export class GendetailsComponent implements OnInit {
   buildingDetails: BuildingDetails[] = [];
   selectedCountryCode: CountryTable;
   isEnteredGross: boolean = false;
+  @ViewChild("peopleOccupying") peopleOccupying: ElementRef;
+  source: any;
+  numRegex = /^[\d]*$/;
+
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
     private fb: FormBuilder,
@@ -62,10 +68,10 @@ export class GendetailsComponent implements OnInit {
       grossAreaUnits: [''],
       netOccupiedFloorArea: ['', Validators.compose([Validators.required])],
       netAreaUnits: ['', Validators.compose([Validators.required])],
-      noOfFloors: ['', Validators.compose([Validators.required])],
-      occupanyHoursPerWeek: ['', Validators.compose([Validators.required])],
-      occupantDensity: ['', Validators.compose([Validators.required])],
-      noOfPeopleOccupying: [0, Validators.compose([Validators.required])],
+      noOfFloors: ['', [Validators.required, Validators.pattern(this.numRegex)]],
+      occupanyHoursPerWeek: ['', Validators.compose([Validators.required,Validators.max(168), Validators.min(0)])],
+      occupantDensity: ['', Validators.compose([Validators.required,Validators.min(0)])],
+      noOfPeopleOccupying: [0, Validators.compose([Validators.required,Validators.pattern(this.numRegex)])],
       occupantDensityUnits: ['', Validators.compose([Validators.required])],
       electricityCost: ['', Validators.compose([Validators.required])],
       fuelCost: ['', Validators.compose([Validators.required])],
@@ -85,15 +91,20 @@ export class GendetailsComponent implements OnInit {
           this.genDetailsForm.patchValue(generalDetails);
           this.beetService.setSelectedCountry(generalDetails.country);
           this.locationlist = this.locationDetails.find(ele => ele.province == generalDetails.province).locations;
-          this.spacesList = this.buildingDetails.find(ele => ele.buildingtype == generalDetails.buildingType).buildingspaces;
-         
+          if(generalDetails.buildingType != ''){
+            this.spacesList = this.buildingDetails.find(ele => ele.buildingtype == generalDetails.buildingType).buildingspaces;
+          }
+          
         });
         //this.getGeneralData(generalDetails.country);
       }
     }
   }
 
+ 
+
   ngAfterViewInit() {
+    
     var acc = this.document.getElementsByClassName('accordion');
     console.log(this.document.getElementsByClassName('accordion'));
     for (let i = 0; i < acc.length; i++) {
@@ -123,12 +134,12 @@ export class GendetailsComponent implements OnInit {
       valueId: selectedCountry.value,
       value: target.innerText.trim()
     };
-    sessionStorage.setItem('selectedCountryName',selectedData.value);
+    sessionStorage.setItem('selectedCountryName', selectedData.value);
     this.selectedCountryCode = selectedCountry.value;
     this.getGeneralData(selectedCountry.value.toString());
   }
 
-  getGeneralData(country: string){
+  getGeneralData(country: string) {
     this.beetService.getGeneralData(country).subscribe(res => {
       this.locationDetails = res.success.locationdata;
       this.buildingDetails = res.success.buildingdata;
@@ -141,31 +152,30 @@ export class GendetailsComponent implements OnInit {
 
   onChangeProvince(event) {
     this.locationlist = this.locationDetails.find(ele => ele.province == event.value).locations;
-    
+
   }
 
   onChangeBuildingType(event) {
     this.spacesList = this.buildingDetails.find(ele => ele.buildingtype == event.value).buildingspaces;
   }
 
- 
+
   calculateGross() {
-    if(!this.isEnteredGross){
+    if (!this.isEnteredGross) {
       this.genDetailsForm.controls.grossAreaUnits.patchValue(this.genDetailsForm.controls.netAreaUnits.value);
       this.genDetailsForm.controls.buildingGrossArea.setValue((this.genDetailsForm.controls.netOccupiedFloorArea.value * 1.1).toFixed(2));
-    } 
+    }
   }
 
 
   resetGross(event) {
-    if(event.target.value == ''){
-     this.isEnteredGross = false;
-    } else{
+    if (event.target.value == '') {
+      this.isEnteredGross = false;
+    } else {
       this.isEnteredGross = true;
     }
-   
-  }
 
+  }
 
   onChangeOccupancy() {
     this.genDetailsForm.controls['occupantDensityKnown'].reset();
@@ -194,5 +204,9 @@ export class GendetailsComponent implements OnInit {
         this.genDetailsForm.controls['occupantDensityUnits'].setValue(res.success.occupantdensityunit);
       });
     }
+
+
   }
+
+
 }

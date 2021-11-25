@@ -95,7 +95,9 @@
 
 
                 <tr mat-header-row
-                    *matHeaderRowDef="['header-row-first-group','header-row-first-Material','header-row-first-Densidad','header-row-third-group','header-row-first-masa','header-row-first-R','header-row-first-selected']">
+                    *matHeaderRowDef="['header-row-first-group','header-row-first-Material',
+                    'header-row-first-Densidad','header-row-third-group','header-row-first-masa',
+                    'header-row-first-R','header-row-first-selected'];sticky: true">
                 </tr>
                 <tr mat-header-row *matHeaderRowDef="lastDisplayedCols; sticky: true"></tr>
 

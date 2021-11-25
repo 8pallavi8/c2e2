@@ -78,6 +78,8 @@ export class OuterwallRadvancedleveldialogComponent implements OnInit {
     });
     dialogref.afterClosed().subscribe(result => {
       this.enteredThickness=result;
+      this.postcalculateAdvancedMaterial();
+
     });
   }
 

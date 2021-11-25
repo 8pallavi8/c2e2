@@ -1,3 +1,5 @@
+// Utilities
+@import "../../../styles";
 .step-button {
     float: right;
     margin-top: 20px;
@@ -333,7 +335,6 @@ table {
 @media (max-width: 600px){
     .field-align {
         flex-direction: column;
-
     }
     }
 
@@ -344,3 +345,30 @@ table {
     .mat-form-field{
         display: block;
     }
+
+   ::ng-deep  .mat-radio-button{
+        width: 80%;
+    }
+
+
+    ::ng-deep .mat-form-field-infix{
+        font-style:italic ;  
+      }
+
+
+.Report-sections{
+    border: 10px solid;
+    border-color: #014b66fc;
+        padding-top: 21px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        padding-bottom: 21px;
+        opacity: 1;
+
+}
+
+.Report-sections-group{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}

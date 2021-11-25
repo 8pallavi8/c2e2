@@ -20,9 +20,9 @@
                 </div>
                 <mat-radio-group aria-label="Select an option" formControlName="heatefficiency"
                     (change)="onChangeHeatEffOption($event)">
-                    <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                    <mat-radio-button value="2">No, I don't know. (default values will be assumed for calculations) </mat-radio-button><br>
-                    <mat-radio-button value="3">The building does not use any
+                   A. <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                   B. <mat-radio-button value="2">No, I don't know. (default values will be assumed for calculations) </mat-radio-button><br>
+                   C. <mat-radio-button value="3">The building does not use any
                         heating equipment</mat-radio-button>
                 </mat-radio-group><br><br>
 
@@ -115,9 +115,9 @@
                 </div>
                 <mat-radio-group aria-label="Select an option" formControlName="airconditioning"
                     (change)="onChangecoolingEffOption($event)">
-                    <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                    <mat-radio-button value="2">No, I don't know. (default values will be assumed for calculations) </mat-radio-button><br>
-                    <mat-radio-button value="3">The building does not use any
+                   A. <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                   B. <mat-radio-button value="2">No, I don't know. (default values will be assumed for calculations) </mat-radio-button><br>
+                   C. <mat-radio-button value="3">The building does not use any
                         cooling equipment</mat-radio-button>
                 </mat-radio-group><br><br>
 
@@ -207,13 +207,11 @@
                 <p class="question-text">Do you know the ventilation rate value for your building?</p>
 
                 <div class="fields-note">
-                    <p><span class="notes-style"> Note:</span> You may select any of the options to provide details
-                        on Ventilation rates of the building.
-                        Default standard ventilation rates will be considered in case of option B</p>
+                    <p><span class="notes-style"> Note:</span> You may select any of the options to provide building infiltration rate.</p>
                 </div>
                 <mat-radio-group aria-label="Select an option" formControlName="ventilation">
-                    <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                    <mat-radio-button value="2" (click)="postCalculateVentilationRate()">No, I don't know
+                   A. <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
+                   B. <mat-radio-button value="2" (click)="postCalculateVentilationRate()">No, I don't know
                     </mat-radio-button>
                 </mat-radio-group>
 
@@ -252,9 +250,9 @@
 
                 <div>
                     <mat-radio-group aria-label="Select an option" formControlName="infiltration">
-                        <mat-radio-button value="1">Yes, I know
+                       A. <mat-radio-button value="1">Yes, I know
                         </mat-radio-button><br>
-                        <mat-radio-button (click)="defaultInfiltration()" value="2">No, I don't know. (default values will be assumed for calculations).
+                        B. <mat-radio-button (click)="defaultInfiltration()" value="2">No, I don't know. (default values will be assumed for calculations).
                         </mat-radio-button>
                     </mat-radio-group>
                 </div>

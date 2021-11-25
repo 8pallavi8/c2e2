@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogState } from '@angular/material/dialog';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatTableDataSource } from '@angular/material/table';
 import { OuterwallAdvLevelAirComponent } from 'src/app/shared/outerwall-adv-level-air/outerwall-adv-level-air.component';
@@ -93,6 +93,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource(this.layerValues);
   roofdataSource = new MatTableDataSource(this.roofLayerValues);
+  windowRdialogref: any;
 
   constructor(private fb: FormBuilder,
     private inputDialog: InputdialogService,
@@ -140,7 +141,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   createOuterWallForm(value: number) {
     if (value == 1) {
       (<FormArray>this.formgroup.get('outerWallArray')).push(this.fb.group({
-        outerwallRKnown: ['', Validators.required],
+        outerwallRKnown: ['', Validators.compose([Validators.required,Validators.min(0)])],
         outerwallrUnits: ['', Validators.required],
       }));
     } else if (value == 2) {
@@ -149,7 +150,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       }));
     } else if (value == 3) {
       (<FormArray>this.formgroup.get('outerWallArray')).push(this.fb.group({
-        rValueAdvanced: ['', Validators.required],
+        rValueAdvanced: ['', Validators.compose([Validators.required,Validators.min(0)])],
         outerwallrUnits: ['m²K/W', Validators.required],
       }));
     }
@@ -164,7 +165,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   createRoofRForm(value: number) {
     if (value == 1) {
       (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
-        roofRKnown: ['', Validators.required],
+        roofRKnown: ['', Validators.compose([Validators.required,Validators.min(0)])],
         roofrUnits: ['', Validators.required],
       }));
     } else if (value == 2) {
@@ -173,24 +174,27 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       }));
     } else if (value == 3) {
       (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
-        rValueAdvanced: ['', Validators.required],
+        rValueAdvanced: ['', Validators.compose([Validators.required,Validators.min(0)])],
         roofrUnits: ['', Validators.required],
       }));
     }
   }
 
+  onWindowNoOption(event){
+    if(this.windowRdialogref != null && this.windowRdialogref.getState() != MatDialogState.OPEN){
+      this.onChangewindowrOption(new MatRadioChange(event.target,2));
+    }
+  }
   onChangewindowrOption(event: MatRadioChange) {
     (<FormArray>this.formgroup.get('windowrArray')).removeAt(0);
     this.createWindowRForm(event.value);
     if (event.value == 2) {
-      const dialogref = this.dialog.open(WindowRdialogComponent, {
+      this.windowRdialogref = this.dialog.open(WindowRdialogComponent, {
         width: '60%',
         autoFocus: false,
         maxHeight: '90vh',
       });
-      dialogref.afterClosed().subscribe(result => {
-        //this.windowRValue = result;
-        
+      this.windowRdialogref.afterClosed().subscribe(result => {
         (<FormGroup>(<FormArray>this.formgroup.get('windowrArray')).at(0)).controls.windowRCaluclated.patchValue(result.rvalue);
         (<FormGroup>(<FormArray>this.formgroup.get('windowrArray')).at(0)).controls.windowRCaluclatedUnits.patchValue(result.rvalueunit);
       });
@@ -200,12 +204,12 @@ export class BuildingenvelopedetailsComponent implements OnInit {
   createWindowRForm(value: number) {
     if (value == 1) {
       (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
-        windowRKnown: ['', Validators.required],
+        windowRKnown: ['', Validators.compose([Validators.required,Validators.min(0)])],
         windowrUnits: ['', Validators.required],
       }));
     } else if (value == 2) {
       (<FormArray>this.formgroup.get('windowrArray')).push(this.fb.group({
-        windowRCaluclated: [this.windowRValue, Validators.required],
+        windowRCaluclated: ['', Validators.compose([Validators.required,Validators.min(0)])],
         windowRCaluclatedUnits: [this.windowRValue, Validators.required],
 
       }));

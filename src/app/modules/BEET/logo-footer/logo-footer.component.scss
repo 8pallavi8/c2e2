@@ -2,7 +2,7 @@
 .block,
 li {
   padding: 1em;
-  width:100%
+  width:60%
 }
 
 .logos-list{
@@ -10,7 +10,17 @@ li {
   list-style: none;
 }
 
-@media (max-width: 499px) {
+.last-logo{
+  display: flex;
+  flex-direction: column;
+  right: 0;
+    top: 0;
+    width: 30%;
+    height: auto;
+    margin-left: auto 
+}
+
+ @media (max-width: 499px) {
     .logos-list {
         //display: flex;
         list-style: none;
@@ -19,20 +29,21 @@ li {
     .logo-AFD{
       width: 150px; 
     }
-}
+    .logo-AFD{   
+      width: 250px;
+      margin-top: 5px;
+    }
 
-.last-logo{
-  display: flex;
-  flex-direction: column;
-  right: 0;
-    top: 0;
-    width: 40%;
-}
+    .last-logo{
+      width:60%;
+      margin-right: auto ;
+    }
+} 
 
 .logo-AFD{
-  height:50px;    
+  //height:50px;    
   width: 250px;
-  margin-top: 30px;
+  margin-top: 5px;
 }
 
 

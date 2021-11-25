@@ -18,9 +18,9 @@
 
                 <div>
                     <mat-radio-group aria-label="Select an option" formControlName="powergenerationco2emmisions">
-                        <mat-radio-button value="1">Yes, I know.
+                      A. <mat-radio-button value="1">Yes, I know.
                         </mat-radio-button><br>
-                        <mat-radio-button value="2" (click)="defaultEmissionFactor()">No, I don't
+                       B. <mat-radio-button value="2" (click)="defaultEmissionFactor()">No, I don't
                             know.</mat-radio-button>
                     </mat-radio-group>
                 </div>
@@ -58,9 +58,9 @@
                 </div>
                 <div>
                     <mat-radio-group aria-label="Select an option" formControlName="fuelEmissionFactor">
-                        <mat-radio-button value="1">A.Yes, I know.
+                      A. <mat-radio-button value="1">A.Yes, I know.
                         </mat-radio-button><br>
-                        <mat-radio-button (click)="postCalculateFuelEmissionFactor()" value="2">B. No, I don't know.
+                       B. <mat-radio-button (click)="postCalculateFuelEmissionFactor()" value="2">B. No, I don't know.
                         </mat-radio-button>
                     </mat-radio-group>
                 </div>

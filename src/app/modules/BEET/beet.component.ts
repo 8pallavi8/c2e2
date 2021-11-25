@@ -1,3 +1,4 @@
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
@@ -50,12 +51,17 @@ export interface Efficiency {
 @Component({
   selector: 'app-beet',
   templateUrl: './beet.component.html',
-  styleUrls: ['./beet.component.scss']
+  styleUrls: ['./beet.component.scss'], 
+  /* providers: [
+    {
+      provide:  STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true }
+    }
+  ] */
 })
 export class BEETComponent implements OnInit, AfterViewInit {
   errorMessages: ErrorMessage[] = errorMessages;
   errFieldMessages: string[] = [];
-  showdisclaimer: boolean = false;
   showTables: boolean = false;
   showText: boolean = false;
   inputvaluestable: CalculatedTables[];
@@ -90,6 +96,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
   @ViewChild(PlugloadsComponent) plugLoaDetailsComponent: PlugloadsComponent;
   displayedColumns: string[] = ["Parameter", "Units", "Value"];
   dataSource: any;
+  reportdatasource:any;
   isGeneralDetailsUpdated: boolean;
   heatingEfficiencyFinal: number;
   generalDetails: GeneralDetails;
@@ -100,9 +107,14 @@ export class BEETComponent implements OnInit, AfterViewInit {
   displayedColumnsmonthlyresults = ["month", "peakkwbaseline", "kwhbaseline", "thermsbaseline", "ngcubicmeterbaseline", "peakkwees", "kwhees", "thermsees", "ngcubicmeterees"];
   displayedColumnseconomizersavings = ["parameter", "baselinevalue", "efficientvalue"];
   displayedColumnsinputsforgraph = ["parameter", "parameterfield", "baselinevalue", "efficientvalue"];
-  
+  projectname="Hans Holo";
   @ViewChild('errMsg') errMsg: ElementRef;
+  step = 0;
+  reportdisplayedColumns = [ 'Element', 'Indicators', 'Indicatorse','Benchmark','Recommendations'];
+  sub1DisplayedCols = [ 'Baseline', 'Energy Efficiency Standards'];
+  sub2DisplayedCols = [ 'Element', 'Indicators', 'Indicatorse','Benchmark','Recommendations']
 
+ 
 
   constructor(private beetService: beetService, private cd: ChangeDetectorRef, private modalService: NgbModal) { }
 
@@ -169,7 +181,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
         Value: this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value
       }, */
       {
-        Parameter: 'Building net occupiable area', Units: this.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
+        Parameter: 'Total built up area', Units: this.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
         Value: this.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value
       },
       { Parameter: 'No. of floors', Units: 'number', Value: this.genDetailsComponent.genDetailsForm.controls.noOfFloors.value },
@@ -235,6 +247,9 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   }
 
+  backClicked() {
+    this.showTables= false;
+  }
 
 
   postDataGenerateReport() {
@@ -352,6 +367,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
            sessionStorage.setItem('userId', this.userId);
          } */
       });
+      
     }
   }
 
@@ -398,10 +414,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
     this.showText = !this.showText;
   }
 
-  showHiddenDisclaimer() {
-    this.showdisclaimer = !this.showdisclaimer;
-  }
-
   saveHVACDetails() {
     if (this.hvacDetailsComponent?.formgroup.controls.heatefficiency.value == 1) {
       this.heatingEfficiencyValue.efficiencyValue = this.hvacDetailsComponent?.formgroup.get('heatefficiencyArray')['controls'][0].controls.heatefficiencyKnown.value;
@@ -435,4 +447,5 @@ export class BEETComponent implements OnInit, AfterViewInit {
       this.coolingEfficiencyValue.equipName = this.hvacDetailsComponent?.formgroup.get('coolefficiencyArray')['controls'][0].controls.coolingEquipmentName.value;
     }
   }
+
 }

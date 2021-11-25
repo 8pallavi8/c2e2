@@ -33,3 +33,11 @@ th.mat-header-cell {
     background-color: white;
     border-radius: 5px;
 }
+
+.mat-row:nth-child(even){
+    background-color: whitesmoke;
+}
+        
+.mat-row:nth-child(odd){
+    background-color: white;
+}

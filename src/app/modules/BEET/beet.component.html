@@ -50,26 +50,18 @@
                 technicians and any individual with basic know-how on buildings and energy efficiency.
             </p>
             <div>
-                <button class="Disclaimer-text info" (click)="showHiddenDisclaimer()">
-                    Disclaimer
-                </button>
-                <div *ngIf="showdisclaimer">
+                <button data-toggle="collapse" data-target="#demo" class="btn btn-info">Disclaimer</button>
+
+                <div id="demo" class="collapse">
                     <i style="font-size: smaller;">The objective of the tool is to provide an indicative and holistic
-                        outcome on
-                        the
-                        building energy efficiency
+                        outcome on the building energy efficiency
                         based on the user's input data. The tool does not replace the simulations and assessments from a
-                        full
-                        fledged
+                        full fledged
                         tools and licensed software
                         available in the market. The output results hence is recommended to be used for reference
-                        purpose
-                        only
-                        and
-                        may
+                        purpose only and may
                         not be used for detailed or investment grade design and implementation activities.The tool is
-                        built
-                        based
+                        built based
                         on technical literature
                         data, available global and local standards, tool developers' knowledge and experience in the
                         sector.
@@ -90,9 +82,10 @@
                         shared in this form will be used to asses the building performance and potential savings through
                         energy
                         efficient measures.
-                    </i><br><br>
+                    </i>
                 </div>
-            </div><br>
+            </div>
+            <br>
 
 
             <p> Should there be any feedback / queries / suitable or customized data integration requirements, please do
@@ -156,6 +149,9 @@
     <div class="container-fluid">
         <mat-horizontal-stepper (selectionChange)="selectionStepperChange($event)" class="stepper-class"
             labelPosition="bottom" #stepper>
+
+
+
             <mat-step #data [stepControl]="genDetailsComponent?.genDetailsForm" label="General Details">
                 <app-gendetails></app-gendetails>
                 <div class="step-button">
@@ -228,19 +224,16 @@
 
             <mat-step>
 
-
-
                 <ng-template matStepLabel>Input Data Summary and Report</ng-template>
-                <div>
+
+                <div *ngIf="!showTables">
                     <b>User-Input Data Summary:</b>
-                    <p>Contains all values that <br>a.The user has either entered<br> b.The user has selected from
-                        available
-                        options
-                        <br> c.Are default valuesby the tool resultingfrom the users selection of available options.
+                    <p>Contains all values that <br>a.The user has either entered.<br>
+                        b.The user has selected from
+                        available options.<br>
+                        c.Are default values by the tool resulting from the user's selection of available options.
                     </p>
                     <br>
-
-
                     <div>
                         <table mat-table matSort matTableResponsive [dataSource]="dataSource">
 
@@ -262,355 +255,177 @@
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                         </table>
-                    </div><br>
 
+
+                    </div><br>
+                    <!-- Tool Assumptions -->
                     <div>
                         <button mat-raised-button color="primary" type="button" (click)="showHiddenText()">
                             Click here for Tool Assumptions
-                        </button>
+                        </button><br>
                         <div *ngIf="showText">
-                            <p>
-                                * Locations with hourly climate data available are only considered in the tool for
-                                now.
-                                <br> * If the “No, I don’t know” option is selected, appropriate
-                                average/efficiency/benchmark
-                                values are loaded to the tool based on location, building type and preceding answers
-                                in
-                                the
-                                tool. These values are adopted as applicable
-                                from several published and widely referred sources such as Ministry of Science,
-                                Technology
-                                and
-                                Innovation – Argentina, University of La Plata – Argentina, ASHRAE standards, U.S.
-                                Energy
-                                Information Administration, U.S. Department
-                                of Energy, Energy Star ratings – U.S. Environmental Protection Agency, Country
-                                Savings
-                                assessments – United for Efficiency UNEP, Bureau of Energy Efficiency – India,
-                                design
-                                details
-                                from equipment / appliance manufacturers and suppliers,
-                                years of energy auditing experience, etc.<br> * Building is a 12' floor-to-floor,
-                                square
-                                footprint
-                                <br> * Respective place weather data from
-                                <a
-                                    href="http://climate.onebuilding.org/WMO_Region_3_South_America/ARG_Argentina/index.html">
-                                    http://climate.onebuilding.org/WMO_Region_3_South_America/ARG_Argentina/index.html</a>
-                                <br> * Envelope convective heat transfer is not considered<br> * Envelope solar gain
-                                is
-                                not
-                                considered, except for windows<br> * The building is treated as a single thermal
-                                zone
-                                <br> * Occupied hours first fill weekdays symmetrically around noon, and then fill
-                                weekends
-                                <br> Infiltration is assumed zero during occupied times (vac pressurization)
-                                <br> * Airside economizer operates only when full cooling load can be met - no
-                                partial
-                                economizer with mechanical cooling<br> * Lights and plug loads are assumed to be at
-                                1/20
-                                power
-                                density during unoccupied times<br> * There is
-                                no energy consumption calculated for hot water heating. There is no energy
-                                calculated
-                                for
-                                hot
-                                water hydronic pumping<br> * Air system is in variable volume setting by default
-                                unless
-                                the
-                                user
-                                chooses "No" option. * Window area is
-                                equally distributed on N,S,E,W exposures. Window to Wall ratio does ratio default
-                                inputs
-                                does
-                                not consider impact on lighting energy.
-                                <br> * Window solar - Normal radiation is based on hourly solar angles<br> * Indoor
-                                air
-                                relative
-                                humidity maintained at 50%. The temperature is user defined.<br> * Only average most
-                                common
-                                efficient values considered for comparison.
-                                However, relatively highest and better efficiency values are available in the
-                                market.
-                                Please
-                                reach out to us, if you do have such values. We will integrate the same into the
-                                tool.
-                                <br> * At times, average most efficient values are considered for calculation when
-                                the user selects option B, i.e. if the user does not know the value.
-                                <br> * Section 2.4 Occupant density Option C: Max occupant density value a month the
-                                selected building category/spaces is considered.<br>
-                                * Section 3.2 R value for Roofs: Both winter (inv)
-                                and summer (ver) values are given. However the higher U values i.e. for summer are being
-                                considered for calculations for Option
-                                B Option C selection.
-                                <br> * Section 5.1: Option B, standard average efficiencies are considered. Also,
-                                for
-                                electrical
-                                radiators, only equipment efficiency is considered as 100% since entire electricity
-                                input is
-                                converted to heat energy. However its
-                                real usage energy efficiency may be lower if other grid losses are considered.<br> *
-                                Section
-                                6.1: Operating hours of appliances/equipment assumed to be at least 50% of daily
-                                occupancy
-                                hours
-                                in case the user does not mention the
-                                actual operating hours in Input_Plugloads1.1 Sheet.<br>
 
+                            <ul>
+                                <li>Locations with hourly climate data available are only considered in the tool for
+                                    now.</li>
+                                <li>If the “No, I don’t know” option is selected, appropriate
+                                    average/efficiency/benchmark
+                                    values are loaded to the tool based on location, building type and preceding answers
+                                    in
+                                    the tool. These values are adopted as applicable from several published and widely
+                                    referred sources such as Ministry of Science, Technology and Innovation – Argentina,
+                                    University of La Plata – Argentina, ASHRAE standards, U.S. Energy Information
+                                    Administration, U.S. Department of Energy, Energy Star ratings – U.S. Environmental
+                                    Protection Agency, Ntional Renewable Energy Laboratory (U.S.DoE), Country Savings
+                                    assessments – United for Efficiency UNEP, Bureau of Energy Efficiency – India,
+                                    design
+                                    details from equipment / appliance manufacturers and suppliers, years of energy
+                                    auditing
+                                    experience, etc.</li>
+                                <li> Building is assumed to be a 12 ft height, floor-to-floor, square footprint.</li>
+                                <li> Weather data for the places provided in the tool are taken from
+                                    http://climate.onebuilding.org/WMO_Region_3_South_America/ARG_Argentina/index.html
+                                    * For the heat load calculations, envelope convective heat transfer, envelope solar
+                                    gain
+                                    (except for windows), are not considered.</li>
+                                <li>The building is treated as a single thermal zone.</li>
+                                <li> Occupied hours first fill weekdays symmetrically around noon, and then fill
+                                    weekends.</li>
+                                <li> Infiltration is assumed zero during occupied times (pressurization).</li>
+                                <li>Airside economizer operates only when full cooling load can be met - no partial
+                                    economizer with mechanical cooling.</li>
+                                <li> Lights and plug loads are assumed to be at 1/20 power density during unoccupied
+                                    times.</li>
+                                <li> There is no energy consumption calculated for hot water heating. There is no energy
+                                    calculated for hot water hydronic pumping.</li>
+                                <li> Air system is in variable volume setting by default unless the user chooses "No"
+                                    option.</li>
+                                <li> Window area is equally distributed on N,S,E,W exposures. Window to Wall ratio does
+                                    ratio default inputs does not consider impact on lighting energy.</li>
+                                <li>Window solar - Normal radiation is based on hourly solar angles.</li>
+                                <li>Indoor air relative humidity maintained at 50%. The temperature is user defined.
+                                </li>
+                                <li>Only average most common efficient values considered for comparison. However,
+                                    relatively highest and better efficiency values are available in the market. Please
+                                    reach out to us, if you come across such efficient values. We will review and
+                                    integrate
+                                    the same into the tool.</li>
+                                <li> At times, average most efficient values are considered for calculation when the
+                                    user selects "I don't know" option.</li>
+                                <li> Max occupant density value among the standard values for selected building category
+                                    /
+                                    spaces is considered for calculations when the user selects "I don't know" option.
+                                </li>
+                                <li> R value (Thermal resistance) - Roof: For R values of roofs, standards for both
+                                    winter
+                                    (inv) and summer (ver) are available. However the higher U values i.e. for summer
+                                    are
+                                    being considered for calculations when the user selects Option B or Option C for
+                                    this.</li>
+                                <li>Plug loads: Standard average efficiencies are considered for calculations if the
+                                    user
+                                    selects Option B i.e. "I don't know". Also, for electrical radiators, only equipment
+                                    efficiency is considered as 100% since entire electricity input is converted to heat
+                                    energy. However its real usage energy efficiency may be lower if other grid losses
+                                    are
+                                    considered.</li>
+                                <li>Operating hours of appliances/equipment assumed to be at least 50% of daily
+                                    occupancy
+                                    hours in case the user does not mention the actual operating hours in Plug Loads
+                                    Option
+                                    B inventory and operating data entry.</li>
+                                <li>For standardization and user guidance, Energy Performance Index (EPI) is calculated
+                                    based on total built up area which is considered as carpet area + thickness of outer
+                                    walls + balcony - parking area. However the cell does not prevent the user from
+                                    entering
+                                    any other forms of area for calculation. </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <div class="step-button">
+                        <button mat-raised-button color="primary" matStepperPrevious
+                            style="margin-right: inherit;">Back</button>
+
+                        <button mat-raised-button color="primary" style="margin-right: inherit;"
+                            (click)="stepper.reset()">Reset</button>
+
+                        <button mat-raised-button color="primary" (click)="postDataGenerateReport()"
+                            style="margin-right: inherit;">Generate Report</button><br>
+                    </div><br><br>
+
+                </div><br>
+
+                <div *ngIf="showTables" class="container">
+                    <div class="report-fields" style="display: flex;">
+                        <div class="w-100 col-md-6">
+                            <p>Building type :
+                                {{genDetailsComponent.genDetailsForm.controls.buildingType.value}}</p>
+                            <p>Surface Area :
+                                {{genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value|
+                                number:'1.2-2'}}
+                                {{genDetailsComponent.genDetailsForm.controls.netAreaUnits.value}}
+                            </p>
+                            <p>No. of Floors :
+                                {{genDetailsComponent.genDetailsForm.controls.noOfFloors.value}}</p>
+                            <p>Occupancy Hours :
+                                {{genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value}}
+                            </p>
+                        </div>
+                        <div class="w-100 col-md-6">
+                            <p>Occupant Density :
+                                {{genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value|
+                                number:'1.2-2'}}
+                                {{genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value}}
+                            </p>
+                            <p>Electricity Cost :
+                                {{genDetailsComponent.genDetailsForm.controls.electricityCost.value|
+                                number:'1.2-2'}}
+                                {{genDetailsComponent.genDetailsForm.controls.electricityUnits.value}}
+                            </p>
+                            <p>Fuel Cost : {{genDetailsComponent.genDetailsForm.controls.fuelCost.value|
+                                number:'1.2-2'}}
+                                {{genDetailsComponent.genDetailsForm.controls.fuelUnits.value}}
                             </p>
                         </div>
                     </div>
+
+                    <br>
+
+                    <div class="Report-sections-group">
+                        <div class="Report-sections w-100 col-md-8">
+                            <h4>Key Indicators</h4>
+
+                        </div>
+                        <div class="Report-sections w-100 col-md-8">
+                            <h4>Baseline vs EE Potential Improvements</h4>
+                        </div>
+
+
+
+                        <div class="Report-sections w-100 col-md-8">
+                            <h4>HVAC Systems</h4>
+                        </div>
+
+                        <div class="Report-sections w-100 col-md-8">
+                            <h4>Lighting</h4>
+                        </div>
+
+
+                        <div class="Report-sections w-100 col-md-8">
+                            <h4>plug Loads</h4>
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="step-button">
-                    <button mat-raised-button color="primary" matStepperPrevious
-                        style="margin-right: inherit;">Back</button>
-
-                    <button mat-raised-button color="primary" style="margin-right: inherit;"
-                        (click)="stepper.reset()">Reset</button>
-
-                    <button mat-raised-button color="primary" (click)="postDataGenerateReport()"
-                        style="margin-right: inherit;">Generate Report</button><br>
-                </div><br><br>
-
-                <div *ngIf="showTables">
-
-                    <mat-tab-group #tabGroup>
-
-                        <mat-tab label="Input Values ">
-
-                            <div class="Calculated-tables">
-
-                                <table [dataSource]="inputvaluestableDataSource" mat-table class="Report-table">
-
-                                    <ng-container matColumnDef="parameter">
-                                        <th mat-header-cell *matHeaderCellDef>parameter</th>
-                                        <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="baselinevalue">
-                                        <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
-                                        <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="efficientvalue">
-                                        <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
-                                        <td mat-cell *matCellDef="let row">{{row.energyefficienctvalue}}</td>
-                                    </ng-container>
-
-
-                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsinputvalues"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsinputvalues;"></tr>
-                                </table>
-                            </div>
-                        </mat-tab>
-
-                        <mat-tab label="Intermediate Calculations">
-                            <div class="Calculated-tables">
-                                <table [dataSource]="intermediatevaluestabletableDataSource" mat-table
-                                    class="Report-table">
-
-                                    <ng-container matColumnDef="parameter">
-                                        <th mat-header-cell *matHeaderCellDef>parameter</th>
-                                        <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="baselinevalue">
-                                        <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
-                                        <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="efficientvalue">
-                                        <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
-                                        <td mat-cell *matCellDef="let row">{{row.energyefficienctvalue}}</td>
-                                    </ng-container>
-
-
-                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsintermediatevalues"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsintermediatevalues;"></tr>
-                                </table>
-                            </div>
-                        </mat-tab>
-
-
-                        <mat-tab label="Output Values">
-                            <div class="Calculated-tables">
-                                <table [dataSource]="outputvaluestableDataSource" mat-table class="Report-table">
-
-                                    <ng-container matColumnDef="parameter">
-                                        <th mat-header-cell *matHeaderCellDef>parameter</th>
-                                        <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="baselinevalue">
-                                        <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
-                                        <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="efficientvalue">
-                                        <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
-                                        <td mat-cell *matCellDef="let row">{{row.energyefficienctvalue}}</td>
-                                    </ng-container>
-
-
-                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsoutputvalues"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsoutputvalues;"></tr>
-                                </table>
-                            </div>
-                        </mat-tab>
-
-                        <mat-tab label="Monthly Results">
-                            <div class="Calculated-tables">
-                                <table [dataSource]="monthresultstabletableDataSource" mat-table class="Report-table">
-
-
-                                    <ng-container matColumnDef="month">
-                                        <th mat-header-cell *matHeaderCellDef>month</th>
-                                        <td mat-cell *matCellDef="let row">{{row.month}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="peakkwbaseline">
-                                        <th mat-header-cell *matHeaderCellDef>peakkwbaseline</th>
-                                        <td mat-cell *matCellDef="let row">{{row.peakkwbaseline}}</td>
-                                    </ng-container>
-                                    <ng-container matColumnDef="kwhbaseline">
-                                        <th mat-header-cell *matHeaderCellDef>kwhbaseline</th>
-                                        <td mat-cell *matCellDef="let row">{{row.kwhbaseline}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="thermsbaseline">
-                                        <th mat-header-cell *matHeaderCellDef>thermsbaseline</th>
-                                        <td mat-cell *matCellDef="let row">{{row.thermsbaseline}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="ngcubicmeterbaseline">
-                                        <th mat-header-cell *matHeaderCellDef>ngcubicmeterbaseline</th>
-                                        <td mat-cell *matCellDef="let row">{{row.ngcubicmeterbaseline}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="peakkwees">
-                                        <th mat-header-cell *matHeaderCellDef>peakkwees</th>
-                                        <td mat-cell *matCellDef="let row">{{row.peakkwees}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="kwhees">
-                                        <th mat-header-cell *matHeaderCellDef>kwhees</th>
-                                        <td mat-cell *matCellDef="let row">{{row.kwhees}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="thermsees">
-                                        <th mat-header-cell *matHeaderCellDef>thermsees</th>
-                                        <td mat-cell *matCellDef="let row">{{row.thermsees}}</td>
-                                    </ng-container>
-
-
-                                    <ng-container matColumnDef="ngcubicmeterees">
-                                        <th mat-header-cell *matHeaderCellDef>ngcubicmeterees</th>
-                                        <td mat-cell *matCellDef="let row">{{row.ngcubicmeterees}}</td>
-                                    </ng-container>
-
-
-                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsmonthlyresults"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsmonthlyresults;"></tr>
-                                </table>
-                            </div>
-                        </mat-tab>
-
-                        <mat-tab label="Economizer Savings">
-                            <div class="Calculated-tables">
-                                <table [dataSource]="economizersavingstableDataSource" mat-table class="Report-table">
-
-                                    <ng-container matColumnDef="parameter">
-                                        <th mat-header-cell *matHeaderCellDef>parameter</th>
-                                        <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="baselinevalue">
-                                        <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
-                                        <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="efficientvalue">
-                                        <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
-                                        <td mat-cell *matCellDef="let row">{{row.energyefficienctvalue}}</td>
-                                    </ng-container>
-
-
-                                    <tr mat-header-row *matHeaderRowDef="displayedColumnseconomizersavings"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayedColumnseconomizersavings;"></tr>
-                                </table>
-                            </div>
-                        </mat-tab>
-
-                        <mat-tab label="Inputs for Graph  ">
-                            <div class="Calculated-tables">
-                                <table [dataSource]="inputsforgraphtableDataSource" mat-table class="Report-table">
-
-                                    <ng-container matColumnDef="parameter">
-                                        <th mat-header-cell *matHeaderCellDef>parameter</th>
-                                        <td mat-cell *matCellDef="let row">{{row.parameter}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="parameterfield">
-                                        <th mat-header-cell *matHeaderCellDef>parameterfield</th>
-                                        <td mat-cell *matCellDef="let row">{{row.parameterfield}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="baselinevalue">
-                                        <th mat-header-cell *matHeaderCellDef>baselinevalue</th>
-                                        <td mat-cell *matCellDef="let row">{{row.baselinevalue}}</td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="efficientvalue">
-                                        <th mat-header-cell *matHeaderCellDef>efficientvalue</th>
-                                        <td mat-cell *matCellDef="let row">{{row.energyefficienctvalue}}</td>
-                                    </ng-container>
-
-
-                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsinputsforgraph"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsinputsforgraph;"></tr>
-                                </table>
-                            </div>
-                        </mat-tab>
-
-                    </mat-tab-group><br>
-
-
-                    <!-- <mat-accordion>
-                        <mat-expansion-panel>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    General information
-                                </mat-panel-title>
-                            </mat-expansion-panel-header>
-
-                            <p>Project Name:</p>
-                            <p>User Name:</p>
-                            <p>Building type:</p>
-                            <p>Construction Year:</p>
-                            <p>Surface Area:</p>
-                            <p>No. of Floors:</p>
-                            <p>Occupancy Hours:</p>
-                            <p>Occupant Density:</p>
-                            <p>Electricity Cost:</p>
-                            <p>Fuel Cost:</p>
-
-                        </mat-expansion-panel>
-                        <mat-expansion-panel>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    Key Indicators
-                                </mat-panel-title>
-                            </mat-expansion-panel-header>
-                        </mat-expansion-panel>
-                    </mat-accordion> -->
-
-
-                </div>
 
             </mat-step>
         </mat-horizontal-stepper>
     </div>
+
     <br>
     <app-logo-footer></app-logo-footer>
 </section>
