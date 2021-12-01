@@ -163,8 +163,8 @@ export class PlugloadsComponent implements OnInit {
       }
     });
     var payload: any = {
-      "buildinggrossarea": Number(this.beetComponent.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value),
-      "buildinggrossareaunit": this.beetComponent.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
+      "netoccupiedarea": Number(this.beetComponent.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value),
+      "netoccupiedareaunit": this.beetComponent.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
       "plugloaddensitydata": plugLoadArray
     }
     this.beetService.postCalculatePlugLoad(payload).subscribe(res => {

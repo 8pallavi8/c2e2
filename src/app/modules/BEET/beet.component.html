@@ -354,71 +354,451 @@
 
                         <button mat-raised-button color="primary" (click)="postDataGenerateReport()"
                             style="margin-right: inherit;">Generate Report</button><br>
+
+                           
+
+
                     </div><br><br>
 
                 </div><br>
 
                 <div *ngIf="showTables" class="container">
-                    <div class="report-fields" style="display: flex;">
-                        <div class="w-100 col-md-6">
-                            <p>Building type :
-                                {{genDetailsComponent.genDetailsForm.controls.buildingType.value}}</p>
-                            <p>Surface Area :
-                                {{genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value|
-                                number:'1.2-2'}}
-                                {{genDetailsComponent.genDetailsForm.controls.netAreaUnits.value}}
-                            </p>
-                            <p>No. of Floors :
-                                {{genDetailsComponent.genDetailsForm.controls.noOfFloors.value}}</p>
-                            <p>Occupancy Hours :
-                                {{genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value}}
-                            </p>
-                        </div>
-                        <div class="w-100 col-md-6">
-                            <p>Occupant Density :
-                                {{genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value|
-                                number:'1.2-2'}}
-                                {{genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value}}
-                            </p>
-                            <p>Electricity Cost :
-                                {{genDetailsComponent.genDetailsForm.controls.electricityCost.value|
-                                number:'1.2-2'}}
-                                {{genDetailsComponent.genDetailsForm.controls.electricityUnits.value}}
-                            </p>
-                            <p>Fuel Cost : {{genDetailsComponent.genDetailsForm.controls.fuelCost.value|
-                                number:'1.2-2'}}
-                                {{genDetailsComponent.genDetailsForm.controls.fuelUnits.value}}
-                            </p>
-                        </div>
+                    <mat-spinner color="primary"></mat-spinner>
+                    <h4>General Information</h4>
+                    <div class="report-fields Report-sections w-100 col-md-10" style="display: flex;">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <td>Building type :</td>
+                                    <td>{{genDetailsComponent.genDetailsForm.controls.buildingType.value}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Surface Area : </td>
+                                    <td>{{genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value|
+                                        number:'1.2-2'}}
+                                        {{genDetailsComponent.genDetailsForm.controls.netAreaUnits.value}}</td>
+                                </tr>
+                                <tr>
+                                    <td>No. of Floors : </td>
+                                    <td>{{genDetailsComponent.genDetailsForm.controls.noOfFloors.value}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Occupancy Hours : </td>
+                                    <td>{{genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <td>Occupant Density :</td>
+                                    <td> {{genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value|
+                                        number:'1.2-2'}}
+                                        {{genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Electricity Cost :</td>
+                                    <td>{{genDetailsComponent.genDetailsForm.controls.electricityCost.value|
+                                        number:'1.2-2'}}
+                                        {{genDetailsComponent.genDetailsForm.controls.electricityUnits.value}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Fuel Cost : </td>
+                                    <td>{{genDetailsComponent.genDetailsForm.controls.fuelCost.value|
+                                        number:'1.2-2'}}
+                                        {{genDetailsComponent.genDetailsForm.controls.fuelUnits.value}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                     </div>
+
 
                     <br>
 
                     <div class="Report-sections-group">
-                        <div class="Report-sections w-100 col-md-8">
-                            <h4>Key Indicators</h4>
+                        <div class="Report-sections w-100 col-md-10">
+                            <div style="display: flex;">
+                                <h4>Key Indicators</h4>
+
+                                <div class="col-md-1" style="padding: 0; margin-top: 0px;">
+                                    <button *ngIf="showTogglePlusIcon" (click)="toggleButtonShowIcon()"
+                                        class="btn btn-link btn-sm" type="button">
+                                        <img style="width: 22px" src="../../../assets/images/plus.png">
+                                    </button>
+                                    <button *ngIf="!showTogglePlusIcon" (click)="toggleButtonShowIcon()"
+                                        class="btn btn-link btn-sm" type="button">
+                                        <img style="width: 22px" src="../../../assets/images/wwr/minus.png">
+                                    </button>
+                                </div>
+                            </div>
+                            <div *ngIf="!showTogglePlusIcon" class="row">
+                                <div class="container-fluid mt-5 col-md-6">
+                                    <div class="chart-wrapper">
+                                        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                            [options]="barChartOptions" [plugins]="barChartPlugins"
+                                            [legend]="barChartLegend" [chartType]="barChartType">
+                                        </canvas>
+                                    </div>
+                                </div>
+                                <div class="container-fluid mt-5 col-md-6">
+                                    <div class="chart-wrapper">
+                                        <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels2"
+                                            [options]="barChartOptions" [plugins]="barChartPlugins"
+                                            [legend]="barChartLegend" [chartType]="barChartType">
+                                        </canvas>
+                                    </div>
+                                </div>
+                                <div class="container-fluid mt-5 col-md-6">
+                                    <div class="chart-wrapper">
+                                        <canvas baseChart [datasets]="barChartData3" [labels]="barChartLabels3"
+                                            [options]="barChartOptions" [plugins]="barChartPlugins"
+                                            [legend]="barChartLegend" [chartType]="barChartType">
+                                        </canvas>
+                                    </div>
+                                </div>
+                                <div class="key-indicators-table" style="display:flex">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Peak electricity demand in</td>
+                                                <td>{{submitResponse.peakelectricitydemand}}</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>Highest electricity consumption in</td>
+                                                <td>{{submitResponse.highestelectricityconsumption}}</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>Highest fuel consumption for heating in</td>
+                                                <td>{{submitResponse.highestfuelconsumption}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Energy Savings</td>
+                                                <td>{{submitResponse.energysavings |
+                                                    number:'1.2-2'}}{{submitResponse.energysavingsunit}}</td>
+                                                <td>{{submitResponse.energysavingspercent | number:'1.2-2'}}</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>Energy Cost Savings</td>
+                                                <td>{{submitResponse.energycostsavings |
+                                                    number:'1.2-2'}}{{submitResponse.energycostsavingsunit}}</td>
+                                                <td>{{submitResponse.energycostsavingspercent | number:'1.2-2'}}</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>CO2 Reduction</td>
+                                                <td>{{submitResponse.co2reduction | number:'1.2-2'}}
+                                                    {{submitResponse.co2reductionunit}}</td>
+                                                <td>{{submitResponse.co2reductionpercent | number:'1.2-2'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="Report-sections w-100 col-md-10">
+                            <div style="display: flex;">
+                                <h4>Baseline vs EE Potential Improvements</h4>
+                                <div class="col-md-1" style="padding: 0; margin-top: 0px;">
+                                    <button *ngIf="showTogglePlusIconbase" (click)="toggleButtonShowIconbase()"
+                                        class="btn btn-link btn-sm" type="button">
+                                        <img style="width: 22px" src="../../../assets/images/plus.png">
+                                    </button>
+                                    <button *ngIf="!showTogglePlusIconbase" (click)="toggleButtonShowIconbase()"
+                                        class="btn btn-link btn-sm" type="button">
+                                        <img style="width: 22px" src="../../../assets/images/wwr/minus.png">
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <table *ngIf="!showTogglePlusIconbase" class="table  table-hover table-bordered"
+                                data-toggle="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Baseline</th>
+                                        <th colspan="3">Energy Efficiency Standards</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Element</th>
+                                        <th>Indicators</th>
+                                        <th>Indicators</th>
+                                        <th>Benchmark</th>
+                                        <th>Recommendations</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="5">Roof</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td>{{submitResponse.roofrvaluebaseline | number:'1.2-2'}}
+                                            {{submitResponse.roofrvalueunit}}</td>
+                                        <td>{{submitResponse.roofrvaluebaseline | number:'1.2-2'}}
+                                            {{submitResponse.roofrvalueunit}}</td>
+                                        <td></td>
+                                        <td>{{submitResponse.plugloaddensityrecommendations}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th colspan="5">Main façade</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td>{{submitResponse.wallrvaluebaseline | number:'1.2-2'}}
+                                            {{submitResponse.wallrvalueunit}}</td>
+                                        <td>{{submitResponse.wallrvaluebaseline | number:'1.2-2'}}
+                                            {{submitResponse.wallrvalueunit}}</td>
+                                        <td></td>
+                                        <td>{{submitResponse.wallrecommendations}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th colspan="5">Windows</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td>{{submitResponse.windowrvaluebaseline | number:'1.2-2'}}
+                                            {{submitResponse.windowrvalueunit}}</td>
+                                        <td>{{submitResponse.windowrvalueees | number:'1.2-2'}}
+                                            {{submitResponse.windowrvalueunit}}</td>
+                                        <td></td>
+                                        <td>{{submitResponse.windowrecommendations}}</td>
+                                    </tr>
+
+                                </thead>
+                            </table>
 
                         </div>
-                        <div class="Report-sections w-100 col-md-8">
-                            <h4>Baseline vs EE Potential Improvements</h4>
+
+
+                        <div class="Report-sections w-100 col-md-10">
+                            <div style="display: flex;">
+                                <h4>HVAC Systems</h4>
+                                <div class="col-md-1" style="padding: 0; margin-top: 0px;">
+                                    <button *ngIf="showTogglePlusIconhvac" (click)="toggleButtonShowhvac()"
+                                        class="btn btn-link btn-sm" type="button">
+                                        <img style="width: 22px" src="../../../assets/images/plus.png">
+                                    </button>
+                                    <button *ngIf="!showTogglePlusIconhvac" (click)="toggleButtonShowhvac()"
+                                        class="btn btn-link btn-sm" type="button">
+                                        <img style="width: 22px" src="../../../assets/images/wwr/minus.png">
+                                    </button>
+                                </div>
+                            </div>
+                            <table *ngIf="!showTogglePlusIconhvac" class="table  table-bordered" data-toggle="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Baseline</th>
+                                        <th colspan="3">Energy Efficiency Standards</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Element</th>
+                                        <th>Indicators</th>
+                                        <th>Indicators</th>
+                                        <th>Benchmark</th>
+                                        <th>Recommendations</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="5">Heating</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td>{{submitResponse.heatingefficiencyimage}}</td>
+                                        <td>{{submitResponse.heatingefficiencybaseline}}{{submitResponse.coolingefficiencyunit}}
+                                        </td>
+                                        <td>{{submitResponse.heatingefficiencyees}}{{submitResponse.coolingefficiencyunit}}
+                                        </td>
+                                        <td></td>
+                                        <td>{{submitResponse.heatingefficiencyrecommendations}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th colspan="5">Cooling</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+                                        </td>
+                                        <td>{{submitResponse.coolingefficiencybaseline}}{{submitResponse.heatingefficiencyunit}}
+                                            {{submitResponse.roofrvalueunit}}</td>
+                                        <td>{{submitResponse.coolingefficiencyees}}{{submitResponse.heatingefficiencyunit}}
+                                            {{submitResponse.roofrvalueunit}}</td>
+                                        <td></td>
+                                        <td>{{submitResponse.coolingefficiencyrecommendations}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th colspan="5">Fans and Blowers</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td>{{submitResponse.roofrvaluebaseline | number:'1.2-2'}}
+                                            {{submitResponse.roofrvalueunit}}</td>
+                                        <td>{{submitResponse.roofrvaluebaseline | number:'1.2-2'}}
+                                            {{submitResponse.roofrvalueunit}}</td>
+                                        <td></td>
+                                        <td>{{submitResponse.plugloaddensityrecommendations}}</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                        <div class="Report-sections w-100 col-md-10">
+                            <div style="display: flex;">
+                                <h4>Lighting</h4>
+                                <div class="col-md-1" style="padding: 0; margin-top: 0px;">
+                                    <button *ngIf="showTogglePlusIconlight" (click)="toggleButtonShowlight()"
+                                        class="btn btn-link btn-sm" type="button">
+                                        <img style="width: 22px" src="../../../assets/images/plus.png">
+                                    </button>
+                                    <button *ngIf="!showTogglePlusIconlight" (click)="toggleButtonShowlight()"
+                                        class="btn btn-link btn-sm" type="button">
+                                        <img style="width: 22px" src="../../../assets/images/wwr/minus.png">
+                                    </button>
+                                </div>
+                            </div>
+                            <table *ngIf="!showTogglePlusIconlight" class="table  table-bordered" data-toggle="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Baseline</th>
+                                        <th colspan="3">Energy Efficiency Standards</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Element</th>
+                                        <th>Indicators</th>
+                                        <th>Indicators</th>
+                                        <th>Benchmark</th>
+                                        <th>Recommendations</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td>{{submitResponse.lightingvaluebaseline | number:'1.2-2'}}
+                                            {{submitResponse.plugloaddensityunit}}</td>
+                                        <td>{{submitResponse.lightingvalueees | number:'1.2-2'}}
+                                            {{submitResponse.plugloaddensityunit}}</td>
+                                        <td></td>
+                                        <td>{{submitResponse.plugloaddensityrecommendations}}</td>
+                                    </tr>
+
+
+                                </thead>
+                            </table>
                         </div>
 
 
-
-                        <div class="Report-sections w-100 col-md-8">
-                            <h4>HVAC Systems</h4>
+                        <div class="Report-sections w-100 col-md-10">
+                            <div style="display: flex;">
+                                <h4>plug Loads</h4>
+                                <div class="col-md-1" style="padding: 0; margin-top: 0px;">
+                                    <button *ngIf="showTogglePlusIconplugload" (click)="toggleButtonShowplugload()"
+                                        class="btn btn-link btn-sm" type="button">
+                                        <img style="width: 22px" src="../../../assets/images/plus.png">
+                                    </button>
+                                    <button *ngIf="!showTogglePlusIconplugload" (click)="toggleButtonShowplugload()"
+                                        class="btn btn-link btn-sm" type="button">
+                                        <img style="width: 22px" src="../../../assets/images/wwr/minus.png">
+                                    </button>
+                                </div>
+                            </div>
+                            <table *ngIf="!showTogglePlusIconplugload" class="table  table-bordered"
+                                data-toggle="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Baseline</th>
+                                        <th colspan="3">Energy Efficiency Standards</th>
+                                    </tr>
+                                    <tr>
+                                        <th data-field="name">Element</th>
+                                        <th data-field="price">Indicators</th>
+                                        <th data-field="name">Indicators</th>
+                                        <th data-field="price">Benchmark</th>
+                                        <th data-field="price">Recommendations</th>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>{{submitResponse.plugloaddensitybaseline | number:'1.2-2'}}
+                                            {{submitResponse.plugloaddensityunit}}</td>
+                                        <td>{{submitResponse.plugloaddensityees | number:'1.2-2'}}
+                                            {{submitResponse.plugloaddensityunit}}</td>
+                                        <td></td>
+                                        <td>{{submitResponse.plugloaddensityrecommendations}}</td>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
 
-                        <div class="Report-sections w-100 col-md-8">
-                            <h4>Lighting</h4>
+
+                        <div class="buttons-report">
+                            <div>
+                                <button data-toggle="collapse" data-target="#text" class="btn btn-info">Assumptions &
+                                    Limitations</button>
+
+                                <div id="text" class="collapse">
+
+                                    <!-- <h5>Assumptions & Limitations</h5> -->
+                                    ■ Values based on data from industry partners, UNLP and RAMCC<br>
+                                    ■ Electricity tariffs and CO2 emission factor are based on IEA data or provided by
+                                    municipalities.<br>
+                                    ■ Additional to the above sources, a questionnaire was utilized to gather data from
+                                    city/municipalities.<br>
+
+                                </div>
+                            </div><br>
+
+                            <div>
+
+                                <button data-toggle="collapse" data-target="#addtext" class="btn btn-info">Additional
+                                    recommendations</button>
+                                <div id="addtext" class="collapse">
+
+                                    <!--  <h5>Additional recommendations</h5> -->
+                                    ■ Get in contact with an energy auditor. Link to XXX.<br>
+                                    ■ Adopt energy efficienct (e.g energy labelling), follow good energy consumption and
+                                    operational practices, and ensure regular maintenance of all equipment and
+                                    appliances.<br>
+                                    ■ Follow energy management system practices and install building management system
+                                    (if applicable to your building) .<br>
+                                    ■ Ground: general recommendation (i.e. insulate basement or crawlspace).<br>
+                                    ■ EE Appliances (labels).<br>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
+                    </div><br>
 
-                        <div class="Report-sections w-100 col-md-8">
-                            <h4>plug Loads</h4>
-                        </div>
+                    <button mat-raised-button color="primary" (click)="Goback()">Go Back</button>
 
-                    </div>
                 </div>
 
 

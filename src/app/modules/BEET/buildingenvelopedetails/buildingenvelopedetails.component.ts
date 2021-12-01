@@ -175,7 +175,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
     } else if (value == 3) {
       (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
         rValueAdvanced: ['', Validators.compose([Validators.required,Validators.min(0)])],
-        roofrUnits: ['', Validators.required],
+        roofrUnits: ['m²K/W', Validators.required],
       }));
     }
   }

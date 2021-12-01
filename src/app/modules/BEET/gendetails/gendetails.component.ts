@@ -183,8 +183,8 @@ export class GendetailsComponent implements OnInit {
     if (this.genDetailsForm.controls.occupantDensity.value == 1 && this.genDetailsForm.controls.noOfPeopleOccupying.value !== 0) {
       var payload: any = {
         noofpeople: this.genDetailsForm.controls.noOfPeopleOccupying.value,
-        buildinggrossarea: Number(this.genDetailsForm.controls.buildingGrossArea.value),
-        buildinggrossareaunit: this.genDetailsForm.controls.grossAreaUnits.value
+        netoccupiedarea: Number(this.genDetailsForm.controls.netOccupiedFloorArea.value),
+        netoccupiedareaunit: this.genDetailsForm.controls.netAreaUnits.value
       }
       this.beetService.postCalculateOccupancyPeople(payload).subscribe(res => {
         if (res.status == 'success') {

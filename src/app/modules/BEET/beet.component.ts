@@ -3,6 +3,8 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetector
 import { FormArray, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
 import { ErrorMessage, errorMessages, GeneralDetails, Summary } from 'src/app/shared/models/beet-models';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { BuildingenvelopedetailsComponent } from './buildingenvelopedetails/buildingenvelopedetails.component';
@@ -100,6 +102,12 @@ export class BEETComponent implements OnInit, AfterViewInit {
   isGeneralDetailsUpdated: boolean;
   heatingEfficiencyFinal: number;
   generalDetails: GeneralDetails;
+  showTogglePlusIcon: boolean = true;
+  showTogglePlusIconbase: boolean = true;
+  showTogglePlusIconhvac: boolean = true;
+  showTogglePlusIconlight: boolean = true;
+  showTogglePlusIconplugload: boolean = true;
+  submitResponse:any;
   summaryTable: { Parameter: string; Units: any; Value: any; }[];
   displayedColumnsinputvalues = ["parameter", "baselinevalue", "efficientvalue"];
   displayedColumnsintermediatevalues = ["parameter", "baselinevalue", "efficientvalue"];
@@ -107,13 +115,21 @@ export class BEETComponent implements OnInit, AfterViewInit {
   displayedColumnsmonthlyresults = ["month", "peakkwbaseline", "kwhbaseline", "thermsbaseline", "ngcubicmeterbaseline", "peakkwees", "kwhees", "thermsees", "ngcubicmeterees"];
   displayedColumnseconomizersavings = ["parameter", "baselinevalue", "efficientvalue"];
   displayedColumnsinputsforgraph = ["parameter", "parameterfield", "baselinevalue", "efficientvalue"];
-  projectname="Hans Holo";
   @ViewChild('errMsg') errMsg: ElementRef;
   step = 0;
-  reportdisplayedColumns = [ 'Element', 'Indicators', 'Indicatorse','Benchmark','Recommendations'];
-  sub1DisplayedCols = [ 'Baseline', 'Energy Efficiency Standards'];
-  sub2DisplayedCols = [ 'Element', 'Indicators', 'Indicatorse','Benchmark','Recommendations']
-
+  barChartLabels: Label[] = ['Total Energy', 'Heating Energy','Electric','Electric Peak','Total Cost'];
+  barChartLabels2: Label[] = ['Heating','Cooling'];
+  barChartLabels3: Label[] = ['Lights','Plugs','fans'];
+  barChartType: ChartType = 'bar';
+  barChartLegend = true;
+  barChartPlugins = [];
+  barChartData: ChartDataSets[] = [{ data: [55,60,45,45,90], label: 'Base Line' },
+  { data: [23,67,34,67,78], label: 'Enerygy Efficient Scenario' }];
+  barChartData2: ChartDataSets[] = [{ data: [55,60], label: 'Base Line' },
+  { data: [23,67], label: 'Enerygy Efficient Scenario' }];
+  barChartData3: ChartDataSets[] = [{ data: [55,60,89], label: 'Base Line' },
+  { data: [23,67,89], label: 'Enerygy Efficient Scenario' }];
+  barChartOptions: ChartOptions = { responsive: true, };
  
 
   constructor(private beetService: beetService, private cd: ChangeDetectorRef, private modalService: NgbModal) { }
@@ -128,7 +144,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.cd.detectChanges();
   }
-
 
   selectionStepperChange(event) {
     this.saveBuildingDetails();
@@ -273,7 +288,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
       });
     } */
 
-    this.showTables = true;
+    
     var selectedcountryname = sessionStorage.getItem('selectedCountryName');
     if (this.genDetailsComponent.genDetailsForm.valid) {
       this.plugloadoptions = [];
@@ -327,7 +342,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
         coolingequipment: this.coolingEfficiencyValue.equipName,
         coolingefficiency: this.coolingEfficiencyValue.efficiencyValue,
         coolingefficiencyunit: this.coolingEfficiencyValue.efficiencyUnits,
-        ventilationrate: this.hvacDetailsComponent.formgroup.controls.ventilationValue.value,
+        ventilationrate: Number(this.hvacDetailsComponent.formgroup.controls.ventilationValue.value),
         ventilationrateunit: this.hvacDetailsComponent.formgroup.controls.ventilationUnits.value,
         infiltrationrate: Number(this.hvacDetailsComponent.formgroup.controls.infiltrationValue.value),
         infiltrationrateunit: this.hvacDetailsComponent.formgroup.controls.infiltrationUnits.value,
@@ -346,20 +361,10 @@ export class BEETComponent implements OnInit, AfterViewInit {
       }
       console.log(payload);
       this.beetService.postDataGenerateReport(payload).subscribe(res => {
-        console.log(res.success)
-        this.inputvaluestable = res.success.inputvaluestable;
-        this.inputvaluestableDataSource = new MatTableDataSource(this.inputvaluestable);
-        this.intermediatevaluestable = res.success.intermediatevaluestable;
-        this.intermediatevaluestabletableDataSource = new MatTableDataSource(this.intermediatevaluestable);
-        this.outputvaluestable = res.success.outputvaluestable;
-        this.outputvaluestableDataSource = new MatTableDataSource(this.outputvaluestable);
-        this.monthresultstable = res.success.monthresultstable;
-        this.monthresultstabletableDataSource = new MatTableDataSource(this.monthresultstable);
-        this.economizersavingstable = res.success.intermediatevaluestable;
-        this.economizersavingstableDataSource = new MatTableDataSource(this.economizersavingstable);
-        this.inputsforgraphtable = res.success.inputsforgraphtable;
-        this.inputsforgraphtableDataSource = new MatTableDataSource(this.inputsforgraphtable);
-
+        console.log(res.success);
+        
+        this.submitResponse = res.success;
+        this.showTables = true;
         /*  if (res.status == 'success') {
            console.log(res.success);
            this.isGeneralDetailsUpdated = true;
@@ -381,7 +386,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
       this.outerWallR.rUnits = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.rimages.value.units;
     } else if (this.buildingdetailsComponent?.formgroup.controls.outerwallr.value == 3) {
       this.outerWallR.rValue = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.rValueAdvanced.value.toFixed(2);
-      this.outerWallR.rUnits = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.outerwallrUnits.units
+      this.outerWallR.rUnits = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.outerwallrUnits.value;
     }
 
 
@@ -447,5 +452,26 @@ export class BEETComponent implements OnInit, AfterViewInit {
       this.coolingEfficiencyValue.equipName = this.hvacDetailsComponent?.formgroup.get('coolefficiencyArray')['controls'][0].controls.coolingEquipmentName.value;
     }
   }
+  toggleButtonShowIcon(){
+    this.showTogglePlusIcon = !this.showTogglePlusIcon;
+  }
 
+  toggleButtonShowIconbase(){
+    this.showTogglePlusIconbase = !this.showTogglePlusIconbase;
+  }
+
+  toggleButtonShowhvac(){
+    this.showTogglePlusIconhvac = !this.showTogglePlusIconhvac;
+  }
+
+  toggleButtonShowlight(){
+    this.showTogglePlusIconlight = !this.showTogglePlusIconlight;
+  }
+
+  toggleButtonShowplugload(){
+    this.showTogglePlusIconplugload = !this.showTogglePlusIconplugload;
+  }
+  Goback(){
+    this.showTables = false;
+  }
 }

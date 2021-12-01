@@ -53,12 +53,14 @@ export class LightingComponent implements OnInit {
       this.lightingOptions = JSON.parse(sessionStorage.getItem('lightingOptions'));
       this.lightingOptionsDataSource = new MatTableDataSource(this.lightingOptions);
     } 
-    else{
+    if( this.lightingOptions == null ){
       this.beetService.getGeneralDetails().subscribe(res => {
         this.lightingOptions = res.success.lighting;
         this.lightingOptionsDataSource = new MatTableDataSource(this.lightingOptions);
       });
-    }
+    }  
+    
+    
 
     if(sessionStorage.getItem('lightingDetails') !== null){
       this.LightningDetailsForm.patchValue(JSON.parse(sessionStorage.getItem('lightingDetails')));
@@ -75,8 +77,8 @@ export class LightingComponent implements OnInit {
   postCalculateLightingPower(): void {
    var payload: any = {
        "countrycode": this.selCountryCode,
-       "buildinggrossarea": Number(this.beetComponent.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value),
-       "buildinggrossareaunit":this.beetComponent.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
+       "netoccupiedarea": Number(this.beetComponent.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value),
+       "netoccupiedareaunit":this.beetComponent.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
        "lightingdata":this.lightingOptions
    }
      this.beetService.postCalculateLightingPower(payload).subscribe(res => {

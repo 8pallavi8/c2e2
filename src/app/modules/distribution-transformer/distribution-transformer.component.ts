@@ -193,6 +193,7 @@ export class DisTransformerComponent implements OnInit {
           this.pieChartLabels.push('E' + i);
           this.pieChartData.push(Math.round(calEnergy * 10) / 10);
         }
+        
         this.barChartData.push()
         this.showForms = false;
       }

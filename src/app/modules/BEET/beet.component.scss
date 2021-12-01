@@ -372,3 +372,40 @@ table {
     justify-content: space-evenly;
     flex-direction: column;
 }
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.table>tbody>tr>td,
+.table>tbody>tr>th {
+  border-top: none;
+}
+
+.table>thead>tr>td,
+.table>thead>tr>th{
+    border-style: solid;
+    border-color: slategray;
+}
+
+.buttons-report{
+    display: flex;
+    flex-direction: column;
+}
+
+.key-indicators-table{
+    display: flex;
+}
+
+@media (max-width: 600px){
+    .key-indicators-table{
+        flex-direction: column;
+    }
+
+    .report-fields{
+        flex-direction: column;
+    }
+    
+
+      }
+
