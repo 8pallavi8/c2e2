@@ -72,12 +72,13 @@ export class GendetailsComponent implements OnInit {
       occupanyHoursPerWeek: ['', Validators.compose([Validators.required,Validators.max(168), Validators.min(0)])],
       occupantDensity: ['', Validators.compose([Validators.required,Validators.min(0)])],
       noOfPeopleOccupying: [0, Validators.compose([Validators.required,Validators.pattern(this.numRegex)])],
+      occupantDensityKnown: [0, Validators.compose([Validators.required])],
       occupantDensityUnits: ['', Validators.compose([Validators.required])],
       electricityCost: ['', Validators.compose([Validators.required])],
       fuelCost: ['', Validators.compose([Validators.required])],
       fuelUnits: ['', Validators.compose([Validators.required])],
       electricityUnits: ['', Validators.compose([Validators.required])],
-      occupantDensityKnown: [0, Validators.compose([Validators.required])],
+      
     });;
     this.getcountryList();
     if (sessionStorage.getItem('generalDetails') !== null) {

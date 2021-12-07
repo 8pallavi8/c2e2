@@ -88,14 +88,14 @@
             <br>
 
 
-            <p> Should there be any feedback / queries / suitable or customized data integration requirements, please do
+           <!--  <p> Should there be any feedback / queries / suitable or customized data integration requirements, please do
                 reach out to
                 us at the below mentioned contact.</p>
             <p>Point of contact:<br>
                 Rahul Raju Dusa <br>
                 Senior Expert – Energy Efficiency <br>
                 rradu@dtu.dk
-            </p>
+            </p> -->
 
         </div>
 
@@ -226,7 +226,7 @@
 
                 <ng-template matStepLabel>Input Data Summary and Report</ng-template>
 
-                <div *ngIf="!showTables">
+                <div *ngIf="!showTables && !showProgress">
                     <b>User-Input Data Summary:</b>
                     <p>Contains all values that <br>a.The user has either entered.<br>
                         b.The user has selected from
@@ -355,72 +355,75 @@
                         <button mat-raised-button color="primary" (click)="postDataGenerateReport()"
                             style="margin-right: inherit;">Generate Report</button><br>
 
-                           
-
 
                     </div><br><br>
 
                 </div><br>
 
-                <div *ngIf="showTables" class="container">
-                    <mat-spinner color="primary"></mat-spinner>
-                    <h4>General Information</h4>
-                    <div class="report-fields Report-sections w-100 col-md-10" style="display: flex;">
-                        <table class="table table-hover">
-                            <tbody>
-                                <tr>
-                                    <td>Building type :</td>
-                                    <td>{{genDetailsComponent.genDetailsForm.controls.buildingType.value}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Surface Area : </td>
-                                    <td>{{genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value|
-                                        number:'1.2-2'}}
-                                        {{genDetailsComponent.genDetailsForm.controls.netAreaUnits.value}}</td>
-                                </tr>
-                                <tr>
-                                    <td>No. of Floors : </td>
-                                    <td>{{genDetailsComponent.genDetailsForm.controls.noOfFloors.value}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Occupancy Hours : </td>
-                                    <td>{{genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <table class="table table-hover">
-                            <tbody>
-                                <tr>
-                                    <td>Occupant Density :</td>
-                                    <td> {{genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value|
-                                        number:'1.2-2'}}
-                                        {{genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value}}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Electricity Cost :</td>
-                                    <td>{{genDetailsComponent.genDetailsForm.controls.electricityCost.value|
-                                        number:'1.2-2'}}
-                                        {{genDetailsComponent.genDetailsForm.controls.electricityUnits.value}}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Fuel Cost : </td>
-                                    <td>{{genDetailsComponent.genDetailsForm.controls.fuelCost.value|
-                                        number:'1.2-2'}}
-                                        {{genDetailsComponent.genDetailsForm.controls.fuelUnits.value}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-
-                    <br>
+                <div *ngIf="showTables" class="container" id="pdfTable" #pdfTable>
 
                     <div class="Report-sections-group">
-                        <div class="Report-sections w-100 col-md-10">
+                        <div class="report-fields Report-sections w-100 col-md-12">
+                            <h4>General Information</h4>
+
+                            <div style="display: flex;">
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Building type :</td>
+                                            <td>{{genDetailsComponent.genDetailsForm.controls.buildingType.value}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Surface Area : </td>
+                                            <td>{{genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value|
+                                                number:'1.2-2'}}
+                                                {{genDetailsComponent.genDetailsForm.controls.netAreaUnits.value}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>No. of Floors : </td>
+                                            <td>{{genDetailsComponent.genDetailsForm.controls.noOfFloors.value}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Occupancy Hours : </td>
+                                            <td>{{genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Occupant Density :</td>
+                                            <td> {{genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value|
+                                                number:'1.2-2'}}
+                                                {{genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value}}
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Electricity Cost :</td>
+                                            <td>{{genDetailsComponent.genDetailsForm.controls.electricityCost.value|
+                                                number:'1.2-2'}}
+                                                {{genDetailsComponent.genDetailsForm.controls.electricityUnits.value}}
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Fuel Cost : </td>
+                                            <td>{{genDetailsComponent.genDetailsForm.controls.fuelCost.value|
+                                                number:'1.2-2'}}
+                                                {{genDetailsComponent.genDetailsForm.controls.fuelUnits.value}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="Report-sections w-100 col-md-12">
                             <div style="display: flex;">
                                 <h4>Key Indicators</h4>
 
@@ -518,7 +521,7 @@
                             </div>
                         </div>
 
-                        <div class="Report-sections w-100 col-md-10">
+                        <div class="Report-sections w-100 col-md-12">
                             <div style="display: flex;">
                                 <h4>Baseline vs EE Potential Improvements</h4>
                                 <div class="col-md-1" style="padding: 0; margin-top: 0px;">
@@ -538,57 +541,100 @@
                                 data-toggle="table">
                                 <thead>
                                     <tr>
-                                        <th colspan="2">Baseline</th>
+                                        <th colspan="3">Baseline</th>
                                         <th colspan="3">Energy Efficiency Standards</th>
                                     </tr>
                                     <tr>
-                                        <th>Element</th>
+                                        <th colspan="2">Element</th>
                                         <th>Indicators</th>
                                         <th>Indicators</th>
                                         <th>Benchmark</th>
                                         <th>Recommendations</th>
                                     </tr>
                                     <tr>
-                                        <th colspan="5">Roof</th>
+                                        <th colspan="6">Roof</th>
                                     </tr>
 
                                     <tr>
-                                        <td></td>
+                                        <td colspan="2"></td>
                                         <td>{{submitResponse.roofrvaluebaseline | number:'1.2-2'}}
                                             {{submitResponse.roofrvalueunit}}</td>
                                         <td>{{submitResponse.roofrvaluebaseline | number:'1.2-2'}}
                                             {{submitResponse.roofrvalueunit}}</td>
                                         <td></td>
-                                        <td>{{submitResponse.plugloaddensityrecommendations}}</td>
+                                        <td>
+                                            <ul>
+                                                <li *ngFor="let rec of submitResponse.roofrecommendations;
+                                                    let i = index">
+                                                    <p *ngIf = "rec.recommendationtype == 0" style="color: red;">    {{ rec.recommendation}}</p>
+                                                <p *ngIf = "rec.recommendationtype != 0">    {{ rec.recommendation}}</p>
+                                                </li>
+                                            </ul>
+                                        </td>
                                     </tr>
 
                                     <tr>
-                                        <th colspan="5">Main façade</th>
+                                        <th colspan="6">Main facade</th>
                                     </tr>
 
                                     <tr>
-                                        <td></td>
+                                        <td colspan="2">
+
+                                        </td>
                                         <td>{{submitResponse.wallrvaluebaseline | number:'1.2-2'}}
                                             {{submitResponse.wallrvalueunit}}</td>
                                         <td>{{submitResponse.wallrvaluebaseline | number:'1.2-2'}}
                                             {{submitResponse.wallrvalueunit}}</td>
                                         <td></td>
-                                        <td>{{submitResponse.wallrecommendations}}</td>
+                                        <td>
+                                            <ul>
+                                                <li *ngFor="let rec of submitResponse.wallrecommendations;
+                                                let i = index">
+                                                    {{ rec.recommendation}}
+                                                </li>
+                                            </ul>
+                                        </td>
                                     </tr>
 
                                     <tr>
-                                        <th colspan="5">Windows</th>
+                                        <th colspan="6">Windows</th>
                                     </tr>
 
                                     <tr>
-                                        <td></td>
+                                        <td rowspan="3" >     <img style="width: 100%;" src="../../../assets/images/report/window-report.png" /></td>
+                                        <td >SHGC</td>
+                                        <td>{{submitResponse.windowshgcvaluebaseline }}</td>
+                                        <td>{{submitResponse.windowshgcvalueees }}</td>
+                                        <td rowspan="3"></td>
+                                        <td rowspan="3">
+                                            <ul>
+                                                <li *ngFor="let rec of submitResponse.windowrecommendations;
+                                                let i = index">
+                                                <p *ngIf = "rec.recommendationtype == 0" style="color: red;">    {{ rec.recommendation}}</p>
+                                                <p *ngIf = "rec.recommendationtype != 0">    {{ rec.recommendation}}</p>
+                                                </li>
+                                            </ul>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>WWR</td>
+                                        <td>{{submitResponse.wwrvaluebaseline }}
+                                            {{submitResponse.wwrvalueunit}}</td>
+                                        <td>{{submitResponse.wwrvalueees}}
+                                            {{submitResponse.wwrvalueunit}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>R value</td>
                                         <td>{{submitResponse.windowrvaluebaseline | number:'1.2-2'}}
                                             {{submitResponse.windowrvalueunit}}</td>
                                         <td>{{submitResponse.windowrvalueees | number:'1.2-2'}}
                                             {{submitResponse.windowrvalueunit}}</td>
-                                        <td></td>
-                                        <td>{{submitResponse.windowrecommendations}}</td>
+
                                     </tr>
+
+
 
                                 </thead>
                             </table>
@@ -596,7 +642,7 @@
                         </div>
 
 
-                        <div class="Report-sections w-100 col-md-10">
+                        <div class="Report-sections w-100 col-md-12">
                             <div style="display: flex;">
                                 <h4>HVAC Systems</h4>
                                 <div class="col-md-1" style="padding: 0; margin-top: 0px;">
@@ -610,6 +656,8 @@
                                     </button>
                                 </div>
                             </div>
+
+
                             <table *ngIf="!showTogglePlusIconhvac" class="table  table-bordered" data-toggle="table">
                                 <thead>
                                     <tr>
@@ -628,13 +676,25 @@
                                     </tr>
 
                                     <tr>
-                                        <td>{{submitResponse.heatingefficiencyimage}}</td>
-                                        <td>{{submitResponse.heatingefficiencybaseline}}{{submitResponse.coolingefficiencyunit}}
+                                        <td>
+                                            <img style="width: 100%;" [src]="submitResponse.heatingefficiencyimage" />
                                         </td>
-                                        <td>{{submitResponse.heatingefficiencyees}}{{submitResponse.coolingefficiencyunit}}
+                                        <td>{{submitResponse.heatingefficiencybaseline}}{{submitResponse.heatingefficiencyunit}}
+                                        </td>
+                                        <td>{{submitResponse.heatingefficiencyees}}{{submitResponse.heatingefficiencyunit}}
                                         </td>
                                         <td></td>
-                                        <td>{{submitResponse.heatingefficiencyrecommendations}}</td>
+                                        <td>
+                                            <ul>
+
+                                                
+                                                <li *ngFor="let rec of submitResponse.heatingefficiencyrecommendations;
+                                                let i = index">
+                                                <p *ngIf = "rec.recommendationtype == 0" style="color: red;">    {{ rec.recommendation}}</p>
+                                                <p *ngIf = "rec.recommendationtype != 0">    {{ rec.recommendation}}</p>
+                                                </li>
+                                            </ul>
+                                        </td>
                                     </tr>
 
                                     <tr>
@@ -643,14 +703,22 @@
 
                                     <tr>
                                         <td>
-
+                                            <img style="width: 100%;" [src]="submitResponse.coolingefficiencyimage" />
                                         </td>
-                                        <td>{{submitResponse.coolingefficiencybaseline}}{{submitResponse.heatingefficiencyunit}}
-                                            {{submitResponse.roofrvalueunit}}</td>
-                                        <td>{{submitResponse.coolingefficiencyees}}{{submitResponse.heatingefficiencyunit}}
-                                            {{submitResponse.roofrvalueunit}}</td>
+                                        <td>{{submitResponse.coolingefficiencybaseline}}{{submitResponse.coolingefficiencyunit}}
+                                        </td>
+                                        <td>{{submitResponse.coolingefficiencyees}}{{submitResponse.coolingefficiencyunit}}
+                                        </td>
                                         <td></td>
-                                        <td>{{submitResponse.coolingefficiencyrecommendations}}</td>
+                                        <td>
+                                            <ul>
+                                                <li *ngFor="let rec of submitResponse.coolingefficiencyrecommendations;
+                                                let i = index">
+                                                <p *ngIf = "rec.recommendationtype == 0" style="color: red;">    {{ rec.recommendation}}</p>
+                                                <p *ngIf = "rec.recommendationtype != 0">    {{ rec.recommendation}}</p>
+                                                </li>
+                                            </ul>
+                                        </td>
                                     </tr>
 
                                     <tr>
@@ -658,19 +726,28 @@
                                     </tr>
 
                                     <tr>
-                                        <td></td>
+                                        <td>     <img style="width: 100%;" src="../../../assets/images/report/fansblowers-report.png" /></td>
                                         <td>{{submitResponse.roofrvaluebaseline | number:'1.2-2'}}
                                             {{submitResponse.roofrvalueunit}}</td>
                                         <td>{{submitResponse.roofrvaluebaseline | number:'1.2-2'}}
                                             {{submitResponse.roofrvalueunit}}</td>
                                         <td></td>
-                                        <td>{{submitResponse.plugloaddensityrecommendations}}</td>
+                                        <td>
+                                            <ul>
+                                                <li *ngFor="let rec of submitResponse.fansblowersrecommendations;
+                                                let i = index">
+                                                <p *ngIf = "rec.recommendationtype == 0" style="color: red;">    {{ rec.recommendation}}</p>
+                                                <p *ngIf = "rec.recommendationtype != 0">    {{ rec.recommendation}}</p>
+                                                </li>
+                                            </ul>
+                                        </td>
                                     </tr>
                                 </thead>
                             </table>
+
                         </div>
 
-                        <div class="Report-sections w-100 col-md-10">
+                        <div class="Report-sections w-100 col-md-12">
                             <div style="display: flex;">
                                 <h4>Lighting</h4>
                                 <div class="col-md-1" style="padding: 0; margin-top: 0px;">
@@ -699,22 +776,28 @@
                                     </tr>
 
                                     <tr>
-                                        <td></td>
+                                        <td>     <img style="width: 100%;" src="../../../assets/images/report/lightning-report.png" /></td>
                                         <td>{{submitResponse.lightingvaluebaseline | number:'1.2-2'}}
                                             {{submitResponse.plugloaddensityunit}}</td>
                                         <td>{{submitResponse.lightingvalueees | number:'1.2-2'}}
                                             {{submitResponse.plugloaddensityunit}}</td>
                                         <td></td>
-                                        <td>{{submitResponse.plugloaddensityrecommendations}}</td>
+                                        <td>
+                                            <ul>
+                                                <li *ngFor="let rec of submitResponse.lightingrecommendations;
+                                                let i = index">
+                                                <p *ngIf = "rec.recommendationtype == 0" style="color: red;">    {{ rec.recommendation}}</p>
+                                                <p *ngIf = "rec.recommendationtype != 0">    {{ rec.recommendation}}</p>
+                                                </li>
+                                            </ul>
+                                        </td>
                                     </tr>
-
-
                                 </thead>
                             </table>
                         </div>
 
 
-                        <div class="Report-sections w-100 col-md-10">
+                        <div class="Report-sections w-100 col-md-12">
                             <div style="display: flex;">
                                 <h4>plug Loads</h4>
                                 <div class="col-md-1" style="padding: 0; margin-top: 0px;">
@@ -743,13 +826,22 @@
                                         <th data-field="price">Recommendations</th>
                                     </tr>
                                     <tr>
-                                        <td></td>
+                                        <td>     <img style="width: 100%;" src="../../../assets/images/report/plugload-report.png" /></td>
                                         <td>{{submitResponse.plugloaddensitybaseline | number:'1.2-2'}}
                                             {{submitResponse.plugloaddensityunit}}</td>
                                         <td>{{submitResponse.plugloaddensityees | number:'1.2-2'}}
                                             {{submitResponse.plugloaddensityunit}}</td>
                                         <td></td>
-                                        <td>{{submitResponse.plugloaddensityrecommendations}}</td>
+                                        <td>
+                                            <ul>
+                                                <li *ngFor="let rec of submitResponse.plugloaddensityrecommendations;
+                                                let i = index" >
+                                                   <p *ngIf="rec.recommendationtype == 0" style="color: red;"> {{ rec.recommendation}}</p> 
+                                                   <p *ngIf="rec.recommendationtype != 0" > {{ rec.recommendation}}</p> 
+                                                </li>
+                                            </ul>
+        
+                                        </td>
                                     </tr>
                                 </thead>
                             </table>
@@ -797,8 +889,15 @@
 
                     </div><br>
 
-                    <button mat-raised-button color="primary" (click)="Goback()">Go Back</button>
+                    <button mat-raised-button color="primary" (click)="Goback()" style="float: right;">Go Back</button>
 
+                </div>
+
+           <!--      <div> <button  (click)="downloadAsPDF()">Export To PDF</button></div> -->
+
+                <div *ngIf="showProgress" class="container progress-bar-beet">
+                    <p>Please wait !!!!</p>
+                    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
                 </div>
 
 

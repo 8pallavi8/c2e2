@@ -22,11 +22,11 @@ export class CO2EmissionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.formgroup = this.fb.group({
-      powergenerationco2emmisions: [0, Validators.compose([Validators.required])],
+      powergenerationco2emmisions: ['', Validators.compose([Validators.required])],
       gridemissionsFactor:['', Validators.compose([Validators.required])],
       gridemissionsFactorUnits: ["kg/kWh", Validators.compose([Validators.required])],
-      fuelEmissionFactor: [0, Validators.compose([Validators.required])],
-      fuelEmissionFactorValue: [0, Validators.compose([Validators.required])],
+      fuelEmissionFactor: ['', Validators.compose([Validators.required])],
+      fuelEmissionFactorValue: ['', Validators.compose([Validators.required])],
       fuelEmissionFactorUnit: ['', Validators.compose([Validators.required])]
     });
     this.beetService.getSelectedCountry().subscribe(res => { this.selCountryCode = res;});

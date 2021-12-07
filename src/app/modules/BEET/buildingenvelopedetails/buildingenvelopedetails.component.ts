@@ -174,7 +174,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       }));
     } else if (value == 3) {
       (<FormArray>this.formgroup.get('roofrArray')).push(this.fb.group({
-        rValueAdvanced: ['', Validators.compose([Validators.required,Validators.min(0)])],
+        rroofValueAdvanced: ['', Validators.compose([Validators.required,Validators.min(0)])],
         roofrUnits: ['m²K/W', Validators.required],
       }));
     }
@@ -320,7 +320,7 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       this.formgroup.get('outerWallArray')['controls'][0].controls.rValueAdvanced.setValue(last.Resistenciatermica);
     }
     if (this.formgroup.controls.roofr.value == 3) {
-      this.formgroup.get('roofrArray')['controls'][0].controls?.rValueAdvanced?.setValue(last.Resistenciatermica);
+      this.formgroup.get('roofrArray')['controls'][0].controls?.rroofValueAdvanced?.setValue(last.Resistenciatermica);
     }
   }
 

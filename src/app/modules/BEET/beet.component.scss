@@ -1,5 +1,5 @@
 // Utilities
-@import "../../../styles";
+
 .step-button {
     float: right;
     margin-top: 20px;
@@ -18,7 +18,6 @@ th.mat-header-cell {
 }
 
 table {
-    width: 70%;
     margin-top: 1rem;
     background: transparent;
 }
@@ -357,7 +356,7 @@ table {
 
 
 .Report-sections{
-    border: 10px solid;
+    border: 2px solid;
     border-color: #014b66fc;
         padding-top: 21px;
         border-radius: 12px;
@@ -395,6 +394,13 @@ table {
 
 .key-indicators-table{
     display: flex;
+    width:100%
+}
+.progress-bar-beet{
+    position: relative;
+    left: 40%;
+    padding: 10%;
+    transform: translate(-20%, 0%);
 }
 
 @media (max-width: 600px){

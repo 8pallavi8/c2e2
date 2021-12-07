@@ -92,7 +92,6 @@ export class PlugloadsComponent implements OnInit {
       var plugloadDetails = JSON.parse(sessionStorage.getItem('plugloadDetails'));
       var plugloadArrayTemp = plugloadDetails.plugLoadArray;
     
-
       if (plugloadDetails !== undefined || plugloadDetails !== null) {
         this.formgroup.patchValue(plugloadDetails);
       }
