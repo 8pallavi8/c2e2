@@ -312,13 +312,19 @@
                         <ng-container style="text-align: center" matColumnDef="options">
                             <mat-header-cell *matHeaderCellDef> Yes/No/NA </mat-header-cell>
                             <mat-cell *matCellDef="let element let rowIndex = index"  [formGroupName]="rowIndex">
-                                <mat-form-field >
-                                    <mat-select [(value)]="element.options" placeholder="select" formControlName="operationresponse">
+                                
+                                    <!-- <mat-select [(value)]="element.options" placeholder="select" formControlName="operationresponse">
                                         <mat-option value="NA">NA</mat-option>
                                         <mat-option value="Yes">Yes</mat-option>
                                         <mat-option value="No">No</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                                    </mat-select> -->
+
+                                     <mat-radio-group class="plugload-radio-group" layout="row" [(value)]="element.options" placeholder="select" formControlName="operationresponse">
+                                        <mat-radio-button value="NA">NA</mat-radio-button >
+                                        <mat-radio-button  value="Yes">Yes</mat-radio-button >
+                                        <mat-radio-button value="No">No</mat-radio-button >
+                                    </mat-radio-group> 
+                                
                             </mat-cell>
                         </ng-container>
 
@@ -338,6 +344,5 @@
 
             </div>
         </fieldset>
-
     </form>
 </div>
