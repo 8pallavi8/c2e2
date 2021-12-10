@@ -4,6 +4,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import jsPDF from 'jspdf';
 import { Label } from 'ng2-charts';
 import { throwError } from 'rxjs';
 import { ErrorMessage, errorMessages, GeneralDetails, Summary } from 'src/app/shared/models/beet-models';
@@ -14,6 +15,7 @@ import { GendetailsComponent } from './gendetails/gendetails.component';
 import { HvacComponent } from './hvac/hvac.component';
 import { LightingComponent } from './lighting/lighting.component';
 import { PlugloadsComponent } from './plugloads/plugloads.component';
+import html2canvas from 'html2canvas';
 
 
 
@@ -660,23 +662,20 @@ export class BEETComponent implements OnInit, AfterViewInit {
   }
 
 
- /*  public downloadAsPDF() {
-   // const doc = new jsPDF();
-
-    const specialElementHandlers = {
-      '#editor': function (element, renderer) {
-        return true;
-      }
-    };
-
-    const pdfTable = this.pdfTable.nativeElement;
-
-    doc.fromHTML(pdfTable.innerHTML, 15, 15, {
-      width: 190,
-      'elementHandlers': specialElementHandlers
-    });
-
-    doc.save('tableToPdf.pdf');
-  } */
+   public downloadAsPDF() {
+    let DATA = document.getElementById('pdfTable');
+   
+    html2canvas(DATA).then(canvas => {
+        let fileWidth = 208;
+        let fileHeight = canvas.height * fileWidth / canvas.width;
+        
+        const FILEURI = canvas.toDataURL('image/png')
+        let PDF = new jsPDF('p', 'mm', 'a4');
+        let position = 0;
+        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+        
+        PDF.save('angular-demo.pdf');
+    });  
+  } 
 
 } 
