@@ -359,10 +359,12 @@
                     </div><br><br>
 
                 </div><br>
+                <!-- id="pdfTable" #pdfTable -->
 
-                <div *ngIf="showTables" class="container" id="pdfTable" #pdfTable>
+                <div *ngIf="showTables" class="container printformClass" >
 
-                    <div class="Report-sections-group">
+                    <div class="Report-sections-group" >
+                    <div  id="general-section" >
                         <div class="report-fields Report-sections w-100 col-md-12">
                             <h4>General Information</h4>
 
@@ -520,7 +522,9 @@
 
                             </div>
                         </div>
+                    </div>
 
+                    <div  id="baseline-potential" >
                         <div class="Report-sections w-100 col-md-12">
                             <div style="display: flex;">
                                 <h4>Baseline vs EE Potential Improvements</h4>
@@ -640,8 +644,9 @@
                             </table>
 
                         </div>
+                    </div>
 
-
+                    <div  id="hvac"  >
                         <div class="Report-sections w-100 col-md-12">
                             <div style="display: flex;">
                                 <h4>HVAC Systems</h4>
@@ -746,7 +751,6 @@
                             </table>
 
                         </div>
-
                         <div class="Report-sections w-100 col-md-12">
                             <div style="display: flex;">
                                 <h4>Lighting</h4>
@@ -846,7 +850,7 @@
                                 </thead>
                             </table>
                         </div>
-
+                    </div>
 
                         <div class="buttons-report">
                             <div>
@@ -890,7 +894,11 @@
                     </div><br>
 
                     <button mat-raised-button color="primary" (click)="Goback()" style="float: right;">Go Back</button>
-                    <button mat-raised-button color="primary" (click)="downloadAsPDF()" >Export To PDF</button>
+                    <!-- <button mat-raised-button color="primary" (click)="convertToPdf()" >Export To PDF</button> -->
+                    <button mat-raised-button  color="primary"  (click)="getPDF()">Generate Pdf
+                        <mat-icon *ngIf= "isGenerating"><mat-spinner color="accent" diameter="20">
+                        </mat-spinner></mat-icon>
+                    </button>
                 </div>
 
                 

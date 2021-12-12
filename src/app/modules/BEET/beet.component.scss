@@ -415,3 +415,14 @@ table {
 
       }
 
+
+      .pageFooter {
+        display: table-footer-group;
+        counter-increment: page;
+      }
+      .pageFooter:after {
+        /* content: counter(page); */
+        content: 'Page ' counter(page);
+      }
+      
+

@@ -67,7 +67,10 @@ export interface Efficiency {
   ]
 })
 export class BEETComponent implements OnInit, AfterViewInit {
-  @ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
+  @ViewChild('pdfTable', {static: false})
+  pdfTable: ElementRef;
+  isGenerating:boolean= false;
+  
   errorMessages: ErrorMessage[] = errorMessages;
   errFieldMessages: string[] = [];
   showTables: boolean = false;
@@ -662,20 +665,58 @@ export class BEETComponent implements OnInit, AfterViewInit {
   }
 
 
-   public downloadAsPDF() {
-    let DATA = document.getElementById('pdfTable');
-   
-    html2canvas(DATA).then(canvas => {
-        let fileWidth = 208;
-        let fileHeight = canvas.height * fileWidth / canvas.width;
-        
-        const FILEURI = canvas.toDataURL('image/png')
-        let PDF = new jsPDF('p', 'mm', 'a4');
-        let position = 0;
-        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
-        
-        PDF.save('angular-demo.pdf');
-    });  
-  } 
+  private delay(ms: number)
+  {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  async getPDF(){
+    this.isGenerating = true;
+    this.showTogglePlusIcon = false ;
+    this.showTogglePlusIconbase =false;
+    this.showTogglePlusIconhvac=false;
+    this.showTogglePlusIconlight=false;
+    this.showTogglePlusIconplugload = false;
 
+    await this.delay(3000);
+    let general  = document.getElementById('general-section');
+    let baseline = document.getElementById('baseline-potential');
+    let hvac = document.getElementById('hvac');
+    let lightining = document.getElementById('lightining');
+    
+    var pdf = new jsPDF('p', 'pt', [1200,1800]);
+
+    this.generateCanvas(pdf,general,40,false);
+    this.generateCanvas(pdf,baseline,40,false); 
+    this.generateCanvas(pdf,hvac,40,true); 
+    this. isGenerating= false;
+    //this.generateCanvas(pdf,lightining,40,true); 
+  };
+
+  generateCanvas(pdf,sectionDiv, top_left_margin,savePDF){
+    var HTML_Width = sectionDiv.offsetWidth;
+    var HTML_Height = sectionDiv.offsetHeight;
+    console.log("HTML Weight height "+HTML_Width+"    "+HTML_Height);
+    var PDF_Width = HTML_Width+(top_left_margin*2);
+    var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
+    var canvas_image_width = HTML_Width;
+    var canvas_image_height = HTML_Height;
+    
+    var totalPDFPages = Math.ceil(HTML_Height/PDF_Height)-1;
+    html2canvas(sectionDiv).then(function(canvas) {
+      canvas.getContext('2d');
+      console.log(canvas.height+"  "+canvas.width);
+      var imgData = canvas.toDataURL("image/jpeg", 1.0);
+        pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
+              if(savePDF != true){
+                  pdf.addPage()
+              }
+              if(savePDF == true){
+                pdf.save("Beet-Report.pdf");
+              }
+        }); 
+
+       
+  }
 } 
+
+
