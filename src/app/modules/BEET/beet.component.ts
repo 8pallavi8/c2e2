@@ -1,4 +1,4 @@
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { CdkStep, STEPPER_GLOBAL_OPTIONS, StepState, STEP_STATE } from '@angular/cdk/stepper';
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
@@ -16,7 +16,6 @@ import { HvacComponent } from './hvac/hvac.component';
 import { LightingComponent } from './lighting/lighting.component';
 import { PlugloadsComponent } from './plugloads/plugloads.component';
 import html2canvas from 'html2canvas';
-
 
 
 export interface PlugLoadOptionsTable {
@@ -63,7 +62,6 @@ export interface Efficiency {
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { showError: true }
     }
-
   ]
 })
 export class BEETComponent implements OnInit, AfterViewInit {
@@ -148,7 +146,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
   isLoading: boolean = true;
 
 
-
   constructor(private beetService: beetService, private cd: ChangeDetectorRef, private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -162,14 +159,15 @@ export class BEETComponent implements OnInit, AfterViewInit {
     this.cd.detectChanges();
   }
 
+  
   selectionStepperChange(event) {
     this.saveBuildingDetails();
     this.saveHVACDetails();
     this.onSaveLightingDetails();
-    this.showSummary();
     this.onSaveGenDetails();
     this.onPlugLoadDetails();
     this.onSaveLightingDetails();
+    this.showSummary();
   }
 
   onSaveGenDetails() {
@@ -472,20 +470,16 @@ export class BEETComponent implements OnInit, AfterViewInit {
             const heating_baseline = heatingObj.baselinevalue;
             const heating_energyeffval = heatingObj.energyefficienctvalue;
 
-
             const coolingObj = res.success.graphinputs.filter(p => p.parameter.includes('Energy Cost') && p.parameterfield.includes('Cooling'))[0]
             const cooling_baseline = coolingObj.baselinevalue;
             const cooling_energyeffval = coolingObj.energyefficienctvalue;
 
-
             this.barChartData2 = [{ data: [heating_baseline, cooling_baseline], label: 'Base Line' },
             { data: [heating_energyeffval, cooling_energyeffval], label: 'Enerygy Efficient Scenario' }];
-
 
             const totalEnergyObj = res.success.graphinputs.filter(p => p.parameter.includes('Performance Indices [metrics]') && p.parameterfield.includes('Total Energy [kWh/m²]'))[0]
             const totalEnergy_baseline = totalEnergyObj.baselinevalue;
             const totalEnergy_energyeffval = totalEnergyObj.energyefficienctvalue;
-
 
             const heatingEnergyObj = res.success.graphinputs.filter(p => p.parameter.includes('Performance Indices [metrics]') && p.parameterfield.includes('Heating Energy [m³N.G/m²]'))[0]
             console.log(heatingEnergyObj);
@@ -495,7 +489,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
             const electricPeakObj = res.success.graphinputs.filter(p => p.parameter.includes('Performance Indices [metrics]') && p.parameterfield.includes('Electric Peak [kW/m²]'))[0]
             const electricPeak_baseline = electricPeakObj.baselinevalue;
             const electricPeak_energyeffval = electricPeakObj.energyefficienctvalue;
-
 
             const electricObj = res.success.graphinputs.filter(p => p.parameter.includes('Performance Indices [metrics]') && p.parameterfield.includes('Heating Energy [m³N.G/m²]'))[0]
             const electric_baseline = electricObj.baselinevalue;
@@ -513,7 +506,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
             const lights_baseline = lightsObj.baselinevalue;
             const lights_energyeffval = lightsObj.energyefficienctvalue;
 
-
             const plugsObj = res.success.graphinputs.filter(p => p.parameter.includes('Energy Cost') && p.parameterfield.includes('Plugs'))[0]
             const plugs_baseline = plugsObj.baselinevalue;
             const plugs_energyeffval = plugsObj.energyefficienctvalue;
@@ -522,18 +514,10 @@ export class BEETComponent implements OnInit, AfterViewInit {
             const fans_baseline = fansObj.baselinevalue;
             const fans_energyeffval = fansObj.energyefficienctvalue;
 
-
             this.barChartData3 = [{ data: [lights_baseline, plugs_baseline, fans_baseline], label: 'Base Line' },
             { data: [lights_energyeffval, plugs_energyeffval, fans_energyeffval], label: 'Enerygy Efficient Scenario' }];
             this.showProgress = false;
             this.showTables = true;
-
-            /*  if (res.status == 'success') {
-              console.log(res.success);
-              this.isGeneralDetailsUpdated = true;
-              this.userId = res.success;
-              sessionStorage.setItem('userId', this.userId);
-            } */
           } catch (e) {
             console.log(e);
             this.showProgress = false;
@@ -547,7 +531,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
         this.showProgress = false;
         this.showTables = false;
       }
-
     }
 
   }
@@ -713,10 +696,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
               if(savePDF == true){
                 pdf.save("Beet-Report.pdf");
               }
-        }); 
-
-       
+        });      
   }
 } 
-
-
