@@ -146,7 +146,7 @@
     </div>
 
 
-    <div class="container-fluid">
+    <div class="container-fluid"> 
         <mat-horizontal-stepper (selectionChange)="selectionStepperChange($event)" class="stepper-class"
             labelPosition="bottom" #stepper>
 
@@ -499,21 +499,27 @@
                                                 <td>Energy Savings</td>
                                                 <td>{{submitResponse.energysavings |
                                                     number:'1.2-2'}}{{submitResponse.energysavingsunit}}</td>
-                                                <td>{{submitResponse.energysavingspercent | number:'1.2-2'}}</td>
+                                                <td>{{submitResponse.energysavingspercent | number:'1.2-2'}}
+                                                    <img style="width: 22px" src="../../../assets/images/report/green-arrow.png">
+                                                </td>
                                             </tr>
                                             <tr>
 
                                                 <td>Energy Cost Savings</td>
                                                 <td>{{submitResponse.energycostsavings |
                                                     number:'1.2-2'}}{{submitResponse.energycostsavingsunit}}</td>
-                                                <td>{{submitResponse.energycostsavingspercent | number:'1.2-2'}}</td>
+                                                <td>{{submitResponse.energycostsavingspercent | number:'1.2-2'}}
+                                                    <img style="width: 22px" src="../../../assets/images/report/green-arrow.png">
+                                                </td>
                                             </tr>
                                             <tr>
 
                                                 <td>CO2 Reduction</td>
                                                 <td>{{submitResponse.co2reduction | number:'1.2-2'}}
                                                     {{submitResponse.co2reductionunit}}</td>
-                                                <td>{{submitResponse.co2reductionpercent | number:'1.2-2'}}</td>
+                                                <td>{{submitResponse.co2reductionpercent | number:'1.2-2'}}
+                                                    <img style="width: 22px" src="../../../assets/images/report/green-arrow.png">
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

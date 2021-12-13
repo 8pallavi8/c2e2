@@ -237,8 +237,8 @@ export class BEETComponent implements OnInit, AfterViewInit {
       { Parameter: 'Thermal Resistance (R value) wall', Units: this.outerWallR.rUnits, Value: this.outerWallR.rValue },
       { Parameter: 'Thermal Resistance (R value) roof', Units: this.roofR.rUnits, Value: this.roofR.rValue },
       { Parameter: 'Thermal Resistance (R value) window', Units: this.windowR.rUnits, Value: this.windowR.rValue },
-      { Parameter: 'Solar Heat Gain Coefficient (SHGC) window', Units: '', Value: this.buildingdetailsComponent.formgroup.controls.SHGCknown.value.toFixed(2) },
-      { Parameter: 'Window to wall ratio', Units: '%', Value: this.wwrValue.toFixed(2) },
+      { Parameter: 'Solar Heat Gain Coefficient (SHGC) window', Units: '', Value: this.buildingdetailsComponent.formgroup.controls.SHGCknown.value },
+      { Parameter: 'Window to wall ratio', Units: '%', Value: this.wwrValue},
       {
         Parameter: 'Total lighting power', Units: this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerUnit.value,
         Value: this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerValue.value
@@ -261,7 +261,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
       },
       {
         Parameter: 'Infiltration rate', Units: this.hvacDetailsComponent.formgroup.controls.infiltrationUnits.value,
-        Value: this.hvacDetailsComponent.formgroup.controls.infiltrationValue.value.toFixed(2)
+        Value: this.hvacDetailsComponent.formgroup.controls.infiltrationValue.value
       },
       {
         Parameter: 'Plug load density', Units: this.plugLoaDetailsComponent.formgroup.controls.plugLoadUnits.value,
