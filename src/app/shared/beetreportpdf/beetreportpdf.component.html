@@ -1,0 +1,532 @@
+<mat-toolbar class="mat-toolbar">
+    <mat-toolbar-row class="d-flex justify-content-between">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onNoClick()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div class="container" id="general-section">
+    <div style="display: flex;">
+        <div style="display: flex;font-weight: bold;">
+            <img src="../../../assets/images/report/argentinaflag.png">
+            <ul class="header-pdf" style="list-style: none;">
+                <li style="font-size: xx-large; ">
+                    {{selectedcountryname}}
+                </li>
+                <li>
+                    Province : {{genDetailsComponent.genDetailsForm.controls.province.value}}
+                </li>
+                <li>
+                    Location : {{genDetailsComponent.genDetailsForm.controls.location.value}}
+                </li>
+            </ul>
+        </div>
+
+        <div style="float: right;">
+            <img width=30% src="../../../assets/images/Logos/UNEP-partnershiplogo.png">
+            <img width=30% src="../../../assets/images/c2e2-logo-seforall.png">
+        </div>
+
+    </div>
+    <div style="background-color:#5B9BD5 ;color:white ;font-size: larger;">
+        <p>Self Assessment Building Energy Efficiency Calculator(BEEC)</p>
+    </div>
+
+
+    <div style="display: flex;">
+        <div>
+            <img src="../../../assets/images/report/plughouse.png">
+        </div>
+        <div style="display: flex;flex-direction: column;">
+            <div>
+                <ul class="header-pdf" style="list-style: none;">
+                    <li>
+                        Study Report
+                    </li>
+                    <li>
+                        Issued on : {{curDate}}
+                    </li>
+                    <li>
+                        Issued by : {{genDetailsComponent.genDetailsForm.controls.location.value}}
+                    </li>
+                </ul>
+
+            </div>
+            <div style="font-size: smaller;"> This factsheet shares a summary of baseline performance, scope for energy savings, energy related cost
+                savings and emission reductions potential from the implementation of energy efficiency measures for your
+                buildings in Argentina. It does not provide final values but rather estimations for a preliminary
+                appraisal
+                of the potential measures. The tool has been developed by the Copenhagen Centre on Energy Efficiency
+                within
+                the EuroClima+ framework. The use of these results are the sole responsibility of each individual user.
+                All
+                results should be checked and challenged before any reliance, investment grade applications and actions,
+                publication or any other use. For more detailed information:<br>
+               <b> please visit: www.c2e2.une contact us: c2e2@dtu.dk / rradu@dtu.dk</b>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color:#5B9BD5 ;color:white ;font-size: larger;">
+        <p>General Details</p>
+    </div>
+
+    <div style="display: flex;flex-wrap: wrap; overflow: hidden;">
+        <table class="table table-hover" style="flex: 1 1 20em;
+        border-top: 1px solid 	rgb (0,0,0);
+        border-left: 1px solid 	rgb (0,0,0);
+        margin-top: -1px;
+        margin-left: -1px;">
+            <tbody>
+                <tr>
+                    <td>Building type :</td>
+                    <td>{{genDetailsComponent.genDetailsForm.controls.buildingType.value}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Surface Area : </td>
+                    <td>{{genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value|
+                        number:'1.2-2'}}
+                        {{genDetailsComponent.genDetailsForm.controls.netAreaUnits.value}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>No. of Floors : </td>
+                    <td>{{genDetailsComponent.genDetailsForm.controls.noOfFloors.value}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Occupancy Hours : </td>
+                    <td>{{genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-hover" style="flex: 1 1 20em;
+        border-top: 1px solid 	rgb (0,0,0);
+        border-left: 1px solid 	rgb (0,0,0);
+        margin-top: -1px;
+        margin-left: -1px;">
+            <tbody>
+                <tr>
+                    <td>Occupant Density :</td>
+                    <td> {{genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value|
+                        number:'1.2-2'}}
+                        {{genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Electricity Cost :</td>
+                    <td>{{genDetailsComponent.genDetailsForm.controls.electricityCost.value|
+                        number:'1.2-2'}}
+                        {{genDetailsComponent.genDetailsForm.controls.electricityUnits.value}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Fuel Cost : </td>
+                    <td>{{genDetailsComponent.genDetailsForm.controls.fuelCost.value|
+                        number:'1.2-2'}}
+                        {{genDetailsComponent.genDetailsForm.controls.fuelUnits.value}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div style="background-color:#5B9BD5 ;color:white ;font-size: larger;">
+        <p>Key Indicators</p>
+    </div>
+
+    <div class="row">
+        <div class="container-fluid mt-5 col-md-6">
+            <div class="chart-wrapper">
+                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"
+                    [colors]="barChartColors">
+                </canvas>
+            </div>
+        </div>
+        <div class="container-fluid mt-5 col-md-6">
+            <div class="chart-wrapper">
+                <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels2" [options]="barChartOptions"
+                    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"
+                    [colors]="barChartColors">
+                </canvas>
+            </div>
+        </div>
+        <div class="container-fluid mt-5 col-md-6">
+            <div class="chart-wrapper">
+                <canvas baseChart [datasets]="barChartData3" [labels]="barChartLabels3" [options]="barChartOptions"
+                    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"
+                    [colors]="barChartColors">
+                </canvas>
+            </div>
+        </div>
+        <div class="key-indicators-table" style="display:flex">
+            <table class="table table-hover" style="flex: 1 1 20em;
+            border-top: 1px solid 	rgb (0,0,0);
+            border-left: 1px solid 	rgb (0,0,0);
+            margin-top: -1px;
+            margin-left: -1px;">
+                <thead>
+                    <tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="key-indicators">Peak electricity demand in</td>
+                        <td class="key-data-values">{{data.peakelectricitydemand}}</td>
+                    </tr>
+                    <tr>
+
+                        <td class="key-indicators">Highest electricity consumption in</td>
+                        <td class="key-data-values">{{data.highestelectricityconsumption}}</td>
+                    </tr>
+                    <tr>
+
+                        <td class="key-indicators">Highest fuel consumption for heating in</td>
+                        <td class="key-data-values">{{data.highestfuelconsumption}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover" style="flex: 1 1 20em;
+            border-top: 1px solid 	rgb (0,0,0);
+            border-left: 1px solid 	rgb (0,0,0);
+            margin-top: -1px;
+            margin-left: -1px;">
+                <thead>
+                    <tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="key-indicators">Energy Savings</td>
+                        <td class="key-data-values">{{submitResponse.energysavings |
+                            number:'1.2-2'}}{{submitResponse.energysavingsunit}}</td>
+                        <td class="key-data-percentvalues">{{submitResponse.energysavingspercent | number:'1.2-2'}}
+                            <img style="width: 22px" src="../../../assets/images/report/green-arrow.png">
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td class="key-indicators">Energy Cost Savings</td>
+                        <td class="key-data-values">{{submitResponse.energycostsavings |
+                            number:'1.2-2'}}{{submitResponse.energycostsavingsunit}}</td>
+                        <td class="key-data-percentvalues">{{submitResponse.energycostsavingspercent | number:'1.2-2'}}
+                            <img style="width: 22px" src="../../../assets/images/report/green-arrow.png">
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td class="key-indicators">CO2 Reduction</td>
+                        <td class="key-data-values">{{submitResponse.co2reduction | number:'1.2-2'}}
+                            {{submitResponse.co2reductionunit}}</td>
+                        <td class="key-data-percentvalues">{{submitResponse.co2reductionpercent | number:'1.2-2'}}
+                            <img style="width: 22px" src="../../../assets/images/report/green-arrow.png">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div style="background-color:#5B9BD5 ;color:white ;font-size: larger;">
+        <p>BASELINE vs EE Potential Improvements</p>
+    </div>
+    <table class="table  table-hover table-bordered table-sm" data-toggle="table">
+        <thead>
+            <tr>
+                <th colspan="6" style="background-color: #2F75B5;">Construction Elements</th>
+            </tr>
+            <tr>
+                <th colspan="3" style="background-color: #F4B084;">Baseline</th>
+                <th colspan="4" style="background-color: #A9D08E;">Energy Efficiency Standards</th>
+            </tr>
+            <tr>
+                <th colspan="2" style="background-color: #FCE4D6;">Element</th>
+                <th style="background-color: #FCE4D6;">Indicators</th>
+                <th style="background-color: #E2EFDA;">Indicators</th>
+                <th style="background-color: #E2EFDA;">Benchmark</th>
+                <th style="background-color: #E2EFDA;">Recommendations</th>
+            </tr>
+
+            <tr>
+                <th colspan="6">Main facade</th>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="width: 40%;">
+                    <p *ngIf="buildingdetailsComponent?.formgroup.controls.outerwallr.value == 1"
+                        style="font-size: large;font-weight: bold;text-align: center;">
+                        User Input Value
+                    </p>
+                    <img *ngIf="buildingdetailsComponent?.formgroup.controls.outerwallr.value == 2" style="width: 100%;"
+                        [src]="buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.rimages.value.imagepath" />
+                    <p *ngIf="buildingdetailsComponent?.formgroup.controls.outerwallr.value == 3"
+                        style="font-size: large;font-weight: bold;text-align: center;">
+                        User Custom Built Layer</p>
+                </td>
+                <td style="color: red;">{{submitResponse.wallrvaluebaseline |
+                    number:'1.2-2'}}
+                    {{submitResponse.wallrvalueunit}}</td>
+                <td style="color: green">{{submitResponse.wallrvaluebaseline |
+                    number:'1.2-2'}}
+                    {{submitResponse.wallrvalueunit}}</td>
+                <td></td>
+                <td>
+                    <ul>
+                        <li *ngFor="let rec of submitResponse.wallrecommendations;
+                                let i = index">
+                            {{ rec.recommendation}}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th style="background-color: #F2F2F2;" colspan="6">Roof</th>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="width: 40%;">
+                    <p *ngIf="buildingdetailsComponent?.formgroup.controls.roofr.value == 1"
+                        style="font-size: large;font-weight: bold;text-align: center;">
+                        User Input Value</p>
+                    <img *ngIf="buildingdetailsComponent?.formgroup.controls.roofr.value == 2" style="width: 100%;"
+                        [src]="buildingdetailsComponent?.formgroup.get('roofrArray')['controls'][0].controls.roofrimages.value.imagepath" />
+                    <p *ngIf="buildingdetailsComponent?.formgroup.controls.roofr.value == 3"
+                        style="font-size: large;font-weight: bold;text-align: center;">
+                        User Custom Built Layer</p>
+
+
+                </td>
+                <td style="color: red;">{{submitResponse.roofrvaluebaseline |
+                    number:'1.2-2'}}
+                    {{submitResponse.roofrvalueunit}}</td>
+                <td style="color: green">{{submitResponse.roofrvaluebaseline |
+                    number:'1.2-2'}}
+                    {{submitResponse.roofrvalueunit}}</td>
+                <td></td>
+                <td>
+                    <ul>
+                        <li *ngFor="let rec of submitResponse.roofrecommendations;
+                                    let i = index">
+                            <p>{{ rec.recommendation}}</p>
+
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+
+
+            <tr>
+                <th colspan="6">Windows</th>
+            </tr>
+
+            <tr style="width: 40%;">
+                <td rowspan="3"> <img style="width: 100%;" src="../../../assets/images/report/window-report.png" /></td>
+                <td>SHGC</td>
+                <td style="color: red;">{{submitResponse.windowshgcvaluebaseline }}</td>
+                <td style="color: green">{{submitResponse.windowshgcvalueees }}</td>
+                <td rowspan="3"></td>
+                <td rowspan="3">
+                    <ul>
+                        <li *ngFor="let rec of submitResponse.windowrecommendations;
+                                let i = index">
+                            <p> {{ rec.recommendation}}</p>
+                        </li>
+                    </ul>
+                </td>
+
+            </tr>
+            <tr>
+                <td>WWR</td>
+                <td style="color: red;">{{submitResponse.wwrvaluebaseline }}
+                    {{submitResponse.wwrvalueunit}}</td>
+                <td style="color: green">{{submitResponse.wwrvalueees}}
+                    {{submitResponse.wwrvalueunit}}</td>
+            </tr>
+
+            <tr>
+                <td>R value</td>
+                <td style="color: red;">{{submitResponse.windowrvaluebaseline |
+                    number:'1.2-2'}}
+                    {{submitResponse.windowrvalueunit}}</td>
+                <td style="color: green">{{submitResponse.windowrvalueees | number:'1.2-2'}}
+                    {{submitResponse.windowrvalueunit}}</td>
+            </tr>
+        </thead>
+    </table>
+
+
+    <div style="background-color:#5B9BD5 ;color:white ;font-size: larger;">
+        <p>BASELINE vs EE Potential Improvements</p>
+    </div>
+
+    <table  class="table  table-bordered table-sm" data-toggle="table">
+        <thead>
+            <tr>
+                <th colspan="5" style="background-color: #2F75B5;">HVAC SYSTEMS</th>
+            </tr>
+            <tr>
+                <th colspan="2" style="background-color: #F4B084;">Baseline</th>
+                <th colspan="3">Energy Efficiency Standards</th>
+            </tr>
+            <tr>
+                <th style="background-color: #FCE4D6;">System</th>
+                <th  style="background-color: #FCE4D6;">Performance</th>
+                <th style="background-color: #E2EFDA;">Performance</th>
+                <th style="background-color: #E2EFDA;">Benchmark</th>
+                <th style="background-color: #E2EFDA;">Recommendations</th>
+            </tr>
+
+            <tr>
+                <th colspan="5">Heating</th>
+            </tr>
+
+            <tr>
+                <td>
+                    <img style="width: 100%;" [src]="submitResponse.heatingefficiencyimage" />
+                </td>
+                <td style="color: red;">
+                    {{submitResponse.heatingefficiencybaseline}}{{submitResponse.heatingefficiencyunit}}
+                </td>
+                <td style="color: green">
+                    {{submitResponse.heatingefficiencyees}}{{submitResponse.heatingefficiencyunit}}
+                </td>
+                <td></td>
+                <td>
+                    <ul>
+
+
+                        <li *ngFor="let rec of submitResponse.heatingefficiencyrecommendations;
+                                        let i = index">
+                            <p>{{ rec.recommendation}}</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <th colspan="5">Cooling</th>
+            </tr>
+
+            <tr>
+                <td>
+                    <img style="width: 100%;" [src]="submitResponse.coolingefficiencyimage" />
+                </td>
+                <td style="color: red;">
+                    {{submitResponse.coolingefficiencybaseline}} {{submitResponse.coolingefficiencyunit}}
+                </td>
+                <td style="color: green;">
+                    {{submitResponse.coolingefficiencyees | number:'1.2-2'}}
+                    {{submitResponse.coolingefficiencyunit}}
+                </td>
+                <td></td>
+                <td>
+                    <ul>
+                        <li *ngFor="let rec of submitResponse.coolingefficiencyrecommendations;
+                                        let i = index">
+                            <p> {{ rec.recommendation}}</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <th colspan="5">Fans and Blowers</th>
+            </tr>
+
+            <tr>
+                <td> <img style="width: 100%;" src="../../../assets/images/report/fansblowers-report.png" />
+                </td>
+                <td style="color: red;">{{submitResponse.roofrvaluebaseline |
+                    number:'1.2-2'}}
+                    {{submitResponse.roofrvalueunit}}</td>
+                <td style="color:green">{{submitResponse.roofrvaluebaseline |
+                    number:'1.2-2'}}
+                    {{submitResponse.roofrvalueunit}}</td>
+                <td></td>
+                <td>
+                    <ul>
+                        <li *ngFor="let rec of submitResponse.fansblowersrecommendations;
+                                        let i = index">
+                            <p> {{ rec.recommendation}}</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <th colspan="5">LIGHTING</th>
+            </tr>
+
+            <tr>
+                <th colspan="5" style="background-color: #2F75B5;">Lighting</th>
+            </tr>
+
+            <tr>
+                <td> <img style="width: 100%;" src="../../../assets/images/report/lightning-report.png" />
+                </td>
+                <td style="color: red;">{{submitResponse.lightingvaluebaseline |
+                    number:'1.2-2'}}
+                    {{submitResponse.lightingvalueunit}}</td>
+                <td style="color:green ;">{{submitResponse.lightingvalueees |
+                    number:'1.2-2'}}
+                    {{submitResponse.lightingvalueunit}}</td>
+                <td></td>
+                <td>
+                    <ul>
+                        <li *ngFor="let rec of submitResponse.lightingrecommendations;
+                                        let i = index">
+                            <p> {{ rec.recommendation}}</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <th colspan="5" style="background-color: #2F75B5;">PLUGLOADS</th>
+            </tr>
+
+            <tr>
+                <th colspan="5">PlugLoads</th>
+            </tr>
+            <tr>
+                <td> <img style="width: 100%;" src="../../../assets/images/report/plugload-report.png" />
+                </td>
+                <td style="color: red;">{{submitResponse.plugloaddensitybaseline |
+                    number:'1.2-2'}}
+                    {{submitResponse.plugloaddensityunit}}</td>
+                <td style="color: green">{{submitResponse.plugloaddensityees |
+                    number:'1.2-2'}}
+                    {{submitResponse.plugloaddensityunit}}</td>
+                <td></td>
+                <td>
+                    <ul>
+                        <li *ngFor="let rec of submitResponse.plugloaddensityrecommendations;
+                                        let i = index">
+                            <p> {{ rec.recommendation}}</p>
+
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </thead>
+    </table>
+
+
+</div>
+
+ <button mat-raised-button color="primary" (click)="getPDF()">Generate Pdf
+        <mat-icon *ngIf="isGenerating">
+            <mat-spinner color="accent" diameter="20">
+            </mat-spinner>
+        </mat-icon>
+    </button> 

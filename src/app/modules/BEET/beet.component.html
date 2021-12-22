@@ -5,13 +5,10 @@
         </div>
     </div>
 </header>
-
-
-
 <div class="container" style="margin-top: 1rem;">
     <div class="row">
         <div class="Home-text col-md-8">
-            <p>Welcome to the self assessment Building Energy Efficiency Tool (BEET). This tool was created under the
+            <p>Welcome to the self assessment Building Energy Efficiency Calculator (BEEC). This tool was created under the
                 framework
                 of the Euroclima+ program by the Copenhagen Centre of Energy Efficiency (C2E2), an Energy Efficiency hub
                 institutionally part of the UNEP
@@ -31,7 +28,7 @@
                 project.
                 <br><br>
 
-                <b>About BEET</b><br> This self assessment Building Energy Efficiency Tool (BEET) is designed to provide
+                <b>About BEET</b><br> This self assessment Building Energy Efficiency Calculator (BEEC) is designed to provide
                 individual users a preliminary rapid assessment platform where they can assess their building energy
                 performance. The overall objective of
                 BEET is three fold:<br> a. Support the development of a rapid assessment of the energy performance of
@@ -88,7 +85,7 @@
             <br>
 
 
-           <!--  <p> Should there be any feedback / queries / suitable or customized data integration requirements, please do
+            <!--  <p> Should there be any feedback / queries / suitable or customized data integration requirements, please do
                 reach out to
                 us at the below mentioned contact.</p>
             <p>Point of contact:<br>
@@ -146,11 +143,9 @@
     </div>
 
 
-    <div class="container-fluid"> 
-        <mat-horizontal-stepper (selectionChange)="selectionStepperChange($event)" class="stepper-class"
+    <div class="container-fluid">
+        <mat-horizontal-stepper (selectionChange)="selectionStepperChange($event)"  class="stepper-class"
             labelPosition="bottom" #stepper>
-
-
 
             <mat-step #data [stepControl]="genDetailsComponent?.genDetailsForm" label="General Details">
                 <app-gendetails></app-gendetails>
@@ -224,7 +219,7 @@
 
             <mat-step>
 
-                <ng-template matStepLabel>Input Data Summary and Report</ng-template>
+                <ng-template matStepLabel>Input Data Summary</ng-template>
 
                 <div *ngIf="!showTables && !showProgress">
                     <b>User-Input Data Summary:</b>
@@ -355,565 +350,20 @@
                         <button mat-raised-button color="primary" (click)="postDataGenerateReport()"
                             style="margin-right: inherit;">Generate Report</button><br>
 
-
                     </div><br><br>
 
                 </div><br>
-               
-                <div *ngIf="showTables" class="container printformClass" >
+            </mat-step>
 
-                    <div class="Report-sections-group" >
-                    <div  id="general-section" >
-                        <div class="report-fields Report-sections w-100 col-md-12">
-                            <h4 style="font-weight: bold;">General Information</h4>
-
-                            <div style="display: flex;">
-                                <table class="table table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <td>Building type :</td>
-                                            <td>{{genDetailsComponent.genDetailsForm.controls.buildingType.value}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Surface Area : </td>
-                                            <td>{{genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value|
-                                                number:'1.2-2'}}
-                                                {{genDetailsComponent.genDetailsForm.controls.netAreaUnits.value}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>No. of Floors : </td>
-                                            <td>{{genDetailsComponent.genDetailsForm.controls.noOfFloors.value}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Occupancy Hours : </td>
-                                            <td>{{genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value}}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <table class="table table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <td>Occupant Density :</td>
-                                            <td> {{genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value|
-                                                number:'1.2-2'}}
-                                                {{genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value}}
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Electricity Cost :</td>
-                                            <td>{{genDetailsComponent.genDetailsForm.controls.electricityCost.value|
-                                                number:'1.2-2'}}
-                                                {{genDetailsComponent.genDetailsForm.controls.electricityUnits.value}}
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Fuel Cost : </td>
-                                            <td>{{genDetailsComponent.genDetailsForm.controls.fuelCost.value|
-                                                number:'1.2-2'}}
-                                                {{genDetailsComponent.genDetailsForm.controls.fuelUnits.value}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="Report-sections w-100 col-md-12">
-                            <div style="display: flex;">
-                                <h4 style="font-weight: bold;">Key Indicators</h4>
-
-                                <div class="col-md-1" style="padding: 0; margin-top: 0px;">
-                                    <button *ngIf="showTogglePlusIcon" (click)="toggleButtonShowIcon()"
-                                        class="btn btn-link btn-sm" type="button">
-                                        <img style="width: 22px" src="../../../assets/images/plus.png">
-                                    </button>
-                                    <button *ngIf="!showTogglePlusIcon" (click)="toggleButtonShowIcon()"
-                                        class="btn btn-link btn-sm" type="button">
-                                        <img style="width: 22px" src="../../../assets/images/wwr/minus.png">
-                                    </button>
-                                </div>
-                            </div>
-                            <div *ngIf="!showTogglePlusIcon" class="row">
-                                <div class="container-fluid mt-5 col-md-6">
-                                    <div class="chart-wrapper">
-                                        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
-                                            [options]="barChartOptions" [plugins]="barChartPlugins"
-                                            [legend]="barChartLegend" [chartType]="barChartType">
-                                        </canvas>
-                                    </div>
-                                </div>
-                                <div class="container-fluid mt-5 col-md-6">
-                                    <div class="chart-wrapper">
-                                        <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels2"
-                                            [options]="barChartOptions" [plugins]="barChartPlugins"
-                                            [legend]="barChartLegend" [chartType]="barChartType">
-                                        </canvas>
-                                    </div>
-                                </div>
-                                <div class="container-fluid mt-5 col-md-6">
-                                    <div class="chart-wrapper">
-                                        <canvas baseChart [datasets]="barChartData3" [labels]="barChartLabels3"
-                                            [options]="barChartOptions" [plugins]="barChartPlugins"
-                                            [legend]="barChartLegend" [chartType]="barChartType">
-                                        </canvas>
-                                    </div>
-                                </div>
-                                <div class="key-indicators-table" style="display:flex">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Peak electricity demand in</td>
-                                                <td>{{submitResponse.peakelectricitydemand}}</td>
-                                            </tr>
-                                            <tr>
-
-                                                <td>Highest electricity consumption in</td>
-                                                <td>{{submitResponse.highestelectricityconsumption}}</td>
-                                            </tr>
-                                            <tr>
-
-                                                <td>Highest fuel consumption for heating in</td>
-                                                <td>{{submitResponse.highestfuelconsumption}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Energy Savings</td>
-                                                <td>{{submitResponse.energysavings |
-                                                    number:'1.2-2'}}{{submitResponse.energysavingsunit}}</td>
-                                                <td>{{submitResponse.energysavingspercent | number:'1.2-2'}}
-                                                    <img style="width: 22px" src="../../../assets/images/report/green-arrow.png">
-                                                </td>
-                                            </tr>
-                                            <tr>
-
-                                                <td>Energy Cost Savings</td>
-                                                <td>{{submitResponse.energycostsavings |
-                                                    number:'1.2-2'}}{{submitResponse.energycostsavingsunit}}</td>
-                                                <td>{{submitResponse.energycostsavingspercent | number:'1.2-2'}}
-                                                    <img style="width: 22px" src="../../../assets/images/report/green-arrow.png">
-                                                </td>
-                                            </tr>
-                                            <tr>
-
-                                                <td>CO2 Reduction</td>
-                                                <td >{{submitResponse.co2reduction | number:'1.2-2'}}
-                                                    {{submitResponse.co2reductionunit}}</td>
-                                                <td>{{submitResponse.co2reductionpercent | number:'1.2-2'}}
-                                                    <img style="width: 22px" src="../../../assets/images/report/green-arrow.png">
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div  id="baseline-potential" >
-                        <div class="Report-sections w-100 col-md-12">
-                            <div style="display: flex;">
-                                <h4 style="font-weight: bold;">Baseline vs EE Potential Improvements</h4>
-                                <div class="col-md-1" style="padding: 0; margin-top: 0px;">
-                                    <button *ngIf="showTogglePlusIconbase" (click)="toggleButtonShowIconbase()"
-                                        class="btn btn-link btn-sm" type="button">
-                                        <img style="width: 22px" src="../../../assets/images/plus.png">
-                                    </button>
-                                    <button *ngIf="!showTogglePlusIconbase" (click)="toggleButtonShowIconbase()"
-                                        class="btn btn-link btn-sm" type="button">
-                                        <img style="width: 22px" src="../../../assets/images/wwr/minus.png">
-                                    </button>
-                                </div>
-                            </div>
-
-
-                            <table *ngIf="!showTogglePlusIconbase" class="table  table-hover table-bordered"
-                                data-toggle="table">
-                                <thead>
-                                    <tr>
-                                        <th colspan="3">Baseline</th>
-                                        <th colspan="3">Energy Efficiency Standards</th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2">Element</th>
-                                        <th>Indicators</th>
-                                        <th>Indicators</th>
-                                        <th>Benchmark</th>
-                                        <th>Recommendations</th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="6">Roof</th>
-                                    </tr>
-
-                                    <tr>
-                                        <td colspan="2"></td>
-                                        <td style="color: red;">{{submitResponse.roofrvaluebaseline | number:'1.2-2'}}
-                                            {{submitResponse.roofrvalueunit}}</td>
-                                        <td style="color: green">{{submitResponse.roofrvaluebaseline | number:'1.2-2'}}
-                                            {{submitResponse.roofrvalueunit}}</td>
-                                        <td></td>
-                                        <td>
-                                            <ul>
-                                                <li *ngFor="let rec of submitResponse.roofrecommendations;
-                                                    let i = index">
-                                                    <p *ngIf = "rec.recommendationtype == 0" style="color: red;">    {{ rec.recommendation}}</p>
-                                                <p *ngIf = "rec.recommendationtype != 0">    {{ rec.recommendation}}</p>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th colspan="6">Main facade</th>
-                                    </tr>
-
-                                    <tr>
-                                        <td colspan="2">
-
-                                        </td>
-                                        <td style="color: red;">{{submitResponse.wallrvaluebaseline | number:'1.2-2'}}
-                                            {{submitResponse.wallrvalueunit}}</td>
-                                        <td style="color: green">{{submitResponse.wallrvaluebaseline | number:'1.2-2'}}
-                                            {{submitResponse.wallrvalueunit}}</td>
-                                        <td></td>
-                                        <td>
-                                            <ul>
-                                                <li *ngFor="let rec of submitResponse.wallrecommendations;
-                                                let i = index">
-                                                    {{ rec.recommendation}}
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th colspan="6">Windows</th>
-                                    </tr>
-
-                                    <tr>
-                                        <td rowspan="3" >     <img style="width: 100%;" src="../../../assets/images/report/window-report.png" /></td>
-                                        <td >SHGC</td>
-                                        <td style="color: red;">{{submitResponse.windowshgcvaluebaseline }}</td>
-                                        <td style="color: green">{{submitResponse.windowshgcvalueees }}</td>
-                                        <td rowspan="3"></td>
-                                        <td rowspan="3">
-                                            <ul>
-                                                <li *ngFor="let rec of submitResponse.windowrecommendations;
-                                                let i = index">
-                                                <p *ngIf = "rec.recommendationtype == 0" style="color: red;">    {{ rec.recommendation}}</p>
-                                                <p *ngIf = "rec.recommendationtype != 0">    {{ rec.recommendation}}</p>
-                                                </li>
-                                            </ul>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>WWR</td>
-                                        <td style="color: red;">{{submitResponse.wwrvaluebaseline }}
-                                            {{submitResponse.wwrvalueunit}}</td>
-                                        <td style="color: green">{{submitResponse.wwrvalueees}}
-                                            {{submitResponse.wwrvalueunit}}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>R value</td>
-                                        <td style="color: red;">{{submitResponse.windowrvaluebaseline | number:'1.2-2'}}
-                                            {{submitResponse.windowrvalueunit}}</td>
-                                        <td style="color: green">{{submitResponse.windowrvalueees | number:'1.2-2'}}
-                                            {{submitResponse.windowrvalueunit}}</td>
-
-                                    </tr>
-
-
-
-                                </thead>
-                            </table>
-
-                        </div>
-                    </div>
-
-                    <div  id="hvac"  >
-                        <div class="Report-sections w-100 col-md-12">
-                            <div style="display: flex;">
-                                <h4 style="font-weight: bold;">HVAC Systems</h4>
-                                <div class="col-md-1" style="padding: 0; margin-top: 0px;">
-                                    <button *ngIf="showTogglePlusIconhvac" (click)="toggleButtonShowhvac()"
-                                        class="btn btn-link btn-sm" type="button">
-                                        <img style="width: 22px" src="../../../assets/images/plus.png">
-                                    </button>
-                                    <button *ngIf="!showTogglePlusIconhvac" (click)="toggleButtonShowhvac()"
-                                        class="btn btn-link btn-sm" type="button">
-                                        <img style="width: 22px" src="../../../assets/images/wwr/minus.png">
-                                    </button>
-                                </div>
-                            </div>
-
-
-                            <table *ngIf="!showTogglePlusIconhvac" class="table  table-bordered" data-toggle="table">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">Baseline</th>
-                                        <th colspan="3">Energy Efficiency Standards</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Element</th>
-                                        <th>Indicators</th>
-                                        <th>Indicators</th>
-                                        <th>Benchmark</th>
-                                        <th>Recommendations</th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="5">Heating</th>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <img style="width: 100%;" [src]="submitResponse.heatingefficiencyimage" />
-                                        </td>
-                                        <td style="color: red;">{{submitResponse.heatingefficiencybaseline}}{{submitResponse.heatingefficiencyunit}}
-                                        </td>
-                                        <td style="color: green">{{submitResponse.heatingefficiencyees}}{{submitResponse.heatingefficiencyunit}}
-                                        </td>
-                                        <td></td>
-                                        <td>
-                                            <ul>
-
-                                                
-                                                <li *ngFor="let rec of submitResponse.heatingefficiencyrecommendations;
-                                                let i = index">
-                                                <p *ngIf = "rec.recommendationtype == 0" style="color: red;">    {{ rec.recommendation}}</p>
-                                                <p *ngIf = "rec.recommendationtype != 0">    {{ rec.recommendation}}</p>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th colspan="5">Cooling</th>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <img style="width: 100%;" [src]="submitResponse.coolingefficiencyimage" />
-                                        </td>
-                                        <td style="color: red;">{{submitResponse.coolingefficiencybaseline}}{{submitResponse.coolingefficiencyunit}}
-                                        </td>
-                                        <td style="color: green;">{{submitResponse.coolingefficiencyees}}{{submitResponse.coolingefficiencyunit}}
-                                        </td>
-                                        <td></td>
-                                        <td>
-                                            <ul>
-                                                <li *ngFor="let rec of submitResponse.coolingefficiencyrecommendations;
-                                                let i = index">
-                                                <p *ngIf = "rec.recommendationtype == 0" style="color: red;">    {{ rec.recommendation}}</p>
-                                                <p *ngIf = "rec.recommendationtype != 0">    {{ rec.recommendation}}</p>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th colspan="5">Fans and Blowers</th>
-                                    </tr>
-
-                                    <tr>
-                                        <td>     <img style="width: 100%;" src="../../../assets/images/report/fansblowers-report.png" /></td>
-                                        <td style="color: red;">{{submitResponse.roofrvaluebaseline | number:'1.2-2'}}
-                                            {{submitResponse.roofrvalueunit}}</td>
-                                        <td style="color:green">{{submitResponse.roofrvaluebaseline | number:'1.2-2'}}
-                                            {{submitResponse.roofrvalueunit}}</td>
-                                        <td></td>
-                                        <td>
-                                            <ul>
-                                                <li *ngFor="let rec of submitResponse.fansblowersrecommendations;
-                                                let i = index">
-                                                <p *ngIf = "rec.recommendationtype == 0" style="color: red;">    {{ rec.recommendation}}</p>
-                                                <p *ngIf = "rec.recommendationtype != 0">    {{ rec.recommendation}}</p>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </thead>
-                            </table>
-
-                        </div>
-                        <div class="Report-sections w-100 col-md-12">
-                            <div style="display: flex;">
-                                <h4 style="font-weight: bold;">Lighting</h4>
-                                <div class="col-md-1" style="padding: 0; margin-top: 0px;">
-                                    <button *ngIf="showTogglePlusIconlight" (click)="toggleButtonShowlight()"
-                                        class="btn btn-link btn-sm" type="button">
-                                        <img style="width: 22px" src="../../../assets/images/plus.png">
-                                    </button>
-                                    <button *ngIf="!showTogglePlusIconlight" (click)="toggleButtonShowlight()"
-                                        class="btn btn-link btn-sm" type="button">
-                                        <img style="width: 22px" src="../../../assets/images/wwr/minus.png">
-                                    </button>
-                                </div>
-                            </div>
-                            <table *ngIf="!showTogglePlusIconlight" class="table  table-bordered" data-toggle="table">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">Baseline</th>
-                                        <th colspan="3">Energy Efficiency Standards</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Element</th>
-                                        <th>Indicators</th>
-                                        <th>Indicators</th>
-                                        <th>Benchmark</th>
-                                        <th>Recommendations</th>
-                                    </tr>
-
-                                    <tr>
-                                        <td>     <img style="width: 100%;" src="../../../assets/images/report/lightning-report.png" /></td>
-                                        <td style="color: red;">{{submitResponse.lightingvaluebaseline | number:'1.2-2'}}
-                                            {{submitResponse.lightingvalueunit}}</td>
-                                        <td style="color:green ;">{{submitResponse.lightingvalueees | number:'1.2-2'}}
-                                            {{submitResponse.lightingvalueunit}}</td>
-                                        <td></td>
-                                        <td>
-                                            <ul>
-                                                <li *ngFor="let rec of submitResponse.lightingrecommendations;
-                                                let i = index">
-                                                <p *ngIf = "rec.recommendationtype == 0" style="color: red;">    {{ rec.recommendation}}</p>
-                                                <p *ngIf = "rec.recommendationtype != 0">    {{ rec.recommendation}}</p>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-
-
-                        <div class="Report-sections w-100 col-md-12">
-                            <div style="display: flex;">
-                                <h4 style="font-weight: bold;">plug Loads</h4>
-                                <div class="col-md-1" style="padding: 0; margin-top: 0px;">
-                                    <button *ngIf="showTogglePlusIconplugload" (click)="toggleButtonShowplugload()"
-                                        class="btn btn-link btn-sm" type="button">
-                                        <img style="width: 22px" src="../../../assets/images/plus.png">
-                                    </button>
-                                    <button *ngIf="!showTogglePlusIconplugload" (click)="toggleButtonShowplugload()"
-                                        class="btn btn-link btn-sm" type="button">
-                                        <img style="width: 22px" src="../../../assets/images/wwr/minus.png">
-                                    </button>
-                                </div>
-                            </div>
-                            <table *ngIf="!showTogglePlusIconplugload" class="table  table-bordered"
-                                data-toggle="table">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">Baseline</th>
-                                        <th colspan="3">Energy Efficiency Standards</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Element</th>
-                                        <th>Indicators</th>
-                                        <th>Indicators</th>
-                                        <th >Benchmark</th>
-                                        <th>Recommendations</th>
-                                    </tr>
-                                    <tr>
-                                        <td>     <img style="width: 100%;" src="../../../assets/images/report/plugload-report.png" /></td>
-                                        <td style="color: red;">{{submitResponse.plugloaddensitybaseline | number:'1.2-2'}}
-                                            {{submitResponse.plugloaddensityunit}}</td>
-                                        <td style="color: green">{{submitResponse.plugloaddensityees | number:'1.2-2'}}
-                                            {{submitResponse.plugloaddensityunit}}</td>
-                                        <td></td>
-                                        <td>
-                                            <ul>
-                                                <li *ngFor="let rec of submitResponse.plugloaddensityrecommendations;
-                                                let i = index" >
-                                                   <p *ngIf="rec.recommendationtype == 0" style="color: red;"> {{ rec.recommendation}}</p> 
-                                                   <p *ngIf="rec.recommendationtype != 0" > {{ rec.recommendation}}</p> 
-                                                </li>
-                                            </ul>
-        
-                                        </td>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-
-                        <div class="buttons-report">
-                            <div>
-                                <button data-toggle="collapse" data-target="#text" class="btn btn-info">Assumptions &
-                                    Limitations</button>
-
-                                <div id="text" class="collapse">
-
-                                    <!-- <h5>Assumptions & Limitations</h5> -->
-                                    ■ Values based on data from industry partners, UNLP and RAMCC<br>
-                                    ■ Electricity tariffs and CO2 emission factor are based on IEA data or provided by
-                                    municipalities.<br>
-                                    ■ Additional to the above sources, a questionnaire was utilized to gather data from
-                                    city/municipalities.<br>
-
-                                </div>
-                            </div><br>
-
-                            <div>
-
-                                <button data-toggle="collapse" data-target="#addtext" class="btn btn-info">Additional
-                                    recommendations</button>
-                                <div id="addtext" class="collapse">
-
-                                    <!--  <h5>Additional recommendations</h5> -->
-                                    ■ Get in contact with an energy auditor. Link to XXX.<br>
-                                    ■ Adopt energy efficienct (e.g energy labelling), follow good energy consumption and
-                                    operational practices, and ensure regular maintenance of all equipment and
-                                    appliances.<br>
-                                    ■ Follow energy management system practices and install building management system
-                                    (if applicable to your building) .<br>
-                                    ■ Ground: general recommendation (i.e. insulate basement or crawlspace).<br>
-                                    ■ EE Appliances (labels).<br>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div><br>
-
-                    <button mat-raised-button color="primary" (click)="Goback()" style="float: right;">Go Back</button>
-                    <!-- <button mat-raised-button color="primary" (click)="convertToPdf()" >Export To PDF</button> -->
-                    <button mat-raised-button  color="primary"  (click)="getPDF()">Generate Pdf
-                        <mat-icon *ngIf= "isGenerating"><mat-spinner color="accent" diameter="20">
-                        </mat-spinner></mat-icon>
-                    </button>
+            <mat-step>
+                <ng-template matStepLabel>Report</ng-template>
+                <app-beetreport></app-beetreport>
+                <div class="step-button">
+                    <button mat-raised-button color="primary" matStepperPrevious
+                        style="margin-right: inherit;">Back</button>
+                    <button mat-raised-button color="primary" matStepperNext (click)="onCo2EmissionsDetails()"
+                        (click)="showSummary()">Next</button>
                 </div>
-
-                
-
-                <div *ngIf="showProgress" class="container progress-bar-beet">
-                    <p>Please wait !!!!</p>
-                    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-                </div>
-
-
             </mat-step>
         </mat-horizontal-stepper>
     </div>

@@ -14,6 +14,8 @@ import { AutoFocusDirective } from './auto-focus.directive';
 import { OuterwallAdvLevelAirComponent } from './shared/outerwall-adv-level-air/outerwall-adv-level-air.component';
 import { OuterwallAdvLevelbrickComponent } from './shared/outerwall-adv-levelbrick/outerwall-adv-levelbrick.component';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { BeetreportComponent } from './modules/BEET/beetreport/beetreport.component';
+import { BeetreportpdfComponent } from './shared/beetreportpdf/beetreportpdf.component';
 
 
 
@@ -33,7 +35,8 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     AppComponent,
     AutoFocusDirective,
     OuterwallAdvLevelAirComponent,
-    OuterwallAdvLevelbrickComponent
+    OuterwallAdvLevelbrickComponent,
+    BeetreportpdfComponent,
   ],
   providers: [ConfirmationDialogService,NgbActiveModal],
   entryComponents: [ConfirmationDialogComponent],
