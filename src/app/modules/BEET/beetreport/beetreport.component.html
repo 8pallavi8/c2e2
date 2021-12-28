@@ -1,9 +1,8 @@
-<div *ngIf="showProgress" class="container progress-bar-beet">
-    <p>Please wait !!!!</p>
-    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+<div *ngIf="showProgress" class="container ">
+    <p>Please Validate Input Summary and Generate Report</p>
 </div>
 
-
+<!-- *ngIf="formAvailable && showProgress"  -->
 
 <div *ngIf="formAvailable" class="container printformClass">
 
@@ -569,45 +568,38 @@
             </table>
         </div>
 
-        <!--  <div class="buttons-report">
-            <div>
-                <button data-toggle="collapse" data-target="#text" class="btn btn-info">Assumptions &
-                    Limitations</button>
-
-                <div id="text" class="collapse">
-
-                  
-                    ■ Values based on data from industry partners, UNLP and RAMCC<br>
-                    ■ Electricity tariffs and CO2 emission factor are based on IEA data or provided by
-                    municipalities.<br>
-                    ■ Additional to the above sources, a questionnaire was utilized to gather data from
-                    city/municipalities.<br>
-
-                </div>
-            </div><br>
-
-            <div>
-
-                <button data-toggle="collapse" data-target="#addtext" class="btn btn-info">Additional
-                    recommendations</button>
-                <div id="addtext" class="collapse">                
-                    ■ Adopt energy efficienct (e.g energy labelling), follow good energy consumption and
-                    operational practices, and ensure regular maintenance of all equipment and
-                    appliances.<br>
-                    ■ Follow energy management system practices and install building management system
-                    (if applicable to your building) .<br>
-                    ■ Ground: general recommendation (i.e. insulate basement or crawlspace).<br>
-                    ■ EE Appliances (labels).<br>
-
-                </div>
-
-            </div>
-
-        </div> -->
 
     </div><br>
 
+    <div class="container">
+        <div class="example-section">
+            <mat-checkbox (change)="onToggleChange($event)" [formControl]="pdfInputForm" class="example-margin"
+                [(ngModel)]="checked">Do you want to display username,project name and year of consruction in the report?</mat-checkbox>
+        </div>
+      
+        <form *ngIf="pdfInputForm.value == true" [formGroup]="beetReportForm" class="form mt-4">
+            <div >
+                <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline" floatLabel="never">
+                    <mat-label>User Name</mat-label>
+                    <input matInput formControlName="userName">
+                </mat-form-field>
+    
+                <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline" floatLabel="auto">
+                    <mat-label>Project name</mat-label>
+                    <input matInput formControlName="projectName" >
+                </mat-form-field>
+    
+                <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
+                    <mat-label>Year of construction</mat-label>
+                    <input matInput formControlName="yearOfConstruction" type="number" >
+                </mat-form-field>
+            </div>
+        </form>
+    
+    </div>
+
     <!--   <button mat-raised-button color="primary" (click)="Goback()" style="float: right;">Go Back</button> -->
-    <button mat-raised-button color="primary" (click)="generatePdf()" >Generate PDF</button>
+    <button mat-raised-button color="primary" (click)="generatePdf()" >PDF Preview</button>
+    <!-- <app-beetreportpdf *ngIf="showPDFView" [parentData]="submitResponse"></app-beetreportpdf> -->
     
 </div>

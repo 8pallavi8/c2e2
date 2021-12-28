@@ -164,7 +164,9 @@ export class PlugloadsComponent implements OnInit {
     var payload: any = {
       "netoccupiedarea": Number(this.beetComponent.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value),
       "netoccupiedareaunit": this.beetComponent.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
-      "plugloaddensitydata": plugLoadArray
+      "plugloaddensitydata": plugLoadArray,
+      "occupancyhrsperweek":this.beetComponent.genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value
+
     }
     this.beetService.postCalculatePlugLoad(payload).subscribe(res => {
       this.formgroup.controls.plugLoadValueKnown.patchValue(res.success.pluloaddensity);

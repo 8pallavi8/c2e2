@@ -36,7 +36,7 @@ import { BeetreportpdfComponent } from './shared/beetreportpdf/beetreportpdf.com
     AutoFocusDirective,
     OuterwallAdvLevelAirComponent,
     OuterwallAdvLevelbrickComponent,
-    BeetreportpdfComponent,
+
   ],
   providers: [ConfirmationDialogService,NgbActiveModal],
   entryComponents: [ConfirmationDialogComponent],

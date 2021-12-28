@@ -20,6 +20,8 @@ import { RouterModule } from '@angular/router';
 import { RoofradvancedComponent } from './roofradvanced/roofradvanced.component';
 import { HeaderTwoComponent } from './header-two/header-two.component';
 import { FooterTwoComponent } from './footer-two/footer-two.component';
+import { BeetreportpdfComponent } from './beetreportpdf/beetreportpdf.component';
+import { BeetreportComponent } from '../modules/BEET/beetreport/beetreport.component';
 
 
 
@@ -37,6 +39,7 @@ import { FooterTwoComponent } from './footer-two/footer-two.component';
     OuterwallRadvancedleveldialogComponent,
     RoofradvancedComponent,
     FooterTwoComponent,
+    BeetreportpdfComponent,
   ],
   imports: [
     CommonModule,
@@ -67,7 +70,8 @@ import { FooterTwoComponent } from './footer-two/footer-two.component';
     OuterwallRadvancedleveldialogComponent,
     RoofradvancedComponent,
     HeaderTwoComponent,
-    FooterTwoComponent
+    FooterTwoComponent,
+    BeetreportpdfComponent
   ],
   
   // If Service do not have Provider == root then add the below code to use the service by other components.

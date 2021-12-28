@@ -3,10 +3,6 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetector
 import { FormArray, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import jsPDF from 'jspdf';
-import { Color, Label } from 'ng2-charts';
-import { throwError } from 'rxjs';
 import { ErrorMessage, errorMessages, GeneralDetails, Summary } from 'src/app/shared/models/beet-models';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { BuildingenvelopedetailsComponent } from './buildingenvelopedetails/buildingenvelopedetails.component';
@@ -15,7 +11,6 @@ import { GendetailsComponent } from './gendetails/gendetails.component';
 import { HvacComponent } from './hvac/hvac.component';
 import { LightingComponent } from './lighting/lighting.component';
 import { PlugloadsComponent } from './plugloads/plugloads.component';
-import html2canvas from 'html2canvas';
 import { BeetreportComponent } from './beetreport/beetreport.component';
 import { MatStepper } from '@angular/material/stepper';
 
@@ -30,12 +25,6 @@ export interface Rvalue {
   rValue?: number;
   rUnits?: string;
 }
-export interface CalculatedTables {
-  parameter: string;
-  baselinevalue: number;
-  energyefficienctvalue: number;
-}
-
 
 export interface Plugloads {
   pluLoadValue?: number;
@@ -66,29 +55,14 @@ export interface Efficiency {
 })
 export class BEETComponent implements OnInit, AfterViewInit {
   @ViewChild('pdfTable', { static: false })
-  pdfTable: ElementRef;
-  isGenerating: boolean = false;
   outerWallR: Rvalue = {};
   roofR: Rvalue = {};
   windowR: Rvalue = {};
   wwrValue: number;
   errorMessages: ErrorMessage[] = errorMessages;
   errFieldMessages: string[] = [];
-  showTables: boolean = false;
-  showText: boolean = false;
-  showProgress: boolean = false;
-  inputvaluestable: CalculatedTables[];
-  inputvaluestableDataSource: MatTableDataSource<CalculatedTables>
-  intermediatevaluestable: CalculatedTables[];
-  intermediatevaluestabletableDataSource: MatTableDataSource<CalculatedTables>
-  outputvaluestable: CalculatedTables[];
-  outputvaluestableDataSource: MatTableDataSource<CalculatedTables>
-  monthresultstable: CalculatedTables[];
-  monthresultstabletableDataSource: MatTableDataSource<CalculatedTables>
-  economizersavingstable: CalculatedTables[];
-  economizersavingstableDataSource: MatTableDataSource<CalculatedTables>
-  inputsforgraphtable: CalculatedTables[];
-  inputsforgraphtableDataSource: MatTableDataSource<CalculatedTables>
+  //showTables: boolean = false;
+  showReportProgress: boolean = false;
   plugloadoptions: PlugLoadOptionsTable[] = [];
   summary: Summary;
   inputTableDataSource: any;
@@ -105,17 +79,11 @@ export class BEETComponent implements OnInit, AfterViewInit {
   @ViewChild(PlugloadsComponent) plugLoaDetailsComponent: PlugloadsComponent;
   @ViewChild(BeetreportComponent) beetReportComponent: BeetreportComponent;
   @ViewChild('stepper') private myStepper: MatStepper;
+  @ViewChild('errMsg') errMsg: ElementRef;
   displayedColumns: string[] = ["Parameter", "Units", "Value"];
   dataSource: any;
-  reportdatasource: any;
   isGeneralDetailsUpdated: boolean;
-  heatingEfficiencyFinal: number;
   generalDetails: GeneralDetails;
-  showTogglePlusIcon: boolean = true;
-  showTogglePlusIconbase: boolean = true;
-  showTogglePlusIconhvac: boolean = true;
-  showTogglePlusIconlight: boolean = true;
-  showTogglePlusIconplugload: boolean = true;
   submitResponse: any;
   selectedcountryname:string;
   summaryTable: { Parameter: string; Units: any; Value: any; }[];
@@ -125,31 +93,9 @@ export class BEETComponent implements OnInit, AfterViewInit {
   displayedColumnsmonthlyresults = ["month", "peakkwbaseline", "kwhbaseline", "thermsbaseline", "ngcubicmeterbaseline", "peakkwees", "kwhees", "thermsees", "ngcubicmeterees"];
   displayedColumnseconomizersavings = ["parameter", "baselinevalue", "efficientvalue"];
   displayedColumnsinputsforgraph = ["parameter", "parameterfield", "baselinevalue", "efficientvalue"];
-  @ViewChild('errMsg') errMsg: ElementRef;
   step = 0;
-  barChartLabels: Label[] = ['Total Energy [kWh/m²]', 'Heating Energy [m³N.G/m²]', 'Electric [kWh/m²]', 'Electric Peak [kW/m²]', 'Total Cost [$/m²]'];
-  barChartLabels2: Label[] = ['Heating', 'Cooling'];
-  barChartLabels3: Label[] = ['Lights', 'Plugs', 'fans'];
-  barChartType: ChartType = 'bar';
-  barChartLegend = true;
-  barChartPlugins = [];
-  barChartOptions: ChartOptions = {
-    responsive: true,
-    legend: { display: false },
-  };
-
-  barChartColors: Color[] = [
-    {
-      backgroundColor: '#FF7D00'
-    },
-    {
-      backgroundColor: '#3cd070'
-    }
-  ];
-  isLoading: boolean = true;
-  barChartData: { data: any[]; label: string; }[];
-  barChartData2: { data: any[]; label: string; barThickness: number; }[];
-  barChartData3: { data: any[]; label: string; barThickness: number }[];
+  disableReport: boolean = false;
+ 
 
   constructor(private beetService: beetService, private cd: ChangeDetectorRef, private modalService: NgbModal) { }
 
@@ -164,7 +110,6 @@ export class BEETComponent implements OnInit, AfterViewInit {
     this.cd.detectChanges();
   }
 
-
   selectionStepperChange(event) {
     this.saveBuildingDetails();
     this.saveHVACDetails();
@@ -173,6 +118,9 @@ export class BEETComponent implements OnInit, AfterViewInit {
     this.onPlugLoadDetails();
     this.onSaveLightingDetails();
     this.showSummary();
+    if(event.selectedIndex == 7){
+      this.postDataGenerateReport(true);
+    }
   }
 
   onSaveGenDetails() {
@@ -283,12 +231,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   }
 
-  backClicked() {
-    this.showTables = false;
-  }
-
-
-  postDataGenerateReport() {
+  async postDataGenerateReport(disablestep:boolean) {
     this.errFieldMessages = [];
     Object.keys(this.genDetailsComponent.genDetailsForm.controls).forEach(field => {
       //const control = this.genDetailsComponent.genDetailsForm.get(field);
@@ -386,14 +329,23 @@ export class BEETComponent implements OnInit, AfterViewInit {
       });
     }
     else {
-      this.myStepper.selectedIndex = 7;
+      this.showReportProgress = true;
+      this.beetReportComponent.showProgress == false;
       this.beetReportComponent.postBeetPayload();
+      await this.delay(5000);
+      this.showReportProgress = false;
+      //this.disableReport=disablestep;
+      this.myStepper.selectedIndex = 7;
     }
 
   }
 
+  private delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   saveBuildingDetails() {
-    console.log(this.buildingdetailsComponent?.formgroup);
+    this.outerWallR={};
     if (this.buildingdetailsComponent?.formgroup.controls.outerwallr.value == 1) {
       if (this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.outerwallRKnown.value != '') {
         this.outerWallR.rValue = this.buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.outerwallRKnown.value.toFixed(2);
@@ -478,91 +430,4 @@ export class BEETComponent implements OnInit, AfterViewInit {
     }
   }
 
-
-  showHiddenText() {
-    this.showText = !this.showText;
-  }
-
-
-  toggleButtonShowIcon() {
-    this.showTogglePlusIcon = !this.showTogglePlusIcon;
-  }
-
-  toggleButtonShowIconbase() {
-    this.showTogglePlusIconbase = !this.showTogglePlusIconbase;
-  }
-
-  toggleButtonShowhvac() {
-    this.showTogglePlusIconhvac = !this.showTogglePlusIconhvac;
-  }
-
-  toggleButtonShowlight() {
-    this.showTogglePlusIconlight = !this.showTogglePlusIconlight;
-  }
-
-  toggleButtonShowplugload() {
-    this.showTogglePlusIconplugload = !this.showTogglePlusIconplugload;
-  }
-  Goback() {
-    this.showTables = false;
-  }
-
-
-  private delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-  /* async getPDF() {
-    this.isGenerating = true;
-    this.showTogglePlusIcon = false;
-    this.showTogglePlusIconbase = false;
-    this.showTogglePlusIconhvac = false;
-    this.showTogglePlusIconlight = false;
-    this.showTogglePlusIconplugload = false;
-
-    await this.delay(3000);
-    let general = document.getElementById('general-section');
-    let baseline = document.getElementById('baseline-potential');
-    let hvac = document.getElementById('hvac');
-    let lightining = document.getElementById('lightining');
-
-    var pdf = new jsPDF('p', 'pt', [1200, 1800]);
-    let curDate = new Date();
-    pdf.setFontSize(30);
-    pdf.setTextColor(231, 76, 60)
-    pdf.setDrawColor(173, 216, 230)
-    pdf.setCreationDate();
-
-    pdf.text('Self Assessment Building Energy Efficiency Calculator (BEEC)', 50, 35,);
-    pdf.text(curDate.toDateString(), 50, 65);
-
-    this.generateCanvas(pdf, general, 40, false);
-    this.generateCanvas(pdf, baseline, 40, false);
-    this.generateCanvas(pdf, hvac, 40, true);
-    this.isGenerating = false;
-    //this.generateCanvas(pdf,lightining,40,true); 
-  };
-
-  generateCanvas(pdf, sectionDiv, top_left_margin, savePDF) {
-    var HTML_Width = sectionDiv.offsetWidth;
-    var HTML_Height = sectionDiv.offsetHeight;
-    console.log("HTML Weight height " + HTML_Width + "    " + HTML_Height);
-    var PDF_Width = HTML_Width + (top_left_margin * 2);
-    var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
-    var canvas_image_width = HTML_Width;
-    var canvas_image_height = HTML_Height;
-
-    var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
-    html2canvas(sectionDiv).then(function (canvas) {
-      canvas.getContext('2d');
-      console.log(canvas.height + "  " + canvas.width);
-      var imgData = canvas.toDataURL("image/jpeg", 1.0);
-      pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
-      if (savePDF != true) {
-        pdf.addPage()
-      }
-      if (savePDF == true) {
-        pdf.save("Beet-Report.pdf");
-      }
-    });
-  } */
 } 

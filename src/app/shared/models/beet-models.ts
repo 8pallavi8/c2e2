@@ -29,7 +29,29 @@ export interface GeneralDetails {
     fuelcost?: number;
     fuelcostunit?: string;
 }
+export interface BeetReportResponse{
 
+    country?: string,
+    province?: string,
+    location?: string,
+    buildingType?: string,
+    buildingSpaces: string[]
+    buildingGrossArea: string,
+    grossAreaUnits : string,
+    netOccupiedFloorArea: number,
+    netAreaUnits: string,
+    noOfFloors: number,
+    occupanyHoursPerWeek: number,
+    occupantDensity: number,
+    noOfPeopleOccupying: number,
+    occupantDensityKnown: number,
+    occupantDensityUnits: string,
+    electricityCost: number,
+    fuelCost: number,
+    fuelUnits: string,
+    electricityUnits: string
+
+}
 
 export interface ErrorMessage{
   key?: string;

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChartOptions, ChartType } from 'chart.js';
 import jsPDF from 'jspdf';
@@ -13,6 +13,9 @@ import { PlugloadsComponent } from 'src/app/modules/BEET/plugloads/plugloads.com
 import { DialogData } from '../models/models';
 import { beetService } from '../services/beet.service';
 import html2canvas from 'html2canvas';
+import { BeetReportResponse } from '../models/beet-models';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BeetreportComponent } from 'src/app/modules/BEET/beetreport/beetreport.component';
 
 @Component({
   selector: 'app-beetreportpdf',
@@ -27,8 +30,9 @@ export class BeetreportpdfComponent implements OnInit {
   hvacDetailsComponent: HvacComponent;
   plugLoaDetailsComponent: PlugloadsComponent;
   beetComponent: BEETComponent;
-  selectedcountryname:string;
-  submitResponse: any;
+  beetReportComponent: BeetreportComponent;
+  selectedcountryname: string;
+
   barChartLabels: Label[] = ['Total Energy [kWh/m²]', 'Heating Energy [m³N.G/m²]', 'Electric [kWh/m²]', 'Electric Peak [kW/m²]', 'Total Cost [$/m²]'];
   barChartLabels2: Label[] = ['Heating', 'Cooling'];
   barChartLabels3: Label[] = ['Lights', 'Plugs', 'fans'];
@@ -36,6 +40,18 @@ export class BeetreportpdfComponent implements OnInit {
   barChartLegend = true;
   barChartPlugins = [];
   barChartOptions: ChartOptions = {
+    responsive: true,
+    legend: { display: true },
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: 'ARS/year'
+        }
+      }]
+    }
+  };
+  barChartOptionsperformance: ChartOptions = {
     responsive: true,
     legend: { display: false },
   };
@@ -48,38 +64,48 @@ export class BeetreportpdfComponent implements OnInit {
       backgroundColor: '#3cd070'
     }
   ];
-  barChartData: { data: any[]; label: string; }[];
-  barChartData2: { data: any[]; label: string; barThickness: number; }[];
-  barChartData3: { data: any[]; label: string; barThickness: number }[];
-  ispdfloading:boolean= false;
-  isGenerating:boolean=false;
- curDate=new Date();
-  
- 
+  ispdfloading: boolean = false;
+  isGenerating: boolean = false;
+  curDate = new Date();
+  pdfInputForm = new FormControl();
+  checked = false;
+  beetReportForm:FormGroup;
+
 
   constructor(private beetService: beetService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<BeetreportpdfComponent>) { 
-     this.submitResponse = data;
-     console.log("response :  "+this.submitResponse)
-     this.initiazeDialog();
-    }
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public parentData: any,
+    public dialogRef: MatDialogRef<BeetreportpdfComponent>) {
+
+  } 
   ngOnInit(): void {
-    this.ispdfloading= true;
+    
+    this.initiazeDialog();
+  }
+  ngAfterViewInit() {
+   // this.initiazeDialog();
+  }
+  
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
+  }  
+  onToggleChange(event) {
+    console.log(this.pdfInputForm.value);
+  } 
+  initiazeDialog(): void {
     this.beetComponent = this.beetService.getBEETParentComponent();
-    this.selectedcountryname =  this.beetComponent.selectedcountryname
+    this.ispdfloading = true;
+    this.beetComponent = this.beetService.getBEETParentComponent();
+    this.selectedcountryname = this.beetComponent.selectedcountryname
     this.genDetailsComponent = this.beetComponent.genDetailsComponent;
-     this.buildingdetailsComponent = this.beetComponent.buildingdetailsComponent;
+    this.buildingdetailsComponent = this.beetComponent.buildingdetailsComponent;
     this.plugLoaDetailsComponent = this.beetComponent.plugLoaDetailsComponent;
     this.lightingDetailsComponent = this.beetComponent.lightingDetailsComponent;
     this.hvacDetailsComponent = this.beetComponent.hvacDetailsComponent;
-    this.co2EmissionsDetailsComponent = this.beetComponent.co2EmissionsDetailsComponent; 
-    console.log("Data :: "+this.submitResponse);
-    this.ispdfloading=false;
-  }
+    this.co2EmissionsDetailsComponent = this.beetComponent.co2EmissionsDetailsComponent;
+    this.beetReportComponent= this.beetComponent.beetReportComponent;
 
-  initiazeDialog(): void {
-
+    this.ispdfloading = false;
   }
 
 
@@ -87,25 +113,27 @@ export class BeetreportpdfComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  async getPDF() {
+   getPDF() {
     this.isGenerating = true;
-    await this.delay(3000);
-    let general = document.getElementById('general-section');
-    let baseline = document.getElementById('baseline-potential');
-    let hvac = document.getElementById('hvac');
-    let lightining = document.getElementById('lightining');
+    //await this.delay(3000);
+    let general = document.getElementById('pdf-general-section');
+    let construction = document.getElementById('pdf-construction');
+    let hvacpdf = document.getElementById('pdf-hvac');
+    
+
+
 
     var pdf = new jsPDF('p', 'pt', [1200, 1800]);
-   
+
     pdf.setFontSize(30);
     pdf.setTextColor(231, 76, 60)
-    pdf.setDrawColor(173,216,230)
+    pdf.setDrawColor(173, 216, 230)
     pdf.setCreationDate();
 
     //pdf.text(curDate.toDateString(),50,65);
     this.generateCanvas(pdf, general, 40, false);
-    this.generateCanvas(pdf, baseline, 40, false);
-    this.generateCanvas(pdf, hvac, 40, true);
+    this.generateCanvas(pdf, construction, 40, false);
+    this.generateCanvas(pdf, hvacpdf, 40, true);
     this.isGenerating = false;
   };
 

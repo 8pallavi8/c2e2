@@ -9,13 +9,14 @@ import { LightingComponent } from '../lighting/lighting.component';
 import { PlugloadsComponent } from '../plugloads/plugloads.component';
 import { beetService } from 'src/app/shared/services/beet.service';
 import { BEETComponent } from '../beet.component';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Color, Label } from 'ng2-charts';
 import { ChartOptions, ChartType } from 'chart.js';
 import { throwError } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { BeetreportpdfComponent } from 'src/app/shared/beetreportpdf/beetreportpdf.component';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { BeetReportResponse } from 'src/app/shared/models/beet-models';
 
 @Component({
   selector: 'app-beetreport',
@@ -46,9 +47,22 @@ export class BeetreportComponent implements OnInit {
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
-  barChartOptions: ChartOptions = {
+  inputchildvalud: any = 0;
+  barChartOptionsperformance: ChartOptions = {
     responsive: true,
     legend: { display: false },
+  };
+  barChartOptions: ChartOptions = {
+    responsive: true,
+    legend: { display: true },
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: 'ARS/year'
+        }
+      }]
+    }
   };
 
   barChartColors: Color[] = [
@@ -63,16 +77,30 @@ export class BeetreportComponent implements OnInit {
   barChartData2: { data: any[]; label: string; barThickness: number; }[];
   barChartData3: { data: any[]; label: string; barThickness: number }[];
   submitResponse: any;
- 
+  showPDFView: boolean = false;
+  beetReportForm: FormGroup;
+  pdfInputForm = new FormControl();
 
-  constructor(private beetService: beetService,public dialog: MatDialog,) { }
+
+  constructor(private beetService: beetService, public dialog: MatDialog,
+    private fb: FormBuilder,) { }
   ngOnInit(): void {
+    this.beetReportForm = this.fb.group({
+      userName: ['', Validators.compose([Validators.required])],
+      projectName: ['', Validators.compose([Validators.required])],
+      yearOfConstruction: ['', Validators.compose([Validators.required])],
+    });;
     this.showProgress = true;
+
   }
 
   selectionChange(event: StepperSelectionEvent) {
     console.log(event.selectedStep.label);
   }
+
+  onToggleChange(event) {
+    console.log(this.pdfInputForm.value);
+  } 
 
   ngAfterViewInit() {
     this.showProgress = true;
@@ -85,13 +113,15 @@ export class BeetreportComponent implements OnInit {
     this.lightingDetailsComponent = this.beetComponent.lightingDetailsComponent;
     this.hvacDetailsComponent = this.beetComponent.hvacDetailsComponent;
     this.co2EmissionsDetailsComponent = this.beetComponent.co2EmissionsDetailsComponent;
-   // this.formAvailable = true;
+    // this.formAvailable = true;
   }
 
-  postBeetPayload() {
+  async postBeetPayload() {
     // try{
     this.showProgress = true;
-    this.delay(5000);
+    this.showPDFView = false;
+
+    // this.delay(5000);
 
     var selectedcountryname = sessionStorage.getItem('selectedCountryName');
     if (this.genDetailsComponent.genDetailsForm.valid) {
@@ -114,7 +144,7 @@ export class BeetreportComponent implements OnInit {
           location: this.genDetailsComponent.genDetailsForm.controls.location.value,
           buildingtype: this.genDetailsComponent.genDetailsForm.controls.buildingType.value,
           buildingspaces: this.genDetailsComponent.genDetailsForm.controls.buildingSpaces.value,
-          // yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value.toString(),
+          //yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value.toString(),
           nooffloors: this.genDetailsComponent.genDetailsForm.controls.noOfFloors.value,
           occupancyhrsperweek: this.genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value,
           buildinggrossarea: Number(this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value),
@@ -181,7 +211,7 @@ export class BeetreportComponent implements OnInit {
 
             this.barChartData2 = [{ data: [heating_baseline, cooling_baseline], label: 'Base Line', barThickness: 30 },
             { data: [heating_energyeffval, cooling_energyeffval], label: 'Enerygy Efficient Scenario', barThickness: 30 }];
-
+            this.submitResponse.barChartData2 = this.barChartData2;
             const totalEnergyObj = res.success.graphinputs.filter(p => p.parameter.includes('Performance Indices [metrics]') && p.parameterfield.includes('Total Energy [kWh/m²]'))[0]
             const totalEnergy_baseline = totalEnergyObj.baselinevalue;
             const totalEnergy_energyeffval = totalEnergyObj.energyefficienctvalue;
@@ -205,7 +235,7 @@ export class BeetreportComponent implements OnInit {
 
             this.barChartData = [{ data: [totalEnergy_baseline, heatingEnergy_baseline, electric_baseline, electricPeak_baseline, totalCost_baseline], label: 'Base Line' },
             { data: [totalEnergy_energyeffval, heatingEnergy_energyeffval, electric_energyeffval, electricPeak_energyeffval, totalCost_energyeffval], label: 'Enerygy Efficient Scenario' }];
-
+            this.submitResponse.barChartData = this.barChartData;
             const lightsObj = res.success.graphinputs.filter(p => p.parameter.includes('Energy Cost') && p.parameterfield.includes('Lights'))[0]
             const lights_baseline = lightsObj.baselinevalue;
             const lights_energyeffval = lightsObj.energyefficienctvalue;
@@ -220,13 +250,13 @@ export class BeetreportComponent implements OnInit {
 
             this.barChartData3 = [{ data: [lights_baseline, plugs_baseline, fans_baseline], label: 'Base Line', barThickness: 30 },
             { data: [lights_energyeffval, plugs_energyeffval, fans_energyeffval], label: 'Enerygy Efficient Scenario', barThickness: 30 }];
+
+            this.submitResponse.barChartData3 = this.barChartData3;
+
             this.showProgress = false;
-           
             this.formAvailable = true
-            
-            
+
           } catch (e) {
-            console.log(e);
             this.showProgress = false;
             this.formAvailable = true
             // this.showTables = false;
@@ -243,22 +273,25 @@ export class BeetreportComponent implements OnInit {
     this.formAvailable = true
   }
 
-  public generatePdf() {
+  generatePdf() {
     console.log(this.submitResponse);
+
+    this.showPDFView = true;
+
     const dialogref = this.dialog.open(BeetreportpdfComponent, {
       width: '80%',
       autoFocus: false,
       maxHeight: '100vh',
-      data:this.submitResponse
+      data: this.submitResponse
     });
     dialogref.afterClosed().subscribe(result => {
-    
+
     });
   }
- private delay(ms: number) {
+  private delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
- 
+
   toggleButtonShowIcon() {
     this.showTogglePlusIcon = !this.showTogglePlusIcon;
   }
@@ -282,9 +315,6 @@ export class BeetreportComponent implements OnInit {
   toggleButtonShowAssump() {
     this.showTogglePlusIconAssump = !this.showTogglePlusIconAssump;
   }
-
-
- 
   /* async getPDF() {
     this.isGenerating = true;
     this.showTogglePlusIcon = false;

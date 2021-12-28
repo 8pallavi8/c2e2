@@ -72,3 +72,30 @@
       .key-indicators{
           font-weight: bold;
       }
+
+      ::ng-deep .mat-form-field-label-wrapper {
+        top: -2.0em;
+        font-size: 15px;
+    }
+    
+    ::ng-deep .mat-form-field-appearance-outline.mat-form-field-should-float {
+        .mat-form-field-label {
+            padding-bottom: -3rem;
+            transform: none;
+            width: initial;
+            //opacity: 0;
+        }
+        .mat-form-field-outline-gap {
+            border-top-color: initial !important;
+        }
+    } 
+    
+    ::ng-deep .mat-form-field-label {
+        padding-top: 7px;
+        font-size: 0.8em!important;
+    }
+    
+    
+    ::ng-deep .mat-form-field-flex>.mat-form-field-infix {
+        padding: 0.4em 0px !important;
+    }
