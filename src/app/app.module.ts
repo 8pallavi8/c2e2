@@ -20,26 +20,23 @@ import { BeetreportpdfComponent } from './shared/beetreportpdf/beetreportpdf.com
 
 
 @NgModule({
-
-  imports: [
-    BrowserModule,
-    CommonModule,
-    HttpClientModule,
-    AppRoutingModule,
-    NgbModule,
-    BrowserAnimationsModule,
-    SharedModule,
-    LayoutModule
-  ],
-  declarations: [
-    AppComponent,
-    AutoFocusDirective,
-    OuterwallAdvLevelAirComponent,
-    OuterwallAdvLevelbrickComponent,
-
-  ],
-  providers: [ConfirmationDialogService,NgbActiveModal],
-  entryComponents: [ConfirmationDialogComponent],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        CommonModule,
+        HttpClientModule,
+        AppRoutingModule,
+        NgbModule,
+        BrowserAnimationsModule,
+        SharedModule,
+        LayoutModule
+    ],
+    declarations: [
+        AppComponent,
+        AutoFocusDirective,
+        OuterwallAdvLevelAirComponent,
+        OuterwallAdvLevelbrickComponent,
+    ],
+    providers: [ConfirmationDialogService, NgbActiveModal],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
