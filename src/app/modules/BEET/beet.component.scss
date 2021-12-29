@@ -353,5 +353,8 @@ table {
       }
 
       ::ng-deep .mat-step-header .mat-step-icon-selected {
-        background-color: rgba(187, 35, 8, 0.897); 
+        background-color: rgba(54, 13, 151, 0.897); 
+     }
+     .progress-bar-beet{
+         max-width: 12%;
      }

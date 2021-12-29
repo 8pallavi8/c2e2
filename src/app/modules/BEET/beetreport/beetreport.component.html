@@ -132,11 +132,14 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="key-indicators">Peak electricity demand in</td>
-                                    <td>{{submitResponse.peakelectricitydemand}}</td>
+                                    <td class="key-indicators">
+                                        Peak electricity demand in
+                                    </td>
+                                    <td>
+                                        {{submitResponse.peakelectricitydemand}}
+                                    </td>
                                 </tr>
                                 <tr>
-
                                     <td class="key-indicators">Highest electricity consumption in</td>
                                     <td>{{submitResponse.highestelectricityconsumption}}</td>
                                 </tr>
@@ -159,7 +162,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="key-indicators">Energy Savings</td>
+                                    <td class="key-indicators">
+                                        <img style="width: 50px" src="../../../assets/images/report/esavings.png">
+                                        Energy Savings</td>
                                     <td>{{submitResponse.energysavings |
                                         number:'1.2-2'}}{{submitResponse.energysavingsunit}}</td>
                                     <td>{{submitResponse.energysavingspercent | number:'1.2-2'}}
@@ -168,7 +173,8 @@
                                 </tr>
                                 <tr>
 
-                                    <td class="key-indicators">Energy Cost Savings</td>
+                                    <td class="key-indicators">
+                                        <img style="width: 50px" src="../../../assets/images/report/ecsavings.png">Energy Cost Savings</td>
                                     <td>{{submitResponse.energycostsavings |
                                         number:'1.2-2'}}{{submitResponse.energycostsavingsunit}}</td>
                                     <td>{{submitResponse.energycostsavingspercent | number:'1.2-2'}}
@@ -177,7 +183,8 @@
                                 </tr>
                                 <tr>
 
-                                    <td class="key-indicators">CO2 Reduction</td>
+                                    <td class="key-indicators">
+                                        <img style="width: 50px" src="../../../assets/images/report/co2red.png">CO2 Reduction</td>
                                     <td>{{submitResponse.co2reduction | number:'1.2-2'}}
                                         {{submitResponse.co2reductionunit}}</td>
                                     <td>{{submitResponse.co2reductionpercent | number:'1.2-2'}}
@@ -547,7 +554,7 @@
                     <tr>
                         <td>
                             <p *ngIf="!showTogglePlusIconAssump">
-                                ■ Values based on data from industry partners, UNLP and RAMCC<br>
+                                ■ Values based on data from industry partners, UNLP and RAMCC.<br>
                                 ■ Electricity tariffs and CO2 emission factor are based on IEA data or provided by
                                 municipalities.<br>
                                 ■ Additional to the above sources, a questionnaire was utilized to gather data from
@@ -556,7 +563,7 @@
                         </td>
                         <td>
                             <p *ngIf="!showTogglePlusIconAssump">
-                                ■ Values based on data from industry partners, UNLP and RAMCC<br>
+                                ■ Values based on data from industry partners, UNLP and RAMCC.<br>
                                 ■ Electricity tariffs and CO2 emission factor are based on IEA data or provided by
                                 municipalities.<br>
                                 ■ Additional to the above sources, a questionnaire was utilized to gather data from

@@ -332,7 +332,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
       this.showReportProgress = true;
       this.beetReportComponent.showProgress == false;
       this.beetReportComponent.postBeetPayload();
-      await this.delay(5000);
+      await this.delay(8000);
       this.showReportProgress = false;
       //this.disableReport=disablestep;
       this.myStepper.selectedIndex = 7;

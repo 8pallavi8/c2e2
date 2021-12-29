@@ -35,7 +35,7 @@
                                     Heat pumps enter COP value.</p>
                                 <b style="margin-top: 1em;">Enter the heatingequipment efficiency value :
                                 </b>
-                                <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                                <mat-form-field class="w-100 mt-2 col-md-6" appearance="outline">
                         
                                     <input matInput placeholder="Enter heating equipment efficiency value" type="number"
                                         formControlName="heatefficiencyKnown" type="number">
@@ -127,11 +127,9 @@
                         <div [formGroupName]="i">
                             <!-- cool efficiency known -->
                             <span *ngIf="formgroup.controls.airconditioning.value == 1" class="units-picker-component">
-                                <p>I have the efficiency/performance parameter for the air conditioning equipment of my
-                                    building.<br>
-                                    Please enter the value in below text box and select respective units.</p>
+                                <p>Please enter the value in below text box and select respective units.</p>
                                 
-                                    <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
+                                    <mat-form-field class="w-100 mt-2 col-md-6" appearance="outline">
                                         <input matInput placeholder="Enter cooling equipment efficiency value" formControlName="acEfficiencyValue"
                                             type="number">
                                         <mat-select placeholder="units" formControlName="acEfficiencyParameter">

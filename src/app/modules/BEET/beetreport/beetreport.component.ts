@@ -86,12 +86,11 @@ export class BeetreportComponent implements OnInit {
     private fb: FormBuilder,) { }
   ngOnInit(): void {
     this.beetReportForm = this.fb.group({
-      userName: ['', Validators.compose([Validators.required])],
-      projectName: ['', Validators.compose([Validators.required])],
-      yearOfConstruction: ['', Validators.compose([Validators.required])],
+      userName: [''],
+      projectName: [''],
+      yearOfConstruction: [''],
     });;
     this.showProgress = true;
-
   }
 
   selectionChange(event: StepperSelectionEvent) {

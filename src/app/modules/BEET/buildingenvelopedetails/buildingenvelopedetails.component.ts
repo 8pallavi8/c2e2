@@ -253,7 +253,11 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      if (typeofroof == 0) {
+      if(result == undefined){
+        this.selectedCapa = '';
+        this.selectedMaterial='';
+      }
+      else if (typeofroof == 0) {
         this.addOuterWallLayerValues(result.thickness, result.rvalue);
       } else {
         this.addRoofLayerValues(result.thickness, result.rvalue);
@@ -268,10 +272,12 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       maxHeight: '100vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      if (result != undefined) {
+      if (result == undefined) {
+        this.selectedCapa = '';
+      }
+      else if (result != undefined) {
         this.addOuterWallLayerValues('', result);
       }
-
     });
   }
 
@@ -283,7 +289,10 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       maxHeight: '90vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      if (typeofroof == 0) {
+      if(result == undefined){
+        this.selectedCapa = '';
+      }
+      else if (typeofroof == 0) {
         this.addOuterWallLayerValues(result.thickness, result.rvalue);
       } else {
         this.addRoofLayerValues(result.thickness, result.rvalue);
@@ -343,7 +352,11 @@ export class BuildingenvelopedetailsComponent implements OnInit {
       maxHeight: '100vh',
     });
     dialogref.afterClosed().subscribe(result => {
-      if (result != undefined) {
+      console.log("ladrillo"+result)
+      if (result == undefined) {
+        this.selectedMaterial = '';
+      }else 
+        {
         this.addRoofLayerValues('', result);
       }
     });

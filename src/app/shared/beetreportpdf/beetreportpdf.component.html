@@ -9,28 +9,29 @@
 
 
 <div class="container" id="pdf-general-section">
-    <div style="display: flex;">
-        <div style="display: flex;font-weight: bold;">
-            <img src="../../../assets/images/report/argentinaflag.png">
-            <ul class="header-pdf" style="list-style: none;">
-                <li style="font-size: xx-large; ">
-                    {{selectedcountryname}}
-                </li>
-                <li>
-                    Province : {{genDetailsComponent.genDetailsForm.controls.province.value}}
-                </li>
-                <li>
-                    Location : {{genDetailsComponent.genDetailsForm.controls.location.value}}
-                </li>
-            </ul>
-        </div>
+   
+    <div  class="row" >
+        
+        <div  class="col-md-2"><img src="../../../assets/images/report/argentinaflag.png"></div>
+        <div  class="col-md-3"> <ul class="header-pdf" style="list-style: none;">
+            <li style="font-size: xx-large;font-weight: bold; padding-bottom: 1rem; ">
+                {{selectedcountryname}}
+            </li>
+            <li style="font-weight: bold;">
+                Province : {{genDetailsComponent.genDetailsForm.controls.province.value}}
+            </li>
+            <li style="font-weight: bold;">
+                Location : {{genDetailsComponent.genDetailsForm.controls.location.value}}
+            </li>
+        </ul>
+       </div>
 
-        <div style="float: right;">
-            <img width=30% src="../../../assets/images/Logos/UNEP-partnershiplogo.png">
-            <img width=30% src="../../../assets/images/c2e2-logo-seforall.png">
-        </div>
-
+        <div class="offset-md-3"> </div>
+        <div class="col-md-2"  ><img  width="" src="../../../assets/images/Logos/UNEP-partnershiplogo.png" style="width: 100%;"></div>
+        <div class="col-md-2"  ><img  width="" src="../../../assets/images/c2e2-logo-seforall.png" style=" width: 100%;"></div>
     </div>
+
+
     <div style="background-color:#5B9BD5 ;color:white ;font-size: larger;">
         <p>Self Assessment Building Energy Efficiency Calculator(BEEC)</p>
     </div>
@@ -43,13 +44,13 @@
         <div style="display: flex;flex-direction: column;align-items: flex-end;">
             <div>
                 <ul class="header-pdf" style="list-style: none;">
-                    <li>
+                    <li style="font-weight: bold;">
                         Study Report
                     </li>
-                    <li>
+                    <li style="font-weight: bold;">
                         Issued on : {{curDate}}
                     </li>
-                    <li *ngIf="beetReportComponent.pdfInputForm.value == true">
+                    <li style="font-weight: bold;" *ngIf="beetReportComponent.pdfInputForm.value == true">
                         Issued by : {{beetReportComponent.beetReportForm.controls.userName.value}}
                     </li>
                 </ul>
@@ -221,7 +222,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="key-indicators">Energy Savings</td>
+                        <td class="key-indicators">
+                            <img style="width: 50px" src="../../../assets/images/report/esavings.png">Energy Savings</td>
                         <td class="key-data-values">{{parentData.energysavings |
                             number:'1.2-2'}}{{parentData.energysavingsunit}}</td>
                         <td class="key-data-percentvalues">{{parentData.energysavingspercent | number:'1.2-2'}}
@@ -230,7 +232,8 @@
                     </tr>
                     <tr>
 
-                        <td class="key-indicators">Energy Cost Savings</td>
+                        <td class="key-indicators">
+                            <img style="width: 50px" src="../../../assets/images/report/ecsavings.png">Energy Cost Savings</td>
                         <td class="key-data-values">{{parentData.energycostsavings |
                             number:'1.2-2'}}{{parentData.energycostsavingsunit}}</td>
                         <td class="key-data-percentvalues">{{parentData.energycostsavingspercent | number:'1.2-2'}}
@@ -239,7 +242,8 @@
                     </tr>
                     <tr>
 
-                        <td class="key-indicators">CO2 Reduction</td>
+                        <td class="key-indicators">
+                            <img style="width: 50px" src="../../../assets/images/report/co2red.png">CO2 Reduction</td>
                         <td class="key-data-values">{{parentData.co2reduction | number:'1.2-2'}}
                             {{parentData.co2reductionunit}}</td>
                         <td class="key-data-percentvalues">{{parentData.co2reductionpercent | number:'1.2-2'}}
