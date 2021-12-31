@@ -4,7 +4,7 @@
 
 <!-- *ngIf="formAvailable && showProgress"  -->
 
-<div *ngIf="formAvailable" class="container printformClass">
+<div *ngIf="formAvailable" class="container printformClass" style="border-width: thin;">
 
     <div class="Report-sections-group ">
 
@@ -20,24 +20,24 @@
                     margin-left: -1px;">
                         <tbody>
                             <tr>
-                                <td>Building type :</td>
+                                <td  style="font-weight: bold;">Building type :</td>
                                 <td>{{genDetailsComponent.genDetailsForm.controls.buildingType.value}}
                                 </td>
                             </tr>
                             <tr>
-                                <td>Surface Area : </td>
+                                <td  style="font-weight: bold;">Surface Area : </td>
                                 <td>{{genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value|
                                     number:'1.2-2'}}
                                     {{genDetailsComponent.genDetailsForm.controls.netAreaUnits.value}}
                                 </td>
                             </tr>
                             <tr>
-                                <td>No. of Floors : </td>
+                                <td  style="font-weight: bold;">No. of Floors : </td>
                                 <td>{{genDetailsComponent.genDetailsForm.controls.noOfFloors.value}}
                                 </td>
                             </tr>
                             <tr>
-                                <td>Occupancy Hours : </td>
+                                <td  style="font-weight: bold;">Occupancy Hours : </td>
                                 <td>{{genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value}}
                                 </td>
                             </tr>
@@ -51,7 +51,7 @@
                     margin-left: -1px;">
                         <tbody>
                             <tr>
-                                <td>Occupant Density :</td>
+                                <td  style="font-weight: bold;">Occupant Density :</td>
                                 <td> {{genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value|
                                     number:'1.2-2'}}
                                     {{genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value}}
@@ -59,7 +59,7 @@
                             </tr>
 
                             <tr>
-                                <td>Electricity Cost :</td>
+                                <td  style="font-weight: bold;">Electricity Cost :</td>
                                 <td>{{genDetailsComponent.genDetailsForm.controls.electricityCost.value|
                                     number:'1.2-2'}}
                                     {{genDetailsComponent.genDetailsForm.controls.electricityUnits.value}}
@@ -67,7 +67,7 @@
                             </tr>
 
                             <tr>
-                                <td>Fuel Cost : </td>
+                                <td  style="font-weight: bold;">Fuel Cost : </td>
                                 <td>{{genDetailsComponent.genDetailsForm.controls.fuelCost.value|
                                     number:'1.2-2'}}
                                     {{genDetailsComponent.genDetailsForm.controls.fuelUnits.value}}</td>
@@ -80,7 +80,7 @@
 
 
 
-            <div class=" w-100 col-md-12 Report-sections">
+            <div class=" w-100 col-md-12 Report-sections" style="border-style: solid">
                 <div style="display: flex;">
                     <h4 class="report-headings">Key Indicators</h4>
 
@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <div class="container-fluid mt-5 col-md-6">
-                        <div class="chart-wrapper">
+                        <div class="chart-wrapper" >
                             <canvas baseChart [datasets]="barChartData3" [labels]="barChartLabels3"
                                 [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
                                 [chartType]="barChartType" [colors]="barChartColors">
@@ -163,31 +163,31 @@
                             <tbody>
                                 <tr>
                                     <td class="key-indicators">
-                                        <img style="width: 50px" src="../../../assets/images/report/esavings.png">
+                                        <img style="width: 30px" src="../../../assets/images/report/esavings.png">
                                         Energy Savings</td>
                                     <td>{{submitResponse.energysavings |
                                         number:'1.2-2'}}{{submitResponse.energysavingsunit}}</td>
-                                    <td>{{submitResponse.energysavingspercent | number:'1.2-2'}}
+                                    <td>{{submitResponse.energysavingspercent | number:'1.2-2'}}%
                                         <img style="width: 22px" src="../../../assets/images/report/green-arrow.png">
                                     </td>
                                 </tr>
                                 <tr>
 
                                     <td class="key-indicators">
-                                        <img style="width: 50px" src="../../../assets/images/report/ecsavings.png">Energy Cost Savings</td>
+                                        <img style="width: 30px" src="../../../assets/images/report/ecsavings.png">Energy Cost Savings</td>
                                     <td>{{submitResponse.energycostsavings |
                                         number:'1.2-2'}}{{submitResponse.energycostsavingsunit}}</td>
-                                    <td>{{submitResponse.energycostsavingspercent | number:'1.2-2'}}
+                                    <td>{{submitResponse.energycostsavingspercent | number:'1.2-2'}}%
                                         <img style="width: 22px" src="../../../assets/images/report/green-arrow.png">
                                     </td>
                                 </tr>
                                 <tr>
 
                                     <td class="key-indicators">
-                                        <img style="width: 50px" src="../../../assets/images/report/co2red.png">CO2 Reduction</td>
+                                        <img style="width: 40px" src="../../../assets/images/report/co2red.png">CO2 Reduction</td>
                                     <td>{{submitResponse.co2reduction | number:'1.2-2'}}
                                         {{submitResponse.co2reductionunit}}</td>
-                                    <td>{{submitResponse.co2reductionpercent | number:'1.2-2'}}
+                                    <td>{{submitResponse.co2reductionpercent | number:'1.2-2'}}%
                                         <img style="width: 22px" src="../../../assets/images/report/green-arrow.png">
                                     </td>
                                 </tr>
@@ -585,19 +585,19 @@
         </div>
       
         <form *ngIf="pdfInputForm.value == true" [formGroup]="beetReportForm" class="form mt-4">
-            <div >
-                <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline" floatLabel="never">
-                    <mat-label>User Name</mat-label>
+            <div class="field-align">
+                <mat-form-field class="field-group w-100 mt-4 col-md-4" appearance="outline" floatLabel="never">
+                    <mat-label class="field-title-beet">User Name</mat-label>
                     <input matInput formControlName="userName">
                 </mat-form-field>
     
-                <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline" floatLabel="auto">
-                    <mat-label>Project name</mat-label>
+                <mat-form-field class="field-group w-100 mt-4 col-md-4" appearance="outline" floatLabel="auto">
+                    <mat-label class="field-title-beet">Project name</mat-label>
                     <input matInput formControlName="projectName" >
                 </mat-form-field>
     
-                <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                    <mat-label>Year of construction</mat-label>
+                <mat-form-field class="field-group w-100 mt-4 col-md-4" appearance="outline">
+                    <mat-label class="field-title-beet">Year of construction</mat-label>
                     <input matInput formControlName="yearOfConstruction" type="number" >
                 </mat-form-field>
             </div>

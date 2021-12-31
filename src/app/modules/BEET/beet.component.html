@@ -5,47 +5,39 @@
         </div>
     </div>
 </header>
+
+<!-- <select #langSelect (change)="translate.use(langSelect.value)">
+    <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+  </select> -->
+
+
 <div class="container" style="margin-top: 1rem;">
     <div class="row">
         <div class="Home-text col-md-8">
+            <!-- <p [innerHTML]="'BEET.DESCRIPTION' | translate">
+            </p> -->
+
             <p>Welcome to the self assessment Building Energy Efficiency Calculator (BEEC). This tool was created under
-                the
-                framework
-                of the Euroclima+ program by the Copenhagen Centre of Energy Efficiency (C2E2), an Energy Efficiency hub
-                institutionally part of the UNEP
-                DTU Partnership.<br><br> The Energy Sustainable Municipal Buildings project is funded by Euroclima +,
-                the
-                flagship cooperation program of the European Union for environmental sustainability and climate change
-                in
-                Latin
-                America. In Argentina, the
-                French Development Agency (AFD) is in charge of the implementation. The National University of La Plata
-                (UNLP)
-                is the entity responsible and leader of the project for its execution. The Red Argentina de Municipios
-                frente al
-                Cambio Climático (RAMCC)
-                and the Copenhagen Center for Energy Efficiency (C2E2) are the strategic partners for the realization of
-                the
-                project.
+                the framework of the Euroclima+ program by the Copenhagen Centre of Energy Efficiency (C2E2), an Energy Efficiency hub
+                institutionally part of the UNEP DTU Partnership.<br><br> The Energy Sustainable Municipal Buildings project is funded by Euroclima +,
+                the flagship cooperation program of the European Union for environmental sustainability and climate change
+                in Latin America. In Argentina, the French Development Agency (AFD) is in charge of the implementation. The National University of La Plata
+                (UNLP) is the entity responsible and leader of the project for its execution. The Red Argentina de Municipios
+                frente al Cambio Climático (RAMCC) and the Copenhagen Center for Energy Efficiency (C2E2) are the strategic partners for the realization of
+                the project.
                 <br><br>
 
-                <b>About BEET</b><br> This self assessment Building Energy Efficiency Calculator (BEEC) is designed to
-                provide
-                individual users a preliminary rapid assessment platform where they can assess their building energy
+                <b>About BEEC</b><br> This self assessment Building Energy Efficiency Calculator (BEEC) is designed to
+                provide individual users a preliminary rapid assessment platform where they can assess their building energy
                 performance. The overall objective of
                 BEET is three fold:<br> a. Support the development of a rapid assessment of the energy performance of
-                individual
-                buildings;
+                individual buildings;
                 <br> b. Create a comparative evaluation between the baseline energy performance with energy efficiency
-                (EE)
-                standards.
+                (EE) standards.
                 <br> c. Share recommendations of potential EE measures across building components and systems.
                 <br> The tool is intended to cater to the needs of municipalities and relevant stakeholders. The tool
-                may be
-                used for overall understanding of impact on overall building energy consumption profile with respect to
-                various
-                system and component level
-                parameters. The target users may be energy managers, analysts, maintenance and operation professionals,
+                may be used for overall understanding of impact on overall building energy consumption profile with respect to
+                various system and component level parameters. The target users may be energy managers, analysts, maintenance and operation professionals,
                 technicians and any individual with basic know-how on buildings and energy efficiency.
             </p>
             <div>
@@ -85,8 +77,6 @@
                 </div>
             </div>
             <br>
-
-
             <!--  <p> Should there be any feedback / queries / suitable or customized data integration requirements, please do
                 reach out to
                 us at the below mentioned contact.</p>
@@ -95,7 +85,6 @@
                 Senior Expert – Energy Efficiency <br>
                 rradu@dtu.dk
             </p> -->
-
         </div>
 
         <div class="col-md-4">
@@ -263,8 +252,7 @@
 
                         <button data-toggle="collapse" data-target="#textassump" class="btn btn-info">Click here for
                             Tool Assumptions
-                        </button
-                        ><br>
+                        </button><br>
 
                         <div id="textassump" class="collapse">
 
@@ -373,15 +361,9 @@
                                 </li>
 
                             </ul>
-
                         </div>
-
                         <br>
                     </div>
-
-
-
-
 
                     <div class="step-button">
                         <button mat-raised-button color="primary" matStepperPrevious

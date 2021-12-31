@@ -123,7 +123,7 @@ export class BeetreportpdfComponent implements OnInit {
 
 
 
-    var pdf = new jsPDF('p', 'pt', [1200, 1800]);
+    var pdf = new jsPDF('p', 'pt', [1300, 2000]);
 
     pdf.setFontSize(30);
     pdf.setTextColor(231, 76, 60)

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, SystemJsNgModuleLoader } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormArray, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
