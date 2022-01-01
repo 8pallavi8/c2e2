@@ -10,11 +10,9 @@ import { GendetailsComponent } from 'src/app/modules/BEET/gendetails/gendetails.
 import { HvacComponent } from 'src/app/modules/BEET/hvac/hvac.component';
 import { LightingComponent } from 'src/app/modules/BEET/lighting/lighting.component';
 import { PlugloadsComponent } from 'src/app/modules/BEET/plugloads/plugloads.component';
-import { DialogData } from '../models/models';
 import { beetService } from '../services/beet.service';
 import html2canvas from 'html2canvas';
-import { BeetReportResponse } from '../models/beet-models';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { BeetreportComponent } from 'src/app/modules/BEET/beetreport/beetreport.component';
 
 @Component({
@@ -78,8 +76,7 @@ export class BeetreportpdfComponent implements OnInit {
     public dialogRef: MatDialogRef<BeetreportpdfComponent>) {
 
   } 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {  
     this.initiazeDialog();
   }
   ngAfterViewInit() {
@@ -108,7 +105,6 @@ export class BeetreportpdfComponent implements OnInit {
     this.ispdfloading = false;
   }
 
-
   private delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -119,21 +115,17 @@ export class BeetreportpdfComponent implements OnInit {
     let general = document.getElementById('pdf-general-section');
     let construction = document.getElementById('pdf-construction');
     let hvacpdf = document.getElementById('pdf-hvac');
-    
-
-
-
-    var pdf = new jsPDF('p', 'pt', [1300, 2000]);
+    var tempwidth = general.offsetWidth;
+    var pdf = new jsPDF('p', 'pt', [tempwidth+60, 1800]);
 
     pdf.setFontSize(30);
     pdf.setTextColor(231, 76, 60)
     pdf.setDrawColor(173, 216, 230)
     pdf.setCreationDate();
 
-    //pdf.text(curDate.toDateString(),50,65);
-    this.generateCanvas(pdf, general, 40, false);
-    this.generateCanvas(pdf, construction, 40, false);
-    this.generateCanvas(pdf, hvacpdf, 40, true);
+    this.generateCanvas(pdf, general, 30, false);
+    this.generateCanvas(pdf, construction, 30, false);
+    this.generateCanvas(pdf, hvacpdf, 30, true);
     this.isGenerating = false;
   };
 
@@ -156,7 +148,7 @@ export class BeetreportpdfComponent implements OnInit {
         pdf.addPage()
       }
       if (savePDF == true) {
-        pdf.save("Beet-Report.pdf");
+        pdf.save("Beec-Report.pdf");
       }
     });
   }
