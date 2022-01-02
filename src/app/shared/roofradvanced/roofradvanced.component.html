@@ -78,12 +78,12 @@
                 </ng-container>
 
                 <ng-container matColumnDef="header-row-Transmitancia-group">
-                    <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">Transmitancia termica U, (W/m2.K)</th>
+                    <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">Transmitancia termica U, (W/m<sup>2</sup>.K)</th>
                 </ng-container>
 
 
                 <ng-container matColumnDef="header-row-Resistencia-group">
-                    <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">Resistencia térmica R, (W/m2.K)</th>
+                    <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">Resistencia térmica R, (W/m<sup>2</sup>.K)</th>
                 </ng-container>
 
                 <ng-container matColumnDef="header-row-first-selected">
@@ -93,7 +93,7 @@
 
 
                 <tr mat-header-row
-                    *matHeaderRowDef="['header-row-first-group','header-row-Medidas-group','header-row-Transmitancia-group','header-row-Resistencia-group','header-row-first-selected']">
+                    *matHeaderRowDef="['header-row-first-group','header-row-Medidas-group','header-row-Transmitancia-group','header-row-Resistencia-group','header-row-first-selected'];sticky: true">
                 </tr>
                 <tr mat-header-row *matHeaderRowDef="lastDisplayedCols; sticky: true"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

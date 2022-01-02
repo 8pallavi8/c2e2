@@ -14,6 +14,9 @@ import { PlugloadsComponent } from './plugloads/plugloads.component';
 import { CO2EmissionsComponent } from './co2-emissions/co2-emissions.component';
 import { LogoFooterComponent } from './logo-footer/logo-footer.component';
 import { BeetreportComponent } from './beetreport/beetreport.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'src/app/app.module';
+import { HttpClient } from '@angular/common/http';
 
 
 const routes: Routes = [
@@ -30,7 +33,15 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     MatInputModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     RouterModule.forChild(routes),
   ]
 })
+
 export class BEETModule { }

@@ -1,0 +1,12 @@
+{
+    "HOME": {
+      "TITLE": "Bonjour Angular avec ngx-translate !",
+      "SELECT": "Changer la langue"
+    },
+    "BEET" :{
+        "DESCRIPTION" :"FRED Welcome to the self assessment Building Energy Efficiency Calculator (BEEC). This tool was created under the framework of the Euroclima+ program by the Copenhagen Centre of Energy Efficiency (C2E2), an Energy Efficiency hub institutionally part of the UNEP DTU Partnership.\\n\\nThe Energy Sustainable Municipal Buildings project is funded by Euroclima +, the flagship cooperation program of the European Union for environmental sustainability and climate change in Latin America. In Argentina, the French Development Agency (AFD) is in charge of the implementation. The National University of La Plata (UNLP) is the entity responsible and leader of the project for its execution. The Red Argentina de Municipios frente al Cambio Climático (RAMCC) and the Copenhagen Center for Energy Efficiency (C2E2) are the strategic partners for the realization of the project"
+    }
+    
+
+  }
+  

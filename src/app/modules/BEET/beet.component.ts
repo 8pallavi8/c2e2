@@ -13,6 +13,7 @@ import { LightingComponent } from './lighting/lighting.component';
 import { PlugloadsComponent } from './plugloads/plugloads.component';
 import { BeetreportComponent } from './beetreport/beetreport.component';
 import { MatStepper } from '@angular/material/stepper';
+import { TranslateService } from '@ngx-translate/core';
 
 
 export interface PlugLoadOptionsTable {
@@ -97,7 +98,17 @@ export class BEETComponent implements OnInit, AfterViewInit {
   disableReport: boolean = false;
  
 
-  constructor(private beetService: beetService, private cd: ChangeDetectorRef, private modalService: NgbModal) { }
+  constructor(public translate: TranslateService,private beetService: beetService, private cd: ChangeDetectorRef, private modalService: NgbModal) {
+    translate.addLangs(['en-US', 'fr-FR']);
+    translate.setDefaultLang('en-US');
+
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/fr|fr-FR/) ? 'fr-FR' : 'en-US');
+    
+    console.log('Browser Lang =', browserLang);
+    console.log('Navigator Lang =', navigator.language);
+    console.log('Current Lang =', translate.currentLang);
+   }
 
   ngOnInit(): void {
     if (sessionStorage.getItem('userId') !== null) {

@@ -8,31 +8,34 @@
 
 
 
-<div class="container" id="pdf-general-section">
-   
-    <div  class="row" >
-        
-        <div  class="col-md-2"><img src="../../../assets/images/report/argentinaflag.png"></div>
-        <div  class="col-md-3"> <ul class="header-pdf" style="list-style: none;">
-            <li style="font-size: xx-large;font-weight: bold; padding-bottom: 1rem; ">
-                {{selectedcountryname}}
-            </li>
-            <li style="font-weight: bold;">
-                Province : {{genDetailsComponent.genDetailsForm.controls.province.value}}
-            </li>
-            <li style="font-weight: bold;">
-                Location : {{genDetailsComponent.genDetailsForm.controls.location.value}}
-            </li>
-        </ul>
-       </div>
+<div class="container" id="pdf-general-section" style="border-style: ridge;padding-top: 1rem;">
+
+    <div class="row" style="padding-top: 1rem;">
+
+        <div class="col-md-2"><img src="../../../assets/images/report/argentinaflag.png"></div>
+        <div class="col-md-3">
+            <ul class="header-pdf" style="list-style: none;">
+                <li style="font-size: xx-large;font-weight: bold; padding-bottom: 1rem; ">
+                    {{selectedcountryname}}
+                </li>
+                <li style="font-weight: bold;">
+                    Province : {{genDetailsComponent.genDetailsForm.controls.province.value}}
+                </li>
+                <li style="font-weight: bold;">
+                    Location : {{genDetailsComponent.genDetailsForm.controls.location.value}}
+                </li>
+            </ul>
+        </div>
 
         <div class="offset-md-3"> </div>
-        <div class="col-md-2"  ><img  width="" src="../../../assets/images/Logos/UNEP-partnershiplogo.png" style="width: 100%;"></div>
-        <div class="col-md-2"  ><img  width="" src="../../../assets/images/c2e2-logo-seforall.png" style=" width: 100%;"></div>
+        <div class="col-md-2"><img width="" src="../../../assets/images/Logos/UNEP-partnershiplogo.png"
+                style="width: 100%;"></div>
+        <div class="col-md-2"><img width="" src="../../../assets/images/c2e2-logo-seforall.png" style=" width: 100%;">
+        </div>
     </div>
 
 
-    <div style="background-color:#5B9BD5 ;color:white ;font-size: larger;">
+    <div class="report-title">
         <p>Self Assessment Building Energy Efficiency Calculator(BEEC)</p>
     </div>
 
@@ -72,8 +75,14 @@
         </div>
     </div>
 
-    <div style="background-color:#5B9BD5 ;color:white ;font-size: larger;">
+    <div class="report-subtitle">
         <p>General Details</p>
+    </div>
+
+    <div *ngIf="beetReportComponent.pdfInputForm.value == true" style="padding-left: 2rem;">
+        <td style="font-weight: bold;">Project Name :</td>
+        <td style=" background-color: #FFD966;;">{{beetReportComponent.beetReportForm.controls.projectName.value}}
+        </td>
     </div>
 
     <div style="display: flex;flex-wrap: wrap; overflow: hidden;">
@@ -84,36 +93,32 @@
         margin-left: -1px;">
 
 
-            <tr *ngIf="beetReportComponent.pdfInputForm.value == true">
-                <td>Project Name :</td>
-                <td>{{beetReportComponent.beetReportForm.controls.projectName.value}}
-                </td>
-            </tr>
+
             <tbody>
                 <tr>
-                    <td>Building type :</td>
+                    <td style="font-weight: bold;">Building type :</td>
                     <td>{{genDetailsComponent.genDetailsForm.controls.buildingType.value}}
                     </td>
                 </tr>
                 <tr *ngIf="beetReportComponent.pdfInputForm.value == true">
-                    <td>Construction Year :</td>
+                    <td style="font-weight: bold;">Construction Year :</td>
                     <td>{{beetReportComponent.beetReportForm.controls.yearOfConstruction.value}}
                     </td>
                 </tr>
                 <tr>
-                    <td>Surface Area : </td>
+                    <td style="font-weight: bold;">Surface Area : </td>
                     <td>{{genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value|
                         number:'1.2-2'}}
                         {{genDetailsComponent.genDetailsForm.controls.netAreaUnits.value}}
                     </td>
                 </tr>
                 <tr>
-                    <td>No. of Floors : </td>
+                    <td style="font-weight: bold;">No. of Floors : </td>
                     <td>{{genDetailsComponent.genDetailsForm.controls.noOfFloors.value}}
                     </td>
                 </tr>
                 <tr>
-                    <td>Occupancy Hours : </td>
+                    <td style="font-weight: bold;">Occupancy Hours : </td>
                     <td>{{genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value}}
                     </td>
                 </tr>
@@ -127,7 +132,7 @@
         margin-left: -1px;">
             <tbody>
                 <tr>
-                    <td>Occupant Density :</td>
+                    <td style="font-weight: bold;">Occupant Density :</td>
                     <td> {{genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value|
                         number:'1.2-2'}}
                         {{genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value}}
@@ -135,7 +140,7 @@
                 </tr>
 
                 <tr>
-                    <td>Electricity Cost :</td>
+                    <td style="font-weight: bold;">Electricity Cost :</td>
                     <td>{{genDetailsComponent.genDetailsForm.controls.electricityCost.value|
                         number:'1.2-2'}}
                         {{genDetailsComponent.genDetailsForm.controls.electricityUnits.value}}
@@ -143,7 +148,7 @@
                 </tr>
 
                 <tr>
-                    <td>Fuel Cost : </td>
+                    <td style="font-weight: bold;">Fuel Cost : </td>
                     <td>{{genDetailsComponent.genDetailsForm.controls.fuelCost.value|
                         number:'1.2-2'}}
                         {{genDetailsComponent.genDetailsForm.controls.fuelUnits.value}}</td>
@@ -153,8 +158,8 @@
     </div>
 
 
-    <div style="background-color:#5B9BD5 ;color:white ;font-size: larger;">
-        <p>Key Indicators</p>
+    <div >
+        <p class="report-subtitle">Key Indicators</p>
     </div>
 
     <div class="row">
@@ -181,7 +186,7 @@
                     [chartType]="barChartType" [colors]="barChartColors">
                 </canvas>
             </div>
-        </div>
+        </div><br>
 
         <div class="key-indicators-table" style="display:flex">
             <table class="table table-hover" style="flex: 1 1 20em;
@@ -223,7 +228,8 @@
                 <tbody>
                     <tr>
                         <td class="key-indicators">
-                            <img style="width: 50px" src="../../../assets/images/report/esavings.png">Energy Savings</td>
+                            <img style="width: 30px" src="../../../assets/images/report/esavings.png">Energy Savings
+                        </td>
                         <td class="key-data-values">{{parentData.energysavings |
                             number:'1.2-2'}}{{parentData.energysavingsunit}}</td>
                         <td class="key-data-percentvalues">{{parentData.energysavingspercent | number:'1.2-2'}}
@@ -233,7 +239,9 @@
                     <tr>
 
                         <td class="key-indicators">
-                            <img style="width: 50px" src="../../../assets/images/report/ecsavings.png">Energy Cost Savings</td>
+                            <img style="width: 30px" src="../../../assets/images/report/ecsavings.png">Energy Cost
+                            Savings
+                        </td>
                         <td class="key-data-values">{{parentData.energycostsavings |
                             number:'1.2-2'}}{{parentData.energycostsavingsunit}}</td>
                         <td class="key-data-percentvalues">{{parentData.energycostsavingspercent | number:'1.2-2'}}
@@ -243,7 +251,8 @@
                     <tr>
 
                         <td class="key-indicators">
-                            <img style="width: 50px" src="../../../assets/images/report/co2red.png">CO2 Reduction</td>
+                            <img style="width: 40px" src="../../../assets/images/report/co2red.png">CO2 Reduction
+                        </td>
                         <td class="key-data-values">{{parentData.co2reduction | number:'1.2-2'}}
                             {{parentData.co2reductionunit}}</td>
                         <td class="key-data-percentvalues">{{parentData.co2reductionpercent | number:'1.2-2'}}
@@ -256,295 +265,302 @@
 
     </div>
 </div>
-<div class="container" id="pdf-construction">
-    <div style="background-color:#5B9BD5 ;color:white ;font-size: larger;">
+<div class="container" id="pdf-construction" style="border-style: ridge;padding-top: 1rem;">
+    <div class="report-subtitle">
         <p>BASELINE vs EE Potential Improvements</p>
     </div>
-    <table class="table  table-hover table-bordered table-sm" data-toggle="table">
-        <thead>
-            <tr>
-                <th colspan="6" style="background-color: #2F75B5;">Construction Elements</th>
-            </tr>
-            <tr>
-                <th colspan="3" style="background-color: #F4B084;">Baseline</th>
-                <th colspan="4" style="background-color: #A9D08E;">Energy Efficiency Standards</th>
-            </tr>
-            <tr>
-                <th colspan="2" style="background-color: #FCE4D6;">Element</th>
-                <th style="background-color: #FCE4D6;">Indicators</th>
-                <th style="background-color: #E2EFDA;">Indicators</th>
-                <th style="background-color: #E2EFDA;">Benchmark</th>
-                <th style="background-color: #E2EFDA;">Recommendations</th>
-            </tr>
+    <div>
+        <table class="table  table-hover table-bordered table-sm" data-toggle="table">
+            <thead>
+                <tr>
+                    <th colspan="6" style="background-color: #2F75B5;">Construction Elements</th>
+                </tr>
+                <tr>
+                    <th colspan="3" style="background-color: #F4B084;">Baseline</th>
+                    <th colspan="4" style="background-color: #A9D08E;">Energy Efficiency Standards</th>
+                </tr>
+                <tr>
+                    <th colspan="2" style="background-color: #FCE4D6;">Element</th>
+                    <th style="background-color: #FCE4D6;">Indicators</th>
+                    <th style="background-color: #E2EFDA;">Indicators</th>
+                    <th style="background-color: #E2EFDA;">Benchmark</th>
+                    <th style="background-color: #E2EFDA;">Recommendations</th>
+                </tr>
 
-            <tr>
-                <th colspan="6">Main facade</th>
-            </tr>
+                <tr>
+                    <th colspan="6" style="background-color: #F2F2F2;">Main facade</th>
+                </tr>
 
-            <tr>
-                <td colspan="2" style="width: 40%;">
-                    <p *ngIf="buildingdetailsComponent?.formgroup.controls.outerwallr.value == 1"
-                        style="font-size: large;font-weight: bold;text-align: center;">
-                        User Input Value
-                    </p>
-                    <img *ngIf="buildingdetailsComponent?.formgroup.controls.outerwallr.value == 2" style="width: 100%;"
-                        [src]="buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.rimages.value.imagepath" />
-                    <p *ngIf="buildingdetailsComponent?.formgroup.controls.outerwallr.value == 3"
-                        style="font-size: large;font-weight: bold;text-align: center;">
-                        User Custom Built Layer</p>
-                </td>
-                <td style="color: red;">{{parentData.wallrvaluebaseline |
-                    number:'1.2-2'}}
-                    {{parentData.wallrvalueunit}}</td>
-                <td style="color: green">{{parentData.wallrvaluebaseline |
-                    number:'1.2-2'}}
-                    {{parentData.wallrvalueunit}}</td>
-                <td></td>
-                <td>
-                    <ul>
-                        <li *ngFor="let rec of parentData.wallrecommendations;
+                <tr>
+                    <td colspan="2" style="width: 40%;">
+                        <p *ngIf="buildingdetailsComponent?.formgroup.controls.outerwallr.value == 1"
+                            style="font-size: large;font-weight: bold;text-align: center;">
+                            User Input Value
+                        </p>
+                        <img *ngIf="buildingdetailsComponent?.formgroup.controls.outerwallr.value == 2"
+                            style="width: 100%;"
+                            [src]="buildingdetailsComponent?.formgroup.get('outerWallArray')['controls'][0].controls.rimages.value.imagepath" />
+                        <p *ngIf="buildingdetailsComponent?.formgroup.controls.outerwallr.value == 3"
+                            style="font-size: large;font-weight: bold;text-align: center;">
+                            User Custom Built Layer</p>
+                    </td>
+                    <td style="color: red;">{{parentData.wallrvaluebaseline |
+                        number:'1.2-2'}}
+                        {{parentData.wallrvalueunit}}</td>
+                    <td style="color: green">{{parentData.wallrvaluebaseline |
+                        number:'1.2-2'}}
+                        {{parentData.wallrvalueunit}}</td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let rec of parentData.wallrecommendations;
                                     let i = index">
-                            {{ rec.recommendation}}
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <th style="background-color: #F2F2F2;" colspan="6">Roof</th>
-            </tr>
+                                {{ rec.recommendation}}
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #F2F2F2;" colspan="6">Roof</th>
+                </tr>
 
-            <tr>
-                <td colspan="2" style="width: 40%;">
-                    <p *ngIf="buildingdetailsComponent?.formgroup.controls.roofr.value == 1"
-                        style="font-size: large;font-weight: bold;text-align: center;">
-                        User Input Value</p>
-                    <img *ngIf="buildingdetailsComponent?.formgroup.controls.roofr.value == 2" style="width: 100%;"
-                        [src]="buildingdetailsComponent?.formgroup.get('roofrArray')['controls'][0].controls.roofrimages.value.imagepath" />
-                    <p *ngIf="buildingdetailsComponent?.formgroup.controls.roofr.value == 3"
-                        style="font-size: large;font-weight: bold;text-align: center;">
-                        User Custom Built Layer</p>
+                <tr>
+                    <td colspan="2" style="width: 40%;">
+                        <p *ngIf="buildingdetailsComponent?.formgroup.controls.roofr.value == 1"
+                            style="font-size: large;font-weight: bold;text-align: center;">
+                            User Input Value</p>
+                        <img *ngIf="buildingdetailsComponent?.formgroup.controls.roofr.value == 2" style="width: 100%;"
+                            [src]="buildingdetailsComponent?.formgroup.get('roofrArray')['controls'][0].controls.roofrimages.value.imagepath" />
+                        <p *ngIf="buildingdetailsComponent?.formgroup.controls.roofr.value == 3"
+                            style="font-size: large;font-weight: bold;text-align: center;">
+                            User Custom Built Layer</p>
 
 
-                </td>
-                <td style="color: red;">{{parentData.roofrvaluebaseline |
-                    number:'1.2-2'}}
-                    {{parentData.roofrvalueunit}}</td>
-                <td style="color: green">{{parentData.roofrvaluebaseline |
-                    number:'1.2-2'}}
-                    {{parentData.roofrvalueunit}}</td>
-                <td></td>
-                <td>
-                    <ul>
-                        <li *ngFor="let rec of parentData.roofrecommendations;
+                    </td>
+                    <td style="color: red;">{{parentData.roofrvaluebaseline |
+                        number:'1.2-2'}}
+                        {{parentData.roofrvalueunit}}</td>
+                    <td style="color: green">{{parentData.roofrvaluebaseline |
+                        number:'1.2-2'}}
+                        {{parentData.roofrvalueunit}}</td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let rec of parentData.roofrecommendations;
                                         let i = index">
-                            <p>{{ rec.recommendation}}</p>
+                                <p>{{ rec.recommendation}}</p>
 
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
-            <tr>
-                <th colspan="6">Windows</th>
-            </tr>
+                <tr>
+                    <th colspan="6" style="background-color: #F2F2F2;">Windows</th>
+                </tr>
 
-            <tr style="width: 40%;">
-                <td rowspan="3"> <img style="width: 100%;" src="../../../assets/images/report/window-report.png" /></td>
-                <td>SHGC</td>
-                <td style="color: red;">{{parentData.windowshgcvaluebaseline }}</td>
-                <td style="color: green">{{parentData.windowshgcvalueees }}</td>
-                <td rowspan="3"></td>
-                <td rowspan="3">
-                    <ul>
-                        <li *ngFor="let rec of parentData.windowrecommendations;
+                <tr style="width: 40%;">
+                    <td rowspan="3"> <img style="width: 100%;" src="../../../assets/images/report/window-report.png" />
+                    </td>
+                    <td>SHGC</td>
+                    <td style="color: red;">{{parentData.windowshgcvaluebaseline }}</td>
+                    <td style="color: green">{{parentData.windowshgcvalueees }}</td>
+                    <td rowspan="3"></td>
+                    <td rowspan="3">
+                        <ul>
+                            <li *ngFor="let rec of parentData.windowrecommendations;
                                     let i = index">
-                            <p> {{ rec.recommendation}}</p>
-                        </li>
-                    </ul>
-                </td>
+                                <p> {{ rec.recommendation}}</p>
+                            </li>
+                        </ul>
+                    </td>
 
-            </tr>
-            <tr>
-                <td>WWR</td>
-                <td style="color: red;">{{parentData.wwrvaluebaseline }}
-                    {{parentData.wwrvalueunit}}</td>
-                <td style="color: green">{{parentData.wwrvalueees}}
-                    {{parentData.wwrvalueunit}}</td>
-            </tr>
+                </tr>
+                <tr>
+                    <td>WWR</td>
+                    <td style="color: red;">{{parentData.wwrvaluebaseline }}
+                        {{parentData.wwrvalueunit}}</td>
+                    <td style="color: green">{{parentData.wwrvalueees}}
+                        {{parentData.wwrvalueunit}}</td>
+                </tr>
 
-            <tr>
-                <td>R value</td>
-                <td style="color: red;">{{parentData.windowrvaluebaseline |
-                    number:'1.2-2'}}
-                    {{parentData.windowrvalueunit}}</td>
-                <td style="color: green">{{parentData.windowrvalueees | number:'1.2-2'}}
-                    {{parentData.windowrvalueunit}}</td>
-            </tr>
-        </thead>
-    </table>
+                <tr>
+                    <td>R value</td>
+                    <td style="color: red;">{{parentData.windowrvaluebaseline |
+                        number:'1.2-2'}}
+                        {{parentData.windowrvalueunit}}</td>
+                    <td style="color: green">{{parentData.windowrvalueees | number:'1.2-2'}}
+                        {{parentData.windowrvalueunit}}</td>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
 
-<div class="container" id="pdf-hvac">
-    <div style="background-color:#5B9BD5 ;color:white ;font-size: larger;">
+<div class="container" id="pdf-hvac" style="border-style: ridge;padding-top: 1rem;">
+    <div class="report-subtitle">
         <p>BASELINE vs EE Potential Improvements</p>
     </div>
 
-    <table class="table  table-bordered table-sm" data-toggle="table">
-        <thead>
-            <tr>
-                <th colspan="5" style="background-color: #2F75B5;">HVAC SYSTEMS</th>
-            </tr>
-            <tr>
-                <th colspan="2" style="background-color: #F4B084;">Baseline</th>
-                <th colspan="3">Energy Efficiency Standards</th>
-            </tr>
-            <tr>
-                <th style="background-color: #FCE4D6;">System</th>
-                <th style="background-color: #FCE4D6;">Performance</th>
-                <th style="background-color: #E2EFDA;">Performance</th>
-                <th style="background-color: #E2EFDA;">Benchmark</th>
-                <th style="background-color: #E2EFDA;">Recommendations</th>
-            </tr>
 
-            <tr>
-                <th colspan="5">Heating</th>
-            </tr>
+    <div>
+        <table class="table  table-bordered table-sm" data-toggle="table">
+            <thead>
+                <tr>
+                    <th colspan="5" style="background-color: #2F75B5;">HVAC SYSTEMS</th>
+                </tr>
+                <tr>
+                    <th colspan="2" style="background-color: #F4B084;">Baseline</th>
+                    <th colspan="3" style="background-color: #A9D08E;">Energy Efficiency Standards</th>
+                </tr>
+                <tr>
+                    <th style="background-color: #FCE4D6;">System</th>
+                    <th style="background-color: #FCE4D6;">Performance</th>
+                    <th style="background-color: #E2EFDA;">Performance</th>
+                    <th style="background-color: #E2EFDA;">Benchmark</th>
+                    <th style="background-color: #E2EFDA;">Recommendations</th>
+                </tr>
 
-            <tr>
-                <td>
-                    <img style="width: 100%;" [src]="parentData.heatingefficiencyimage" />
-                </td>
-                <td style="color: red;">
-                    {{parentData.heatingefficiencybaseline}}{{parentData.heatingefficiencyunit}}
-                </td>
-                <td style="color: green">
-                    {{parentData.heatingefficiencyees}}{{parentData.heatingefficiencyunit}}
-                </td>
-                <td></td>
-                <td>
-                    <ul>
+                <tr>
+                    <th colspan="5" style="background-color: #F2F2F2;">Heating</th>
+                </tr>
+
+                <tr>
+                    <td>
+                        <img style="width: 100%;" [src]="parentData.heatingefficiencyimage" />
+                    </td>
+                    <td style="color: red;">
+                        {{parentData.heatingefficiencybaseline}}{{parentData.heatingefficiencyunit}}
+                    </td>
+                    <td style="color: green">
+                        {{parentData.heatingefficiencyees}}{{parentData.heatingefficiencyunit}}
+                    </td>
+                    <td></td>
+                    <td>
+                        <ul>
 
 
-                        <li *ngFor="let rec of parentData.heatingefficiencyrecommendations;
+                            <li *ngFor="let rec of parentData.heatingefficiencyrecommendations;
                                             let i = index">
-                            <p>{{ rec.recommendation}}</p>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+                                <p>{{ rec.recommendation}}</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
-            <tr>
-                <th colspan="5">Cooling</th>
-            </tr>
+                <tr>
+                    <th colspan="5" style="background-color: #F2F2F2;">Cooling</th>
+                </tr>
 
-            <tr>
-                <td>
-                    <img style="width: 100%;" [src]="parentData.coolingefficiencyimage" />
-                </td>
-                <td style="color: red;">
-                    {{parentData.coolingefficiencybaseline}} {{parentData.coolingefficiencyunit}}
-                </td>
-                <td style="color: green;">
-                    {{parentData.coolingefficiencyees | number:'1.2-2'}}
-                    {{parentData.coolingefficiencyunit}}
-                </td>
-                <td></td>
-                <td>
-                    <ul>
-                        <li *ngFor="let rec of parentData.coolingefficiencyrecommendations;
+                <tr>
+                    <td>
+                        <img style="width: 100%;" [src]="parentData.coolingefficiencyimage" />
+                    </td>
+                    <td style="color: red;">
+                        {{parentData.coolingefficiencybaseline}} {{parentData.coolingefficiencyunit}}
+                    </td>
+                    <td style="color: green;">
+                        {{parentData.coolingefficiencyees | number:'1.2-2'}}
+                        {{parentData.coolingefficiencyunit}}
+                    </td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let rec of parentData.coolingefficiencyrecommendations;
                                             let i = index">
-                            <p> {{ rec.recommendation}}</p>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+                                <p> {{ rec.recommendation}}</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
-            <tr>
-                <th colspan="5">Fans and Blowers</th>
-            </tr>
+                <tr>
+                    <th colspan="5" style="background-color: #F2F2F2;">Fans and Blowers</th>
+                </tr>
 
-            <tr>
-                <td> <img style="width: 100%;" src="../../../assets/images/report/fansblowers-report.png" />
-                </td>
-                <td style="color: red;">{{parentData.roofrvaluebaseline |
-                    number:'1.2-2'}}
-                    {{parentData.roofrvalueunit}}</td>
-                <td style="color:green">{{parentData.roofrvaluebaseline |
-                    number:'1.2-2'}}
-                    {{parentData.roofrvalueunit}}</td>
-                <td></td>
-                <td>
-                    <ul>
-                        <li *ngFor="let rec of parentData.fansblowersrecommendations;
+                <tr>
+                    <td> <img style="width: 100%;" src="../../../assets/images/report/fansblowers-report.png" />
+                    </td>
+                    <td style="color: red;">{{parentData.roofrvaluebaseline |
+                        number:'1.2-2'}}
+                        {{parentData.roofrvalueunit}}</td>
+                    <td style="color:green">{{parentData.roofrvaluebaseline |
+                        number:'1.2-2'}}
+                        {{parentData.roofrvalueunit}}</td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let rec of parentData.fansblowersrecommendations;
                                             let i = index">
-                            <p> {{ rec.recommendation}}</p>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+                                <p> {{ rec.recommendation}}</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
-            <tr>
-                <th colspan="5">LIGHTING</th>
-            </tr>
+                <tr>
+                    <th colspan="5" style="background-color: #2F75B5;">LIGHTING</th>
+                </tr>
 
-            <tr>
-                <th colspan="5" style="background-color: #2F75B5;">Lighting</th>
-            </tr>
+                <tr>
+                    <th colspan="5" style="background-color: #F2F2F2;">Lighting</th>
+                </tr>
 
-            <tr>
-                <td> <img style="width: 100%;" src="../../../assets/images/report/lightning-report.png" />
-                </td>
-                <td style="color: red;">{{parentData.lightingvaluebaseline |
-                    number:'1.2-2'}}
-                    {{parentData.lightingvalueunit}}</td>
-                <td style="color:green ;">{{parentData.lightingvalueees |
-                    number:'1.2-2'}}
-                    {{parentData.lightingvalueunit}}</td>
-                <td></td>
-                <td>
-                    <ul>
-                        <li *ngFor="let rec of parentData.lightingrecommendations;
+                <tr>
+                    <td> <img style="width: 100%;" src="../../../assets/images/report/lightning-report.png" />
+                    </td>
+                    <td style="color: red;">{{parentData.lightingvaluebaseline |
+                        number:'1.2-2'}}
+                        {{parentData.lightingvalueunit}}</td>
+                    <td style="color:green ;">{{parentData.lightingvalueees |
+                        number:'1.2-2'}}
+                        {{parentData.lightingvalueunit}}</td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let rec of parentData.lightingrecommendations;
                                             let i = index">
-                            <p> {{ rec.recommendation}}</p>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+                                <p> {{ rec.recommendation}}</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
-            <tr>
-                <th colspan="5" style="background-color: #2F75B5;">PLUGLOADS</th>
-            </tr>
+                <tr>
+                    <th colspan="5" style="background-color: #2F75B5;">PLUGLOADS</th>
+                </tr>
 
-            <tr>
-                <th colspan="5">PlugLoads</th>
-            </tr>
-            <tr>
-                <td> <img style="width: 100%;" src="../../../assets/images/report/plugload-report.png" />
-                </td>
-                <td style="color: red;">{{parentData.plugloaddensitybaseline |
-                    number:'1.2-2'}}
-                    {{parentData.plugloaddensityunit}}</td>
-                <td style="color: green">{{parentData.plugloaddensityees |
-                    number:'1.2-2'}}
-                    {{parentData.plugloaddensityunit}}</td>
-                <td></td>
-                <td>
-                    <ul>
-                        <li *ngFor="let rec of parentData.plugloaddensityrecommendations;
+                <tr>
+                    <th colspan="5" style="background-color: #F2F2F2;">PlugLoads</th>
+                </tr>
+                <tr>
+                    <td> <img style="width: 100%;" src="../../../assets/images/report/plugload-report.png" />
+                    </td>
+                    <td style="color: red;">{{parentData.plugloaddensitybaseline |
+                        number:'1.2-2'}}
+                        {{parentData.plugloaddensityunit}}</td>
+                    <td style="color: green">{{parentData.plugloaddensityees |
+                        number:'1.2-2'}}
+                        {{parentData.plugloaddensityunit}}</td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let rec of parentData.plugloaddensityrecommendations;
                                             let i = index">
-                            <p> {{ rec.recommendation}}</p>
+                                <p> {{ rec.recommendation}}</p>
 
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        </thead>
-    </table>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
 
 
-<button mat-raised-button color="primary" (click)="getPDF()">Download Pdf
+<button mat-Flat-button color="primary" (click)="getPDF()">Download Pdf
     <mat-icon *ngIf="isGenerating">
         <mat-spinner color="accent" diameter="20">
         </mat-spinner>

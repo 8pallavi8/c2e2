@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import { BuildingenvelopedetailsComponent } from '../buildingenvelopedetails/buildingenvelopedetails.component';
 import { CO2EmissionsComponent } from '../co2-emissions/co2-emissions.component';
 import { GendetailsComponent } from '../gendetails/gendetails.component';
@@ -16,7 +14,6 @@ import { throwError } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { BeetreportpdfComponent } from 'src/app/shared/beetreportpdf/beetreportpdf.component';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { BeetReportResponse } from 'src/app/shared/models/beet-models';
 
 @Component({
   selector: 'app-beetreport',
@@ -278,13 +275,13 @@ export class BeetreportComponent implements OnInit {
     this.showPDFView = true;
 
     const dialogref = this.dialog.open(BeetreportpdfComponent, {
-      width: '80%',
+      width: '90%',
+      maxWidth:"100%",
       autoFocus: false,
       maxHeight: '100vh',
       data: this.submitResponse
     });
     dialogref.afterClosed().subscribe(result => {
-
     });
   }
   private delay(ms: number) {
@@ -314,57 +311,7 @@ export class BeetreportComponent implements OnInit {
   toggleButtonShowAssump() {
     this.showTogglePlusIconAssump = !this.showTogglePlusIconAssump;
   }
-  /* async getPDF() {
-    this.isGenerating = true;
-    this.showTogglePlusIcon = false;
-    this.showTogglePlusIconbase = false;
-    this.showTogglePlusIconhvac = false;
-    this.showTogglePlusIconlight = false;
-    this.showTogglePlusIconplugload = false;
-
-    await this.delay(3000);
-    let general = document.getElementById('general-section');
-    let baseline = document.getElementById('baseline-potential');
-    let hvac = document.getElementById('hvac');
-    let lightining = document.getElementById('lightining');
-
-    var pdf = new jsPDF('p', 'pt', [1200, 1800]);
-    let curDate=new Date();
-    pdf.setFontSize(30);
-    pdf.setTextColor(231, 76, 60)
-    pdf.setDrawColor(173,216,230)
-    pdf.setCreationDate();
-
-    pdf.text(curDate.toDateString(),50,65);
-    this.generateCanvas(pdf, general, 40, false);
-    this.generateCanvas(pdf, baseline, 40, false);
-    this.generateCanvas(pdf, hvac, 40, true);
-    this.isGenerating = false;
-  };
-
-  generateCanvas(pdf, sectionDiv, top_left_margin, savePDF) {
-    var HTML_Width = sectionDiv.offsetWidth;
-    var HTML_Height = sectionDiv.offsetHeight;
-    console.log("HTML Weight height " + HTML_Width + "    " + HTML_Height);
-    var PDF_Width = HTML_Width + (top_left_margin * 2);
-    var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
-    var canvas_image_width = HTML_Width;
-    var canvas_image_height = HTML_Height;
-
-    var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
-    html2canvas(sectionDiv).then(function (canvas) {
-      canvas.getContext('2d');
-      console.log(canvas.height + "  " + canvas.width);
-      var imgData = canvas.toDataURL("image/jpeg", 1.0);
-      pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
-      if (savePDF != true) {
-        pdf.addPage()
-      }
-      if (savePDF == true) {
-        pdf.save("Beet-Report.pdf");
-      }
-    });
-  } */
+  
 }
 
 
