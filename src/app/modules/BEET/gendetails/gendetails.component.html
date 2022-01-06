@@ -3,33 +3,21 @@
 
         <fieldset>
 
-            <!--  <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline" floatLabel="never">
-                <mat-label>User Name</mat-label> 
-                <input  matInput formControlName="userName" required>
-            </mat-form-field>
-
-            <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline" floatLabel="auto" >
-                <mat-label>Project name</mat-label>
-                <input  matInput formControlName="projectName" required>
-            </mat-form-field>   -->
-
             <legend>Location Details</legend>
-            <h2 class="heading-style">1.1 Location Details</h2>
-            <p>Please enter location details.
+            <h2 class="heading-style">1.1 {{'BEEC.GENDETAILS.LOC_DETAILS_TITLE' | translate}}</h2>
+            <p>{{'BEEC.GENDETAILS.LOC_DETAILS_TEXT' | translate}}
             </p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> Select Province first and then Location.
-                    If exact location is not available, please select the nearest / most suitable location (or) reach
-                    out to us.
+                <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.GENDETAILS.LOC_DETAILS_NOTE_TEXT' | translate}}
                 </p>
             </div>
             <div class="field-align">
 
                 <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">Country</mat-label>
+                    <mat-label class="field-title-beet">{{'BEEC.GENDETAILS.LOC_DETAILS_COUNTRY' | translate}}</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select id="Country" (selectionChange)="onChangeCountry($event)" formControlName="country"
-                            required placeholder="Select country">
+                            required placeholder="{{'BEEC.GENDETAILS.LOC_DETAILS_COUNTRY_PLACEHOLDER' | translate}}">
                             <mat-option *ngFor="let con of countrylist" [attr.data-id]="con.country"
                                 placeholder="Select Country" [value]="con.countrycode">{{con.country}}</mat-option>
                         </mat-select>
@@ -37,10 +25,10 @@
                 </div>
 
                 <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">Province</mat-label>
+                    <mat-label class="field-title-beet">{{'BEEC.GENDETAILS.LOC_DETAILS_PROVINCE' | translate}}</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select matNativeControl id="Province" formControlName="province" required
-                            (selectionChange)="onChangeProvince($event)" placeholder="Select province">
+                            (selectionChange)="onChangeProvince($event)" placeholder="{{'BEEC.GENDETAILS.LOC_DETAILS_PROVINCE_PLACEHOLDER' | translate}}">
                             <mat-option *ngFor="let location of locationDetails" [value]="location.province">
                                 {{location.province}}</mat-option>
                         </mat-select>
@@ -48,10 +36,10 @@
                 </div>
 
                 <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">Location</mat-label>
+                    <mat-label class="field-title-beet">{{'BEEC.GENDETAILS.LOC_DETAILS_LOCATION' | translate}}</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select matNativeControl id="Location" formControlName="location" required
-                            placeholder="Select location within the province">
+                            placeholder="{{'BEEC.GENDETAILS.LOC_DETAILS_LOCATION_PLACEHOLDER' | translate}}">
                             <mat-option *ngFor="let loc of locationlist" [value]="loc">{{loc}}</mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -61,20 +49,17 @@
         </fieldset>
         <fieldset>
             <legend>Type of building</legend>
-            <h2 class="heading-style">1.2 Type of building</h2>
-            <p>Please select building type and its areas.
+            <h2 class="heading-style">1.2 {{'BEEC.GENDETAILS.BUILDING_DETAILS_TITLE' | translate}}</h2>
+            <p>{{'BEEC.GENDETAILS.BUILDING_DETAILS_TEXT' | translate}}
             </p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> Please first select the building type and applicable building
-                    spaces from drop down list.
-                    If your building type is not available in the list, please select the most representative building
-                    type.
+                <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span>{{'BEEC.GENDETAILS.BUILDING_DETAILS_NOTE_TEXT' | translate}}
                 </p>
             </div>
 
             <div class="field-align">
                 <div class="field-group w-100 col-md-5">
-                    <mat-label class="field-title-beet">Building type</mat-label>
+                    <mat-label class="field-title-beet">{{'BEEC.GENDETAILS.BUILDING_DETAILS_TYPE' | translate}}</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select matNativeControl id="Buidling" formControlName="buildingType" required
                             (selectionChange)="onChangeBuildingType($event)" placeholder="Select building type">
@@ -86,7 +71,7 @@
 
 
                 <div class="field-group w-100 col-md-5">
-                    <mat-label class="field-title-beet">Building spaces</mat-label>
+                    <mat-label class="field-title-beet">{{'BEEC.GENDETAILS.BUILDING_DETAILS_SPACES' | translate}}</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select matNativeControl id="BuidlingSpaces" formControlName="buildingSpaces" multiple
                             required placeholder="Select spaces within the building (multiple selections allowed)">
@@ -101,25 +86,15 @@
 
         <fieldset>
             <legend>Building age, area, no. of floors, occupancy hours</legend>
-            <h2 class="heading-style">1.3 Building preliminary functional details</h2>
+            <h2 class="heading-style">1.3 {{'BEEC.GENDETAILS.BUILDING_FUN_DETAILS_TITLE' | translate}}</h2>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> Please enter details on number of floors, occupancy hours and
-                    built up area.
-                    You may select units in which you may want to enter for the building area value using the drop down
-                    button.
+                <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.GENDETAILS.BUILDING_FUN_DETAILS_NOTE_TEXT' | translate}}
                 </p>
             </div>
 
-
-            <!--    <mat-form-field class="w-100 mt-4 col-md-4" appearance="outline">
-                <mat-label>Year of construction</mat-label>
-                <input  matInput formControlName="yearOfConstruction" type="number" required>  
-            </mat-form-field>  -->
-
-
             <div class="field-align">
                 <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">Number of floors</mat-label>
+                    <mat-label class="field-title-beet">{{'BEEC.GENDETAILS.BUILDING_FUN_DETAILS_FLOORS' | translate}}</mat-label>
                     <mat-form-field appearance="outline">
                         <input formControlName="noOfFloors" type="number" matInput required
                             placeholder="Enter the number of floors in the building">
@@ -129,7 +104,7 @@
                     </mat-form-field>
                 </div>
                 <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">Occupancy hours per week</mat-label>
+                    <mat-label class="field-title-beet">{{'BEEC.GENDETAILS.BUILDING_FUN_DETAILS_OCCHRS' | translate}}</mat-label>
                     <mat-form-field appearance="outline">
                         <input formControlName="occupanyHoursPerWeek" type="number" matInput required
                             placeholder="Enter occupancy hours per week">
@@ -153,15 +128,15 @@
             <div class="field-align">
                 <div class="field-group w-100 col-md-8">
                     <div class="units-picker-component">
-                        <mat-label class="field-title-beet">Total built up area</mat-label>
+                        <mat-label class="field-title-beet">{{'BEEC.GENDETAILS.BUILDING_FUN_DETAILS_NETAREA' | translate}}</mat-label>
                         <mat-form-field class="netarea-field" appearance="outline">
                             <input formControlName="netOccupiedFloorArea" type="number" matInput required
                                 (input)="calculateGross()"
                                 placeholder="Enter built up area (i.e. carpet area + thickness of outer walls + balcony - parking area)">
                             <mat-select style="padding-left: 8px ;width: 180px;" placeholder="units"
                                 formControlName="netAreaUnits" (selectionChange)="calculateGross()">
-                                <mat-option value="square feet">Square Feet</mat-option>
-                                <mat-option value="square meter">Square Meter</mat-option>
+                                <mat-option value="square feet">{{'BEEC.GENDETAILS.BUILDING_FUN_DETAILS_SQFEET' | translate}}</mat-option>
+                                <mat-option value="square meter">{{'BEEC.GENDETAILS.BUILDING_FUN_DETAILS_SQMETER' | translate}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -172,34 +147,29 @@
         </fieldset>
         <fieldset>
             <legend>Occupancy - People </legend>
-            <h2 class="heading-style">1.4 Occupancy - People </h2>
-            <p>Please share occupancy details for the building.
+            <h2 class="heading-style">1.4 {{'BEEC.GENDETAILS.OCCUPANCY_TITLE' | translate}}</h2>
+            <p>{{'BEEC.GENDETAILS.OCCUPANCY_TEXT' | translate}}
             </p>
 
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> Select from following options. For option C, standard values
-                    will be considered based on the building categories and spaces selected. More details on this is
-                    given in the Assumptions section.
+                <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.GENDETAILS.OCCUPANCY_NOTE_TEXT' | translate}}
                 </p>
             </div>
             <div>
                 <mat-radio-group aria-label="Select an option" formControlName="occupantDensity"
                     (change)="onChangeOccupancy()">
-                    A. <mat-radio-button value="1">I only know the number of people occupying the building during normal
-                        working hours.</mat-radio-button><br>
-                    B. <mat-radio-button value="2"> I know the occupant density of the building.
+                    A. <mat-radio-button value="1">{{'BEEC.GENDETAILS.OCCUPANCY_PEOPLEOCCUPYING' | translate}}</mat-radio-button><br>
+                    B. <mat-radio-button value="2"> {{'BEEC.GENDETAILS.OCCUPANCY_OCCDENSITY' | translate}}
                     </mat-radio-button><br>
-                    C. <mat-radio-button value="3">I do not know the value.
+                    C. <mat-radio-button value="3">{{'BEEC.GENDETAILS.OCCUPANCY_OCCDENSITY_UNKNOWN' | translate}}
                     </mat-radio-button>
                 </mat-radio-group>
             </div>
 
             <div *ngIf="genDetailsForm.controls.occupantDensity.value==1">
-                <!-- <p style="margin-top: 1em;">I know the number of people occupying the building during normal
-                            working hours.</p> -->
-
+             
                 <div class="field-button-calculate">
-                    <b style="margin-top: 1.5rem;">Number of people occupying the building</b>
+                    <b style="margin-top: 1.5rem;">{{'BEEC.GENDETAILS.OCCUPANCY_PEOPLEOCCUPYING_TEXT' | translate}}</b>
                     <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
                         <input matInput placeholder="Enter number of people" formControlName="noOfPeopleOccupying"
                             type="number" (keyup)="onChangeOccupancy()" #peopleOccupying>
@@ -208,30 +178,23 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <p>Example for number of people input : 50 or 100 or 125 or 1020,etc.</p>
-                <div>
-                    <!-- <button mat-raised-button color="primary" style="margin-top: 1rem;"
-                        (click)="onChangeOccupancy()">Calculate Occupant Density</button> -->
-                </div>
+                <p>{{'BEEC.GENDETAILS.OCCUPANCY_PEOPLEOCCUPYING_HINT' | translate}}: 50 or 100 or 125 or 1020,etc.</p>
             </div>
 
 
             <span *ngIf="genDetailsForm.controls.occupantDensity.value==2">
 
-                <p class="fields-note">You may choose to enter the values for any of the units mentioned
-                    below. Necessary units conversions will be made by
-                    the tool for respective calculations.</p>
-                <b style="margin-top: 1em;">Occupant Density of the building :</b>
+                <p class="fields-note">{{'BEEC.GENDETAILS.OCCUPANCY_OCCDENSITY_TEXT' | translate}}</p>
+                <b style="margin-top: 1em;">{{'BEEC.GENDETAILS.OCCUPANCY_OCCDENSITY_HINT' | translate}} :</b>
                 <span class="units-picker-component">
                     <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                        <!-- <mat-label>Enter value here</mat-label> -->
-                        <input matInput placeholder="Enter value" type="number" formControlName="occupantDensityKnown"
+                        <input matInput placeholder="{{'BEEC.COMMON.ENTER_VALUE' | translate}}" type="number" formControlName="occupantDensityKnown"
                             type="number">
-                        <mat-select [(value)]="occupancyUnits" placeholder="Select Units"
+                        <mat-select [(value)]="occupancyUnits" placeholder="{{'BEEC.COMMON.SELECT_UNITS' | translate}}"
                             formControlName="occupantDensityUnits">
                             <mat-label>Select units</mat-label>
-                            <mat-option value="square feet per person">square feet per person</mat-option>
-                            <mat-option value="square meter per person">square meter per person</mat-option>
+                            <mat-option value="square feet per person">{{'BEEC.GENDETAILS.OCCUPANCY_OCCDENSITY_SQFTPERSON' | translate}} </mat-option>
+                            <mat-option value="square meter per person">{{'BEEC.GENDETAILS.OCCUPANCY_OCCDENSITY_SQMTPERSON' | translate}} </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </span>
@@ -239,40 +202,38 @@
 
             <div>
                 <b class="calculated-values">
-                    Occupant density: {{genDetailsForm.controls.occupantDensityKnown.value | number:'1.2-2'}}
+                    {{'BEEC.GENDETAILS.OCCUPANCY_OCCUPANCYDENSITY' | translate}} : {{genDetailsForm.controls.occupantDensityKnown.value | number:'1.2-2'}}
                     {{genDetailsForm.controls.occupantDensityUnits.value}}
                 </b>
             </div>
         </fieldset>
         <fieldset>
             <legend>Energy and Fuel cost</legend>
-            <h2 class="heading-style">1.5 Energy and Fuel cost</h2>
+            <h2 class="heading-style">1.5 {{'BEEC.GENDETAILS.ENERGYANDFUEL_TITLE' | translate}}</h2>
 
-            <p>Please enter energy and fuel details associated with the building.
+            <p>{{'BEEC.GENDETAILS.ENERGYANDFUEL_TEXT' | translate}}
             </p>
             <div class="fields-note">
-                <p><span class="notes-style"> Note:</span> Fuel considered as Natural Gas. If any other forms of fuel is
-                    being used,
-                    please reach out to us. Select the units from the drop down list.
+                <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.GENDETAILS.ENERGYANDFUEL_NOTE_TEXT' | translate}}
                 </p>
             </div>
 
             <div class="field-align">
 
                 <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">Electricity cost units</mat-label>
+                    <mat-label class="field-title-beet">{{'BEEC.GENDETAILS.ENERGYANDFUEL_ELECTRICITY_UNITS' | translate}}</mat-label>
                     <mat-form-field appearance="outline">
-                        <mat-select formControlName="electricityUnits" placeholder="Select units">
+                        <mat-select formControlName="electricityUnits" placeholder="{{'BEEC.COMMON.SELECT_UNITS' | translate}}">
                             <mat-option *ngFor="let unit of eletricityunitslist" [value]="unit"
-                                placeholder="Select units">{{unit}}</mat-option>
+                                placeholder="{{'BEEC.COMMON.SELECT_UNITS' | translate}}">{{unit}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
 
                 <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">Electricity cost value</mat-label>
+                    <mat-label class="field-title-beet">{{'BEEC.GENDETAILS.ENERGYANDFUEL_ELECTRICITY_VALUE' | translate}}</mat-label>
                     <mat-form-field appearance="outline">
-                        <input type="number" matInput formControlName="electricityCost" placeholder="Enter value"
+                        <input type="number" matInput formControlName="electricityCost" placeholder="{{'BEEC.COMMON.ENTER_VALUE' | translate}}"
                             required>
                     </mat-form-field><br>
                 </div>
@@ -280,7 +241,7 @@
 
             <div class="field-align">
                 <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">Fuel cost units</mat-label>
+                    <mat-label class="field-title-beet">{{'BEEC.GENDETAILS.ENERGYANDFUEL_FUELCOST_UNITS' | translate}}</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-select formControlName="fuelUnits" placeholder="Select units">
                             <mat-option *ngFor="let units of fuelunitslist" [value]="units">{{units}}</mat-option>
@@ -289,13 +250,11 @@
                 </div>
 
                 <div class="field-group w-100 col-md-4">
-                    <mat-label class="field-title-beet">Fuel cost value</mat-label>
+                    <mat-label class="field-title-beet">{{'BEEC.GENDETAILS.ENERGYANDFUEL_FUELCOST_VALUE' | translate}}</mat-label>
                     <mat-form-field appearance="outline">
                         <input matInput type="number" formControlName="fuelCost" placeholder="Enter value" required>
                     </mat-form-field>
                 </div>
-
-
             </div>
         </fieldset>
     </form>

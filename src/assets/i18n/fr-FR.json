@@ -3,9 +3,17 @@
       "TITLE": "Bonjour Angular avec ngx-translate !",
       "SELECT": "Changer la langue"
     },
-    "BEET" :{
-        "DESCRIPTION" :"FRED Welcome to the self assessment Building Energy Efficiency Calculator (BEEC). This tool was created under the framework of the Euroclima+ program by the Copenhagen Centre of Energy Efficiency (C2E2), an Energy Efficiency hub institutionally part of the UNEP DTU Partnership.\\n\\nThe Energy Sustainable Municipal Buildings project is funded by Euroclima +, the flagship cooperation program of the European Union for environmental sustainability and climate change in Latin America. In Argentina, the French Development Agency (AFD) is in charge of the implementation. The National University of La Plata (UNLP) is the entity responsible and leader of the project for its execution. The Red Argentina de Municipios frente al Cambio Climático (RAMCC) and the Copenhagen Center for Energy Efficiency (C2E2) are the strategic partners for the realization of the project"
+    "BEEC" :{
+      "COMMON":{
+        "DESCRIPTION" :"Bienvenue dans le calculateur d'auto-évaluation de l'efficacité énergétique des bâtiments (BEEC). Cet outil a été créé dans le cadre du programme Euroclima+ par le Copenhagen Center of Energy Efficiency (C2E2), un hub d'efficacité énergétique institutionnellement partie du partenariat PNUE DTU.<br _ngcontent-yoi-c353=\"\"><br _ngcontent -yoi-c353=\"\"> Le projet Energy Sustainable Municipal Buildings est financé par Euroclima +, le programme de coopération phare de l'Union européenne pour la durabilité environnementale et le changement climatique en Amérique latine. En Argentine, l'Agence française de développement (AFD) est en charge de la mise en œuvre. L'Université nationale de La Plata (UNLP) est l'entité responsable et chef de file du projet pour son exécution. Le Red Argentina de Municipios frente al Cambio Climático (RAMCC) et le Copenhagen Center for Energy Efficiency (C2E2) sont les partenaires stratégiques pour la réalisation du projet. <br _ngcontent-yoi-c353=\"\"><br _ngcontent-yoi-c353=\"\"><b _ngcontent-yoi-c353=\"\">À propos de BEET</b><br _ngcontent-yoi -c353=\"\"> Ce calculateur d'auto-évaluation de l'efficacité énergétique des bâtiments (BEEC) est conçu pour fournir aux utilisateurs individuels une plate-forme d'évaluation rapide préliminaire où ils peuvent évaluer la performance énergétique de leur bâtiment. L'objectif global de BEET est triple :<br _ngcontent-yoi-c353=\"\"> a. Soutenir le développement d'une évaluation rapide de la performance énergétique des bâtiments individuels ; <br _ngcontent-yoi-c353=\"\"> b. Créer une évaluation comparative entre la performance énergétique de base et les normes d'efficacité énergétique (EE). <br _ngcontent-yoi-c353=\"\"> c. Partager des recommandations de mesures d'EE potentielles sur les composants et les systèmes du bâtiment. <br _ngcontent-yoi-c353=\"\"> L'outil est destiné à répondre aux besoins des municipalités et des parties prenantes concernées. L'outil peut être utilisé pour une compréhension globale de l'impact sur le profil global de consommation d'énergie du bâtiment par rapport à divers paramètres au niveau du système et des composants. Les utilisateurs cibles peuvent être des gestionnaires de l'énergie, des analystes, des professionnels de la maintenance et de l'exploitation, des techniciens et toute personne ayant des connaissances de base sur les bâtiments et l'efficacité énergétique.",
+        "DISCLAIMER": "wwwwww",
+        "DISCLAIMER-TEXT":"WRETRYTYTUYI",
+        "BUILDINGS":"WRETRYTYTUYI",
+        "BUILDINGS-TEXT":"XXXXXX",
+        "STEPLABEL1":"YYYYYYY"
+      }
     }
+  
     
 
   }

@@ -608,5 +608,7 @@
     <!--   <button mat-raised-button color="primary" (click)="Goback()" style="float: right;">Go Back</button> -->
     <button mat-raised-button color="primary" (click)="generatePdf()" >PDF Preview</button>
     <!-- <app-beetreportpdf *ngIf="showPDFView" [parentData]="submitResponse"></app-beetreportpdf> -->
-    
+    <div *ngIf="debug == 'true'">
+        {{debugPayload}}
+    </div>
 </div>

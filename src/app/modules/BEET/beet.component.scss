@@ -343,6 +343,9 @@ table {
         display: block;
     }
 
+
+    
+
    ::ng-deep  .mat-radio-button{
         width: 80%;
     }
@@ -357,4 +360,10 @@ table {
      }
      .progress-bar-beet{
          max-width: 12%;
+     }
+
+     .lang-selector{
+         float: right;
+         border-radius: 5px;
+         margin-right: 5rem;
      }

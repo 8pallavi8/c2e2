@@ -1,11 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormArray, FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Label, SingleDataSet } from 'ng2-charts';
-import { DialogData, DistTransformer } from 'src/app/shared/models/models';
+import { Color, Label, SingleDataSet } from 'ng2-charts';
+import { DistTransformer } from 'src/app/shared/models/models';
 import { ToolsService } from 'src/app/shared/services/tools.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogOverviewExampleDialog} from './newtransformer-dialog/distribution-transformer-dialog';
 import { Location } from '@angular/common';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmation-dialog.service';
@@ -41,12 +40,36 @@ export class DisTransformerComponent implements OnInit {
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
-  barChartOptions: ChartOptions = { responsive: true, };
+  pieData: number[] = [];
+  pieLabels: string[] = [];
+
+
+  barChartOptions: ChartOptions = 
+  { responsive: true,
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: 'ton CO2/year'
+        }
+      }]
+    }
+   };
+   barChartColors: Color[] = [
+    {
+      backgroundColor: '#5B9BD5'
+    }
+  ];
   barChartLabels: Label[] = ['CO2 baseline', 'Final CO2 emissions'];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
   barChartData: ChartDataSets[] = [{ data: [], label: 'CO2 emissions' }];
+
+
+
+
+  
   showForms: boolean = true;
   policyLevels: number[] = [1, 2];
   FireRegulation: String[] = ["Fire standard distribution power transformers", "Fire safer distribution power transformers"];
@@ -57,34 +80,8 @@ export class DisTransformerComponent implements OnInit {
   countrylist: String[];
   highestVoltageValueslist: String[];
   dualVoltWindings: String[];
-  inputDisplayedColumns: string[] = [
-    'Power',
-    'Stock',
-    'PlateEfficiency',
-    'Energy',
-    'EnergyPrice',
-    'PolicyLevel',
-    'FireRegulation',
-    'HighestVoltageValues',
-    'DualVoltWindings',
-    'Capex', 'action'
-  ]
-  displayedColumns: string[] = [
-    'efficacy',
-    'll',
-    'nl',
-    'energyeffyincrease',
-    'energy',
-    'financial',
-    'paybackperiod',
-    'co2baseline',
-    'co2savingston',
-    'co2savingspercent',
-    'finalco2emissions'
-  ];
-  pieData: number[] = [];
-  pieLabels: string[] = [];
-
+  inputDisplayedColumns: string[] = ['Power','Stock','PlateEfficiency','Energy','EnergyPrice','PolicyLevel','FireRegulation','HighestVoltageValues','DualVoltWindings','Capex', 'action']
+  displayedColumns: string[] = ['efficacy','ll','nl','energyeffyincrease','energy','financial','paybackperiod','co2baseline','co2savingston','co2savingspercent','finalco2emissions'];
   DisTransformerInputs: FormGroup;
   forminputs: FormArray;
   InputValuesArr: DistTransformer[] = [];
@@ -100,7 +97,8 @@ export class DisTransformerComponent implements OnInit {
   }
 
   backClicked() {
-    location.replace(location.origin);
+    //location.replace(location.origin+"/transformer");
+    this.showForms=true;
   }
 
   ngOnInit(): void {
@@ -118,7 +116,7 @@ export class DisTransformerComponent implements OnInit {
 
   openDialog(action, obj): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '90%',
+      width: '95%',
       autoFocus: false,
       maxHeight: '90vh',
       data: {
@@ -159,8 +157,6 @@ export class DisTransformerComponent implements OnInit {
       Country: this.DisTransformerInputs.get('Country').value,
       InputValuesArr: this.inputValues
     }
-
-
     this.toolService.sendDisTransformerDetails(transReq).subscribe(res => {
       if (res.status == 'success') {
         var finalOutValues: FinalTable[] = [];
@@ -188,6 +184,7 @@ export class DisTransformerComponent implements OnInit {
         })
         
         this.dataSource = finalOutValues;
+
         for (let i = 0; i < finalOutValues.length - 1; i++) {
           var calEnergy = (finalOutValues[i].energy / finalOutValues[finalOutValues.length - 1].energy) * 100;
           this.pieChartLabels.push('E' + i);

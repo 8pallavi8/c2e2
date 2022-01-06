@@ -99,11 +99,12 @@ export class BEETComponent implements OnInit, AfterViewInit {
  
 
   constructor(public translate: TranslateService,private beetService: beetService, private cd: ChangeDetectorRef, private modalService: NgbModal) {
-    translate.addLangs(['en-US', 'fr-FR']);
-    translate.setDefaultLang('en-US');
+    translate.addLangs(['English', 'Spanish']);
+    translate.addLangs
+    translate.setDefaultLang('English');
 
     const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/fr|fr-FR/) ? 'fr-FR' : 'en-US');
+    translate.use(browserLang.match(/es/) ? 'Spanish' : 'English');
     
     console.log('Browser Lang =', browserLang);
     console.log('Navigator Lang =', navigator.language);
@@ -343,7 +344,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
       this.showReportProgress = true;
       this.beetReportComponent.showProgress == false;
       this.beetReportComponent.postBeetPayload();
-      await this.delay(8000);
+      await this.delay(10000);
       this.showReportProgress = false;
       //this.disableReport=disablestep;
       this.myStepper.selectedIndex = 7;

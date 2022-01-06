@@ -81,14 +81,14 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+        <mat-form-field class="w-100 mt-4 col-md-5" appearance="outline">
             <mat-label>FireRegulation</mat-label>
             <mat-select matNativeControl id="FireRegulation" formControlName="FireRegulation">
                 <mat-option *ngFor="let Regulation of FireRegulation" [value]="Regulation">{{Regulation}}</mat-option>
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+        <mat-form-field class="w-100 mt-4 col-md-7" appearance="outline">
             <mat-label>HighestVoltageValues</mat-label>
             <mat-select matNativeControl id="HighestVoltageValues" formControlName="HighestVoltageValues">
                 <mat-option *ngFor="let voltage of data.highestVoltageValueslist" [value]="voltage">{{voltage}}
@@ -96,7 +96,7 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+        <mat-form-field class="w-100 mt-4 col-md-5" appearance="outline">
             <mat-label>DualVoltWindings</mat-label>
             <mat-select matNativeControl id="DualVoltWindings" formControlName="DualVoltWindings">
                 <mat-option *ngFor="let voltwindings of data.dualVoltWindings" [value]="voltwindings">{{voltwindings}}
@@ -104,7 +104,7 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
+        <mat-form-field class="w-100 mt-4 col-md-7" appearance="outline">
             <mat-label>Capex(USD/unit)</mat-label>
             <input type="number" class="pro-name" matInput placeholder="Enter Capex(USD/unit)" formControlName="Capex" required>
             <!-- <mat-hint color="primary">Provide Capex</mat-hint> -->

@@ -14,6 +14,7 @@ import { throwError } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { BeetreportpdfComponent } from 'src/app/shared/beetreportpdf/beetreportpdf.component';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-beetreport',
@@ -77,9 +78,11 @@ export class BeetreportComponent implements OnInit {
   showPDFView: boolean = false;
   beetReportForm: FormGroup;
   pdfInputForm = new FormControl();
+  debug: string = 'false';
+  debugPayload: string;
 
 
-  constructor(private beetService: beetService, public dialog: MatDialog,
+  constructor(private route:ActivatedRoute , private beetService: beetService, public dialog: MatDialog,
     private fb: FormBuilder,) { }
   ngOnInit(): void {
     this.beetReportForm = this.fb.group({
@@ -88,6 +91,11 @@ export class BeetreportComponent implements OnInit {
       yearOfConstruction: [''],
     });;
     this.showProgress = true;
+    this.debug = this.route.snapshot.queryParamMap.get("debug")
+    this.route.queryParamMap.subscribe(queryParams => {
+      this.debug = queryParams.get("debug")
+    })
+
   }
 
   selectionChange(event: StepperSelectionEvent) {
@@ -267,6 +275,10 @@ export class BeetreportComponent implements OnInit {
     }
     this.showProgress = false;
     this.formAvailable = true
+    if(this.debug == 'true'){
+      this.debugPayload = JSON.stringify(payload);
+    }
+   
   }
 
   generatePdf() {

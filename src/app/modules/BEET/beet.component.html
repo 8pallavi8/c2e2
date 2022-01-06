@@ -6,73 +6,21 @@
     </div>
 </header>
 
-<!-- <select #langSelect (change)="translate.use(langSelect.value)">
-    <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
-  </select> -->
+
 
 
 <div class="container" style="margin-top: 1rem;">
     <div class="row">
         <div class="Home-text col-md-8">
-            <!-- <p [innerHTML]="'BEET.DESCRIPTION' | translate">
-            </p> -->
-
-            <p>Welcome to the self assessment Building Energy Efficiency Calculator (BEEC). This tool was created under
-                the framework of the Euroclima+ program by the Copenhagen Centre of Energy Efficiency (C2E2), an Energy Efficiency hub
-                institutionally part of the UNEP DTU Partnership.<br><br> The Energy Sustainable Municipal Buildings project is funded by Euroclima +,
-                the flagship cooperation program of the European Union for environmental sustainability and climate change
-                in Latin America. In Argentina, the French Development Agency (AFD) is in charge of the implementation. The National University of La Plata
-                (UNLP) is the entity responsible and leader of the project for its execution. The Red Argentina de Municipios
-                frente al Cambio Climático (RAMCC) and the Copenhagen Center for Energy Efficiency (C2E2) are the strategic partners for the realization of
-                the project.
-                <br><br>
-
-                <b>About BEEC</b><br> This self assessment Building Energy Efficiency Calculator (BEEC) is designed to
-                provide individual users a preliminary rapid assessment platform where they can assess their building energy
-                performance. The overall objective of
-                BEET is three fold:<br> a. Support the development of a rapid assessment of the energy performance of
-                individual buildings;
-                <br> b. Create a comparative evaluation between the baseline energy performance with energy efficiency
-                (EE) standards.
-                <br> c. Share recommendations of potential EE measures across building components and systems.
-                <br> The tool is intended to cater to the needs of municipalities and relevant stakeholders. The tool
-                may be used for overall understanding of impact on overall building energy consumption profile with respect to
-                various system and component level parameters. The target users may be energy managers, analysts, maintenance and operation professionals,
-                technicians and any individual with basic know-how on buildings and energy efficiency.
+            <p [innerHTML]="'BEEC.COMMON.DESCRIPTION' | translate">
             </p>
+
             <div>
-                <button data-toggle="collapse" data-target="#demo" class="btn btn-info">Disclaimer</button>
+                <button data-toggle="collapse" data-target="#demo" class="btn btn-info">{{'BEEC.COMMON.DISCLAIMER' |
+                    translate}}</button>
 
                 <div id="demo" class="collapse">
-                    <i style="font-size: smaller;">The objective of the tool is to provide an indicative and holistic
-                        outcome on the building energy efficiency
-                        based on the user's input data. The tool does not replace the simulations and assessments from a
-                        full fledged
-                        tools and licensed software
-                        available in the market. The output results hence is recommended to be used for reference
-                        purpose only and may
-                        not be used for detailed or investment grade design and implementation activities.The tool is
-                        built based
-                        on technical literature
-                        data, available global and local standards, tool developers' knowledge and experience in the
-                        sector.
-                        Care
-                        has
-                        been taken to deliver the most possibly suitable platform. However, due to the challenges in
-                        availability of
-                        country specific data with
-                        respect to climate files, building envelope standards, equipment and appliances, energy
-                        efficiency
-                        applications,
-                        operations, technology and related resources, etc. we understand that there may be certain
-                        differences
-                        with
-                        other similar available
-                        online and licensed tools. All the assumptions have been listed in the Assumptions page.The
-                        information
-                        shared in this form will be used to asses the building performance and potential savings through
-                        energy
-                        efficient measures.
+                    <i style="font-size: smaller;" [innerHTML]="'BEEC.COMMON.DISCLAIMER-TEXT' | translate">
                     </i>
                 </div>
             </div>
@@ -110,13 +58,16 @@
 
 <section class="calculator-tools">
 
+    
+
     <div class="tools-header">
         <div class="top-logo container-fluid">
             <div class="row-logo">
                 <img src="./assets/images/logo_copenhagen-centre.svg" width="150px" height="auto">
-
             </div>
-        </div>
+        </div><br>
+
+        
         <div class="container-fluid" style="display: flex;padding-top: 10px;">
             <div class="row_inline">
                 <div class="col-3 col-md-3 d-flex" style="align-items: center;">
@@ -124,21 +75,36 @@
                 </div>
                 <div class="col-9 col-md-9 d-flex">
                     <div class="title-container">
-                        <h2 style="color:#35495e">Buildings</h2>
-                        <p>Energy efficiency calculator</p>
+                        <h2 style="color:#35495e">{{'BEEC.COMMON.BUILDINGS' | translate}}</h2>
+                        <p>{{'BEEC.COMMON.BUILDINGS-TEXT' | translate}}</p>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
 
+        <div class="w-100 col-md-4" style="float: right;">
+            <mat-form-field appearance="fill">
+                <mat-label>Select Language</mat-label>
+                <mat-select #langSelect (selectionChange)="translate.use(langSelect.value)">
+                    <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang"
+                        [selected]="lang === translate.currentLang">
+                        {{lang}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div><br>
+
+    <!-- <select #langSelect (change)="translate.use(langSelect.value)">
+        <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+      </select>  -->
 
     <div class="container-fluid">
         <mat-horizontal-stepper (selectionChange)="selectionStepperChange($event)" class="stepper-class"
             labelPosition="bottom" #stepper>
 
-            <mat-step #data [stepControl]="genDetailsComponent?.genDetailsForm" label="General Details">
+            <mat-step #data [stepControl]="genDetailsComponent?.genDetailsForm"
+                label="{{ 'BEEC.COMMON.STEPLABEL1' | translate}}">
                 <app-gendetails></app-gendetails>
                 <div class="step-button">
                     <!--[disabled]="genDetailsComponent?.genDetailsForm.invalid"  -->
@@ -147,7 +113,8 @@
                 </div>
             </mat-step>
 
-            <mat-step [stepControl]="buildingdetailsComponent?.formgroup" label="Building Envelope Details">
+            <mat-step [stepControl]="buildingdetailsComponent?.formgroup"
+                label="{{ 'BEEC.COMMON.STEPLABEL2' | translate}}">
                 <app-buildingenvelopedetails></app-buildingenvelopedetails>
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
@@ -159,7 +126,7 @@
             </mat-step>
 
             <mat-step>
-                <ng-template matStepLabel>Lighting</ng-template>
+                <ng-template matStepLabel>{{ 'BEEC.COMMON.STEPLABEL3' | translate}}</ng-template>
                 <app-lighting></app-lighting>
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
@@ -170,8 +137,7 @@
                 </div>
             </mat-step>
 
-            <mat-step>
-                <ng-template matStepLabel>HVAC</ng-template>
+            <mat-step [stepControl]="hvacDetailsComponent?.formgroup" label="{{ 'BEEC.COMMON.STEPLABEL4' | translate}}">
                 <app-hvac></app-hvac>
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
@@ -182,8 +148,8 @@
                 </div>
             </mat-step>
 
-            <mat-step>
-                <ng-template matStepLabel>Plug Loads</ng-template>
+            <mat-step [stepControl]="plugLoaDetailsComponent?.formgroup"
+                label="{{ 'BEEC.COMMON.STEPLABEL5' | translate}}">
                 <app-plugloads></app-plugloads>
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
@@ -195,8 +161,8 @@
             </mat-step>
 
 
-            <mat-step>
-                <ng-template matStepLabel>CO2 Emissions</ng-template>
+            <mat-step [stepControl]="co2EmissionsDetailsComponent?.formgroup"
+                label="{{ 'BEEC.COMMON.STEPLABEL6' | translate}}">
                 <app-co2-emissions></app-co2-emissions>
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
@@ -208,9 +174,8 @@
                 </div>
             </mat-step>
 
-            <mat-step>
-
-                <ng-template matStepLabel>Input Data Summary</ng-template>
+            <mat-step label="{{ 'BEEC.COMMON.STEPLABEL7' | translate}}">
+                <!-- <ng-template matStepLabel>Input Data Summary</ng-template> -->
                 <div *ngIf="showReportProgress" class="container progress-bar-beet">
                     <p>Generating BEEC report</p>
                     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
@@ -381,10 +346,7 @@
                 <br>
             </mat-step>
 
-            <mat-step [editable]="false">
-
-
-                <ng-template matStepLabel>Report</ng-template>
+            <mat-step [editable]="false" label="{{ 'BEEC.COMMON.STEPLABEL8' | translate}}">
                 <app-beetreport></app-beetreport>
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
@@ -398,7 +360,6 @@
     <br>
     <app-logo-footer></app-logo-footer>
 </section>
-
 
 <ng-template class="" #errMsg let-modal>
 

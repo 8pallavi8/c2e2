@@ -13,7 +13,7 @@
             <div >
                 <p class="question-text">Do you know the plug load density for your building ?</p>
                 <div class="fields-note">
-                    <p><span class="notes-style"> Note:</span>You may select any of the options. Option C available for
+                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span>You may select any of the options. Option C available for
                         selected cases only.
                     </p>
                 </div>
@@ -45,7 +45,7 @@
                             <span *ngIf="formgroup.controls.plugloads.value == 2"
                                 class="container-fluid beet-container">
                                 <div class="fields-note">
-                                    <p><span class="notes-style"> Note:</span> Plug load refer to energy used by
+                                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> Plug load refer to energy used by
                                         equipment that is plugged into an outlet. For example, in an office, key plug
                                         loads include computer and
                                         monitors, printers, and copiers. Equipment/Appliances include other connected
@@ -199,17 +199,13 @@
                                     <button mat-raised-button color="primary" style="margin-top: 1rem;"
                                         (click)="calculatePlugLoad()">Calculate</button>
                                 </div><br>
-
-
                             </span>
 
                             <!-- plugload available -->
                             <span *ngIf="formgroup.controls.plugloads.value == 3"
                                 class="container-fluid beet-container">
-
-
                                 <div class="fields-note">
-                                    <p><span class="notes-style"> Note:</span> Options available for selected
+                                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> Options available for selected
                                         cases only. Select the most suitable type and closest area to your building. If
                                         the values in the options are far
                                         from your building values, please opt for Option B.</p>
@@ -326,7 +322,7 @@
                             <mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;">Quantity</mat-header-cell>
                             <mat-cell *matCellDef="let quantity let rowIndex = index"  [formGroupName]="rowIndex">
                                 <mat-form-field class="plugloads-opr-qty">
-                                    <input type="number"  matInput  formControlName="quantity" title="dsfs sdfs df d df">
+                                    <input type="number"  matInput  formControlName="quantity" [(title)]="quantity.cellcomments">
                                 </mat-form-field>
                             </mat-cell>
                            

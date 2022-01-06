@@ -1,11 +1,22 @@
 <div class="container" style="margin-top: 1rem;">
-    <p>United for Efficiency (U4E) provides a Model regulation guidelines for energy performance requirements for distribution transformers (10/2019) is provided at
-        <a href="https://united4efficiency.org/resources/model-regulation-guidelines-for-energy-performance-requirements-for-distribution-transformers/">
-            https://united4efficiency.org/resources/model-regulation-guidelines-for-energy-performance-requirements-for-distribution-transformers/</a><br> It provides a voluntary guidance to assist Governments in developing and emerging economies
-        that are considering a regulatory or legislative framework for minimum energy performance standards.<br> The model considers distribution power transformers in the 5 - 3150 kVA range to the international best practice energy performance level.
-        This model regulation does not cover transformers outside the mentioned range or transformers designed for special applications.<br><br> The policy level to be/ already implemented in the country regarding the mannufacturing of efficient transformers:
-        <br> Level 1 basic energy performance option: offering a draft policy framework to other countries that do have a significant domestic distribution power transformer <br> Level 2 high energy performance option: offering a draft policy framework
-        designed to leapfrog directly to high energy-performance, which is the international best practice policy. This is suitable for countries that do not have a significant domestic distribution power transformer manufacturing industry and import
+    <p>United for Efficiency (U4E) provides a Model regulation guidelines for energy performance requirements for
+        distribution transformers (10/2019) is provided at
+        <a
+            href="https://united4efficiency.org/resources/model-regulation-guidelines-for-energy-performance-requirements-for-distribution-transformers/">
+            https://united4efficiency.org/resources/model-regulation-guidelines-for-energy-performance-requirements-for-distribution-transformers/</a><br>
+        It provides a voluntary guidance to assist Governments in developing and emerging economies
+        that are considering a regulatory or legislative framework for minimum energy performance standards.<br> The
+        model considers distribution power transformers in the 5 - 3150 kVA range to the international best practice
+        energy performance level.
+        This model regulation does not cover transformers outside the mentioned range or transformers designed for
+        special applications.<br><br> The policy level to be/ already implemented in the country regarding the
+        mannufacturing of efficient transformers:
+        <br> Level 1 basic energy performance option: offering a draft policy framework to other countries that do have
+        a significant domestic distribution power transformer <br> Level 2 high energy performance option: offering a
+        draft policy framework
+        designed to leapfrog directly to high energy-performance, which is the international best practice policy. This
+        is suitable for countries that do not have a significant domestic distribution power transformer manufacturing
+        industry and import
         almost all of them.
     </p>
 </div>
@@ -43,19 +54,23 @@
         </div> -->
         <form [formGroup]="DisTransformerInputs" novalidate (submit)="addNewTransformerVariant()">
             <div class="row">
-                <mat-form-field class="w-100 mt-3 col-md-6" appearance="outline" floatLabel="never">
-                    <mat-label>Select country</mat-label>
-                    <mat-select matNativeControl id="Country" formControlName="Country">
-                        <mat-option *ngFor="let con of countrylist" [value]="con">{{con}}</mat-option>
-                    </mat-select>
-                    <mat-hint color="primary">Select country to add Transformer</mat-hint>
-                    <mat-error *ngIf="DisTransformerInputs.controls['Country'].hasError('required')">
-                        Country is required
-                    </mat-error>
-                </mat-form-field>
+                <div class="field-group w-100 col-md-6">
+                    <mat-label class="field-title-beet">Country</mat-label>
+                    <mat-form-field  appearance="outline" floatLabel="never">
+                        <mat-select matNativeControl id="Country" formControlName="Country" placeholder="Select country">
+                            <mat-option *ngFor="let con of countrylist" [value]="con">{{con}}</mat-option>
+                        </mat-select>
+                        <mat-hint color="primary" style="font-weight: bold;"> Please select country to add transformer</mat-hint>
+                        <mat-error *ngIf="DisTransformerInputs.controls['Country'].hasError('required')">
+                            Country is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
 
                 <div class="col-md-6" style="margin-top:20px">
-                    <button mat-raised-button color="accent" style="color: #fff;" class="mat-elevation-z6" type="button" [disabled]="DisTransformerInputs.controls['Country'].hasError('required')" (click)="openDialog('Add',{})">
+                    <button mat-raised-button color="accent" style="color: #fff;" class="mat-elevation-z6" type="button"
+                        [disabled]="DisTransformerInputs.controls['Country'].hasError('required')"
+                        (click)="openDialog('Add',{})">
                         Add Transformer</button>
                 </div>
                 <div class="example-table-container">
@@ -125,14 +140,16 @@
                         </ng-container>
 
 
-                        <tr mat-header-row *matHeaderRowDef="inputDisplayedColumns; sticky: true"></tr>
+                        <tr mat-header-row *matHeaderRowDef="inputDisplayedColumns; sticky: true"
+                            style="font-weight: bolder;"></tr>
                         <tr mat-row *matRowDef="let row; columns: inputDisplayedColumns;"></tr>
 
                     </table>
                 </div>
 
                 <div class="text-right mt-5 col-md-12">
-                    <button *ngIf="inputValues.length>0" mat-raised-button type="submit" color="primary" style="height: 50px;" class="mat-elevation-z6">Submit
+                    <button *ngIf="inputValues.length>0" mat-raised-button type="submit" color="primary"
+                        style="height: 50px;" class="mat-elevation-z6">Submit
                         Transformers</button>
                 </div>
             </div>
@@ -204,19 +221,19 @@
                 </table>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="container-fluid mt-5 col-md-6">
                 <div class="chart-wrapper">
-                    <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" 
-                    [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+                    <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                        [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
                     </canvas>
                 </div>
             </div>
             <div class="container-fluid mt-5 col-md-6">
                 <div class="chart-wrapper">
-                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" 
-                    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                        [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
                     </canvas>
                 </div>
             </div>
@@ -224,8 +241,8 @@
 
 
         <div class="text-left mt-5 col-md-12">
-            <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="submit" 
-            (click)="backClicked()">
+            <button mat-raised-button color="primary" style="color: #fff;" class="mat-elevation-z6" type="submit"
+                (click)="backClicked()">
                 Go back </button>
         </div>
     </div>

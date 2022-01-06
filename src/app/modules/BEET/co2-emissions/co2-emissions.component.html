@@ -8,34 +8,33 @@
 
         <fieldset>
             <legend>Power generation CO<sub>2</sub> emissions </legend>
-            <h2>6.1 Power generation CO<sub>2</sub> emissions</h2>
+            <h2>6.1  {{'BEEC.CO2EMISSIONS.POWERGENCO2EMISSIONS_TITLE' | translate}}</h2>
             <div>
-                <p class="question-text">Do you know the local grid emission factor ?</p>
+                <p class="question-text">{{'BEEC.CO2EMISSIONS.POWERGENCO2EMISSIONS_QUESTION' | translate}}</p>
                 <div class="fields-note mt-0">
-                    <p><span class="notes-style"> Note:</span> Applicable for electricity import from the grid.
+                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.CO2EMISSIONS.POWERGENCO2EMISSIONS_NOTE_TEXT' | translate}}
                     </p>
                 </div>
 
                 <div>
                     <mat-radio-group aria-label="Select an option" formControlName="powergenerationco2emmisions">
-                      A. <mat-radio-button value="1">Yes, I know.
+                      A. <mat-radio-button value="1">{{'BEEC.COMMON.FIELDVALUE_KNOWN_OPTION' | translate}}
                         </mat-radio-button><br>
-                       B. <mat-radio-button value="2" (click)="defaultEmissionFactor()">No, I don't
-                            know.</mat-radio-button>
+                       B. <mat-radio-button value="2" (click)="defaultEmissionFactor()">{{'BEEC.COMMON.NOTKNOWN_OPTION' | translate}}</mat-radio-button>
                     </mat-radio-group>
                 </div>
                 <span *ngIf="formgroup.controls.powergenerationco2emmisions.value == 1">
                     <div style="display: flex;">
-                        <p style="padding-top: 10px;">Please enter grid emission factor : </p>
+                        <p style="padding-top: 10px;">{{'BEEC.CO2EMISSIONS.POWERGENCO2EMISSIONS_KNOWN_TEXT' | translate}} : </p>
                         <mat-form-field appearance="outline">
                             <input class="custom-input" matInput type="number" required
-                                formControlName="gridemissionsFactor">
+                                formControlName="gridemissionsFactor" placeholder="{{'BEEC.CO2EMISSIONS.POWERGENCO2EMISSIONS_KNOWN_TEXT_PLACEHOLDER' | translate}}">
                         </mat-form-field>
                     </div>
                 </span>
             </div>
 
-            <b class="calculated-values">CO<sub>2</sub> emissions:{{formgroup.controls.gridemissionsFactor.value|
+            <b class="calculated-values">{{'BEEC.CO2EMISSIONS.POWERGENCO2EMISSIONS_FINAL' | translate}}:{{formgroup.controls.gridemissionsFactor.value|
                 number:'1.2-2'}}
                 {{formgroup.controls.gridemissionsFactorUnits.value}}
             </b>
@@ -44,36 +43,32 @@
 
         <fieldset>
             <legend>On site CO<sub>2</sub> emissions </legend>
-            <h2>6.2 On site CO<sub>2</sub> emissions</h2>
+            <h2>6.2 {{'BEEC.CO2EMISSIONS.ONSITECO2EMISSIONS_TITLE' | translate}}</h2>
             <div>
-                <p style="margin-top: 1em;" class="question-text">Do you know the fuel CO<sub>2</sub> emission factor?
+                <p style="margin-top: 1em;" class="question-text">{{'BEEC.CO2EMISSIONS.ONSITECO2EMISSIONS_QUESTION' | translate}}
                 </p>
                 <div class="fields-note">
-                    <p><span class="notes-style"> Note:</span>You may select any of the options to provide details
-                        of On-site CO<sub>2</sub> emissions (especially if you are using fuel based heating equipment or
-                        power
-                        generators, etc.).Natural Gas equivalent CO<sub>2</sub> emissions values will be used for the
-                        assessment.
+                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span>{{'BEEC.CO2EMISSIONS.ONSITECO2EMISSIONS_NOTE_TEXT' | translate}}
                     </p>
                 </div>
                 <div>
                     <mat-radio-group aria-label="Select an option" formControlName="fuelEmissionFactor">
-                      A. <mat-radio-button value="1">A.Yes, I know.
+                      A. <mat-radio-button value="1">{{'BEEC.COMMON.FIELDVALUE_KNOWN_OPTION' | translate}}
                         </mat-radio-button><br>
-                       B. <mat-radio-button (click)="postCalculateFuelEmissionFactor()" value="2">B. No, I don't know.
+                       B. <mat-radio-button (click)="postCalculateFuelEmissionFactor()" value="2">{{'BEEC.COMMON.NOTKNOWN_OPTION' | translate}}
                         </mat-radio-button>
                     </mat-radio-group>
                 </div>
 
 
                 <span *ngIf="formgroup.controls.fuelEmissionFactor.value == 1">
-                    <p style="margin-top: 1em;">Please enter value and choose any one from the available units</p>
+                    <p style="margin-top: 1em;">{{'BEEC.CO2EMISSIONS.ONSITECO2EMISSIONS_KNOWN_TEXT' | translate}}</p>
 
 
                     <div class="field-align">
 
                         <div class="field-group w-100 col-md-4">
-                            <mat-label class="field-title-beet">Enter fuel emission factor value</mat-label>
+                            <mat-label class="field-title-beet">{{'BEEC.CO2EMISSIONS.ONSITECO2EMISSIONS_KNOWN_VALUE_FIELD' | translate}}</mat-label>
                             <mat-form-field appearance="outline">
                                 <input class="custom-input" matInput placeholder="Enter value" required
                                     formControlName="fuelEmissionFactorValue">
@@ -81,7 +76,7 @@
                         </div>
 
                         <div class="field-group w-100 col-md-4">
-                            <mat-label class="field-title-beet">Select CO<sub>2</sub> emissions units</mat-label>
+                            <mat-label class="field-title-beet">{{'BEEC.CO2EMISSIONS.ONSITECO2EMISSIONS_KNOWN_UNIT_FIELD' | translate}}</mat-label>
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="fuelEmissionFactorUnit">
                                     <mat-option *ngFor="let unit of co2emissionsunits" [value]="unit">{{unit}}
@@ -94,8 +89,7 @@
 
             </div>
 
-            <b class="calculated-values"> On site CO<sub>2</sub>
-                emissions:{{formgroup.controls.fuelEmissionFactorValue.value|
+            <b class="calculated-values"> {{'BEEC.CO2EMISSIONS.ONSITECO2EMISSIONS_FINAL' | translate}}:{{formgroup.controls.fuelEmissionFactorValue.value|
                 number:'1.2-2'}}
                 {{formgroup.controls.fuelEmissionFactorUnit.value}}</b>
 

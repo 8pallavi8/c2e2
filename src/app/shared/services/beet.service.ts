@@ -12,7 +12,6 @@ import { Summary } from "../models/beet-models";
 export class beetService {
 
 
-
     private selectedCountry = new ReplaySubject<string>(1);
 
     private generalDetail = new ReplaySubject<any>(1);

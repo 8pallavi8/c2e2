@@ -79,6 +79,7 @@ export class PlugloadsComponent implements OnInit {
       this.optbDataSource = new MatTableDataSource(this.plugLoadGuide);
       this.optcDataSource = new MatTableDataSource(this.plugLoadPredefined);
       this.plugloadoptions = res.success.plugloadoperations;
+      console.log("ops"+this.plugloadoptions);
       if((<FormArray>this.formgroup.get('plugLoadOptionsArray')).length == 0 ){
         for (var plugloadoption of this.plugloadoptions) {
           (<FormArray>this.formgroup.get('plugLoadOptionsArray')).push(this.createOptions(plugloadoption));
@@ -95,7 +96,6 @@ export class PlugloadsComponent implements OnInit {
       if (plugloadDetails !== undefined || plugloadDetails !== null) {
         this.formgroup.patchValue(plugloadDetails);
       }
-     
       this.changeFormFieldValues(plugloadArrayTemp);
       
     }
@@ -166,7 +166,6 @@ export class PlugloadsComponent implements OnInit {
       "netoccupiedareaunit": this.beetComponent.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
       "plugloaddensitydata": plugLoadArray,
       "occupancyhrsperweek":this.beetComponent.genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value
-
     }
     this.beetService.postCalculatePlugLoad(payload).subscribe(res => {
       this.formgroup.controls.plugLoadValueKnown.patchValue(res.success.pluloaddensity);
