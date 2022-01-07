@@ -56,7 +56,7 @@
                             <br>
                             <div>
                                 <div>
-                                    <b style="margin-top: 20px;padding-left: 2rem">{{'BEEC.BUILDINGENV_DETAILS.LAYER' | translate}} : </b>
+                                    <b style="margin-top: 20px;padding-left: 2rem">{{'BEEC.BUILDINGENV_DETAILS.RVALUE_LAYERNUMBER' | translate}} : </b>
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'BEEC.BUILDINGENV_DETAILS.RVALUE_LAYERNUMBER_PLACEHOLDER' | translate}}</mat-label>
                                         <mat-select [(value)]="selectedLayerValue">
@@ -68,7 +68,7 @@
                                     <b style="margin-top: 20px;padding-left: 2rem;">Capa del elemento constructivo :
                                     </b>
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Select</mat-label>
+                                        <mat-label>{{'BEEC.COMMON.SELECT' | translate}}</mat-label>
                                         <mat-select [(value)]="selectedCapa" #sel
                                             (selectionChange)="onOptionsSelected($event)">
                                             <mat-option *ngFor="let element of elementsList" [value]="element">
@@ -81,7 +81,7 @@
                                 <table style="margin-bottom: 20px;" mat-table matSort matTableResponsive
                                     [dataSource]="dataSource" class="table-advancedR">
                                     <ng-container matColumnDef="Layer">
-                                        <th mat-header-cell *matHeaderCellDef> Layer</th>
+                                        <th mat-header-cell *matHeaderCellDef> {{'BEEC.BUILDINGENV_DETAILS.LAYER' | translate}}</th>
                                         <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
                                     </ng-container>
 
@@ -132,20 +132,17 @@
 
         <fieldset>
             <legend>R Value (Thermal resistance) - Roof </legend>
-            <h2>2.2 R Value (Thermal resistance) - Roof </h2>
-            <p class="question-text">Do you know the R value?</p>
+            <h2>2.2 {{'BEEC.BUILDINGENV_DETAILS.RROOF_TITLE' | translate}} </h2>
+            <p class="question-text">{{'BEEC.BUILDINGENV_DETAILS.RVALUE_QUESTION' | translate}}</p>
             <div class="fields-note">
-                <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> You may select any of the options to provide details on R
-                    value of the roof.</p>
+                <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.BUILDINGENV_DETAILS.RROOF_NOTE_TEXT' | translate}}</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="roofr"
                 (change)="onChangeroofrOption($event)">
-                A. <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                B. <mat-radio-button value="2"> I want to select from predefined types (pictures available for
-                    reference)
+                A. <mat-radio-button value="1">{{'BEEC.COMMON.FIELDVALUE_KNOWN_OPTION' | translate}}</mat-radio-button><br>
+                B. <mat-radio-button value="2"> {{'BEEC.BUILDINGENV_DETAILS.RVALUE_IMAGES' | translate}}
                 </mat-radio-button><br>
-                C. <mat-radio-button value="3">Calculate the R value by adding custom layers from prelisted materials
-                    (Advanced level)</mat-radio-button>
+                C. <mat-radio-button value="3">{{'BEEC.BUILDINGENV_DETAILS.RVALUE_CUSTOMLAYERS' | translate}}</mat-radio-button>
             </mat-radio-group><br><br>
 
             <div formArrayName="roofrArray" *ngIf="formgroup.controls.roofr.value !== ''">
@@ -153,9 +150,8 @@
                     <div [formGroupName]="i">
                         <!-- Roof R known -->
                         <span *ngIf="formgroup.controls.roofr.value == 1" class="units-picker-component">
-                            <p class="fields-note">Enter the value in the cell and select the units from the drop down
-                                list.</p>
-                            <b style="margin-top: 1em;">Roof R value : </b>
+                            <p class="fields-note">{{'BEEC.COMMON.FIELDVALUE_KNOWN_TEXT' | translate}}</p>
+                            <b style="margin-top: 1em;">{{'BEEC.BUILDINGENV_DETAILS.RROOF_KNOWN_FIELDNAME' | translate}} : </b>
                             <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
                                 <input matInput placeholder="{{'BEEC.COMMON.ENTER_VALUE' | translate}}" type="number" formControlName="roofRKnown"
                                     type="number">
@@ -168,7 +164,7 @@
 
                         <!-- Roof R images -->
                         <div *ngIf="formgroup.controls.roofr.value == 2" class="container-fluid">
-                            <p>Select most representative picture composition of your building outer wall.</p>
+                            <p>{{'BEEC.BUILDINGENV_DETAILS.RROOF_IMAGES_TEXT' | translate}}</p>
 
                             <div class="row">
                                 <mat-radio-group class="mat-radio-group-image" formControlName="roofrimages">
@@ -188,9 +184,9 @@
                             <br>
                             <div>
                                 <div>
-                                    <b style="margin-top: 20px;padding-left: 2rem">{{'BEEC.BUILDINGENV_RVALUE_DETAILS_LAYERNUMBER' | translate}}: </b>
+                                    <b style="margin-top: 20px;padding-left: 2rem">{{'BEEC.BUILDINGENV_DETAILS.RVALUE_LAYERNUMBER' | translate}}: </b>
                                     <mat-form-field appearance="outline">
-                                        <mat-label>{{'BEEC.BUILDINGENV_RVALUE_DETAILS_LAYERNUMBER_PLACEHOLDER' | translate}} </mat-label>
+                                        <mat-label>{{'BEEC.BUILDINGENV_DETAILS.RVALUE_LAYERNUMBER_PLACEHOLDER' | translate}} </mat-label>
                                         <mat-select [(value)]="selectedRoofLayerValue">
                                             <mat-option *ngFor="let layer of layersList" [value]="layer">{{layer}}
                                             </mat-option>
@@ -200,7 +196,7 @@
                                     <b style="margin-top: 20px;padding-left: 2rem;">Capa del elemento constructivo :
                                     </b>
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Select</mat-label>
+                                        <mat-label>{{'BEEC.COMMON.SELECT' | translate}}</mat-label>
                                         <mat-select [(value)]="selectedMaterial" #sel
                                             (selectionChange)="onOptionsSelectedroof($event)">
                                             <mat-option *ngFor="let element of elementsList" [value]="element">
@@ -213,7 +209,7 @@
                                 <table mat-table matSort matTableResponsive [dataSource]="roofdataSource"
                                     class="mat-elevation-z8 table-advancedR">
                                     <ng-container matColumnDef="Layer">
-                                        <th mat-header-cell *matHeaderCellDef> Layer</th>
+                                        <th mat-header-cell *matHeaderCellDef> {{'BEEC.BUILDINGENV_DETAILS.LAYER' | translate}}</th>
                                         <td mat-cell *matCellDef="let example"> {{example.Layer}} </td>
                                     </ng-container>
 
@@ -264,17 +260,16 @@
 
         <fieldset>
             <legend>R Value (Thermal resistance) - Window</legend>
-            <h2>2.3 R Value (Thermal resistance) - Window</h2>
+            <h2>2.3 {{'BEEC.BUILDINGENV_DETAILS.RWINDOW_TITLE' | translate}}</h2>
 
-            <p class="question-text">Do you know the R value?</p>
+            <p class="question-text">{{'BEEC.BUILDINGENV_DETAILS.RVALUE_QUESTION' | translate}}</p>
             <div class="fields-note">
-                <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> You may select any of the options to provide details on
-                    R value of the window.</p>
+                <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.BUILDINGENV_DETAILS.RWINDOW_NOTE_TEXT' | translate}}</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="windowr"
                 (change)="onChangewindowrOption($event)">
-                A. <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                B. <mat-radio-button (click)="onWindowNoOption($event)" value="2"> I want to select from predefined types (list available)
+                A. <mat-radio-button value="1">{{'BEEC.COMMON.FIELDVALUE_KNOWN_OPTION' | translate}}</mat-radio-button><br>
+                B. <mat-radio-button (click)="onWindowNoOption($event)" value="2">{{'BEEC.BUILDINGENV_DETAILS.RWINDOW_PREDEFINED_OPTION' | translate}}
                 </mat-radio-button>
             </mat-radio-group><br><br>
 
@@ -283,13 +278,12 @@
                 <div *ngFor="let item of  formgroup.get('windowrArray')['controls'];let i = index;">
                     <div [formGroupName]="i">
                         <span *ngIf="formgroup.controls.windowr.value == 1" class="units-picker-component">
-                            <p class="fields-note">Enter the value in the cell and select the units from the drop down
-                                list.</p>
-                            <b style="margin-top: 1em;">Window R value : </b>
+                            <p class="fields-note">{{'BEEC.COMMON.FIELDVALUE_KNOWN_TEXT' | translate}}</p>
+                            <b style="margin-top: 1em;">{{'BEEC.BUILDINGENV_DETAILS.RWINDOW_KNOWN_TEXT' | translate}} : </b>
                             <mat-form-field class="w-100 mt-2 col-md-4" appearance="outline">
-                                <input matInput placeholder="{{'BEEC.BUILDINGENV_DETAILS.ENTERVALUE' | translate}}" formControlName="windowRKnown"
+                                <input matInput placeholder="{{'BEEC.COMMON.ENTERVALUE' | translate}}" formControlName="windowRKnown"
                                     type="number">
-                                <mat-select placeholder="{{'BEEC.BUILDINGENV_DETAILS.UNITS' | translate}}" formControlName="windowrUnits">
+                                <mat-select placeholder="{{'BEEC.COMMON.UNITS' | translate}}" formControlName="windowrUnits">
                                     <mat-option value="m².K/W">m².K/W</mat-option>
                                     <mat-option value="ft².°F.h/BTU">ft².°F/BTU</mat-option>
                                 </mat-select>
@@ -315,23 +309,22 @@
         <!-- SHGC window -->
         <fieldset>
             <legend>Solar Heat Gain Coefficient (SHGC) - Window </legend>
-            <h2>2.4 Solar Heat Gain Coefficient (SHGC) - Window </h2>
+            <h2>2.4 {{'BEEC.BUILDINGENV_DETAILS.SHGC_TITLE' | translate}} </h2>
 
-            <p class="question-text">Do you know the SHGC value?</p>
+            <p class="question-text">{{'BEEC.BUILDINGENV_DETAILS.SHGC_QUESTION' | translate}}</p>
             <div class="fields-note">
-                <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}} :</span> You may select any of the options to provide details on SHGC
-                    value of the window</p>
+                <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}} :</span>{{'BEEC.BUILDINGENV_DETAILS.SHGC_NOTE_TEXT' | translate}}</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="SHGC">
-                A. <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                B. <mat-radio-button (click)="postCalculateshgc()" value="2"> No, I don't know.</mat-radio-button>
+                A. <mat-radio-button value="1">{{'BEEC.COMMON.FIELDVALUE_KNOWN_OPTION' | translate}}</mat-radio-button><br>
+                B. <mat-radio-button (click)="postCalculateshgc()" value="2"> {{'BEEC.COMMON.NOTKNOWN_OPTION' | translate}}</mat-radio-button>
             </mat-radio-group>
 
             <span *ngIf="formgroup.controls.SHGC.value == 1">
                 <div style="display: flex;">
-                    <p style="margin-top: 1rem;">Please enter the SHGC value:</p>
+                    <p style="margin-top: 1rem;">{{'BEEC.BUILDINGENV_DETAILS.SHGC_KNOWN_TEXT' | translate}}:</p>
                     <mat-form-field appearance="outline">
-                        <input matInput required formControlName="SHGCknown" placeholder="Enter SHGC value">
+                        <input matInput required formControlName="SHGCknown" placeholder="{{'BEEC.COMMON.SHGC_KNOWN_TEXT_PLACEHOLDER' | translate}}">
                     </mat-form-field>
                 </div>
             </span><br>
@@ -344,15 +337,14 @@
             <legend>
                 <h2>Window to Wall Ratio (WWR)</h2>
             </legend>
-            <h2>2.5 Window to Wall Ratio (WWR)</h2>
-            <p class="question-text">Do you know the Window to Wall Ratio</p>
+            <h2>2.5 {{'BEEC.BUILDINGENV_DETAILS.WWR_TITLE' | translate}}</h2>
+            <p class="question-text">{{'BEEC.BUILDINGENV_DETAILS.WWR_TITLE' | translate}}</p>
             <div class="fields-note">
-                <p> <span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> You may select any of the options to provide details on WWR
-                    value of the window</p>
+                <p> <span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.BUILDINGENV_DETAILS.WWR_NOTE_TEXT' | translate}}</p>
             </div>
             <mat-radio-group aria-label="Select an option" formControlName="wwr" (change)="onChangeWWROption($event)">
-                A. <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                B. <mat-radio-button value="2"> No, I don't know. Guide me to enter the value.</mat-radio-button>
+                A. <mat-radio-button value="1">{{'BEEC.COMMON.FIELDVALUE_KNOWN_OPTION' | translate}}</mat-radio-button><br>
+                B. <mat-radio-button value="2">{{'BEEC.BUILDINGENV_DETAILS.WWR_NOTKNOWN' | translate}}</mat-radio-button>
             </mat-radio-group>
 
             <div formArrayName="wwrArray" *ngIf="formgroup.controls.wwr.value !== ''">
@@ -361,10 +353,10 @@
                         <!-- wwr known -->
                         <span *ngIf="formgroup.controls.wwr.value == 1">
                             <div style="display: flex;">
-                                <p style="margin-top: 1rem;">Please enter the WWR value:
+                                <p style="margin-top: 1rem;">{{'BEEC.BUILDINGENV_DETAILS.WWR_KNOWN_TEXT' | translate}}:
                                 </p>
                                 <mat-form-field appearance="outline">
-                                    <input matInput placeholder="Enter WWR value" type="number"
+                                    <input matInput placeholder="{{'BEEC.COMMON.ENTER_VALUE' | translate}}" type="number"
                                         formControlName="wwrKnown" required>
                                 </mat-form-field>
                             </div>
@@ -375,10 +367,10 @@
                         <span *ngIf="formgroup.controls.wwr.value == 2">
 
                             <div>
-                                <p style="margin-top: 1rem;">Please enter the WWR value in(%) by refering to pictures:
+                                <p style="margin-top: 1rem;">{{'BEEC.BUILDINGENV_DETAILS.WWR_NOTKNOWN_TEXT' | translate}}:
                                 </p>
                                 <mat-form-field appearance="outline">
-                                    <input matInput placeholder="Enter value" type="number" formControlName="wwrGuide"
+                                    <input matInput placeholder="{{'BEEC.COMMON.ENTER_VALUE' | translate}}" type="number" formControlName="wwrGuide"
                                         required>
                                 </mat-form-field><br>
                                 <div class="images-wwr">
@@ -395,14 +387,11 @@
                             </b>
                             <b *ngIf="formgroup.controls.wwr.value == 2" class="calculated-values">
                                 WWR : {{formgroup.get('wwrArray')['controls'][0].controls.wwrGuide.value}}
-
                             </b>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </fieldset>
     </form>
 </div>

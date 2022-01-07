@@ -1,22 +1,22 @@
 <mat-toolbar class="mat-toolbar">
     <mat-toolbar-row class="d-flex justify-content-between">
-        <h3>R Value Window</h3>
+        <h3>{{ 'BEEC.BUILDINGENV_DETAILS.RWINDOW_KNOWN_TEXT' | translate}}</h3>
         <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onNoClick()">
             <mat-icon>close</mat-icon>
         </button>
     </mat-toolbar-row>
 </mat-toolbar>
 
-<p>Select R Value from predefined types</p>
+<p>{{'BEEC.BUILDINGENV_DETAILS.RWINDOW_PREDEFINED_DIALOG_TEXT' | translate}}</p>
 
 <div>
     <form [formGroup]="windowRFG" novalidate>
         <div class=row>
-            <p class="w-100 mt-4 col-md-6 column-name">Window Frame Type : </p>
+            <p class="w-100 mt-4 col-md-6 column-name">{{'BEEC.BUILDINGENV_DETAILS.RWINDOW_PREDEFINED_FRAMETYPE' | translate}} : </p>
 
 
             <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                <mat-label>Select frame type</mat-label>
+                <mat-label>{{'BEEC.BUILDINGENV_DETAILS.RWINDOW_PREDEFINED_FRAMETYPE_PLACEHOLDER' | translate}} </mat-label>
                 <mat-select formControlName="windowFrameType" (selectionChange)="onFrameType($event)">
                     <mat-option *ngFor="let type of windowRData" [value]="type.frametype">{{type.frametype}}
                     </mat-option>
@@ -25,10 +25,10 @@
         </div>
 
         <div class=row>
-            <p class="w-100 mt-4 col-md-6 column-name">Window Glazing Type : </p>
+            <p class="w-100 mt-4 col-md-6 column-name">{{'BEEC.BUILDINGENV_DETAILS.RWINDOW_PREDEFINED_GLAZINGTYPE' | translate}}  : </p>
 
             <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                <mat-label>Select Window Glazing Type</mat-label>
+                <mat-label>{{'BEEC.BUILDINGENV_DETAILS.RWINDOW_PREDEFINED_GLAZINGTYPE_PLACEHOLDER' | translate}} </mat-label>
                 <mat-select formControlName="windowGlazingType">
                     <mat-option *ngFor="let type of glazingList" [value]="type">{{type}}</mat-option>
                 </mat-select>
@@ -37,9 +37,9 @@
 
         <div class=row>
 
-            <p class="w-100 mt-4 col-md-6 column-name">Gap Between Panes : </p>
+            <p class="w-100 mt-4 col-md-6 column-name">{{'BEEC.BUILDINGENV_DETAILS.RWINDOW_PREDEFINED_GAPBTWPANES' | translate}}  : </p>
             <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                <mat-label>Select gap Between Panes</mat-label>
+                <mat-label>{{'BEEC.BUILDINGENV_DETAILS.RWINDOW_PREDEFINED_GAPBTWPANES_PLACEHOLDER' | translate}} </mat-label>
                 <mat-select formControlName="gapBetweenPanes">
                     <mat-option *ngFor="let type of gapBetweenPanes" [value]="type">{{type}}</mat-option>
                 </mat-select>
@@ -47,17 +47,17 @@
         </div>
 
         <div class=row>
-            <p class="w-100 mt-4 col-md-6 column-name">Thermal Break: </p>
+            <p class="w-100 mt-4 col-md-6 column-name">{{'BEEC.BUILDINGENV_DETAILS.RWINDOW_PREDEFINED_THERMALBREAK' | translate}} : </p>
             <mat-form-field class="w-100 mt-4 col-md-6" appearance="outline">
-                <mat-label>Select Thermal Break</mat-label>
+                <mat-label>{{'BEEC.BUILDINGENV_DETAILS.RWINDOW_PREDEFINED_THERMALBREAK_PLACEHOLDER' | translate}} </mat-label>
                 <mat-select formControlName="thermalBreak">
                     <mat-option *ngFor="let type of thermalBreak" [value]="type">{{type}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
         <div class="button-dialog" mat-dialog-actions>
-            <button mat-raised-button color="primary" (click)="postCalculateWindowR()" style="color: #fff;" class="mat-elevation-z6" 
-             type="submit" cdkFocusInitial>Click to Return</button>
+            <button mat-raised-button color="primary" (click)="postCalculateWindowR()" style="color: #fff;"
+                class="mat-elevation-z6" type="submit" cdkFocusInitial>Click to Return</button>
         </div>
     </form>
 

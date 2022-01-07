@@ -22,6 +22,9 @@ import { HeaderTwoComponent } from './header-two/header-two.component';
 import { FooterTwoComponent } from './footer-two/footer-two.component';
 import { BeetreportpdfComponent } from './beetreportpdf/beetreportpdf.component';
 import { BeetreportComponent } from '../modules/BEET/beetreport/beetreport.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../app.module';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -49,6 +52,13 @@ import { BeetreportComponent } from '../modules/BEET/beetreport/beetreport.compo
         NgbModule,
         ChartsModule,
         MatDialogModule,
+        TranslateModule.forRoot({
+            loader: {
+              provide: TranslateLoader,
+              useFactory: HttpLoaderFactory,
+              deps: [HttpClient]
+            }
+          }),
         RouterModule
     ],
     exports: [

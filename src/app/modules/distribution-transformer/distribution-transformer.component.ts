@@ -65,11 +65,7 @@ export class DisTransformerComponent implements OnInit {
   barChartLegend = true;
   barChartPlugins = [];
   barChartData: ChartDataSets[] = [{ data: [], label: 'CO2 emissions' }];
-
-
-
-
-  
+  barChartLabels1: Label[] = ['CO2 baseline', 'Final CO2 emissions'];
   showForms: boolean = true;
   policyLevels: number[] = [1, 2];
   FireRegulation: String[] = ["Fire standard distribution power transformers", "Fire safer distribution power transformers"];

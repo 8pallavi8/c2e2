@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 import { beetService } from '../services/beet.service';
 
 
@@ -25,7 +26,8 @@ export class WindowRdialogComponent implements OnInit {
   selCountryCode:string;
 
   constructor(public dialogRef: MatDialogRef<WindowRdialogComponent>, 
-    private fb:FormBuilder,private beetService: beetService) { }
+    private fb:FormBuilder,private beetService: beetService,public translate: TranslateService
+    ) { }
 
   ngOnInit(): void {
     this.windowRFG= this.fb.group({

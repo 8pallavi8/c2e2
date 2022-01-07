@@ -8,20 +8,19 @@
 
         <fieldset>
             <legend>Plug loads (equipment/appliances inside occupied conditioned area)</legend>
-            <h2>5.1 Plug loads (equipment/appliances inside occupied conditioned area) </h2>
+            <h2>5.1 {{'BEEC.PLUGLOADS.PLUGLOADS_TITLE' | translate}} </h2>
 
             <div >
-                <p class="question-text">Do you know the plug load density for your building ?</p>
+                <p class="question-text">{{'BEEC.PLUGLOADS.PLUGLOADS_QUESTION' | translate}}</p>
                 <div class="fields-note">
-                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span>You may select any of the options. Option C available for
-                        selected cases only.
+                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span>{{'BEEC.PLUGLOADS.PLUGLOADS_NOTE_TEXT' | translate}}
                     </p>
                 </div>
                 <mat-radio-group aria-label="Select an option" formControlName="plugloads"
                     (change)="onChangePlugLoadOption($event)">
-                    A. <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                    B. <mat-radio-button value="2">No, I don't know. Guide me to calculate.</mat-radio-button><br>
-                    C. <mat-radio-button value="3">I will select from already available values</mat-radio-button>
+                    A. <mat-radio-button value="1">{{'BEEC.COMMON.FIELDVALUE_KNOWN_OPTION' | translate}}</mat-radio-button><br>
+                    B. <mat-radio-button value="2">{{'BEEC.PLUGLOADS.PLUGLOADS_GUIDE_OPTION' | translate}}</mat-radio-button><br>
+                    C. <mat-radio-button value="3">{{'BEEC.PLUGLOADS.PLUGLOADS_EXISTING_OPTION' | translate}}</mat-radio-button>
                 </mat-radio-group><br><br>
 
                 <div *ngIf="formgroup.controls.plugloads.value !== ''">
@@ -29,14 +28,14 @@
                         <div>
                             <!-- Plugload value known -->
                             <span *ngIf="formgroup.controls.plugloads.value == 1" class="units-picker-component">
-                                <p class="fields-note">Enter the value in the cell and select the units from the drop down list.</p>
-                                <b style="margin-top: 1em;">Plug load density:</b>
+                                <p class="fields-note">{{'BEEC.COMMON.FIELDVALUE_KNOWN_TEXT' | translate}}</p>
+                                <b style="margin-top: 1em;">{{'BEEC.PLUGLOADS.PLUGLOADS_FINAL' | translate}}:</b>
                                 <mat-form-field class="w-100 mt-2 col-md-5" appearance="outline">
-                                    <input matInput placeholder="Enter plug load density value" formControlName="plugLoadValueKnown"
+                                    <input matInput placeholder="{{'BEEC.PLUGLOADS.PLUGLOADS_KNOWN_TEXT_PLACEHOLDER' | translate}}" formControlName="plugLoadValueKnown"
                                         type="number">
                                     <mat-select placeholder="units" formControlName="plugLoadUnits">
-                                        <mat-option value="watts per square meter">watts per square meter</mat-option>
-                                        <mat-option value="watts per square foot">watts per square foot</mat-option>
+                                        <mat-option value="watts per square meter">{{'BEEC.PLUGLOADS.PLUGLOAD_UNITS_WPSM' | translate}}</mat-option>
+                                        <mat-option value="watts per square foot">{{'BEEC.PLUGLOADS.PLUGLOAD_UNITS_WPSF' | translate}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </span>
@@ -45,28 +44,19 @@
                             <span *ngIf="formgroup.controls.plugloads.value == 2"
                                 class="container-fluid beet-container">
                                 <div class="fields-note">
-                                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> Plug load refer to energy used by
-                                        equipment that is plugged into an outlet. For example, in an office, key plug
-                                        loads include computer and
-                                        monitors, printers, and copiers. Equipment/Appliances include other connected
-                                        load such as the prefilled examples in the table. Do not include major lighting
-                                        fixture details that have already been entered in the lighting section.
-                                        Table lamps, plugged task lightings, etc. which were not covered in the lighting
-                                        section may be entered here. Do not include large HVAC system components here.
+                                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.PLUGLOADS.PLUGLOADS_GUIDE_OPTION_TEXT' | translate}}
                                     </p>
                                 </div>
                                 <div class="example-table-container" formArrayName=plugLoadArray>
                                     <table *ngIf="formgroup.controls.plugloads.value == 2" class="table">
                                         <thead style="position: sticky;top: 0;background-color: #646c74;" class="thead-dark table-sm">
                                             <tr>
-                                                <th>Space</th>
-                                                <th>Plug load Equipment/Appliance</th>
-                                                <th>Year of installation(Optional)</th>
-                                                <th>Average Power, Watts(if available)</th>
-                                                <th>Connected stock of equipment/appliance 
-                                                    (Numbers)</th>
-                                                <th>Average operating hours per day
-                                                    (if available)</th>
+                                                <th>{{'BEEC.PLUGLOADS.PLUGLOAD_GUIDE_TABLE_SPACE' | translate}}</th>
+                                                <th>{{'BEEC.PLUGLOADS.PLUGLOAD_GUIDE_TABLE_EQUIP' | translate}}</th>
+                                                <th>{{'BEEC.PLUGLOADS.PLUGLOAD_GUIDE_TABLE_YEAFOFINSTALLATION' | translate}}</th>
+                                                <th>{{'BEEC.PLUGLOADS.PLUGLOAD_GUIDE_TABLE_AVGPOWER' | translate}}</th>
+                                                <th>{{'BEEC.PLUGLOADS.PLUGLOAD_GUIDE_TABLE_STOCKOFEQIP' | translate}}</th>
+                                                <th>{{'BEEC.PLUGLOADS.PLUGLOAD_GUIDE_TABLE_AVGOPERATINGHRS' | translate}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -197,7 +187,7 @@
 
                                 <div>
                                     <button mat-raised-button color="primary" style="margin-top: 1rem;"
-                                        (click)="calculatePlugLoad()">Calculate</button>
+                                        (click)="calculatePlugLoad()">{{'BEEC.COMMON.CALCULATE' | translate}}</button>
                                 </div><br>
                             </span>
 
@@ -205,19 +195,14 @@
                             <span *ngIf="formgroup.controls.plugloads.value == 3"
                                 class="container-fluid beet-container">
                                 <div class="fields-note">
-                                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> Options available for selected
-                                        cases only. Select the most suitable type and closest area to your building. If
-                                        the values in the options are far
-                                        from your building values, please opt for Option B.</p>
+                                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.PLUGLOADS.PLUGLOADS_EXISTING_OPTION_TEXT' | translate}}</p>
                                 </div>
-
-
 
                                 <table mat-table [dataSource]="optcDataSource">
 
                                     <ng-container matColumnDef="select">
                                         <th mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;">
-                                            Select
+                                            {{'BEEC.COMMON.SELECT' | translate}}
                                         </th>
                                         <td mat-cell *matCellDef="let element">
                                             <mat-radio-button [value]="element"
@@ -228,7 +213,7 @@
 
 
                                     <ng-container matColumnDef="buildingtype">
-                                        <th mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> Building Type </th>
+                                        <th mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> {{'BEEC.PLUGLOADS.PLUGLOADS_EXISTING_OPTION_TABLE_BUIDLING_TYPE' | translate}}</th>
                                         <td mat-cell *matCellDef="let element">
                                             {{element.buildingtype}}
                                         </td>
@@ -236,28 +221,28 @@
 
 
                                     <ng-container matColumnDef="avgpplwperft2">
-                                        <th mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> Average PPL, W/ft<sup>2</sup></th>
+                                        <th mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> {{'BEEC.PLUGLOADS.PLUGLOADS_EXISTING_OPTION_TABLE_AVGPPLWFT' | translate}}</th>
                                         <td mat-cell *matCellDef="let element">
                                             {{element.avgpplwperft2}}
                                         </td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="avgpplwperm2">
-                                        <th mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> Average PPL, W/mt<sup>2</sup> </th>
+                                        <th mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> {{'BEEC.PLUGLOADS.PLUGLOADS_EXISTING_OPTION_TABLE_AVGPPLWMT' | translate}} </th>
                                         <td mat-cell *matCellDef="let element">
                                             {{element.avgpplwperm2}}
                                         </td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="totalareaft2">
-                                        <th mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> Total Area (ft<sup>2</sup>) </th>
+                                        <th mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> {{'BEEC.PLUGLOADS.PLUGLOADS_EXISTING_OPTION_TABLE_TOTAREASQFT' | translate}} </th>
                                         <td mat-cell *matCellDef="let element">
                                             {{element.totalareaft2}}
                                         </td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="totalaream2">
-                                        <th mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> Total Area (mt<sup>2</sup>)</th>
+                                        <th mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> {{'BEEC.PLUGLOADS.PLUGLOADS_EXISTING_OPTION_TABLE_TOTAREASQMT' | translate}} </th>
                                         <td mat-cell *matCellDef="let element">
                                             {{element.totalaream2}}
                                         </td>
@@ -270,14 +255,14 @@
 
                             </span>
                             <div>
-                                <b *ngIf="formgroup.controls.plugloads.value == 1">Plugload Density :
+                                <b *ngIf="formgroup.controls.plugloads.value == 1">{{'BEEC.PLUGLOADS.PLUGLOADS_FINAL' | translate}} :
                                     {{formgroup.controls.plugLoadValueKnown.value| number:'1.2-2'}}
                                     {{formgroup.controls.plugLoadUnits.value}}</b>
-                                <b *ngIf="formgroup.controls.plugloads.value == 2">Plugload Density :
+                                <b *ngIf="formgroup.controls.plugloads.value == 2">{{'BEEC.PLUGLOADS.PLUGLOADS_FINAL' | translate}} :
                                     {{formgroup.controls.plugLoadValueKnown.value| number:'1.2-2'}}
                                     {{formgroup.controls.plugLoadUnits.value}}
                                 </b>
-                                <b *ngIf="formgroup.controls.plugloads.value == 3">Plugload Density :
+                                <b *ngIf="formgroup.controls.plugloads.value == 3">{{'BEEC.PLUGLOADS.PLUGLOADS_FINAL' | translate}} :
                                     {{formgroup.controls.plugLoadValueKnown.value| number:'1.2-2'}}
                                     {{formgroup.controls.plugLoadUnits.value}}
                                 </b>
@@ -291,24 +276,24 @@
 
         <fieldset>
             <legend>Plug loads operations and practices</legend>
-            <h2>5.2 Plug loads operations and practices</h2>
+            <h2>5.2 {{'BEEC.PLUGLOADS.PLUGLOAD_OPSANDPRATICES_TITLE' | translate}} </h2>
 
             <div >
 
-                <p>Select the option "Yes" or "No" and enter the quantity</p>
+                <p>{{'BEEC.PLUGLOADS.PLUGLOAD_OPSANDPRATICES_TEXT' | translate}}</p>
                 <div class="example-container mat-elevation-z8">
 
                     <mat-table class="plugloadtable" formArrayName="plugLoadOptionsArray" [dataSource]="plugloadOptionsDataSource">
 
                         <!-- operations Column -->
                         <ng-container style="column-width: 5rem;" matColumnDef="plugloadops">
-                            <mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> Operations and pratices </mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> {{'BEEC.PLUGLOADS.PLUGLOAD_OPSANDPRATICES_TABLE_OPSANDPRATICES' | translate}} </mat-header-cell>
                             <mat-cell *matCellDef="let option let rowIndex = index"  [formGroupName]="rowIndex"> {{option.plugloadops}} </mat-cell>
                         </ng-container>
 
                         <!-- options Column -->
                         <ng-container style="text-align: center" matColumnDef="options">
-                            <mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> Yes/No/NA </mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;"> {{'BEEC.PLUGLOADS.PLUGLOAD_OPSANDPRATICES_TABLE_YESNONA' | translate}} </mat-header-cell>
                             <mat-cell *matCellDef="let element let rowIndex = index"  [formGroupName]="rowIndex">
                                      <mat-radio-group class="plugload-radio-group" layout="row" [(value)]="element.options" placeholder="select" formControlName="operationresponse">
                                         <mat-radio-button value="NA">NA</mat-radio-button >
@@ -319,7 +304,7 @@
                         </ng-container>
 
                         <ng-container matColumnDef="quantity">
-                            <mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;">Quantity</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef style="font-size: large;font-weight: bolder;">{{'BEEC.PLUGLOADS.PLUGLOAD_OPSANDPRATICES_TABLE_QUANTITY' | translate}}</mat-header-cell>
                             <mat-cell *matCellDef="let quantity let rowIndex = index"  [formGroupName]="rowIndex">
                                 <mat-form-field class="plugloads-opr-qty">
                                     <input type="number"  matInput  formControlName="quantity" [(title)]="quantity.cellcomments">

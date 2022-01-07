@@ -10,20 +10,18 @@
 
         <fieldset>
             <legend>Heating</legend>
-            <h2>4.1 Heating efficiency</h2>
+            <h2>4.1 {{'BEEC.HVAC.HEATING_EFFICIENCY_TITLE' | translate}}</h2>
             <div >
-                <p class="question-text">Do you know the heating equipment efficiency of your building?</p>
+                <p class="question-text">{{'BEEC.HVAC.HEATING_EFFICIENCY_QUESTION' | translate}}</p>
                 <div class="fields-note">
-                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> You may select any of the options.
-                        You may find these values on the equipment name plate or design document or from supplier
+                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.HVAC.HEATING_EFFICIENCY_NOTE_TEXT' | translate}}
                     </p>
                 </div>
                 <mat-radio-group aria-label="Select an option" formControlName="heatefficiency"
                     (change)="onChangeHeatEffOption($event)">
-                   A. <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                   B. <mat-radio-button value="2">No, I don't know. (default values will be assumed for calculations) </mat-radio-button><br>
-                   C. <mat-radio-button value="3">The building does not use any
-                        heating equipment</mat-radio-button>
+                   A. <mat-radio-button value="1">{{'BEEC.COMMON.FIELDVALUE_KNOWN_OPTION' | translate}}</mat-radio-button><br>
+                   B. <mat-radio-button value="2">{{'BEEC.HVAC.EFFICIENCY_NOTKNOWN' | translate}} </mat-radio-button><br>
+                   C. <mat-radio-button value="3">{{'BEEC.HVAC.HEATING_EFFICIENCY_NOHEATING_EQUIP' | translate}}</mat-radio-button>
                 </mat-radio-group><br><br>
 
                 <div formArrayName="heatefficiencyArray" *ngIf="formgroup.controls.heatefficiency.value !== ''">
@@ -31,15 +29,14 @@
                         <div [formGroupName]="i">
                             <!-- Heat efficiency known -->
                             <span *ngIf="formgroup.controls.heatefficiency.value == 1" class="units-picker-component">
-                                <p>The value should be available on the equipment name plate or contact the supplier.For
-                                    Heat pumps enter COP value.</p>
-                                <b style="margin-top: 1em;">Enter the heatingequipment efficiency value :
+                                <p>{{'BEEC.HVAC.HEATING_EFFICIENCY_KNOWN_TEXT' | translate}}</p>
+                                <b style="margin-top: 1em;">{{'BEEC.HVAC.HEATING_EFFICIENCY_KNOWN_FIELDNAME' | translate}} :
                                 </b>
-                                <mat-form-field class="w-100 mt-2 col-md-6" appearance="outline">
+                                <mat-form-field class="w-100 mt-2 col-md-8" appearance="outline">
                         
-                                    <input matInput placeholder="Enter heating equipment efficiency value" type="number"
-                                        formControlName="heatefficiencyKnown" type="number">
-                                    <mat-select placeholder="units" formControlName="heatEfficiencyUnits">
+                                    <input matInput placeholder="{{'BEEC.HVAC.HEATING_EFFICIENCY_KNOWN_FIELDNAME_PLACEHOLDER' | translate}}" type="number"
+                                        formControlName="heatefficiencyKnown">
+                                    <mat-select placeholder="{{'BEEC.COMMON.UNITS' | translate}}" formControlName="heatEfficiencyUnits">
                                         <mat-option value="%">%</mat-option>
                                         <mat-option value="COP">COP</mat-option>
                                     </mat-select>
@@ -62,9 +59,7 @@
                             <div *ngIf="formgroup.controls.heatefficiency.value == 2">
 
                                 <div>
-                                    <p style="margin-top: 1em;">Please select the most representative picture for your
-                                        heating equipment
-                                        type.<br>
+                                    <p style="margin-top: 1em;">{{'BEEC.HVAC.HEATING_EFFICIENCY_IMAGES_TEXT' | translate}}<br>
                                     </p>
                                     <div> 
                                         <mat-radio-group class="mat-radio-group-image" formControlName="heatValueImages"
@@ -81,16 +76,16 @@
 
 
                             <div>
-                                <b *ngIf="formgroup.controls.heatefficiency.value == 1">Heating efficiency :
+                                <b *ngIf="formgroup.controls.heatefficiency.value == 1">{{'BEEC.HVAC.HEATING_EFFICIENCY_TITLE' | translate}} :
                                     {{formgroup.get('heatefficiencyArray')['controls'][0].controls.heatefficiencyKnown.value}}
                                     {{formgroup.get('heatefficiencyArray')['controls'][0].controls.heatEfficiencyUnits.value}}
                                 </b>
-                                <b *ngIf="formgroup.controls.heatefficiency.value == 2">Heating efficiency :
+                                <b *ngIf="formgroup.controls.heatefficiency.value == 2">{{'BEEC.HVAC.HEATING_EFFICIENCY_TITLE' | translate}} :
 
                                     {{formgroup.get('heatefficiencyArray')['controls'][0].controls.heatefficiency.value}}
                                     {{formgroup.get('heatefficiencyArray')['controls'][0].controls.heatEfficiencyUnits.value}}
                                 </b>
-                                <b *ngIf="formgroup.controls.heatefficiency.value == 3">No heating equipment
+                                <b *ngIf="formgroup.controls.heatefficiency.value == 3">{{'BEEC.HVAC.HEATING_EFFICIENCY_NOHEATING_TEXT' | translate}}
                                 </b>
                             </div>
 
@@ -104,21 +99,19 @@
         <!-- Air-Conditioning (Cooling) -->
         <fieldset>
             <legend>Air-Conditioning (Cooling)</legend>
-            <h2>4.2 Air-Conditioning (Cooling)</h2>
+            <h2>4.2 {{'BEEC.HVAC.COOLING_EFFICIENCY_TITLE' | translate}}</h2>
 
             <div >
-                <p class="question-text">Do you know the cooling equipment performance parameters of your building? </p>
+                <p class="question-text">{{'BEEC.HVAC.COOLING_EFFICIENCY_QUESTION' | translate}} </p>
                 <div class="fields-note">
-                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> You may select any of the options.
-                        You may find these values on the equipment name plate or design document or from supplier.
+                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.HVAC.COOLING_EFFICIENCY_NOTE_TEXT' | translate}} 
                     </p>
                 </div>
                 <mat-radio-group aria-label="Select an option" formControlName="airconditioning"
                     (change)="onChangecoolingEffOption($event)">
-                   A. <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                   B. <mat-radio-button value="2">No, I don't know. (default values will be assumed for calculations) </mat-radio-button><br>
-                   C. <mat-radio-button value="3">The building does not use any
-                        cooling equipment</mat-radio-button>
+                   A. <mat-radio-button value="1">{{'BEEC.COMMON.FIELDVALUE_KNOWN_OPTION' | translate}}</mat-radio-button><br>
+                   B. <mat-radio-button value="2">{{'BEEC.COMMON.NOTKNOWN_OPTION' | translate}} </mat-radio-button><br>
+                   C. <mat-radio-button value="3">{{'BEEC.HVAC.COOLING_EFFICIENCY_NOCOOLING_EQUIP' | translate}} </mat-radio-button>
                 </mat-radio-group><br><br>
 
 
@@ -127,10 +120,10 @@
                         <div [formGroupName]="i">
                             <!-- cool efficiency known -->
                             <span *ngIf="formgroup.controls.airconditioning.value == 1" class="units-picker-component">
-                                <p>Please enter the value in below text box and select respective units.</p>
+                                <p>{{'BEEC.HVAC.COOLING_EFFICIENCY_KNOWN_TEXT' | translate}}</p>
                                 
                                     <mat-form-field class="w-100 mt-2 col-md-6" appearance="outline">
-                                        <input matInput placeholder="Enter cooling equipment efficiency value" formControlName="acEfficiencyValue"
+                                        <input matInput placeholder="{{'BEEC.HVAC.COOLING_EFFICIENCY_KNOWN_FIELDNAME_PLACEHOLDER' | translate}}" formControlName="acEfficiencyValue"
                                             type="number">
                                         <mat-select placeholder="units" formControlName="acEfficiencyParameter">
                                             <mat-option *ngFor="let unit of acEfficiencyParameterList" [value]="unit">
@@ -158,9 +151,7 @@
 
                             <span *ngIf="formgroup.controls.airconditioning.value == 2">
 
-                                <p style="margin-top: 1em;">Please select the most representative picture for your
-                                    cooling equipment
-                                    type.<br>
+                                <p style="margin-top: 1em;">{{'BEEC.HVAC.COOLING_EFFICIENCY_IMAGES_TEXT' | translate}}<br>
                                 </p>
                                 <div class="row">
 
@@ -175,16 +166,16 @@
                                 </div>
                             </span>
                             <div>
-                                <b *ngIf="formgroup.controls.airconditioning.value == 1">Cooling efficiency :
+                                <b *ngIf="formgroup.controls.airconditioning.value == 1">{{'BEEC.HVAC.COOLING_EFFICIENCY_TITLE' | translate}}:
                                     {{formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyValue.value}}
                                     {{formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyParameter.value}}
 
                                 </b>
-                                <b *ngIf="formgroup.controls.airconditioning.value == 2">Cooling efficiency :
+                                <b *ngIf="formgroup.controls.airconditioning.value == 2">{{'BEEC.HVAC.COOLING_EFFICIENCY_TITLE' | translate}} :
                                     {{formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyValue.value}}
                                     {{formgroup.get('coolefficiencyArray')['controls'][0].controls.acEfficiencyUnits.value}}
                                 </b>
-                                <b *ngIf="formgroup.controls.airconditioning.value == 3">No Cooling equipment
+                                <b *ngIf="formgroup.controls.airconditioning.value == 3">{{'BEEC.HVAC.COOLING_EFFICIENCY_NOCOOLING_TEXT' | translate}}
                                 </b>
                             </div>
 
@@ -199,26 +190,25 @@
 
         <fieldset>
             <legend>Ventilation</legend>
-            <h2>4.3 Ventilation</h2>
+            <h2>4.3 {{'BEEC.HVAC.VENTILATION_TITLE' | translate}}</h2>
 
             <div>
-                <p class="question-text">Do you know the ventilation rate value for your building?</p>
+                <p class="question-text">{{'BEEC.HVAC.VENTILATION_QUESTION' | translate}}</p>
 
                 <div class="fields-note">
-                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> You may select any of the options to provide building infiltration rate.</p>
+                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.HVAC.VENTILATION_NOTE_TEXT' | translate}}</p>
                 </div>
                 <mat-radio-group aria-label="Select an option" formControlName="ventilation">
-                   A. <mat-radio-button value="1">Yes, I know</mat-radio-button><br>
-                   B. <mat-radio-button value="2" (click)="postCalculateVentilationRate()">No, I don't know
+                   A. <mat-radio-button value="1">{{'BEEC.COMMON.FIELDVALUE_KNOWN_OPTION' | translate}}</mat-radio-button><br>
+                   B. <mat-radio-button value="2" (click)="postCalculateVentilationRate()">{{'BEEC.COMMON.NOTKNOWN_OPTION' | translate}}
                     </mat-radio-button>
                 </mat-radio-group>
 
                 <span *ngIf="formgroup.controls.ventilation.value == 1" class="units-picker-component">
-                    <p class="fields-note">You may choose to enter the values for any of the units mentioned
-                        below. Necessary units conversions will be made by the tool for respective calculations.</p>
-                    <b style="margin-top: 1em;">Ventilation Rate : </b>
+                    <p class="fields-note">{{'BEEC.HVAC.VENTILATION_KNOWN_TEXT' | translate}}</p>
+                    <b style="margin-top: 1em;">{{'BEEC.HVAC.VENTILATION_KNOWN_FIELDNAME' | translate}} : </b>
                     <mat-form-field class="w-100 mt-2 col-md-6" appearance="outline">
-                        <input matInput placeholder="Enter ventilation value" type="number" formControlName="ventilationValue"
+                        <input matInput placeholder="{{'BEEC.HVAC.VENTILATION_KNOWN_FIELDNAME_PLACEHOLDER' | translate}}" type="number" formControlName="ventilationValue"
                             type="number">
                         <mat-select placeholder="units" formControlName="ventilationUnits">
                             <mat-option value="cubic meter per minute per person">cubic meter per minute per person
@@ -229,7 +219,7 @@
                     </mat-form-field>
                 </span>
                 <div>
-                    <b>Ventilation: {{formgroup.controls.ventilationValue.value}} {{formgroup.controls.ventilationUnits.value}}</b>
+                    <b>{{'BEEC.HVAC.VENTILATION_TITLE' | translate}}: {{formgroup.controls.ventilationValue.value}} {{formgroup.controls.ventilationUnits.value}}</b>
                 </div>
             </div>
         </fieldset>
@@ -248,9 +238,9 @@
 
                 <div>
                     <mat-radio-group aria-label="Select an option" formControlName="infiltration">
-                       A. <mat-radio-button value="1">Yes, I know
+                       A. <mat-radio-button value="1">{{'BEEC.COMMON.FIELDVALUE_KNOWN_OPTION' | translate}}
                         </mat-radio-button><br>
-                        B. <mat-radio-button (click)="defaultInfiltration()" value="2">No, I don't know. (default values will be assumed for calculations).
+                        B. <mat-radio-button (click)="defaultInfiltration()" value="2">{{'BEEC.COMMON.NOTKNOWN_OPTION' | translate}} (default values will be assumed for calculations).
                         </mat-radio-button>
                     </mat-radio-group>
                 </div>
@@ -319,7 +309,7 @@
                 <span class="units-picker-component">
                     <p class="fieldname-align question-text">Average indoor air temperature (set-point):</p>
                     <mat-form-field appearance="outline">
-                        <input matInput placeholder="Enter value" type="number" formControlName="avgIndoorAirTemp">
+                        <input matInput placeholder="{{'BEEC.COMMON.ENTER_VALUE' | translate}}" type="number" formControlName="avgIndoorAirTemp">
                         <mat-select [(value)]="units" placeholder="units" formControlName="avgIndoorAirTempUnit">
                             <mat-option value="centigrade">ºC</mat-option>
                             <mat-option value="farenheit">ºF</mat-option>
