@@ -10,7 +10,7 @@
 
         <div id="general-section">
             <div class="report-fields  w-100 col-md-12 Report-sections">
-                <h4 class="report-headings">General Information</h4>
+                <h4 class="report-headings">{{ 'BEEC.COMMON.STEPLABEL1' | translate}}</h4>
 
                 <div style="display: flex;flex-wrap: wrap; overflow: hidden;">
                     <table class="table table-hover" style="flex: 1 1 20em;
@@ -20,24 +20,25 @@
                     margin-left: -1px;">
                         <tbody>
                             <tr>
-                                <td  style="font-weight: bold;">Building type :</td>
+                                <td style="font-weight: bold;">{{ 'BEEC.GENDETAILS.BUILDING_DETAILS_TYPE' | translate}}
+                                    :</td>
                                 <td>{{genDetailsComponent.genDetailsForm.controls.buildingType.value}}
                                 </td>
                             </tr>
                             <tr>
-                                <td  style="font-weight: bold;">Surface Area : </td>
+                                <td style="font-weight: bold;">{{ 'BEEC.REPORT.SURFACE_AREA' | translate}} : </td>
                                 <td>{{genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value|
                                     number:'1.2-2'}}
                                     {{genDetailsComponent.genDetailsForm.controls.netAreaUnits.value}}
                                 </td>
                             </tr>
                             <tr>
-                                <td  style="font-weight: bold;">No. of Floors : </td>
+                                <td style="font-weight: bold;">{{ 'BEEC.REPORT.NUMBER_OF_FLOORS' | translate}} : </td>
                                 <td>{{genDetailsComponent.genDetailsForm.controls.noOfFloors.value}}
                                 </td>
                             </tr>
                             <tr>
-                                <td  style="font-weight: bold;">Occupancy Hours : </td>
+                                <td style="font-weight: bold;">{{ 'BEEC.REPORT.OCCUPANCY_HOURS' | translate}} : </td>
                                 <td>{{genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value}}
                                 </td>
                             </tr>
@@ -51,7 +52,8 @@
                     margin-left: -1px;">
                         <tbody>
                             <tr>
-                                <td  style="font-weight: bold;">Occupant Density :</td>
+                                <td style="font-weight: bold;">{{'BEEC.GENDETAILS.OCCUPANCY_OCCUPANCYDENSITY' |
+                                    translate}} :</td>
                                 <td> {{genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value|
                                     number:'1.2-2'}}
                                     {{genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value}}
@@ -59,7 +61,7 @@
                             </tr>
 
                             <tr>
-                                <td  style="font-weight: bold;">Electricity Cost :</td>
+                                <td style="font-weight: bold;">{{'BEEC.REPORT.ELECTRICITY_COST' | translate}} :</td>
                                 <td>{{genDetailsComponent.genDetailsForm.controls.electricityCost.value|
                                     number:'1.2-2'}}
                                     {{genDetailsComponent.genDetailsForm.controls.electricityUnits.value}}
@@ -67,7 +69,7 @@
                             </tr>
 
                             <tr>
-                                <td  style="font-weight: bold;">Fuel Cost : </td>
+                                <td style="font-weight: bold;">{{'BEEC.REPORT.FUEL_COST' | translate}} : </td>
                                 <td>{{genDetailsComponent.genDetailsForm.controls.fuelCost.value|
                                     number:'1.2-2'}}
                                     {{genDetailsComponent.genDetailsForm.controls.fuelUnits.value}}</td>
@@ -75,18 +77,12 @@
                         </tbody>
                     </table>
                 </div>
-
-                <div>
-                    <img src="{{con.imagepath}}">
-                </div>
-
             </div>
-
 
 
             <div class=" w-100 col-md-12 Report-sections" style="border-style: solid">
                 <div style="display: flex;">
-                    <h4 class="report-headings">Key Indicators</h4>
+                    <h4 class="report-headings">{{'BEEC.REPORT.KEY_INDICATORS' | translate}}</h4>
 
                     <div class="col-md-1" style="padding: 0; margin-top: 0px;">
                         <button *ngIf="showTogglePlusIcon" (click)="toggleButtonShowIcon()" class="btn btn-link btn-sm"
@@ -117,7 +113,7 @@
                         </div>
                     </div>
                     <div class="container-fluid mt-5 col-md-6">
-                        <div class="chart-wrapper" >
+                        <div class="chart-wrapper">
                             <canvas baseChart [datasets]="barChartData3" [labels]="barChartLabels3"
                                 [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
                                 [chartType]="barChartType" [colors]="barChartColors">
@@ -137,19 +133,21 @@
                             <tbody>
                                 <tr>
                                     <td class="key-indicators">
-                                        Peak electricity demand in
+                                        {{'BEEC.REPORT.PEAK_ELECTRICITY_DEMAND_IN' | translate}}
                                     </td>
                                     <td>
                                         {{submitResponse.peakelectricitydemand}}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="key-indicators">Highest electricity consumption in</td>
+                                    <td class="key-indicators">{{'BEEC.REPORT.HIGHEST_ELECTRICITY_CONSUMPTION_IN' |
+                                        translate}}</td>
                                     <td>{{submitResponse.highestelectricityconsumption}}</td>
                                 </tr>
                                 <tr>
 
-                                    <td class="key-indicators">Highest fuel consumption for heating in</td>
+                                    <td class="key-indicators">{{'BEEC.REPORT.HIGHEST_FUEL_CONSUMPTION_FORHEATINGIN' |
+                                        translate}}</td>
                                     <td>{{submitResponse.highestfuelconsumption}}</td>
                                 </tr>
                             </tbody>
@@ -168,7 +166,8 @@
                                 <tr>
                                     <td class="key-indicators">
                                         <img style="width: 30px" src="../../../assets/images/report/esavings.png">
-                                        Energy Savings</td>
+                                        {{'BEEC.REPORT.ENERGY_SAVINGS' | translate}}
+                                    </td>
                                     <td>{{submitResponse.energysavings |
                                         number:'1.2-2'}}{{submitResponse.energysavingsunit}}</td>
                                     <td>{{submitResponse.energysavingspercent | number:'1.2-2'}}%
@@ -178,7 +177,10 @@
                                 <tr>
 
                                     <td class="key-indicators">
-                                        <img style="width: 30px" src="../../../assets/images/report/ecsavings.png">Energy Cost Savings</td>
+                                        <img style="width: 30px"
+                                            src="../../../assets/images/report/ecsavings.png">{{'BEEC.REPORT.ENERGY_COST_SAVINGS'
+                                        | translate}}
+                                    </td>
                                     <td>{{submitResponse.energycostsavings |
                                         number:'1.2-2'}}{{submitResponse.energycostsavingsunit}}</td>
                                     <td>{{submitResponse.energycostsavingspercent | number:'1.2-2'}}%
@@ -188,7 +190,10 @@
                                 <tr>
 
                                     <td class="key-indicators">
-                                        <img style="width: 40px" src="../../../assets/images/report/co2red.png">CO2 Reduction</td>
+                                        <img style="width: 40px"
+                                            src="../../../assets/images/report/co2red.png">{{'BEEC.REPORT.CO2_REDUCTION'
+                                        | translate}}
+                                    </td>
                                     <td>{{submitResponse.co2reduction | number:'1.2-2'}}
                                         {{submitResponse.co2reductionunit}}</td>
                                     <td>{{submitResponse.co2reductionpercent | number:'1.2-2'}}%
@@ -224,22 +229,22 @@
                     data-toggle="table">
                     <thead>
                         <tr>
-                            <th colspan="6">Construction Elements</th>
+                            <th colspan="6">{{ 'BEEC.REPORT.CONSTRUCTION_ELEMENT' | translate}}</th>
                         </tr>
                         <tr>
-                            <th colspan="3">Baseline</th>
-                            <th colspan="4">Energy Efficiency Standards</th>
+                            <th colspan="3">{{ 'BEEC.REPORT.BASELINE' | translate}}</th>
+                            <th colspan="4">{{ 'BEEC.REPORT.ENERGY_EFFICIENCY_STANDARDS' | translate}}</th>
                         </tr>
                         <tr>
-                            <th colspan="2">Element</th>
-                            <th>Indicators</th>
-                            <th>Indicators</th>
-                            <th>Benchmark</th>
-                            <th>Recommendations</th>
+                            <th colspan="2">{{ 'BEEC.REPORT.ELEMENT' | translate}}</th>
+                            <th>{{ 'BEEC.REPORT.INDICATORS' | translate}}</th>
+                            <th>{{ 'BEEC.REPORT.INDICATORS' | translate}}</th>
+                            <th>{{ 'BEEC.REPORT.BENCHMARK' | translate}}</th>
+                            <th>{{ 'BEEC.REPORT.RECOMMENDATIONS' | translate}}</th>
                         </tr>
 
                         <tr>
-                            <th colspan="6">Main facade</th>
+                            <th colspan="6">{{ 'BEEC.REPORT.MAIN_FACADE' | translate}}</th>
                         </tr>
 
                         <tr>
@@ -272,7 +277,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th style="background-color: #F2F2F2;" colspan="6">Roof</th>
+                            <th style="background-color: #F2F2F2;" colspan="6">{{ 'BEEC.REPORT.ROOF' | translate}}</th>
                         </tr>
 
                         <tr>
@@ -309,7 +314,7 @@
 
 
                         <tr>
-                            <th colspan="6">Windows</th>
+                            <th colspan="6">{{ 'BEEC.REPORT.WINDOWS' | translate}}</th>
                         </tr>
 
                         <tr style="width: 40%;">
@@ -371,22 +376,22 @@
                 <table *ngIf="!showTogglePlusIconhvac" class="table  table-bordered table-sm" data-toggle="table">
                     <thead>
                         <tr>
-                            <th colspan="5">HVAC SYSTEMS</th>
+                            <th colspan="5">{{ 'BEEC.REPORT.HVAC_SYSTEMS' | translate}}</th>
                         </tr>
                         <tr>
-                            <th colspan="2">Baseline</th>
-                            <th colspan="3">Energy Efficiency Standards</th>
+                            <th colspan="2">{{ 'BEEC.REPORT.BASELINE' | translate}}</th>
+                            <th colspan="3">{{ 'BEEC.REPORT.ENERGY_EFFICIENCY_STANDARDS' | translate}}</th>
                         </tr>
                         <tr>
-                            <th>System</th>
-                            <th>Performance</th>
-                            <th>Performance</th>
-                            <th>Benchmark</th>
-                            <th>Recommendations</th>
+                            <th>{{ 'BEEC.REPORT.SYSTEM' | translate}}</th>
+                            <th>{{ 'BEEC.REPORT.PERFORMANCE' | translate}}</th>
+                            <th>{{ 'BEEC.REPORT.PERFORMANCE' | translate}}</th>
+                            <th>{{ 'BEEC.REPORT.BENCHMARK' | translate}}</th>
+                            <th>{{ 'BEEC.REPORT.RECOMMENDATIONS' | translate}}</th>
                         </tr>
 
                         <tr>
-                            <th colspan="5">Heating</th>
+                            <th colspan="5">{{ 'BEEC.REPORT.HEATING' | translate}}</th>
                         </tr>
 
                         <tr>
@@ -413,7 +418,7 @@
                         </tr>
 
                         <tr>
-                            <th colspan="5">Cooling</th>
+                            <th colspan="5">{{ 'BEEC.REPORT.COOLING' | translate}}</th>
                         </tr>
 
                         <tr>
@@ -439,7 +444,7 @@
                         </tr>
 
                         <tr>
-                            <th colspan="5">Fans and Blowers</th>
+                            <th colspan="5">{{ 'BEEC.REPORT.FANS_AND_BLOWERS' | translate}}</th>
                         </tr>
 
                         <tr>
@@ -463,11 +468,11 @@
                         </tr>
 
                         <tr>
-                            <th colspan="5">LIGHTING</th>
+                            <th colspan="5">{{ 'BEEC.REPORT.LIGHTING_HEADING' | translate}}</th>
                         </tr>
 
                         <tr>
-                            <th colspan="5">Lighting</th>
+                            <th colspan="5">{{ 'BEEC.REPORT.LIGHTING' | translate}}</th>
                         </tr>
 
                         <tr>
@@ -491,11 +496,11 @@
                         </tr>
 
                         <tr>
-                            <th colspan="5">PLUGLOADS</th>
+                            <th colspan="5">{{ 'BEEC.REPORT.PLUGLOADS_HEADING' | translate}}</th>
                         </tr>
 
                         <tr>
-                            <th colspan="5">PlugLoads</th>
+                            <th colspan="5">{{ 'BEEC.REPORT.PLUGLOADS' | translate}}</th>
                         </tr>
                         <tr>
                             <td> <img style="width: 100%;" src="../../../assets/images/report/plugload-report.png" />
@@ -525,8 +530,7 @@
         <div class="Report-sections">
             <div class=" w-100 col-md-12">
                 <div style="display: flex;">
-                    <h4 class="report-headings">Assumptions,Limitations and Additional
-                        recommendations </h4>
+                    <h4 class="report-headings">{{ 'BEEC.REPORT.ASSUMPTIONS_AND_LIMITATIONS_RECOMMENDATIONS' | translate}} </h4>
                     <div class="col-md-1" style="padding: 0; margin-top: 0px;">
                         <button *ngIf="showTogglePlusIconAssump" (click)="toggleButtonShowAssump()"
                             class="btn btn-link btn-sm" type="button">
@@ -545,11 +549,11 @@
 
                     <tr>
                         <td class="key-indicators">
-                            <p>Assumptions and Limitations
+                            <p>{{ 'BEEC.REPORT.ASSUMPTIONS_AND_LIMITATIONS' | translate}}
                             </p>
                         </td>
                         <td class="key-indicators">
-                            <p>Additional recommendations
+                            <p>{{ 'BEEC.REPORT.ADDITIONAL_RECOMMENDATIONS' | translate}}
                             </p>
                         </td>
                     </tr>
@@ -557,21 +561,13 @@
 
                     <tr>
                         <td>
-                            <p *ngIf="!showTogglePlusIconAssump">
-                                ■ Values based on data from industry partners, UNLP and RAMCC.<br>
-                                ■ Electricity tariffs and CO2 emission factor are based on IEA data or provided by
-                                municipalities.<br>
-                                ■ Additional to the above sources, a questionnaire was utilized to gather data from
-                                city/municipalities.
+                            <p *ngIf="!showTogglePlusIconAssump"
+                                [innerHTML]="'BEEC.REPORT.ASSUMPTIONS_AND_LIMITATIONS_TEXT' | translate">
                             </p>
                         </td>
                         <td>
-                            <p *ngIf="!showTogglePlusIconAssump">
-                                ■ Values based on data from industry partners, UNLP and RAMCC.<br>
-                                ■ Electricity tariffs and CO2 emission factor are based on IEA data or provided by
-                                municipalities.<br>
-                                ■ Additional to the above sources, a questionnaire was utilized to gather data from
-                                city/municipalities.
+                            <p *ngIf="!showTogglePlusIconAssump"
+                                [innerHTML]="'BEEC.REPORT.ADDITIONAL_RECOMMENDATIONS_TEXT' | translate">
                             </p>
                         </td>
                     </tr>
@@ -585,32 +581,32 @@
     <div class="container">
         <div class="example-section">
             <mat-checkbox (change)="onToggleChange($event)" [formControl]="pdfInputForm" class="example-margin"
-                [(ngModel)]="checked">Do you want to display username,project name and year of consruction in the report?</mat-checkbox>
+                [(ngModel)]="checked">{{'BEEC.REPORT.REPORT_QUESTION_EXTRAFIELDS' | translate}}</mat-checkbox>
         </div>
-      
+
         <form *ngIf="pdfInputForm.value == true" [formGroup]="beetReportForm" class="form mt-4">
             <div class="field-align">
                 <mat-form-field class="field-group w-100 mt-4 col-md-4" appearance="outline" floatLabel="never">
-                    <mat-label class="field-title-beet">User Name</mat-label>
+                    <mat-label class="field-title-beet">{{'BEEC.REPORT.USER_NAME' | translate}}</mat-label>
                     <input matInput formControlName="userName">
                 </mat-form-field>
-    
+
                 <mat-form-field class="field-group w-100 mt-4 col-md-4" appearance="outline" floatLabel="auto">
-                    <mat-label class="field-title-beet">Project name</mat-label>
-                    <input matInput formControlName="projectName" >
+                    <mat-label class="field-title-beet">{{'BEEC.REPORT.PROJECT_NAME' | translate}}</mat-label>
+                    <input matInput formControlName="projectName">
                 </mat-form-field>
-    
+
                 <mat-form-field class="field-group w-100 mt-4 col-md-4" appearance="outline">
-                    <mat-label class="field-title-beet">Year of construction</mat-label>
-                    <input matInput formControlName="yearOfConstruction" type="number" >
+                    <mat-label class="field-title-beet">{{'BEEC.REPORT.YEAROFCONSTRUCTION' | translate}}</mat-label>
+                    <input matInput formControlName="yearOfConstruction" type="number">
                 </mat-form-field>
             </div>
         </form>
-    
+
     </div>
 
     <!--   <button mat-raised-button color="primary" (click)="Goback()" style="float: right;">Go Back</button> -->
-    <button mat-raised-button color="primary" (click)="generatePdf()" >PDF Preview</button>
+    <button mat-raised-button color="primary" (click)="generatePdf()">{{'BEEC.REPORT.PDF_PREVIEW' | translate}}</button>
     <!-- <app-beetreportpdf *ngIf="showPDFView" [parentData]="submitResponse"></app-beetreportpdf> -->
     <div *ngIf="debug == 'true'">
         {{debugPayload}}

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { TranslateService } from "@ngx-translate/core";
 import { BehaviorSubject, Observable, ReplaySubject } from "rxjs";
 import { BEETComponent } from "src/app/modules/BEET/beet.component";
 import { environment } from "src/environments/environment";
@@ -10,7 +11,6 @@ import { Summary } from "../models/beet-models";
     providedIn: 'root'
 })
 export class beetService {
-
 
     private selectedCountry = new ReplaySubject<string>(1);
 
@@ -28,7 +28,7 @@ export class beetService {
 
     private beetComponent: BEETComponent;
 
-    constructor(private fb: FormBuilder, private http: HttpClient) {
+    constructor(private fb: FormBuilder, private http: HttpClient,public translate: TranslateService) {
     }
 
     setBEETParentComponent(beetComponent: BEETComponent) {
@@ -67,10 +67,10 @@ export class beetService {
         return this.http.get(environment.baseUrl + ':9998/api/user/v1/getcountries');
     }
 
-    getGeneralData(countyryCode: string): Observable<any> {
+    getGeneralData(countryCode: string): Observable<any> {
         let params = new HttpParams();
-        params = params.append('countrycode', countyryCode);
-
+        params = params.append('countrycode', countryCode);
+        params = params.append('language', this.translate.currentLang);
         return this.http.get(environment.baseUrl + ':9998/api/user/v1/getgeneraldata', { params: params });
     }
 

@@ -1,31 +1,31 @@
 <fieldset style="margin-top: 4rem;">
     <legend>Lighting fixture details(Stock and Technology type of lighting fixtures.) </legend>
-    <h2>Lighting fixture details(Stock and Technology type of lighting fixtures.) </h2>
+    <h2>{{'BEEC.LIGHTING.LIGHTING_TITLE' | translate}} </h2>
 
 
     <div class="container-fluid beet-container">
         <div class="fields-note">
-            <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> Please be ready with type, number, power rating (wattage) details of the lighting fixtures</p>
+            <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span>{{'BEEC.LIGHTING.LIGHTING_NOTE_TEXT' | translate}} </p>
         </div>
         <div class="example-table-container">
             <table mat-table [dataSource]="lightingOptionsDataSource" multiTemplateDataRows>
 
                 <ng-container matColumnDef="technology">
-                    <th mat-header-cell *matHeaderCellDef> Technology </th>
+                    <th mat-header-cell *matHeaderCellDef> {{'BEEC.LIGHTING.LIGHTING_TABLE_TECHNOLOGY' | translate}} </th>
                     <td mat-cell *matCellDef="let element;let i = dataIndex" [attr.rowspan]="6" [style.display]="getStyleDisplay(i,6) ? '' : 'none'">
                         {{element.technology}}
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="lightingimagepath">
-                    <th mat-header-cell *matHeaderCellDef> Technology Image </th>
+                    <th mat-header-cell *matHeaderCellDef> {{'BEEC.LIGHTING.LIGHTING_TABLE_TECH_IMAGE' | translate}} </th>
                     <td mat-cell *matCellDef="let element ;let i = dataIndex" [attr.rowspan]="6" [style.display]="getStyleDisplay(i,6) ? '' : 'none' ">
                         <img [src]="element.lightingimagepath" class="light-image"/>
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Yearofinstallation">
-                    <th mat-header-cell *matHeaderCellDef> Year of installation </th>
+                    <th mat-header-cell *matHeaderCellDef> {{'BEEC.LIGHTING.LIGHTING_TABLE_YEAROFINSTALLATION' | translate}} </th>
                     <td mat-cell *matCellDef="let element;let i = dataIndex" [style.background]="getenableyearofinstallation(0,5,i) || getenableyearofinstallation(24,41,i)  ? 'gray' :'' ">
                         <mat-select [disabled]="getenableyearofinstallation(0,5,i) || getenableyearofinstallation(24,41,i)" [(ngModel)]="lightingOptions[i].yearofinstallation">
                             <mat-option *ngFor="let year of yearsList" [value]="year">{{year}}
@@ -36,28 +36,28 @@
 
 
                 <ng-container matColumnDef="LampPower">
-                    <th mat-header-cell *matHeaderCellDef> Lamp Power (Watts)</th>
+                    <th mat-header-cell *matHeaderCellDef> {{'BEEC.LIGHTING.LIGHTING_TABLE_LAMPPOWER' | translate}}</th>
                     <td mat-cell *matCellDef="let element; let i = dataIndex">
                         <input matInput type="number" [(ngModel)]="lightingOptions[i].lamppower">
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="StockofFixtures">
-                    <th mat-header-cell *matHeaderCellDef> Stock of Fixtures</th>
+                    <th mat-header-cell *matHeaderCellDef> {{'BEEC.LIGHTING.LIGHTING_TABLE_STOCKOFFIXTURES' | translate}}</th>
                     <td mat-cell *matCellDef="let element; let i = dataIndex">
                         <input matInput type="number" [(ngModel)]="lightingOptions[i].fixtures">
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="LumenOutput">
-                    <th mat-header-cell *matHeaderCellDef> Lumen Output(Optional) </th>
+                    <th mat-header-cell *matHeaderCellDef> {{'BEEC.LIGHTING.LIGHTING_TABLE_LUMENOUTPUT' | translate}} </th>
                     <td mat-cell *matCellDef="let element;let i = dataIndex" [style.background]="getenableyearofinstallation(6,41,i) ? 'gray' :'' ">
                         <input [disabled]="getenableyearofinstallation(6,41,i)" matInput type="number" [(ngModel)]="lightingOptions[i].lumenoutput">
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Averagedailyworkinghours">
-                    <th mat-header-cell *matHeaderCellDef> Average daily working hours(Optional) </th>
+                    <th mat-header-cell *matHeaderCellDef> {{'BEEC.LIGHTING.LIGHTING_TABLE_AVGDAILYWORKINGHRS' | translate}} </th>
                     <td mat-cell *matCellDef="let element;let i = dataIndex">
                         <input matInput type="number" [(ngModel)]="lightingOptions[i].avgdailyworkinghours">
                     </td>
@@ -69,12 +69,10 @@
             </table>
         </div>
         <div>
-            <button mat-raised-button color="primary" style="margin-top: 1rem;" (click)="postCalculateLightingPower()">Calculate</button>
+            <button mat-raised-button color="primary" style="margin-top: 1rem;" (click)="postCalculateLightingPower()">{{'BEEC.LIGHTING.LIGHTING_CALCULATE' | translate}}</button>
         </div><br>
 
-        <b>Lighting power density :{{this.LightningDetailsForm.controls.lightingPowerDensityValue.value}}{{this.LightningDetailsForm.controls.lightingPowerDensityUnit.value}}</b><br>
-        <b>Total lighting power :{{this.LightningDetailsForm.controls.totalLightingPowerValue.value}}{{this.LightningDetailsForm.controls.totalLightingPowerUnit.value}}</b>
-
-
+        <b>{{'BEEC.LIGHTING.LIGHTING_POWERDENSITY' | translate}} :{{this.LightningDetailsForm.controls.lightingPowerDensityValue.value}}{{this.LightningDetailsForm.controls.lightingPowerDensityUnit.value}}</b><br>
+        <b>{{'BEEC.LIGHTING.LIGHTING_POWER' | translate}} :{{this.LightningDetailsForm.controls.totalLightingPowerValue.value}}{{this.LightningDetailsForm.controls.totalLightingPowerUnit.value}}</b>
     </div>
 </fieldset>

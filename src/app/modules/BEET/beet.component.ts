@@ -82,7 +82,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
   @ViewChild('stepper') private myStepper: MatStepper;
   @ViewChild('errMsg') errMsg: ElementRef;
   displayedColumns: string[] = ["Parameter", "Units", "Value"];
-  dataSource: any;
+  summaryDataSource: any;
   isGeneralDetailsUpdated: boolean;
   generalDetails: GeneralDetails;
   submitResponse: any;
@@ -100,7 +100,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
 
   constructor(public translate: TranslateService,private beetService: beetService, private cd: ChangeDetectorRef, private modalService: NgbModal) {
     translate.addLangs(['English', 'Spanish']);
-    translate.addLangs
+   //translate.addLangs
     translate.setDefaultLang('English');
 
     const browserLang = translate.getBrowserLang();
@@ -239,7 +239,7 @@ export class BEETComponent implements OnInit, AfterViewInit {
         Value: this.co2EmissionsDetailsComponent.formgroup.controls.fuelEmissionFactorValue.value.toFixed(2)
       },
     ];
-    this.dataSource = new MatTableDataSource(this.summaryTable);
+    this.summaryDataSource = new MatTableDataSource(this.summaryTable);
 
   }
 

@@ -30,7 +30,8 @@
       "YES":"Yes",
       "NO":"No",
       "NA":"N/A",
-      "SELECT_ANY_OPTION":"Select any option"
+      "SELECT_ANY_OPTION":"Select any option",
+      "NOTKNOWN_OPTION_DEFAULT":"No, I don't know. (default values will be assumed for calculations)"
     },
     "GENDETAILS": {
       "LOC_DETAILS_TITLE": "Location Details",
@@ -100,6 +101,7 @@
       "RWINDOW_TITLE": "R Value (Thermal resistance) - Window",
       "RWINDOW_NOTE_TEXT": "You may select any of the options to provide details on R value of the window.",
       "RWINDOW_KNOWN_TEXT": "Window R value",
+      "RVALUE_SELECTED_ELEMENT":"Selected Element",
       "RWINDOW_PREDEFINED_OPTION": "I want to select from predefined types (list available)",
       "RWINDOW_PREDEFINED_FRAMETYPE": "Window Frame Type ",
       "RWINDOW_PREDEFINED_FRAMETYPE_PLACEHOLDER": "Select frame type",
@@ -122,7 +124,20 @@
       "WWR_KNOWN_TEXT": "Please enter the WWR value",
       "WWR_NOTKNOWN_TEXT": "Please enter the WWR value in(%) by refering to pictures"
     },
-    "LIGHTING": {},
+    "LIGHTING": {
+      "LIGHTING_TITLE":"Lighting fixture details(Stock and Technology type of lighting fixtures)",
+      "LIGHTING_NOTE_TEXT":"Please be ready with type, number, power rating (wattage) details of the lighting fixtures",
+      "LIGHTING_TABLE_TECHNOLOGY":"Technology",
+      "LIGHTING_TABLE_TECH_IMAGE":"Technology Image",
+      "LIGHTING_TABLE_YEAROFINSTALLATION":"Year of installation",
+      "LIGHTING_TABLE_LAMPPOWER":"Lamp Power (Watts)",
+      "LIGHTING_TABLE_STOCKOFFIXTURES":"Stock of Fixtures",	
+      "LIGHTING_TABLE_LUMENOUTPUT":"Lumen Output(Optional)",
+      "LIGHTING_TABLE_AVGDAILYWORKINGHRS":"Average daily working hours(Optional)",
+      "LIGHTING_CALCULATE":"calculate",
+      "LIGHTING_POWERDENSITY":"Lighting power density",
+      "LIGHTING_POWER":"Total lighting power"
+    },
     "HVAC": {
       "HEATING_EFFICIENCY_TITLE":"Heating efficiency",
       "HEATING_EFFICIENCY_QUESTION":"Do you know the heating equipment efficiency of your building?",
@@ -209,7 +224,61 @@
       "ONSITECO2EMISSIONS_KNOWN_UNIT_FIELD": "Select CO2 emissions units",
       "ONSITECO2EMISSIONS_FINAL": "On site CO2 emissions"
     },
-    "INPUTSUMMARY": {},
-    "REPORT": {}
+    "INPUTSUMMARY": {
+      "INPUTSUMMARY_TITLE":"User-Input Data Summary",
+      "INPUTSUMMARY_TEXT":"Contains all values that",
+      "INPUTSUMMARY_TEXTA":"The user has either entered.",
+      "INPUTSUMMARY_TEXTB":"The user has selected from available options.",
+      "INPUTSUMMARY_TEXTC":"Are default values by the tool resulting from the user's selection of available options.",
+      "INPUTSUMMARY_TABLE_PARAMETERS":"Parameter",
+      "INPUTSUMMARY_TABLE_UNITS":"Units",
+      "INPUTSUMMARY_Table_VALUE":"Value",
+      "INPUTSUMMARY_ASSUMPTIONBUTTON_TEXT":"Click for tool assumptions",
+      "INPUTSUMMARY_ASSUMPTIONS":"<ul><li>Locations with hourly climate data available are only considered in the tool for now.</li><li>If the “No, I don’t know” option is selected, appropriate average/efficiency/benchmark values are loaded to the tool based on location, building type and preceding answers in the tool. These values are adopted as applicable from several published and widely referred sources such as Ministry of Science, Technology and Innovation – Argentina, University of La Plata – Argentina, ASHRAE standards, U.S. Energy Information Administration, U.S. Department of Energy, Energy Star ratings – U.S. Environmental Protection Agency, Ntional Renewable Energy Laboratory (U.S.DoE), Country Savings assessments – United for Efficiency UNEP, Bureau of Energy Efficiency – India, design details from equipment / appliance manufacturers and suppliers, years of energy auditing experience, etc.</li><li> Building is assumed to be a 12 ft height, floor-to-floor, square footprint.</li><li > Weather data for the places provided in the tool are taken from http://climate.onebuilding.org/WMO_Region_3_South_America/ARG_Argentina/index.html * For the heat load calculations, envelope convective heat transfer, envelope solar gain (except for windows), are not considered.</li><li>The building is treated as a single thermal zone.</li><li> Occupied hours first fill weekdays symmetrically around noon, and then fill weekends.</li><li> Infiltration is assumed zero during occupied times (pressurization).</li><li>Airside economizer operates only when full cooling load can be met - no partial economizer with mechanical cooling.</li><li> Lights and plug loads are assumed to be at 1/20 power density during unoccupied times.</li><li > There is no energy consumption calculated for hot water heating. There is no energy calculated for hot water hydronic pumping.</li><li > Air system is in variable volume setting by default unless the user chooses \"No\" option.</li><li> Window area is equally distributed on N,S,E,W exposures. Window to Wall ratio does ratio default inputs does not consider impact on lighting energy.</li><li>Window solar - Normal radiation is based on hourly solar angles.</li><li >Indoor air relative humidity maintained at 50%. The temperature is user defined. </li><li >Only average most common efficient values considered for comparison. However, relatively highest and better efficiency values are available in the market. Please reach out to us, if you come across such efficient values. We will review and integrate the same into the tool.</li><li> At times, average most efficient values are considered for calculation when the user selects \"I don't know\" option.</li><li> Max occupant density value among the standard values for selected building category / spaces is considered for calculations when the user selects \"I don't know\" option. </li><li> R value (Thermal resistance) - Roof: For R values of roofs, standards for both winter (inv) and summer (ver) are available. However the higher U values i.e. for summer are being considered for calculations when the user selects Option B or Option C for this.</li><li>Plug loads: Standard average efficiencies are considered for calculations if the user selects Option B i.e. \"I don't know\". Also, for electrical radiators, only equipment efficiency is considered as 100% since entire electricity input is converted to heat energy. However its real usage energy efficiency may be lower if other grid losses are considered.</li><li>Operating hours of appliances/equipment assumed to be at least 50% of daily occupancy hours in case the user does not mention the actual operating hours in Plug Loads Option B inventory and operating data entry.</li><li>For standardization and user guidance, Energy Performance Index (EPI) is calculated based on total built up area which is considered as carpet area + thickness of outer walls + balcony - parking area. However the cell does not prevent the user from entering any other forms of area for calculation. </li></ul>"
+    },
+    "REPORT": {
+      "SURFACE_AREA":"Surface Area",
+      "NUMBER_OF_FLOORS":"No. of Floors",
+      "OCCUPANCY_HOURS":"Occupancy Hours",
+      "ELECTRICITY_COST":"Electricity Cost",
+      "FUEL_COST":"Fuel Cost",
+      "KEY_INDICATORS":"Key Indicators",
+      "PEAK_ELECTRICITY_DEMAND_IN":"Peak electricity demand in",
+      "HIGHEST_ELECTRICITY_CONSUMPTION_IN":"Highest electricity consumption in",
+      "HIGHEST_FUEL_CONSUMPTION_FORHEATINGIN":"Highest fuel consumption for heating in",
+      "ENERGY_SAVINGS":"Energy Savings",
+      "ENERGY_COST_SAVINGS":"Energy Cost Savings",
+      "CO2_REDUCTION":"CO2 Reduction",
+      "CONSTRUCTION_ELEMENT":"Construction Elements",
+      "BASELINE":"Baseline",
+      "ENERGY_EFFICIENCY_STANDARDS":"Energy Efficiency Standards",
+      "ELEMENT":"Element",
+      "INDICATORS":"Indicators",
+      "BENCHMARK":"Benchmark",
+      "RECOMMENDATIONS":"Recommendations",
+      "MAIN_FACADE":"Main facade",
+      "ROOF":"Roof",
+      "WINDOWS":"Windows",
+      "HVAC_SYSTEMS":"HVAC Systems",
+      "SYSTEM":"System",
+      "PERFORMANCE":"Performance",
+      "HEATING":"Heating",
+      "COOLING":"Cooling",
+      "FANS_AND_BLOWERS":"Fans and Blowers",
+      "LIGHTING_HEADING":"LIGHTING",
+      "LIGHTING":"Lighting",
+      "PLUGLOADS_HEADING":"PLUGLOADS",
+      "PLUGLOADS":"Plugloads",
+      "ASSUMPTIONS_AND_LIMITATIONS_RECOMMENDATIONS":"Assumptions,Limitations and Additional recommendations",
+      "ASSUMPTIONS_AND_LIMITATIONS":"Assumptions and Limitations",
+      "ADDITIONAL_RECOMMENDATIONS":"Additional recommendations",
+      "ASSUMPTIONS_AND_LIMITATIONS_TEXT":"■ Values based on data from industry partners, UNLP and RAMCC<br> ■ Electricity tariffs and CO2 emission factor are based on IEA data or provided by municipalities.<br> ■ Additional to the above sources, a questionnaire was utilized to gather data from city/municipalities.",
+      "ADDITIONAL_RECOMMENDATIONS_TEXT":"■ Values based on data from industry partners, UNLP and RAMCC.<br> ■ Electricity tariffs and CO2 emission factor are based on IEA data or provided by municipalities.<br> ■ Additional to the above sources, a questionnaire was utilized to gather data from city/municipalities.",
+      "REPORT_QUESTION_EXTRAFIELDS":"Do you want to display username,project name and year of consruction in the report?",
+      "USER_NAME":"User name",
+      "PROJECT_NAME":"Project name",
+      "YEAROFCONSTRUCTION":"Year of construction",
+      "PDF_PREVIEW":"PDF Preview"
+    }
   }
 }

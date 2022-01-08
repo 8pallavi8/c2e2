@@ -36,7 +36,7 @@
                         
                                     <input matInput placeholder="{{'BEEC.HVAC.HEATING_EFFICIENCY_KNOWN_FIELDNAME_PLACEHOLDER' | translate}}" type="number"
                                         formControlName="heatefficiencyKnown">
-                                    <mat-select placeholder="{{'BEEC.COMMON.UNITS' | translate}}" formControlName="heatEfficiencyUnits">
+                                    <mat-select placeholder="{{'BEEC.COMMON.SELECT_UNITS' | translate}}" formControlName="heatEfficiencyUnits">
                                         <mat-option value="%">%</mat-option>
                                         <mat-option value="COP">COP</mat-option>
                                     </mat-select>
@@ -125,7 +125,7 @@
                                     <mat-form-field class="w-100 mt-2 col-md-6" appearance="outline">
                                         <input matInput placeholder="{{'BEEC.HVAC.COOLING_EFFICIENCY_KNOWN_FIELDNAME_PLACEHOLDER' | translate}}" formControlName="acEfficiencyValue"
                                             type="number">
-                                        <mat-select placeholder="units" formControlName="acEfficiencyParameter">
+                                        <mat-select placeholder="{{'BEEC.COMMON.SELECT_UNITS' | translate}}" formControlName="acEfficiencyParameter">
                                             <mat-option *ngFor="let unit of acEfficiencyParameterList" [value]="unit">
                                                 {{unit}}</mat-option>
                                         </mat-select>
@@ -210,10 +210,10 @@
                     <mat-form-field class="w-100 mt-2 col-md-6" appearance="outline">
                         <input matInput placeholder="{{'BEEC.HVAC.VENTILATION_KNOWN_FIELDNAME_PLACEHOLDER' | translate}}" type="number" formControlName="ventilationValue"
                             type="number">
-                        <mat-select placeholder="units" formControlName="ventilationUnits">
-                            <mat-option value="cubic meter per minute per person">cubic meter per minute per person
+                        <mat-select placeholder="{{'BEEC.COMMON.SELECT_UNITS'| translate}}" formControlName="ventilationUnits">
+                            <mat-option value="cubic meter per minute per person">{{'BEEC.HVAC.VENTILATION_KNOWN_UNITS_CUBICMETERPERMINPERPERSON' | translate}}
                             </mat-option>
-                            <mat-option value="cubic feet per minute per person">cubic feet per minute per person
+                            <mat-option value="cubic feet per minute per person">{{'BEEC.HVAC.VENTILATION_KNOWN_UNITS_CUBICFEETPERMINPERPERSON' | translate}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -228,31 +228,30 @@
 
         <fieldset>
             <legend>Infiltration rate </legend>
-            <h2>4.4 Infiltration rate </h2>
+            <h2>4.4 {{'BEEC.HVAC.INFILTRATION_TITLE' | translate}} </h2>
 
             <div>
-                <p class="question-text">Do you know the infiltration rate value for your building?</p>
+                <p class="question-text">{{'BEEC.HVAC.INFILTRATION_QUESTION' | translate}}</p>
                 <div class="fields-note">
-                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> You may select any of the options to provide building infiltration rate.</p>
+                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.HVAC.INFILTRATION_NOTE_TEXT' | translate}}</p>
                 </div>
 
                 <div>
                     <mat-radio-group aria-label="Select an option" formControlName="infiltration">
                        A. <mat-radio-button value="1">{{'BEEC.COMMON.FIELDVALUE_KNOWN_OPTION' | translate}}
                         </mat-radio-button><br>
-                        B. <mat-radio-button (click)="defaultInfiltration()" value="2">{{'BEEC.COMMON.NOTKNOWN_OPTION' | translate}} (default values will be assumed for calculations).
+                        B. <mat-radio-button (click)="defaultInfiltration()" value="2">{{'BEEC.COMMON.NOTKNOWN_OPTION_DEFAULT' | translate}}
                         </mat-radio-button>
                     </mat-radio-group>
                 </div>
                 <span *ngIf="formgroup.controls.infiltration.value==1">
-                    <p style="margin-top: 1em;">Please enter the Infiltration Rate value in Air Changes per
-                        Hour(ACH)</p>
+                    <p style="margin-top: 1em;">{{'BEEC.HVAC.INFILTRATION_KNOWN_TEXT' | translate}}</p>
                     <mat-form-field class="w-100 mt-1 col-md-4" appearance="outline">
-                        <input matInput placeholder="Enter infiltration value" required formControlName="infiltrationValue">
+                        <input matInput placeholder="{{'BEEC.HVAC.INFILTRATION_KNOWN_PLACEHOLDER' | translate}}" required formControlName="infiltrationValue">
                     </mat-form-field>
                 </span>
                 <div>
-                    <b>Infiltration Rate: {{formgroup.controls.infiltrationValue.value}} {{formgroup.controls.infiltrationUnits.value}}</b>
+                    <b> {{'BEEC.HVAC.INFILTRATION_TITLE' | translate}}: {{formgroup.controls.infiltrationValue.value}} {{formgroup.controls.infiltrationUnits.value}}</b>
                 </div>
             </div>
 
@@ -261,25 +260,20 @@
 
         <fieldset>
             <legend>Economizer/free cooling</legend>
-            <h2>4.5 Economizer/free cooling</h2>
+            <h2>4.5 {{'BEEC.HVAC.ECONOMIZER_TITLE' | translate}}</h2>
 
             <div >
                 <div class="fields-note">
-                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> Economizer is a part of the outdoor system of an HVAC
-                        system. It can be used to avail optimal
-                        free cooling using outside air if the outside ambient conditions are favourable with respect
-                        to the temperatures and humidity levels.
-                        N/A: Not applicable
+                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.HVAC.ECONOMIZER_NOTE_TEXT' | translate}}
                     </p>
                 </div>
                 <div>
                     <span>
-                        <p class="question-text">Do you have and actively manage the economizer / free cooling to cater to your cooling
-                            needs?</p>
+                        <p class="question-text">{{'BEEC.HVAC.ECONOMIZER_QUESTION' | translate}}</p>
                     </span>
                     <span>
                         <mat-form-field appearance="outline">
-                            <mat-select placeholder="select any option" formControlName="economizer">
+                            <mat-select placeholder="{{'BEEC.HVAC.ECONOMIZER_KNOWN_PLACEHOLDER' | translate}}" formControlName="economizer">
                                 <mat-option *ngFor="let option of options" [value]="option.value">
                                     {{option.value}}
                                 </mat-option>
@@ -295,51 +289,44 @@
 
         <fieldset>
             <legend>Other miscellaneous data</legend>
-            <h2>4.6 Other miscellaneous data</h2>
+            <h2>4.6 {{'BEEC.HVAC.MISCELLANEOUSDATA_TITLE' | translate}}</h2>
             <div >
                 <div class="fields-note">
-                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> Average indoor air temperature being maintained
-                        throughout the year inside the building. It
-                        can also be the temperature set points at the user side (occupant areas).
-                        Enter the value in either units i.e. degree Centigrade (ºC) or degree Fahrenheit (ºF)
-                        N/A: Not applicable
+                    <p><span class="notes-style"> {{'BEEC.COMMON.NOTE' | translate}}:</span> {{'BEEC.HVAC.MISCELLANEOUSDATA_NOTE_TEXT' | translate}}
                     </p>
                 </div>
 
                 <span class="units-picker-component">
-                    <p class="fieldname-align question-text">Average indoor air temperature (set-point):</p>
+                    <p class="fieldname-align question-text">{{'BEEC.HVAC.AVG_INDOOR_AIRTEMP' | translate}}:</p>
                     <mat-form-field appearance="outline">
                         <input matInput placeholder="{{'BEEC.COMMON.ENTER_VALUE' | translate}}" type="number" formControlName="avgIndoorAirTemp">
-                        <mat-select [(value)]="units" placeholder="units" formControlName="avgIndoorAirTempUnit">
+                        <mat-select [(value)]="units" placeholder="{{'BEEC.COMMON.SELECT_UNITS' | translate}}" formControlName="avgIndoorAirTempUnit">
                             <mat-option value="centigrade">ºC</mat-option>
                             <mat-option value="farenheit">ºF</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </span>
 
-                <p class="question-text">Inverter / VFD / Speed controller for HVAC compressors installed? </p>
+                <p class="question-text">{{'BEEC.HVAC.COMPRESSORS_QUESTION' | translate}} </p>
 
                 <mat-form-field appearance="outline">
-                    <mat-select placeholder="select any option" formControlName="hvacCompressorInstalled">
+                    <mat-select placeholder="{{'BEEC.HVAC.ECONOMIZER_KNOWN_PLACEHOLDER' | translate}}" formControlName="hvacCompressorInstalled">
                         <mat-option *ngFor="let option of options" [value]="option.value">
                             {{option.value}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
 
-                <p class="question-text">Inverter / VFD / Speed controller for HVAC fans and blowers installed?</p>
+                <p class="question-text">{{'BEEC.HVAC.FANSANDBLOWERS_QUESTION' | translate}}</p>
 
                 <mat-form-field appearance="outline">
-                    <mat-select placeholder="select any option" formControlName="hvacFansandBlowersInstalled">
+                    <mat-select placeholder="{{'BEEC.HVAC.ECONOMIZER_KNOWN_PLACEHOLDER' | translate}}" formControlName="hvacFansandBlowersInstalled">
                         <mat-option *ngFor="let option of options" [value]="option.value">
                             {{option.value}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-
-
             </div>
         </fieldset>
     </form>
-
 </div>
