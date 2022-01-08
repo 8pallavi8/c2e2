@@ -165,17 +165,10 @@ export class BEETComponent implements OnInit, AfterViewInit {
     console.log("show summary ");
     this.selectedcountryname = sessionStorage.getItem('selectedCountryName');
     this.summaryTable = [
-      //{ Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.userName.value },
-      //{ Parameter: 'Assessment name', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.projectName.value },
       { Parameter: 'Country', Units: null, Value: this.selectedcountryname },
       { Parameter: 'Province', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.province.value },
       { Parameter: 'Location', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.location.value },
       { Parameter: 'Building type', Units: null, Value: this.genDetailsComponent.genDetailsForm.controls.buildingType.value },
-      //{ Parameter: 'Building age', Units: 'Years', Value: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value },
-      /* {
-        Parameter: 'Building gross area', Units: this.genDetailsComponent.genDetailsForm.controls.grossAreaUnits.value,
-        Value: this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value
-      }, */
       {
         Parameter: 'Total built up area', Units: this.genDetailsComponent.genDetailsForm.controls.netAreaUnits.value,
         Value: this.genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value.toFixed(2)

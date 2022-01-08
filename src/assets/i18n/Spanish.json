@@ -249,6 +249,7 @@
       "ENERGY_SAVINGS": "Ahorros de energía",
       "ENERGY_COST_SAVINGS": "Ahorro de costos de energía",
       "CO2_REDUCTION": "Reducción de CO2",
+      "BASELINE_EEPOTENTIALIMPROVEMENTS":"Línea de base frente a las mejoras potenciales de EE",
       "CONSTRUCTION_ELEMENT": "Elementos de construcción",
       "BASELINE": "Base",
       "ENERGY_EFFICIENCY_STANDARDS": "Estándares de eficiencia energética",
@@ -278,7 +279,12 @@
       "USER_NAME": "Nombre de usuario",
       "PROJECT_NAME": "Nombre del proyecto",
       "YEAROFCONSTRUCTION": "Año de construcción",
-      "PDF_PREVIEW": "Vista previa en PDF"
+      "PDF_PREVIEW": "Vista previa en PDF",
+      "PDF_TITLE":"Calculadora de autoevaluación de eficiencia energética de edificios (BEEC)",
+      "STUDY_REPORT":"Informe de estudio",
+      "ISSUED_ON":"Emitido el",
+      "PDF_TEXT":"Esta hoja informativa comparte un resumen del desempeño de referencia, el alcance del ahorro de energía, el ahorro de costos relacionados con la energía y el potencial de reducción de emisiones a partir de la implementación de medidas de eficiencia energética para sus edificios en Argentina. No proporciona valores finales sino estimaciones para una evaluación preliminar de las posibles medidas. La herramienta ha sido desarrollada por el Centro de Copenhague sobre Eficiencia Energética dentro del marco EuroClima +. El uso de estos resultados es responsabilidad exclusiva de cada usuario individual. Todos los resultados deben verificarse y cuestionarse antes de cualquier aplicación y acción de confianza, grado de inversión, publicación o cualquier otro uso. Para obtener información más detallada:",
+      "DOWNLOAD_PDF": "Descargar PDF"
     }
   }
 }

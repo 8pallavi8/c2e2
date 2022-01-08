@@ -19,10 +19,10 @@
                     {{selectedcountryname}}
                 </li>
                 <li style="font-weight: bold;">
-                    Province : {{genDetailsComponent.genDetailsForm.controls.province.value}}
+                    {{'BEEC.GENDETAILS.LOC_DETAILS_PROVINCE' | translate}} : {{genDetailsComponent.genDetailsForm.controls.province.value}}
                 </li>
                 <li style="font-weight: bold;">
-                    Location : {{genDetailsComponent.genDetailsForm.controls.location.value}}
+                    {{'BEEC.GENDETAILS.LOC_DETAILS_LOCATION' | translate}} : {{genDetailsComponent.genDetailsForm.controls.location.value}}
                 </li>
             </ul>
         </div>
@@ -36,7 +36,7 @@
 
 
     <div class="report-title">
-        <p>Self Assessment Building Energy Efficiency Calculator(BEEC)</p>
+        <p>{{'BEEC.REPORT.PDF_TITLE' | translate}}</p>
     </div>
 
 
@@ -48,39 +48,29 @@
             <div>
                 <ul class="header-pdf" style="list-style: none;">
                     <li style="font-weight: bold;">
-                        Study Report
+                        {{'BEEC.REPORT.STUDY_REPORT' | translate}}
                     </li>
                     <li style="font-weight: bold;">
-                        Issued on : {{curDate}}
+                        {{'BEEC.REPORT.ISSUED_ON' | translate}} : {{curDate}}
                     </li>
                     <li style="font-weight: bold;" *ngIf="beetReportComponent.pdfInputForm.value == true">
-                        Issued by : {{beetReportComponent.beetReportForm.controls.userName.value}}
+                        {{'BEEC.REPORT.USER_NAME' | translate}} : {{beetReportComponent.beetReportForm.controls.userName.value}}
                     </li>
                 </ul>
 
             </div>
-            <div style="font-size: smaller;"> This factsheet shares a summary of baseline performance, scope for energy
-                savings, energy related cost
-                savings and emission reductions potential from the implementation of energy efficiency measures for your
-                buildings in Argentina. It does not provide final values but rather estimations for a preliminary
-                appraisal
-                of the potential measures. The tool has been developed by the Copenhagen Centre on Energy Efficiency
-                within
-                the EuroClima+ framework. The use of these results are the sole responsibility of each individual user.
-                All
-                results should be checked and challenged before any reliance, investment grade applications and actions,
-                publication or any other use. For more detailed information:<br>
+            <div style="font-size: smaller;">{{'BEEC.REPORT.PDF_TEXT' | translate}} <br>
                 <b> please visit: www.c2e2.une contact us: c2e2@dtu.dk / rradu@dtu.dk</b>
             </div>
         </div>
     </div>
 
     <div class="report-subtitle">
-        <p>General Details</p>
+        <p>{{'BEEC.COMMON.STEPLABEL1' | translate}} </p>
     </div>
 
     <div *ngIf="beetReportComponent.pdfInputForm.value == true" style="padding-left: 2rem;">
-        <td style="font-weight: bold;">Project Name :</td>
+        <td style="font-weight: bold;">{{'BEEC.REPORT.PROJECT_NAME' | translate}} :</td>
         <td style=" background-color: #FFD966;;">{{beetReportComponent.beetReportForm.controls.projectName.value}}
         </td>
     </div>
@@ -96,29 +86,29 @@
 
             <tbody>
                 <tr>
-                    <td style="font-weight: bold;">Building type :</td>
+                    <td style="font-weight: bold;">{{ 'BEEC.GENDETAILS.BUILDING_DETAILS_TYPE' | translate}}  :</td>
                     <td>{{genDetailsComponent.genDetailsForm.controls.buildingType.value}}
                     </td>
                 </tr>
                 <tr *ngIf="beetReportComponent.pdfInputForm.value == true">
-                    <td style="font-weight: bold;">Construction Year :</td>
+                    <td style="font-weight: bold;">{{'BEEC.REPORT.YEAROFCONSTRUCTION' | translate}}  :</td>
                     <td>{{beetReportComponent.beetReportForm.controls.yearOfConstruction.value}}
                     </td>
                 </tr>
                 <tr>
-                    <td style="font-weight: bold;">Surface Area : </td>
+                    <td style="font-weight: bold;">{{ 'BEEC.REPORT.SURFACE_AREA' | translate}}  : </td>
                     <td>{{genDetailsComponent.genDetailsForm.controls.netOccupiedFloorArea.value|
                         number:'1.2-2'}}
                         {{genDetailsComponent.genDetailsForm.controls.netAreaUnits.value}}
                     </td>
                 </tr>
                 <tr>
-                    <td style="font-weight: bold;">No. of Floors : </td>
+                    <td style="font-weight: bold;">{{ 'BEEC.REPORT.NUMBER_OF_FLOORS' | translate}} : </td>
                     <td>{{genDetailsComponent.genDetailsForm.controls.noOfFloors.value}}
                     </td>
                 </tr>
                 <tr>
-                    <td style="font-weight: bold;">Occupancy Hours : </td>
+                    <td style="font-weight: bold;">{{ 'BEEC.REPORT.OCCUPANCY_HOURS' | translate}}s : </td>
                     <td>{{genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value}}
                     </td>
                 </tr>
@@ -132,7 +122,8 @@
         margin-left: -1px;">
             <tbody>
                 <tr>
-                    <td style="font-weight: bold;">Occupant Density :</td>
+                    <td style="font-weight: bold;">{{'BEEC.GENDETAILS.OCCUPANCY_OCCUPANCYDENSITY' |
+                        translate}} :</td>
                     <td> {{genDetailsComponent.genDetailsForm.controls.occupantDensityKnown.value|
                         number:'1.2-2'}}
                         {{genDetailsComponent.genDetailsForm.controls.occupantDensityUnits.value}}
@@ -140,7 +131,7 @@
                 </tr>
 
                 <tr>
-                    <td style="font-weight: bold;">Electricity Cost :</td>
+                    <td style="font-weight: bold;">{{'BEEC.REPORT.ELECTRICITY_COST' | translate}}  :</td>
                     <td>{{genDetailsComponent.genDetailsForm.controls.electricityCost.value|
                         number:'1.2-2'}}
                         {{genDetailsComponent.genDetailsForm.controls.electricityUnits.value}}
@@ -148,7 +139,7 @@
                 </tr>
 
                 <tr>
-                    <td style="font-weight: bold;">Fuel Cost : </td>
+                    <td style="font-weight: bold;">{{'BEEC.REPORT.FUEL_COST' | translate}} : </td>
                     <td>{{genDetailsComponent.genDetailsForm.controls.fuelCost.value|
                         number:'1.2-2'}}
                         {{genDetailsComponent.genDetailsForm.controls.fuelUnits.value}}</td>
@@ -159,7 +150,7 @@
 
 
     <div >
-        <p class="report-subtitle">Key Indicators</p>
+        <p class="report-subtitle">{{'BEEC.REPORT.KEY_INDICATORS' | translate}}</p>
     </div>
 
     <div class="row">
@@ -200,17 +191,19 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="key-indicators">Peak electricity demand in</td>
+                        <td class="key-indicators">{{'BEEC.REPORT.PEAK_ELECTRICITY_DEMAND_IN' | translate}}</td>
                         <td class="key-data-values">{{parentData.peakelectricitydemand}}</td>
                     </tr>
                     <tr>
 
-                        <td class="key-indicators">Highest electricity consumption in</td>
+                        <td class="key-indicators">{{'BEEC.REPORT.HIGHEST_ELECTRICITY_CONSUMPTION_IN' |
+                            translate}}</td>
                         <td class="key-data-values">{{parentData.highestelectricityconsumption}}</td>
                     </tr>
                     <tr>
 
-                        <td class="key-indicators">Highest fuel consumption for heating in</td>
+                        <td class="key-indicators">{{'BEEC.REPORT.HIGHEST_FUEL_CONSUMPTION_FORHEATINGIN' |
+                            translate}}</td>
                         <td class="key-data-values">{{parentData.highestfuelconsumption}}</td>
                     </tr>
                 </tbody>
@@ -228,7 +221,7 @@
                 <tbody>
                     <tr>
                         <td class="key-indicators">
-                            <img style="width: 30px" src="../../../assets/images/report/esavings.png">Energy Savings
+                            <img style="width: 30px" src="../../../assets/images/report/esavings.png">{{'BEEC.REPORT.ENERGY_SAVINGS' | translate}}
                         </td>
                         <td class="key-data-values">{{parentData.energysavings |
                             number:'1.2-2'}}{{parentData.energysavingsunit}}</td>
@@ -239,7 +232,8 @@
                     <tr>
 
                         <td class="key-indicators">
-                            <img style="width: 30px" src="../../../assets/images/report/ecsavings.png">Energy Cost
+                            <img style="width: 30px" src="../../../assets/images/report/ecsavings.png">{{'BEEC.REPORT.ENERGY_COST_SAVINGS'
+                            | translate}}
                             Savings
                         </td>
                         <td class="key-data-values">{{parentData.energycostsavings |
@@ -251,7 +245,8 @@
                     <tr>
 
                         <td class="key-indicators">
-                            <img style="width: 40px" src="../../../assets/images/report/co2red.png">CO2 Reduction
+                            <img style="width: 40px" src="../../../assets/images/report/co2red.png">{{'BEEC.REPORT.CO2_REDUCTION'
+                            | translate}}
                         </td>
                         <td class="key-data-values">{{parentData.co2reduction | number:'1.2-2'}}
                             {{parentData.co2reductionunit}}</td>
@@ -267,28 +262,28 @@
 </div>
 <div class="container" id="pdf-construction" style="border-style: ridge;padding-top: 1rem;">
     <div class="report-subtitle">
-        <p>BASELINE vs EE Potential Improvements</p>
+        <p>{{'BEEC.REPORT.BASELINE_EEPOTENTIALIMPROVEMENTS' | translate}}</p>
     </div>
     <div>
         <table class="table  table-hover table-bordered table-sm" data-toggle="table">
             <thead>
                 <tr>
-                    <th colspan="6" style="background-color: #2F75B5;">Construction Elements</th>
+                    <th colspan="6" style="background-color: #2F75B5;">{{ 'BEEC.REPORT.CONSTRUCTION_ELEMENT' | translate}}</th>
                 </tr>
                 <tr>
-                    <th colspan="3" style="background-color: #F4B084;">Baseline</th>
-                    <th colspan="4" style="background-color: #A9D08E;">Energy Efficiency Standards</th>
+                    <th colspan="3" style="background-color: #F4B084;">{{ 'BEEC.REPORT.BASELINE' | translate}}</th>
+                    <th colspan="4" style="background-color: #A9D08E;">{{ 'BEEC.REPORT.ENERGY_EFFICIENCY_STANDARDS' | translate}}</th>
                 </tr>
                 <tr>
-                    <th colspan="2" style="background-color: #FCE4D6;">Element</th>
-                    <th style="background-color: #FCE4D6;">Indicators</th>
-                    <th style="background-color: #E2EFDA;">Indicators</th>
-                    <th style="background-color: #E2EFDA;">Benchmark</th>
-                    <th style="background-color: #E2EFDA;">Recommendations</th>
+                    <th colspan="2" style="background-color: #FCE4D6;">{{ 'BEEC.REPORT.ELEMENT' | translate}}</th>
+                    <th style="background-color: #FCE4D6;">{{ 'BEEC.REPORT.INDICATORS' | translate}}</th>
+                    <th style="background-color: #E2EFDA;">{{ 'BEEC.REPORT.INDICATORS' | translate}}</th>
+                    <th style="background-color: #E2EFDA;">{{ 'BEEC.REPORT.BENCHMARK' | translate}}</th>
+                    <th style="background-color: #E2EFDA;">{{ 'BEEC.REPORT.RECOMMENDATIONS' | translate}}</th>
                 </tr>
 
                 <tr>
-                    <th colspan="6" style="background-color: #F2F2F2;">Main facade</th>
+                    <th colspan="6" style="background-color: #F2F2F2;">{{ 'BEEC.REPORT.MAIN_FACADE' | translate}}</th>
                 </tr>
 
                 <tr>
@@ -321,7 +316,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th style="background-color: #F2F2F2;" colspan="6">Roof</th>
+                    <th style="background-color: #F2F2F2;" colspan="6">{{ 'BEEC.REPORT.ROOF' | translate}}</th>
                 </tr>
 
                 <tr>
@@ -357,7 +352,7 @@
 
 
                 <tr>
-                    <th colspan="6" style="background-color: #F2F2F2;">Windows</th>
+                    <th colspan="6" style="background-color: #F2F2F2;">{{ 'BEEC.REPORT.WINDOWS' | translate}}</th>
                 </tr>
 
                 <tr style="width: 40%;">
@@ -400,7 +395,7 @@
 
 <div class="container" id="pdf-hvac" style="border-style: ridge;padding-top: 1rem;">
     <div class="report-subtitle">
-        <p>BASELINE vs EE Potential Improvements</p>
+        <p>{{'BEEC.REPORT.BASELINE_EEPOTENTIALIMPROVEMENTS' | translate}}</p>
     </div>
 
 
@@ -408,22 +403,22 @@
         <table class="table  table-bordered table-sm" data-toggle="table">
             <thead>
                 <tr>
-                    <th colspan="5" style="background-color: #2F75B5;">HVAC SYSTEMS</th>
+                    <th colspan="5" style="background-color: #2F75B5;">{{ 'BEEC.REPORT.HVAC_SYSTEMS' | translate}}</th>
                 </tr>
                 <tr>
-                    <th colspan="2" style="background-color: #F4B084;">Baseline</th>
-                    <th colspan="3" style="background-color: #A9D08E;">Energy Efficiency Standards</th>
+                    <th colspan="2" style="background-color: #F4B084;">{{ 'BEEC.REPORT.BASELINE' | translate}}</th>
+                    <th colspan="3" style="background-color: #A9D08E;">{{ 'BEEC.REPORT.ENERGY_EFFICIENCY_STANDARDS' | translate}}</th>
                 </tr>
                 <tr>
-                    <th style="background-color: #FCE4D6;">System</th>
-                    <th style="background-color: #FCE4D6;">Performance</th>
-                    <th style="background-color: #E2EFDA;">Performance</th>
-                    <th style="background-color: #E2EFDA;">Benchmark</th>
-                    <th style="background-color: #E2EFDA;">Recommendations</th>
+                    <th style="background-color: #FCE4D6;">{{ 'BEEC.REPORT.SYSTEM' | translate}}</th>
+                    <th style="background-color: #FCE4D6;">{{ 'BEEC.REPORT.PERFORMANCE' | translate}}</th>
+                    <th style="background-color: #E2EFDA;">{{ 'BEEC.REPORT.PERFORMANCE' | translate}}</th>
+                    <th style="background-color: #E2EFDA;">{{ 'BEEC.REPORT.BENCHMARK' | translate}}</th>
+                    <th style="background-color: #E2EFDA;">{{ 'BEEC.REPORT.RECOMMENDATIONS' | translate}}</th>
                 </tr>
 
                 <tr>
-                    <th colspan="5" style="background-color: #F2F2F2;">Heating</th>
+                    <th colspan="5" style="background-color: #F2F2F2;">{{ 'BEEC.REPORT.HEATING' | translate}}</th>
                 </tr>
 
                 <tr>
@@ -450,7 +445,7 @@
                 </tr>
 
                 <tr>
-                    <th colspan="5" style="background-color: #F2F2F2;">Cooling</th>
+                    <th colspan="5" style="background-color: #F2F2F2;">{{ 'BEEC.REPORT.COOLING' | translate}}</th>
                 </tr>
 
                 <tr>
@@ -476,7 +471,7 @@
                 </tr>
 
                 <tr>
-                    <th colspan="5" style="background-color: #F2F2F2;">Fans and Blowers</th>
+                    <th colspan="5" style="background-color: #F2F2F2;">{{ 'BEEC.REPORT.FANS_AND_BLOWERS' | translate}}</th>
                 </tr>
 
                 <tr>
@@ -500,11 +495,11 @@
                 </tr>
 
                 <tr>
-                    <th colspan="5" style="background-color: #2F75B5;">LIGHTING</th>
+                    <th colspan="5" style="background-color: #2F75B5;">{{ 'BEEC.REPORT.LIGHTING_HEADING' | translate}}</th>
                 </tr>
 
                 <tr>
-                    <th colspan="5" style="background-color: #F2F2F2;">Lighting</th>
+                    <th colspan="5" style="background-color: #F2F2F2;">{{ 'BEEC.REPORT.LIGHTING' | translate}}</th>
                 </tr>
 
                 <tr>
@@ -528,11 +523,11 @@
                 </tr>
 
                 <tr>
-                    <th colspan="5" style="background-color: #2F75B5;">PLUGLOADS</th>
+                    <th colspan="5" style="background-color: #2F75B5;">{{ 'BEEC.REPORT.PLUGLOADS_HEADING' | translate}}</th>
                 </tr>
 
                 <tr>
-                    <th colspan="5" style="background-color: #F2F2F2;">PlugLoads</th>
+                    <th colspan="5" style="background-color: #F2F2F2;">{{ 'BEEC.REPORT.PLUGLOADS' | translate}}</th>
                 </tr>
                 <tr>
                     <td> <img style="width: 100%;" src="../../../assets/images/report/plugload-report.png" />
