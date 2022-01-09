@@ -31,7 +31,9 @@
       "NO": "No",
       "NA": "N/A",
       "SELECT_ANY_OPTION": "Select any option",
-      "NOTKNOWN_OPTION_DEFAULT": "No, I don't know. (default values will be assumed for calculations)"
+      "NOTKNOWN_OPTION_DEFAULT": "No, I don't know. (default values will be assumed for calculations)",
+      "BACK":"Back",
+      "NEXT":"Next"
     },
     "GENDETAILS": {
       "LOC_DETAILS_TITLE": "Location Details",

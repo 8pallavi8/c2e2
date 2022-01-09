@@ -141,14 +141,11 @@ export class BeetreportComponent implements OnInit {
         });
 
         var payload: any = {
-          //username: this.genDetailsComponent.genDetailsForm.controls.userName.value,
-          //projectname: this.genDetailsComponent.genDetailsForm.controls.projectName.value,
           country: selectedcountryname,
           province: this.genDetailsComponent.genDetailsForm.controls.province.value,
           location: this.genDetailsComponent.genDetailsForm.controls.location.value,
           buildingtype: this.genDetailsComponent.genDetailsForm.controls.buildingType.value,
           buildingspaces: this.genDetailsComponent.genDetailsForm.controls.buildingSpaces.value,
-          //yearofconstruction: this.genDetailsComponent.genDetailsForm.controls.yearOfConstruction.value.toString(),
           nooffloors: this.genDetailsComponent.genDetailsForm.controls.noOfFloors.value,
           occupancyhrsperweek: this.genDetailsComponent.genDetailsForm.controls.occupanyHoursPerWeek.value,
           buildinggrossarea: Number(this.genDetailsComponent.genDetailsForm.controls.buildingGrossArea.value),
@@ -168,7 +165,7 @@ export class BeetreportComponent implements OnInit {
           rvaluewindow: Number(this.beetComponent.windowR.rValue),
           rvaluewindowunit: this.beetComponent.windowR.rUnits,
           shgc: Number(this.buildingdetailsComponent.formgroup.controls.SHGCknown.value),
-          windowtowallratio: this.wwrValue,
+          windowtowallratio: Number(this.beetComponent.wwrValue),
           windowtowallratiounit: '%',
           totallightingpower: this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerValue.value,
           totallightingpowerunit: this.lightingDetailsComponent.LightningDetailsForm.controls.totalLightingPowerUnit.value,

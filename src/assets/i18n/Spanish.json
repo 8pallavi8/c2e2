@@ -31,7 +31,9 @@
       "NO": "No",
       "NA": "N / A",
       "SELECT_ANY_OPTION": "Seleccione cualquier opción",
-      "NOTKNOWN_OPTION_DEFAULT": "No, no lo se. (se asumirán valores predeterminados para los cálculos)"
+      "NOTKNOWN_OPTION_DEFAULT": "No, no lo se. (se asumirán valores predeterminados para los cálculos)",
+      "BACK":"atrás",
+      "NEXT":"Próximo"
     },
     "GENDETAILS": {
       "LOC_DETAILS_TITLE": "Detalles de ubicación",

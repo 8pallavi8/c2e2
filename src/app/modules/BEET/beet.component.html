@@ -104,7 +104,7 @@
                 <div class="step-button">
                     <!--[disabled]="genDetailsComponent?.genDetailsForm.invalid"  -->
                     <button [disabled]="genDetailsComponent?.genDetailsForm.invalid" mat-raised-button color="primary"
-                        matStepperNext (click)="onSaveGenDetails()">Next</button>
+                        matStepperNext (click)="onSaveGenDetails()">{{'BEET.COMMON.NEXT' | translate}}</button>
                 </div>
             </mat-step>
 
@@ -116,7 +116,7 @@
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="buildingdetailsComponent?.formgroup.invalid"  (click)="saveBuildingDetails()" -->
                     <button [disabled]="buildingdetailsComponent?.formgroup.invalid" mat-raised-button color="primary"
-                        matStepperNext (click)="onSaveBuildingEnvDetails()">Next</button>
+                        matStepperNext (click)="onSaveBuildingEnvDetails()">{{'BEET.COMMON.NEXT' | translate}}</button>
                 </div>
             </mat-step>
 
@@ -128,7 +128,7 @@
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="lightingDetailsComponent?.formgroup.invalid"  -->
                     <button mat-raised-button color="primary" matStepperNext
-                        (click)="onSaveLightingDetails()">Next</button>
+                        (click)="onSaveLightingDetails()">{{'BEET.COMMON.NEXT' | translate}}</button>
                 </div>
             </mat-step>
 
@@ -139,7 +139,7 @@
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="hvacDetailsComponent?.formgroup.invalid"  -->
                     <button [disabled]="hvacDetailsComponent?.formgroup.invalid" mat-raised-button color="primary"
-                        (click)="onHvacDetails()" matStepperNext>Next</button>
+                        (click)="onHvacDetails()" matStepperNext>{{'BEET.COMMON.NEXT' | translate}}</button>
                 </div>
             </mat-step>
 
@@ -151,7 +151,7 @@
                         style="margin-right: inherit;">Back</button>
                     <!--[disabled]="plugLoaDetailsComponent?.formgroup.invalid"  -->
                     <button [disabled]="plugLoaDetailsComponent?.formgroup.invalid" mat-raised-button color="primary"
-                        matStepperNext (click)="onPlugLoadDetails()">Next</button>
+                        matStepperNext (click)="onPlugLoadDetails()">{{'BEET.COMMON.NEXT' | translate}}</button>
                 </div>
             </mat-step>
 
@@ -165,7 +165,7 @@
                     <!--[disabled]="co2EmissionsDetailsComponent?.formgroup.invalid"   -->
                     <button [disabled]="co2EmissionsDetailsComponent?.formgroup.invalid" mat-raised-button
                         color="primary" matStepperNext (click)="onCo2EmissionsDetails()"
-                        (click)="showSummary()">Next</button>
+                        (click)="showSummary()">{{'BEET.COMMON.NEXT' | translate}}</button>
                 </div>
             </mat-step>
 
@@ -343,7 +343,7 @@
                 <div class="step-button">
                     <button mat-raised-button color="primary" matStepperPrevious
                         style="margin-right: inherit;">Back</button>
-                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                    <button mat-raised-button color="primary" matStepperNext>{{'BEET.COMMON.NEXT' | translate}}</button>
                 </div>
             </mat-step>
         </mat-horizontal-stepper>
